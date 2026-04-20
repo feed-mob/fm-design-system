@@ -10,7 +10,82 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="./playground.css" />
+  <style>
+    /* Additional styles for the tabbed interface */
+    .interface-panel h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--fm-color-text);
+      margin: 20px 0 12px 0;
+    }
+    .interface-panel h4:first-child {
+      margin-top: 0;
+    }
+    .props-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .props-table th,
+    .props-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--fm-color-border);
+    }
+    .props-table th {
+      font-weight: 600;
+      color: var(--fm-color-text);
+      background: var(--fm-color-surface-alt);
+    }
+    .props-table td {
+      color: var(--fm-color-text-secondary);
+    }
+    .props-table code {
+      font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+      font-size: 0.8rem;
+      background: var(--fm-color-surface-muted);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--fm-color-primary-dark);
+    }
+    .animation-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 0.875rem;
+      color: var(--fm-color-text-secondary);
+      line-height: 1.6;
+    }
+    .animation-list li {
+      margin-bottom: 6px;
+    }
+    .animation-list strong {
+      color: var(--fm-color-text);
+    }
+    .code-panel pre {
+      margin: 0;
+      border-radius: var(--fm-radius-md);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+    .code-panel pre code {
+      font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    }
+    .manual-section {
+      margin-bottom: 40px;
+    }
+    .manual-text {
+      font-size: 0.9rem;
+      color: var(--fm-color-text-secondary);
+      margin: 12px 0;
+    }
+    .code-panel p.manual-text {
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body>
   <img src="./logo.png" alt="FeedMob Design System Logo" class="logo" />
@@ -20,39 +95,125 @@
   <p class="subtitle">Professional UI components for FeedMob — built with Web Components &amp; Motion</p>
 
   <!-- ============================================================ -->
+  <!-- GETTING STARTED                                               -->
+  <!-- ============================================================ -->
+  <section class="manual-section">
+    <h2>Getting Started</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="npm Install">
+        <div class="code-panel">
+          <pre><code class="language-bash"># Install via npm
+npm install @fm-agency/design-system</code></pre>
+          <p class="manual-text">Then import in your JavaScript:</p>
+          <pre><code class="language-javascript">import '@fm-agency/design-system';</code></pre>
+        </div>
+      </fm-tab>
+      <fm-tab label="CDN (Easiest)">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Add this to your HTML head --&gt;
+&lt;script type="module" src="https://unpkg.com/@fm-agency/design-system/dist/fm-ds.js"&gt;&lt;/script&gt;</code></pre>
+          <p class="manual-text">Or download and use locally:</p>
+          <pre><code class="language-html">&lt;script type="module" src="./dist/fm-ds.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+      <fm-tab label="Basic Usage">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Just use the tags! --&gt;
+&lt;fm-button variant="primary"&gt;Get Started&lt;/fm-button&gt;
+
+&lt;fm-card hoverable&gt;
+  &lt;span slot="header"&gt;Campaign Performance&lt;/span&gt;
+  Track real-time metrics across all active campaigns.
+&lt;/fm-card&gt;
+
+&lt;fm-badge variant="success" dot&gt;Live&lt;/fm-badge&gt;</code></pre>
+          <p class="manual-text">That's it! FM Design System components work like native HTML elements.</p>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- BUTTONS                                                       -->
   <!-- ============================================================ -->
   <section>
     <h2>fm-button</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0;">
+          <div class="row" style="margin-bottom: 20px;">
+            <fm-button variant="primary">Get Started</fm-button>
+            <fm-button variant="secondary">Learn More</fm-button>
+            <fm-button variant="outline">View Case Study</fm-button>
+            <fm-button variant="ghost">Read Docs</fm-button>
+          </div>
+          <div class="row" style="margin-bottom: 20px;">
+            <fm-button variant="primary" size="sm">Small</fm-button>
+            <fm-button variant="primary" size="md">Medium</fm-button>
+            <fm-button variant="primary" size="lg">Large</fm-button>
+          </div>
+          <div class="row">
+            <fm-button variant="primary">Active</fm-button>
+            <fm-button variant="primary" disabled>Disabled</fm-button>
+            <fm-button variant="outline" disabled>Disabled Outline</fm-button>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"primary"</td>
+                <td>Button style: <code>primary</code>, <code>secondary</code>, <code>outline</code>, <code>ghost</code></td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Button size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables the button interaction</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Subtle fade-in + upward slide with spring</li>
+            <li><strong>Hover:</strong> Refined lift with shadow enhancement</li>
+            <li><strong>Press:</strong> Tactile press-down with spring physics</li>
+            <li><strong>Focus:</strong> Teal ring indicator</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Primary action --&gt;
+&lt;fm-button variant="primary"&gt;Get Started&lt;/fm-button&gt;
 
-    <p class="demo-label">Variants</p>
-    <div class="row" style="margin-bottom: 20px;">
-      <fm-button variant="primary">Get Started</fm-button>
-      <fm-button variant="secondary">Learn More</fm-button>
-      <fm-button variant="outline">View Case Study</fm-button>
-      <fm-button variant="ghost">Read Docs</fm-button>
-    </div>
+&lt;!-- Different variants --&gt;
+&lt;fm-button variant="secondary"&gt;Learn More&lt;/fm-button&gt;
+&lt;fm-button variant="outline"&gt;View Case Study&lt;/fm-button&gt;
+&lt;fm-button variant="ghost"&gt;Read Docs&lt;/fm-button&gt;
 
-    <p class="demo-label">Sizes</p>
-    <div class="row" style="margin-bottom: 20px;">
-      <fm-button variant="primary" size="sm">Small</fm-button>
-      <fm-button variant="primary" size="md">Medium</fm-button>
-      <fm-button variant="primary" size="lg">Large</fm-button>
-    </div>
+&lt;!-- Sizes --&gt;
+&lt;fm-button variant="primary" size="lg"&gt;Large Button&lt;/fm-button&gt;
 
-    <p class="demo-label">States</p>
-    <div class="row">
-      <fm-button variant="primary">Active</fm-button>
-      <fm-button variant="primary" disabled>Disabled</fm-button>
-      <fm-button variant="outline" disabled>Disabled Outline</fm-button>
-    </div>
-
-    <div class="code-block">
-      <span class="cmt">&lt;!-- Primary action --&gt;</span><br/>
-      <span class="tag">&lt;fm-button</span> <span class="attr">variant</span>=<span class="val">"primary"</span><span class="tag">&gt;</span><span class="txt">Get Started</span><span class="tag">&lt;/fm-button&gt;</span><br/><br/>
-      <span class="cmt">&lt;!-- Outline variant, large --&gt;</span><br/>
-      <span class="tag">&lt;fm-button</span> <span class="attr">variant</span>=<span class="val">"outline"</span> <span class="attr">size</span>=<span class="val">"lg"</span><span class="tag">&gt;</span><span class="txt">View Case Study</span><span class="tag">&lt;/fm-button&gt;</span>
-    </div>
+&lt;!-- Disabled state --&gt;
+&lt;fm-button variant="primary" disabled&gt;Disabled&lt;/fm-button&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
   </section>
 
   <!-- ============================================================ -->
@@ -60,54 +221,111 @@
   <!-- ============================================================ -->
   <section>
     <h2>fm-card</h2>
-
-    <p class="demo-label">Default &amp; Outlined</p>
-    <div class="grid" style="margin-bottom: 20px;">
-      <fm-card hoverable>
-        <span slot="header">Campaign Performance</span>
-        Track real-time metrics across all active campaigns. Monitor reach, engagement, and conversion in a unified dashboard.
-        <span slot="footer">
-          <fm-button variant="primary" size="sm">View Report</fm-button>
-        </span>
-      </fm-card>
-
-      <fm-card variant="outlined" hoverable>
-        <span slot="header">Brand Guidelines</span>
-        Comprehensive brand assets, tone of voice documentation, and visual identity standards for consistent client delivery.
-        <span slot="footer">
-          <fm-button variant="outline" size="sm">Download</fm-button>
-        </span>
-      </fm-card>
-    </div>
-
-    <p class="demo-label">Elevated</p>
-    <div class="grid">
-      <fm-card variant="elevated" hoverable>
-        <span slot="header">Creative Brief</span>
-        Start a new project with a structured creative brief. Define objectives, audience, deliverables, and timelines.
-        <span slot="footer">
-          <div class="row">
-            <fm-badge variant="primary" dot>Active</fm-badge>
-            <fm-badge variant="neutral">Q2 2026</fm-badge>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0;">
+          <div class="grid" style="margin-bottom: 20px;">
+            <fm-card hoverable>
+              <span slot="header">Campaign Performance</span>
+              Track real-time metrics across all active campaigns. Monitor reach, engagement, and conversion in a unified dashboard.
+              <span slot="footer">
+                <fm-button variant="primary" size="sm">View Report</fm-button>
+              </span>
+            </fm-card>
+            <fm-card variant="outlined" hoverable>
+              <span slot="header">Brand Guidelines</span>
+              Comprehensive brand assets, tone of voice documentation, and visual identity standards for consistent client delivery.
+              <span slot="footer">
+                <fm-button variant="outline" size="sm">Download</fm-button>
+              </span>
+            </fm-card>
           </div>
-        </span>
-      </fm-card>
+          <div class="grid">
+            <fm-card variant="elevated" hoverable>
+              <span slot="header">Creative Brief</span>
+              Start a new project with a structured creative brief. Define objectives, audience, deliverables, and timelines.
+              <span slot="footer">
+                <div class="row">
+                  <fm-badge variant="primary" dot>Active</fm-badge>
+                  <fm-badge variant="neutral">Q2 2026</fm-badge>
+                </div>
+              </span>
+            </fm-card>
+            <fm-card variant="elevated">
+              <span slot="header">Client Onboarding</span>
+              Streamlined onboarding workflow with automated document collection, stakeholder mapping, and kickoff scheduling.
+            </fm-card>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Card style: <code>default</code>, <code>outlined</code>, <code>elevated</code></td>
+              </tr>
+              <tr>
+                <td><code>hoverable</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Adds lift effect on hover</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Main card content</td></tr>
+              <tr><td><code>header</code></td><td>Card header area</td></tr>
+              <tr><td><code>footer</code></td><td>Card footer area</td></tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade + slide up with spring easing</li>
+            <li><strong>Hover:</strong> Refined lift with shadow elevation</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic card with hover effect --&gt;
+&lt;fm-card hoverable&gt;
+  &lt;span slot="header"&gt;Campaign Performance&lt;/span&gt;
+  Track real-time metrics across all active campaigns.
+  &lt;span slot="footer"&gt;
+    &lt;fm-button variant="primary" size="sm"&gt;View Report&lt;/fm-button&gt;
+  &lt;/span&gt;
+&lt;/fm-card&gt;
 
-      <fm-card variant="elevated">
-        <span slot="header">Client Onboarding</span>
-        Streamlined onboarding workflow with automated document collection, stakeholder mapping, and kickoff scheduling.
-      </fm-card>
-    </div>
+&lt;!-- Outlined card --&gt;
+&lt;fm-card variant="outlined" hoverable&gt;
+  &lt;span slot="header"&gt;Brand Guidelines&lt;/span&gt;
+  Comprehensive brand assets and documentation.
+&lt;/fm-card&gt;
 
-    <div class="code-block">
-      <span class="tag">&lt;fm-card</span> <span class="attr">variant</span>=<span class="val">"elevated"</span> <span class="attr">hoverable</span><span class="tag">&gt;</span><br/>
-      &nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">slot</span>=<span class="val">"header"</span><span class="tag">&gt;</span><span class="txt">Campaign Performance</span><span class="tag">&lt;/span&gt;</span><br/>
-      &nbsp;&nbsp;<span class="txt">Track real-time metrics...</span><br/>
-      &nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">slot</span>=<span class="val">"footer"</span><span class="tag">&gt;</span><br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;fm-button</span> <span class="attr">size</span>=<span class="val">"sm"</span><span class="tag">&gt;</span><span class="txt">View Report</span><span class="tag">&lt;/fm-button&gt;</span><br/>
-      &nbsp;&nbsp;<span class="tag">&lt;/span&gt;</span><br/>
-      <span class="tag">&lt;/fm-card&gt;</span>
-    </div>
+&lt;!-- Elevated card with badges --&gt;
+&lt;fm-card variant="elevated" hoverable&gt;
+  &lt;span slot="header"&gt;Creative Brief&lt;/span&gt;
+  Start a new project with structured workflow.
+  &lt;span slot="footer"&gt;
+    &lt;fm-badge variant="primary" dot&gt;Active&lt;/fm-badge&gt;
+  &lt;/span&gt;
+&lt;/fm-card&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
   </section>
 
   <!-- ============================================================ -->
@@ -115,43 +333,216 @@
   <!-- ============================================================ -->
   <section>
     <h2>fm-badge</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0;">
+          <div class="row" style="margin-bottom: 20px;">
+            <fm-badge variant="primary">Design</fm-badge>
+            <fm-badge variant="secondary">Strategy</fm-badge>
+            <fm-badge variant="success">Approved</fm-badge>
+            <fm-badge variant="warning">In Review</fm-badge>
+            <fm-badge variant="error">Overdue</fm-badge>
+            <fm-badge variant="neutral">Draft</fm-badge>
+          </div>
+          <div class="row" style="margin-bottom: 20px;">
+            <fm-badge variant="success" dot>Live</fm-badge>
+            <fm-badge variant="primary" dot>Active</fm-badge>
+            <fm-badge variant="warning" dot>Pending</fm-badge>
+            <fm-badge variant="error" dot>Offline</fm-badge>
+          </div>
+          <div class="row" style="margin-bottom: 20px;">
+            <fm-badge variant="primary" size="sm">Small</fm-badge>
+            <fm-badge variant="primary" size="md">Medium</fm-badge>
+          </div>
+          <div class="row">
+            <fm-badge variant="success" dot animate="pulse">Live Campaign</fm-badge>
+            <fm-badge variant="error" animate="pulse">3 Alerts</fm-badge>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"primary"</td>
+                <td>Badge color: <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code></td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Size: <code>sm</code>, <code>md</code></td>
+              </tr>
+              <tr>
+                <td><code>dot</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Shows a leading status dot</td>
+              </tr>
+              <tr>
+                <td><code>animate</code></td>
+                <td>string</td>
+                <td>"none"</td>
+                <td>Animation: <code>none</code>, <code>pulse</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Scales in from 0 with spring physics</li>
+            <li><strong>Pulse:</strong> Subtle recurring scale animation for attention</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Status badge with dot --&gt;
+&lt;fm-badge variant="success" dot&gt;Live&lt;/fm-badge&gt;
+&lt;fm-badge variant="primary" dot&gt;Active&lt;/fm-badge&gt;
+&lt;fm-badge variant="warning" dot&gt;Pending&lt;/fm-badge&gt;
 
-    <p class="demo-label">Variants</p>
-    <div class="row" style="margin-bottom: 20px;">
-      <fm-badge variant="primary">Design</fm-badge>
-      <fm-badge variant="secondary">Strategy</fm-badge>
-      <fm-badge variant="success">Approved</fm-badge>
-      <fm-badge variant="warning">In Review</fm-badge>
-      <fm-badge variant="error">Overdue</fm-badge>
-      <fm-badge variant="neutral">Draft</fm-badge>
-    </div>
+&lt;!-- Pulsing alert badge --&gt;
+&lt;fm-badge variant="error" animate="pulse"&gt;3 Alerts&lt;/fm-badge&gt;
 
-    <p class="demo-label">With Status Dot</p>
-    <div class="row" style="margin-bottom: 20px;">
-      <fm-badge variant="success" dot>Live</fm-badge>
-      <fm-badge variant="primary" dot>Active</fm-badge>
-      <fm-badge variant="warning" dot>Pending</fm-badge>
-      <fm-badge variant="error" dot>Offline</fm-badge>
-    </div>
+&lt;!-- Different sizes --&gt;
+&lt;fm-badge variant="primary" size="sm"&gt;Small&lt;/fm-badge&gt;
+&lt;fm-badge variant="primary" size="md"&gt;Medium&lt;/fm-badge&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
 
-    <p class="demo-label">Sizes</p>
-    <div class="row" style="margin-bottom: 20px;">
-      <fm-badge variant="primary" size="sm">Small</fm-badge>
-      <fm-badge variant="primary" size="md">Medium</fm-badge>
-    </div>
+  <!-- ============================================================ -->
+  <!-- TABS                                                          -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-tabs</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0;">
+          <div style="margin-bottom: 24px;">
+            <fm-tabs active="0">
+              <fm-tab label="Overview">
+                <p style="color: var(--fm-color-text-secondary); line-height: 1.6; margin-top: 12px;">
+                  Campaign Overview: Track real-time metrics, engagement rates, and conversion data across all active channels.
+                </p>
+              </fm-tab>
+              <fm-tab label="Analytics">
+                <p style="color: var(--fm-color-text-secondary); line-height: 1.6; margin-top: 12px;">
+                  Detailed Analytics: Deep dive into audience demographics, click-through rates, and ROI calculations.
+                </p>
+              </fm-tab>
+              <fm-tab label="Settings">
+                <p style="color: var(--fm-color-text-secondary); line-height: 1.6; margin-top: 12px;">
+                  Campaign Settings: Configure targeting parameters, budget allocation, and scheduling options.
+                </p>
+              </fm-tab>
+            </fm-tabs>
+          </div>
+          <div>
+            <fm-tabs variant="pills" active="1">
+              <fm-tab label="Active">
+                <div class="row" style="margin-top: 12px;">
+                  <fm-badge variant="success" dot>3 Live</fm-badge>
+                  <fm-badge variant="warning" dot>2 Pending</fm-badge>
+                  <fm-badge variant="neutral">5 Draft</fm-badge>
+                </div>
+              </fm-tab>
+              <fm-tab label="Archived">
+                <div class="row" style="margin-top: 12px;">
+                  <fm-badge variant="neutral">12 Completed</fm-badge>
+                  <fm-badge variant="error" dot>3 Cancelled</fm-badge>
+                </div>
+              </fm-tab>
+              <fm-tab label="All">
+                <div class="row" style="margin-top: 12px;">
+                  <fm-badge variant="primary">25 Total Projects</fm-badge>
+                </div>
+              </fm-tab>
+            </fm-tabs>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>active</code></td>
+                <td>number</td>
+                <td>0</td>
+                <td>Index of the active tab</td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Style: <code>default</code> (with underline), <code>pills</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-tab-change</code></td>
+                <td><code>{ index, label }</code></td>
+                <td>Fired when tab changes</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Header fades + slides in with spring</li>
+            <li><strong>Panel switch:</strong> Content fades in smoothly</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Default tabs with underline indicator --&gt;
+&lt;fm-tabs active="0"&gt;
+  &lt;fm-tab label="Overview"&gt;
+    Campaign Overview content...
+  &lt;/fm-tab&gt;
+  &lt;fm-tab label="Analytics"&gt;
+    Detailed Analytics content...
+  &lt;/fm-tab&gt;
+  &lt;fm-tab label="Settings"&gt;
+    Campaign Settings content...
+  &lt;/fm-tab&gt;
+&lt;/fm-tabs&gt;
 
-    <p class="demo-label">Animated (Pulse)</p>
-    <div class="row">
-      <fm-badge variant="success" dot animate="pulse">Live Campaign</fm-badge>
-      <fm-badge variant="error" animate="pulse">3 Alerts</fm-badge>
-    </div>
+&lt;!-- Pills variant --&gt;
+&lt;fm-tabs variant="pills" active="1"&gt;
+  &lt;fm-tab label="Active"&gt;...&lt;/fm-tab&gt;
+  &lt;fm-tab label="Archived"&gt;...&lt;/fm-tab&gt;
+  &lt;fm-tab label="All"&gt;...&lt;/fm-tab&gt;
+&lt;/fm-tabs&gt;
 
-    <div class="code-block">
-      <span class="cmt">&lt;!-- Status badge with dot --&gt;</span><br/>
-      <span class="tag">&lt;fm-badge</span> <span class="attr">variant</span>=<span class="val">"success"</span> <span class="attr">dot</span><span class="tag">&gt;</span><span class="txt">Live</span><span class="tag">&lt;/fm-badge&gt;</span><br/><br/>
-      <span class="cmt">&lt;!-- Pulsing alert badge --&gt;</span><br/>
-      <span class="tag">&lt;fm-badge</span> <span class="attr">variant</span>=<span class="val">"error"</span> <span class="attr">animate</span>=<span class="val">"pulse"</span><span class="tag">&gt;</span><span class="txt">3 Alerts</span><span class="tag">&lt;/fm-badge&gt;</span>
-    </div>
+&lt;!-- Listen for tab changes --&gt;
+&lt;script&gt;
+  document.querySelector('fm-tabs').addEventListener('fm-tab-change', (e) => {
+    console.log('Tab changed:', e.detail.index, e.detail.label);
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
   </section>
 
   <!-- ============================================================ -->
@@ -159,24 +550,103 @@
   <!-- ============================================================ -->
   <section>
     <h2>Theming</h2>
-    <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">
-      Override CSS custom properties to customise the design system.
-    </p>
-    <div class="code-block">
-      <span class="cmt">/* Override theme tokens */</span><br/>
-      <span class="tag">:root</span> {<br/>
-      &nbsp;&nbsp;<span class="attr">--fm-color-primary</span>: <span class="val">#0D9488</span>;<br/>
-      &nbsp;&nbsp;<span class="attr">--fm-color-secondary</span>: <span class="val">#1E293B</span>;<br/>
-      &nbsp;&nbsp;<span class="attr">--fm-font-family</span>: <span class="val">'Inter', system-ui, sans-serif</span>;<br/>
-      &nbsp;&nbsp;<span class="attr">--fm-radius-md</span>: <span class="val">8px</span>;<br/>
-      }
-    </div>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Overview">
+        <div style="padding: 16px 0;">
+          <p style="font-size: 0.9rem; color: var(--fm-color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
+            Override CSS custom properties to customise the design system. All components inherit from these theme tokens.
+          </p>
+          <div class="code-panel">
+            <pre><code class="language-css">/* Override theme tokens */
+:root {
+  --fm-color-primary: #0D9488;
+  --fm-color-primary-light: #14B8A6;
+  --fm-color-primary-dark: #0F766E;
+  --fm-color-secondary: #1E293B;
+  --fm-font-family: 'Inter', system-ui, sans-serif;
+  --fm-radius-md: 8px;
+}</code></pre>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Color Tokens">
+        <div class="interface-panel" style="padding: 16px 0;">
+          <h4>Primary Palette</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-primary</code></td><td>#0D9488</td><td>Primary teal</td></tr>
+              <tr><td><code>--fm-color-primary-light</code></td><td>#14B8A6</td><td>Lighter teal</td></tr>
+              <tr><td><code>--fm-color-primary-dark</code></td><td>#0F766E</td><td>Darker teal</td></tr>
+            </tbody>
+          </table>
+          <h4>Semantic Colors</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-success</code></td><td>#059669</td><td>Success state</td></tr>
+              <tr><td><code>--fm-color-warning</code></td><td>#D97706</td><td>Warning state</td></tr>
+              <tr><td><code>--fm-color-error</code></td><td>#DC2626</td><td>Error state</td></tr>
+              <tr><td><code>--fm-color-info</code></td><td>#0284C7</td><td>Info state</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </fm-tab>
+      <fm-tab label="Full Token List">
+        <div class="code-panel" style="padding: 16px 0;">
+          <pre><code class="language-css">/* Primary Teal Palette */
+--fm-color-primary: #0D9488;
+--fm-color-primary-light: #14B8A6;
+--fm-color-primary-dark: #0F766E;
+
+/* Secondary & Accent */
+--fm-color-secondary: #1E293B;
+--fm-color-secondary-light: #334155;
+--fm-color-accent: #F59E0B;
+
+/* Surfaces */
+--fm-color-surface: #FFFFFF;
+--fm-color-surface-alt: #F8FAFC;
+--fm-color-surface-muted: #F1F5F9;
+--fm-color-text: #0F172A;
+--fm-color-text-secondary: #475569;
+
+/* Typography */
+--fm-font-family: 'Inter', sans-serif;
+--fm-font-size-sm: 0.875rem;
+--fm-font-size-md: 1rem;
+
+/* Spacing */
+--fm-space-sm: 8px;
+--fm-space-md: 16px;
+--fm-space-lg: 24px;
+
+/* Radius */
+--fm-radius-md: 8px;
+--fm-radius-lg: 12px;
+--fm-radius-full: 9999px;
+
+/* Shadows */
+--fm-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+--fm-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
   </section>
 
   <footer>
     FM Design System v0.1.0 — Built with Web Components &amp; Motion
   </footer>
 
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
   <script type="module" src="./src/index.js"></script>
 </body>
 </html>

@@ -6,3 +6,4 @@ export { themeStyles } from "./core/theme.js";
 export { FmButton } from "./components/fm-button.js";
 export { FmCard } from "./components/fm-card.js";
 export { FmBadge } from "./components/fm-badge.js";
+export { FmTabs, FmTab } from "./components/fm-tabs.js";
