@@ -17,6 +17,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
 h1 {
   font-size: 2rem;
   font-weight: 700;
