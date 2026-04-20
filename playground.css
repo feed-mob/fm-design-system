@@ -1,0 +1,105 @@
+/* FM Design System — Playground Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: #F8FAFC;
+  color: #0F172A;
+  padding: 48px 24px 80px;
+  max-width: 960px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: #475569;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+
+.accent {
+  color: #0D9488;
+}
+
+section {
+  margin-bottom: 48px;
+}
+
+section h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.code-block {
+  background: #1E293B;
+  color: #E2E8F0;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+.code-block .tag { color: #7DD3FC; }
+.code-block .attr { color: #C4B5FD; }
+.code-block .val { color: #86EFAC; }
+.code-block .txt { color: #FDE68A; }
+.code-block .cmt { color: #64748B; }
+
+.demo-label {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.card-meta {
+  font-size: 0.8rem;
+  color: #64748B;
+  margin-top: 8px;
+}
+
+footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid #E2E8F0;
+  font-size: 0.8rem;
+  color: #94A3B8;
+  text-align: center;
+}

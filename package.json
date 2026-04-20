@@ -1,0 +1,39 @@
+{
+  "name": "@fm-agency/design-system",
+  "version": "0.1.0",
+  "description": "Professional, animation-rich UI components for FM Agency — built with Web Components and Motion",
+  "type": "module",
+  "main": "./dist/fm-ds.umd.cjs",
+  "module": "./dist/fm-ds.js",
+  "exports": {
+    ".": {
+      "import": "./dist/fm-ds.js",
+      "require": "./dist/fm-ds.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "design-system",
+    "ui",
+    "web-components",
+    "custom-elements",
+    "animation",
+    "motion",
+    "agency"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "motion": "^12.38.0"
+  },
+  "devDependencies": {
+    "vite": "^8.0.8"
+  }
+}

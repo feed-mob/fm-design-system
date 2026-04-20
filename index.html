@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FM Design System — Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./playground.css" />
+</head>
+<body>
+  <h1>FM <span class="accent">Design System</span></h1>
+  <p class="subtitle">Professional UI components for FM Agency — built with Web Components &amp; Motion</p>
+
+  <!-- ============================================================ -->
+  <!-- BUTTONS                                                       -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-button</h2>
+
+    <p class="demo-label">Variants</p>
+    <div class="row" style="margin-bottom: 20px;">
+      <fm-button variant="primary">Get Started</fm-button>
+      <fm-button variant="secondary">Learn More</fm-button>
+      <fm-button variant="outline">View Case Study</fm-button>
+      <fm-button variant="ghost">Read Docs</fm-button>
+    </div>
+
+    <p class="demo-label">Sizes</p>
+    <div class="row" style="margin-bottom: 20px;">
+      <fm-button variant="primary" size="sm">Small</fm-button>
+      <fm-button variant="primary" size="md">Medium</fm-button>
+      <fm-button variant="primary" size="lg">Large</fm-button>
+    </div>
+
+    <p class="demo-label">States</p>
+    <div class="row">
+      <fm-button variant="primary">Active</fm-button>
+      <fm-button variant="primary" disabled>Disabled</fm-button>
+      <fm-button variant="outline" disabled>Disabled Outline</fm-button>
+    </div>
+
+    <div class="code-block">
+      <span class="cmt">&lt;!-- Primary action --&gt;</span><br/>
+      <span class="tag">&lt;fm-button</span> <span class="attr">variant</span>=<span class="val">"primary"</span><span class="tag">&gt;</span><span class="txt">Get Started</span><span class="tag">&lt;/fm-button&gt;</span><br/><br/>
+      <span class="cmt">&lt;!-- Outline variant, large --&gt;</span><br/>
+      <span class="tag">&lt;fm-button</span> <span class="attr">variant</span>=<span class="val">"outline"</span> <span class="attr">size</span>=<span class="val">"lg"</span><span class="tag">&gt;</span><span class="txt">View Case Study</span><span class="tag">&lt;/fm-button&gt;</span>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CARDS                                                         -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-card</h2>
+
+    <p class="demo-label">Default &amp; Outlined</p>
+    <div class="grid" style="margin-bottom: 20px;">
+      <fm-card hoverable>
+        <span slot="header">Campaign Performance</span>
+        Track real-time metrics across all active campaigns. Monitor reach, engagement, and conversion in a unified dashboard.
+        <span slot="footer">
+          <fm-button variant="primary" size="sm">View Report</fm-button>
+        </span>
+      </fm-card>
+
+      <fm-card variant="outlined" hoverable>
+        <span slot="header">Brand Guidelines</span>
+        Comprehensive brand assets, tone of voice documentation, and visual identity standards for consistent client delivery.
+        <span slot="footer">
+          <fm-button variant="outline" size="sm">Download</fm-button>
+        </span>
+      </fm-card>
+    </div>
+
+    <p class="demo-label">Elevated</p>
+    <div class="grid">
+      <fm-card variant="elevated" hoverable>
+        <span slot="header">Creative Brief</span>
+        Start a new project with a structured creative brief. Define objectives, audience, deliverables, and timelines.
+        <span slot="footer">
+          <div class="row">
+            <fm-badge variant="primary" dot>Active</fm-badge>
+            <fm-badge variant="neutral">Q2 2026</fm-badge>
+          </div>
+        </span>
+      </fm-card>
+
+      <fm-card variant="elevated">
+        <span slot="header">Client Onboarding</span>
+        Streamlined onboarding workflow with automated document collection, stakeholder mapping, and kickoff scheduling.
+      </fm-card>
+    </div>
+
+    <div class="code-block">
+      <span class="tag">&lt;fm-card</span> <span class="attr">variant</span>=<span class="val">"elevated"</span> <span class="attr">hoverable</span><span class="tag">&gt;</span><br/>
+      &nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">slot</span>=<span class="val">"header"</span><span class="tag">&gt;</span><span class="txt">Campaign Performance</span><span class="tag">&lt;/span&gt;</span><br/>
+      &nbsp;&nbsp;<span class="txt">Track real-time metrics...</span><br/>
+      &nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">slot</span>=<span class="val">"footer"</span><span class="tag">&gt;</span><br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;fm-button</span> <span class="attr">size</span>=<span class="val">"sm"</span><span class="tag">&gt;</span><span class="txt">View Report</span><span class="tag">&lt;/fm-button&gt;</span><br/>
+      &nbsp;&nbsp;<span class="tag">&lt;/span&gt;</span><br/>
+      <span class="tag">&lt;/fm-card&gt;</span>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- BADGES                                                        -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-badge</h2>
+
+    <p class="demo-label">Variants</p>
+    <div class="row" style="margin-bottom: 20px;">
+      <fm-badge variant="primary">Design</fm-badge>
+      <fm-badge variant="secondary">Strategy</fm-badge>
+      <fm-badge variant="success">Approved</fm-badge>
+      <fm-badge variant="warning">In Review</fm-badge>
+      <fm-badge variant="error">Overdue</fm-badge>
+      <fm-badge variant="neutral">Draft</fm-badge>
+    </div>
+
+    <p class="demo-label">With Status Dot</p>
+    <div class="row" style="margin-bottom: 20px;">
+      <fm-badge variant="success" dot>Live</fm-badge>
+      <fm-badge variant="primary" dot>Active</fm-badge>
+      <fm-badge variant="warning" dot>Pending</fm-badge>
+      <fm-badge variant="error" dot>Offline</fm-badge>
+    </div>
+
+    <p class="demo-label">Sizes</p>
+    <div class="row" style="margin-bottom: 20px;">
+      <fm-badge variant="primary" size="sm">Small</fm-badge>
+      <fm-badge variant="primary" size="md">Medium</fm-badge>
+    </div>
+
+    <p class="demo-label">Animated (Pulse)</p>
+    <div class="row">
+      <fm-badge variant="success" dot animate="pulse">Live Campaign</fm-badge>
+      <fm-badge variant="error" animate="pulse">3 Alerts</fm-badge>
+    </div>
+
+    <div class="code-block">
+      <span class="cmt">&lt;!-- Status badge with dot --&gt;</span><br/>
+      <span class="tag">&lt;fm-badge</span> <span class="attr">variant</span>=<span class="val">"success"</span> <span class="attr">dot</span><span class="tag">&gt;</span><span class="txt">Live</span><span class="tag">&lt;/fm-badge&gt;</span><br/><br/>
+      <span class="cmt">&lt;!-- Pulsing alert badge --&gt;</span><br/>
+      <span class="tag">&lt;fm-badge</span> <span class="attr">variant</span>=<span class="val">"error"</span> <span class="attr">animate</span>=<span class="val">"pulse"</span><span class="tag">&gt;</span><span class="txt">3 Alerts</span><span class="tag">&lt;/fm-badge&gt;</span>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- THEMING                                                       -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>Theming</h2>
+    <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">
+      Override CSS custom properties to customise the design system.
+    </p>
+    <div class="code-block">
+      <span class="cmt">/* Override theme tokens */</span><br/>
+      <span class="tag">:root</span> {<br/>
+      &nbsp;&nbsp;<span class="attr">--fm-color-primary</span>: <span class="val">#0D9488</span>;<br/>
+      &nbsp;&nbsp;<span class="attr">--fm-color-secondary</span>: <span class="val">#1E293B</span>;<br/>
+      &nbsp;&nbsp;<span class="attr">--fm-font-family</span>: <span class="val">'Inter', system-ui, sans-serif</span>;<br/>
+      &nbsp;&nbsp;<span class="attr">--fm-radius-md</span>: <span class="val">8px</span>;<br/>
+      }
+    </div>
+  </section>
+
+  <footer>
+    FM Design System v0.1.0 — Built with Web Components &amp; Motion
+  </footer>
+
+  <script type="module" src="./src/index.js"></script>
+</body>
+</html>
