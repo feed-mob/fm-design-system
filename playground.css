@@ -218,10 +218,19 @@ footer {
 
 /* ========== MAIN CONTENT ========== */
 .main-content {
+  /* Default: offset from sidebar */
   margin-left: 220px;
   max-width: 960px;
   padding: 48px 32px 80px;
-  margin-right: auto;
+}
+
+/* Center in available space when viewport is wide enough */
+@media (min-width: 1248px) {
+  .main-content {
+    /* Center in (viewport - sidebar) space: sidebar + (available - content) / 2 */
+    margin-left: calc(220px + (100vw - 220px - 960px) / 2);
+    margin-right: auto;
+  }
 }
 
 /* ========== MOBILE TOGGLE ========== */
@@ -376,6 +385,7 @@ footer {
     width: 200px;
   }
   .main-content {
+    /* Fixed offset - not enough space to center */
     margin-left: 200px;
     padding: 48px 24px 80px;
   }
@@ -405,10 +415,10 @@ footer {
     opacity: 1;
   }
   .main-content {
-    margin-left: 0;
+    margin-left: auto;
+    margin-right: auto;
     padding: 64px 16px 80px;
     max-width: 100%;
-    margin-right: 0;
   }
   .page-header {
     padding-left: 48px;
@@ -434,9 +444,28 @@ footer {
 
 /* ========== FOOTER ========== */
 footer {
+  /* Center in available space to the right of sidebar */
   margin-left: 220px;
-  padding: 24px 32px;
   max-width: 960px;
+  padding: 24px 32px;
+  text-align: center;
+}
+
+footer a {
+  color: #0D9488;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Center footer on wide screens */
+@media (min-width: 1248px) {
+  footer {
+    margin-left: calc(220px + (100vw - 220px - 960px) / 2);
+    margin-right: auto;
+  }
 }
 
 /* ========== SMOOTH SCROLL ========== */
