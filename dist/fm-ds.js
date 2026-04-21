@@ -3772,4 +3772,253 @@ i(Ka, "observedAttributes", [
 	"title"
 ]), customElements.define("fm-alert", Ka);
 //#endregion
-export { Ka as FmAlert, Ua as FmBadge, Va as FmButton, Ha as FmCard, a as FmElement, Ga as FmTab, Wa as FmTabs, e as themeStyles };
+//#region src/components/fm-checkbox.js
+var qa = class extends a {
+	template() {
+		let e = this.attr("size", "md"), t = this.boolAttr("disabled"), n = this.boolAttr("checked"), r = this.boolAttr("indeterminate");
+		return `
+      <style>
+        :host {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--fm-space-sm);
+          cursor: pointer;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        :host([disabled]) {
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+
+        .checkbox-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .checkbox-box {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid var(--fm-color-border-strong);
+          border-radius: var(--fm-radius-sm);
+          background: var(--fm-color-surface);
+          transition: border-color var(--fm-transition-fast),
+                      background-color var(--fm-transition-fast),
+                      box-shadow var(--fm-transition-fast);
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* ---- Sizes ---- */
+        .checkbox-box.size-sm {
+          width: 16px;
+          height: 16px;
+          border-radius: 4px;
+        }
+        .checkbox-box.size-sm svg {
+          width: 10px;
+          height: 10px;
+        }
+
+        .checkbox-box.size-md {
+          width: 20px;
+          height: 20px;
+        }
+        .checkbox-box.size-md svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        .checkbox-box.size-lg {
+          width: 24px;
+          height: 24px;
+          border-radius: var(--fm-radius-md);
+        }
+        .checkbox-box.size-lg svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        /* ---- States ---- */
+        .checkbox-box.is-checked {
+          background: var(--fm-color-primary);
+          border-color: var(--fm-color-primary);
+        }
+
+        .checkbox-box.is-disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        /* ---- Focus ---- */
+        :host(:focus-visible) .checkbox-box {
+          outline: 2px solid var(--fm-color-primary-light);
+          outline-offset: 2px;
+        }
+
+        /* ---- Checkmark ---- */
+        .checkmark {
+          color: white;
+          stroke: currentColor;
+          stroke-width: 2.5;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          fill: none;
+          opacity: 0;
+          transform: scale(0);
+        }
+
+        .checkbox-box.is-checked .checkmark {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        /* ---- Indeterminate dash ---- */
+        .indeterminate-dash {
+          width: 60%;
+          height: 2px;
+          background: white;
+          border-radius: 1px;
+          opacity: 0;
+          transform: scaleX(0);
+        }
+
+        .checkbox-box.is-checked .indeterminate-dash {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+
+        /* ---- Label ---- */
+        .label {
+          font-family: var(--fm-font-family);
+          font-size: var(--fm-font-size-sm);
+          color: var(--fm-color-text);
+          font-weight: var(--fm-font-weight-normal);
+        }
+
+        .checkbox-box.size-sm ~ .label {
+          font-size: var(--fm-font-size-xs);
+        }
+
+        .checkbox-box.size-lg ~ .label {
+          font-size: var(--fm-font-size-md);
+        }
+      </style>
+
+      <div class="checkbox-wrapper">
+        <div
+          class="checkbox-box ${{
+			sm: "size-sm",
+			md: "size-md",
+			lg: "size-lg"
+		}[e] || "size-md"} ${n || r ? "is-checked" : ""} ${t ? "is-disabled" : ""}"
+          part="checkbox"
+          role="checkbox"
+          aria-checked="${n || r ? "true" : "false"}"
+          tabindex="${t ? "-1" : "0"}"
+        >
+          ${r ? "<div class=\"indeterminate-dash\" part=\"dash\"></div>" : "\n              <svg class=\"checkmark\" viewBox=\"0 0 12 12\" part=\"checkmark\">\n                <path d=\"M2 6L5 9L10 3\" />\n              </svg>\n            "}
+        </div>
+        <span class="label" part="label">
+          <slot></slot>
+        </span>
+      </div>
+    `;
+	}
+	onEnter() {
+		$(this.root.querySelector(".checkbox-wrapper"), {
+			opacity: [0, 1],
+			scale: [.9, 1]
+		}, {
+			type: "spring",
+			stiffness: 400,
+			damping: 25
+		});
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._bindEvents();
+	}
+	_bindEvents() {
+		let e = this.root.querySelector(".checkbox-box"), t = this.root.querySelector(".checkbox-wrapper");
+		!e || !t || (t.addEventListener("click", (e) => {
+			this.boolAttr("disabled") || (e.preventDefault(), this.toggle());
+		}), e.addEventListener("keydown", (e) => {
+			this.boolAttr("disabled") || (e.key === " " || e.key === "Enter") && (e.preventDefault(), this.toggle());
+		}), ui(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { scale: 1.08 }, {
+			type: "spring",
+			stiffness: 400,
+			damping: 20
+		}), () => {
+			$(e, { scale: 1 }, {
+				type: "spring",
+				stiffness: 400,
+				damping: 20
+			});
+		})), xi(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { scale: .92 }, {
+			type: "spring",
+			stiffness: 500,
+			damping: 22
+		}), () => {
+			$(e, { scale: 1.08 }, {
+				type: "spring",
+				stiffness: 400,
+				damping: 18
+			});
+		})), (this.boolAttr("checked") || this.boolAttr("indeterminate")) && this._animateCheck(!0));
+	}
+	toggle() {
+		let e = this.boolAttr("checked") || this.boolAttr("indeterminate");
+		e ? (this.removeAttribute("checked"), this.removeAttribute("indeterminate")) : this.setAttribute("checked", ""), this._animateCheck(!e), this.dispatchEvent(new CustomEvent("change", {
+			detail: { checked: !e },
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+	_animateCheck(e) {
+		let t = this.root.querySelector(".checkbox-box"), n = this.root.querySelector(".checkmark"), r = this.root.querySelector(".indeterminate-dash");
+		if (!t) return;
+		$(t, {
+			backgroundColor: e ? "var(--fm-color-primary)" : "var(--fm-color-surface)",
+			borderColor: e ? "var(--fm-color-primary)" : "var(--fm-color-border-strong)"
+		}, { duration: .15 });
+		let i = n || r;
+		i && (e ? $(i, {
+			opacity: [0, 1],
+			scale: [0, 1],
+			x: ["-20%", "0%"]
+		}, {
+			type: "spring",
+			stiffness: 500,
+			damping: 20
+		}) : $(i, {
+			opacity: 0,
+			scale: .5
+		}, {
+			duration: .15,
+			ease: "easeOut"
+		}));
+	}
+	attributeChangedCallback(e, t, n) {
+		if (e === "size" || e === "disabled") this.render(), this._bindEvents();
+		else if (e === "checked" || e === "indeterminate") {
+			let e = t !== null, r = n !== null;
+			if (e !== r) {
+				let e = this.root.querySelector(".checkbox-box");
+				e && (r ? e.classList.add("is-checked") : e.classList.remove("is-checked"), e.setAttribute("aria-checked", r ? "true" : "false")), this._animateCheck(r);
+			}
+		}
+	}
+};
+i(qa, "observedAttributes", [
+	"checked",
+	"disabled",
+	"size",
+	"indeterminate"
+]), customElements.define("fm-checkbox", qa);
+//#endregion
+export { Ka as FmAlert, Ua as FmBadge, Va as FmButton, Ha as FmCard, qa as FmCheckbox, a as FmElement, Ga as FmTab, Wa as FmTabs, e as themeStyles };

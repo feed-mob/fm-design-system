@@ -674,6 +674,121 @@ npm install @fm-agency/design-system</code></pre>
   </section>
 
   <!-- ============================================================ -->
+  <!-- CHECKBOXES                                                    -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-checkbox</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0;">
+          <div class="row" style="margin-bottom: 20px; align-items: center;">
+            <fm-checkbox checked>Accept terms and conditions</fm-checkbox>
+            <fm-checkbox>Subscribe to newsletter</fm-checkbox>
+          </div>
+          <div class="row" style="margin-bottom: 20px; align-items: center;">
+            <fm-checkbox size="sm" checked>Small checkbox</fm-checkbox>
+            <fm-checkbox size="md" checked>Medium checkbox (default)</fm-checkbox>
+            <fm-checkbox size="lg" checked>Large checkbox</fm-checkbox>
+          </div>
+          <div class="row" style="margin-bottom: 20px; align-items: center;">
+            <fm-checkbox disabled>Disabled unchecked</fm-checkbox>
+            <fm-checkbox disabled checked>Disabled checked</fm-checkbox>
+          </div>
+          <div class="row" style="align-items: center;">
+            <fm-checkbox indeterminate>Indeterminate state</fm-checkbox>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>checked</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Sets the checked state</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables interaction</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Checkbox size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>indeterminate</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Shows indeterminate dash instead of checkmark</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>change</code></td>
+                <td><code>{ checked: boolean }</code></td>
+                <td>Fired when checkbox state changes</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade-in + scale with spring physics</li>
+            <li><strong>Check:</strong> Spring-pop on checkmark with path draw</li>
+            <li><strong>Uncheck:</strong> Fade-out with scale down</li>
+            <li><strong>Hover:</strong> Gentle lift with enhanced shadow</li>
+            <li><strong>Press:</strong> Tactile press-down effect</li>
+            <li><strong>Focus:</strong> Teal ring indicator</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic checkbox --&gt;
+&lt;fm-checkbox&gt;Accept terms and conditions&lt;/fm-checkbox&gt;
+
+&lt;!-- Checked by default --&gt;
+&lt;fm-checkbox checked&gt;Subscribe to newsletter&lt;/fm-checkbox&gt;
+
+&lt;!-- Different sizes --&gt;
+&lt;fm-checkbox size="sm"&gt;Small&lt;/fm-checkbox&gt;
+&lt;fm-checkbox size="md"&gt;Medium (default)&lt;/fm-checkbox&gt;
+&lt;fm-checkbox size="lg"&gt;Large&lt;/fm-checkbox&gt;
+
+&lt;!-- Disabled states --&gt;
+&lt;fm-checkbox disabled&gt;Disabled unchecked&lt;/fm-checkbox&gt;
+&lt;fm-checkbox disabled checked&gt;Disabled checked&lt;/fm-checkbox&gt;
+
+&lt;!-- Indeterminate state --&gt;
+&lt;fm-checkbox indeterminate&gt;Indeterminate&lt;/fm-checkbox&gt;
+
+&lt;!-- Listen for changes --&gt;
+&lt;script&gt;
+  document.querySelector('fm-checkbox').addEventListener('change', (e) => {
+    console.log('Checked:', e.detail.checked);
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- ALERTS                                                        -->
   <!-- ============================================================ -->
   <section>

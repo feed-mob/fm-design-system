@@ -8,3 +8,4 @@ export { FmCard } from "./components/fm-card.js";
 export { FmBadge } from "./components/fm-badge.js";
 export { FmTabs, FmTab } from "./components/fm-tabs.js";
 export { FmAlert } from "./components/fm-alert.js";
+export { FmCheckbox } from "./components/fm-checkbox.js";
