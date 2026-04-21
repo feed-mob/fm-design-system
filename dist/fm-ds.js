@@ -5550,4 +5550,164 @@ i(Qa, "observedAttributes", [
 	"href-template"
 ]), customElements.define("fm-pagination", Qa);
 //#endregion
-export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, Za as FmDropdown, a as FmElement, Qa as FmPagination, Ga as FmTab, Wa as FmTabs, e as themeStyles };
+//#region src/components/fm-sparkline.js
+var $a = 0, eo = class extends a {
+	constructor() {
+		super(), $a += 1, this._gradientId = `fm-sparkline-gradient-${$a}`;
+	}
+	template() {
+		let e = this._parseData(), t = this._numberAttr("width", 200), n = this._numberAttr("height", 60), r = this.attr("gradient-from", "var(--fm-alpha-primary-20)"), i = this.attr("gradient-to", "transparent"), a = this.attr("stroke-color", "var(--fm-color-primary)"), o = this._numberAttr("stroke-width", 2), s = this.attr("aria-label", "Sparkline trend"), { line: c, area: l, point: u } = this._buildPathData(e, t, n), d = this._formatPoint(Math.max(o * 1.5, 3));
+		return `
+      <style>
+        :host {
+          display: inline-block;
+          line-height: 0;
+        }
+
+        .sparkline {
+          display: inline-block;
+          will-change: transform, opacity;
+        }
+
+        svg {
+          display: block;
+          overflow: visible;
+        }
+
+        .area {
+          transition: opacity var(--fm-transition-normal);
+        }
+
+        .line {
+          filter: drop-shadow(0 2px 6px var(--fm-alpha-primary-15));
+          transition: opacity var(--fm-transition-normal);
+        }
+
+        .point {
+          filter: drop-shadow(0 2px 6px var(--fm-alpha-primary-15));
+          transition: opacity var(--fm-transition-normal);
+        }
+      </style>
+
+      <div class="sparkline" part="sparkline">
+        <svg
+          width="${t}"
+          height="${n}"
+          viewBox="0 0 ${t} ${n}"
+          role="img"
+          aria-label="${this._escapeAttr(s)}"
+          part="svg"
+        >
+          <defs>
+            <linearGradient id="${this._gradientId}" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color: ${this._escapeAttr(r)};" />
+              <stop offset="100%" style="stop-color: ${this._escapeAttr(i)};" />
+            </linearGradient>
+          </defs>
+
+          ${l ? `
+            <path
+              class="area"
+              d="${l}"
+              fill="url(#${this._gradientId})"
+              part="area"
+            ></path>
+          ` : ""}
+
+          ${c ? `
+            <path
+              class="line"
+              d="${c}"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="stroke: ${this._escapeAttr(a)}; stroke-width: ${o}px;"
+              part="line"
+            ></path>
+          ` : ""}
+
+          ${u ? `
+            <circle
+              class="point"
+              cx="${u[0]}"
+              cy="${u[1]}"
+              r="${d}"
+              style="fill: ${this._escapeAttr(a)};"
+              part="point"
+            ></circle>
+          ` : ""}
+        </svg>
+      </div>
+    `;
+	}
+	onEnter() {
+		this._animateSparkline();
+	}
+	attributeChangedCallback() {
+		this.render(), this.isConnected && this._entered && this._animateSparkline();
+	}
+	_animateSparkline() {
+		let e = this.root.querySelector(".sparkline");
+		e && $(e, {
+			opacity: [.4, 1],
+			y: [6, 0]
+		}, {
+			type: "spring",
+			stiffness: 320,
+			damping: 26
+		});
+	}
+	_numberAttr(e, t) {
+		let n = Number(this.attr(e, String(t)));
+		return Number.isFinite(n) && n > 0 ? n : t;
+	}
+	_parseData() {
+		let e = this.attr("data", "").trim();
+		if (!e) return [];
+		try {
+			let t = JSON.parse(e);
+			if (Array.isArray(t)) return t.map((e) => Number(e)).filter((e) => Number.isFinite(e));
+		} catch {}
+		return e.split(",").map((e) => Number(e.trim())).filter((e) => Number.isFinite(e));
+	}
+	_buildPathData(e, t, n) {
+		if (e.length === 0) return {
+			line: "",
+			area: "",
+			point: null
+		};
+		let r = Math.min(...e), i = Math.max(...e) - r || 1, a = Math.min(10, t / 2, n / 2), o = Math.max(t - a * 2, 0), s = Math.max(n - a * 2, 0), c = e.map((n, c) => {
+			let l = e.length === 1 ? t / 2 : a + c / (e.length - 1) * o, u = a + s - (n - r) / i * s;
+			return [this._formatPoint(l), this._formatPoint(u)];
+		});
+		if (e.length === 1) return {
+			line: "",
+			area: "",
+			point: c[0]
+		};
+		let l = c.map(([e, t], n) => `${n === 0 ? "M" : "L"} ${e} ${t}`).join(" "), u = this._formatPoint(n - a);
+		return {
+			line: l,
+			area: `${l} L ${c[c.length - 1][0]} ${u} L ${c[0][0]} ${u} Z`,
+			point: null
+		};
+	}
+	_formatPoint(e) {
+		return Number(e.toFixed(2));
+	}
+	_escapeAttr(e) {
+		return String(e).replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+	}
+};
+i(eo, "observedAttributes", [
+	"data",
+	"width",
+	"height",
+	"gradient-from",
+	"gradient-to",
+	"stroke-color",
+	"stroke-width",
+	"aria-label"
+]), customElements.define("fm-sparkline", eo);
+//#endregion
+export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, Za as FmDropdown, a as FmElement, Qa as FmPagination, eo as FmSparkline, Ga as FmTab, Wa as FmTabs, e as themeStyles };

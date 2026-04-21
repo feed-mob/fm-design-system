@@ -1736,4 +1736,85 @@
         ${y}
         ${x}
       </nav>
-    `}_getPagyObject(){let e=this.attr(`pagy`,``);if(e)try{let t=JSON.parse(e);if(typeof t==`object`&&t)return t}catch{console.warn(`[fm-pagination] Invalid pagy JSON`)}return null}_getPageSeries(e,t,n,r){let i=this._getPagyObject();if(i&&i.series&&Array.isArray(i.series))return i.series.map(e=>e===`:gap`||e===`gap`?`...`:typeof e==`number`?e:String(e));let a=this.attr(`series`,``);if(a)try{let e=JSON.parse(a);if(Array.isArray(e))return e.map(e=>e===`:gap`||e===`gap`?`...`:typeof e==`number`?e:String(e))}catch{console.warn(`[fm-pagination] Invalid series JSON`)}return this._getPageRange(e,t,n,r)}_getPageRange(e,t,n,r){let i=[],a=[];for(let e=1;e<=Math.min(r,t);e++)a.push(e);let o=[];for(let e=Math.max(r+1,t-r+1);e<=t;e++)o.push(e);let s=Math.max(r+1,e-n),c=Math.min(t-r,e+n);i.push(...a),s>r+1?i.push(`...`):s===r+1&&!a.includes(s)&&i.push(s);for(let e=Math.max(s,r+2);e<=c;e++)!a.includes(e)&&!o.includes(e)&&i.push(e);c<t-r?i.push(`...`):c===t-r&&!o.includes(c)&&i.push(c);for(let e of o)i.includes(e)||i.push(e);return i}getCurrent(){let e=this._getPagyObject();if(e&&typeof e.page==`number`)return Math.max(1,e.page);let t=this.attr(`page`,``),n=this.attr(`current`,``);return Math.max(1,parseInt(t||n||`1`,10)||1)}getTotal(){let e=this._getPagyObject();if(e&&typeof e.pages==`number`)return Math.max(1,e.pages);let t=this.attr(`pages`,``),n=this.attr(`total`,``);return Math.max(1,parseInt(t||n||`1`,10)||1)}connectedCallback(){super.connectedCallback(),this._bindEvents()}onEnter(){let e=this.root.querySelector(`.pagination`);e&&$(e,{opacity:[0,1],y:[8,0]},{type:`spring`,stiffness:350,damping:25})}_bindEvents(){this.boolAttr(`disabled`)||this.root.querySelectorAll(`.pagination-btn:not(:disabled)`).forEach(e=>{e.addEventListener(`click`,t=>{if(t.target.tagName===`A`&&!t.ctrlKey&&!t.metaKey)return;t.preventDefault();let n=this.getCurrent(),r=n;if(e.dataset.action===`prev`?r=Math.max(1,n-1):e.dataset.action===`next`?r=Math.min(this.getTotal(),n+1):e.dataset.action===`first`?r=1:e.dataset.action===`last`?r=this.getTotal():e.dataset.page&&(r=parseInt(e.dataset.page,10)),r!==n){let e=n;this.setAttribute(`current`,String(r)),this.dispatchEvent(new CustomEvent(`fm-page-change`,{bubbles:!0,detail:{page:r,previousPage:e}}))}}),Q(e,e=>($(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20}),()=>{$(e,{scale:1},{type:`spring`,stiffness:400,damping:20})})),Si(e,e=>($(e,{scale:.95},{type:`spring`,stiffness:500,damping:22}),()=>{$(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20})}))})}attributeChangedCallback(){this.render(),this._bindEvents()}};a($a,`observedAttributes`,[`pagy`,`current`,`page`,`total`,`pages`,`series`,`size`,`variant`,`sibling-count`,`boundary-count`,`disabled`,`show-first-last`,`hide-prev-next`,`prev-label`,`next-label`,`href-template`]),customElements.define(`fm-pagination`,$a),e.FmAlert=qa,e.FmBadge=Wa,e.FmBreadcrumb=Ya,e.FmButton=Ha,e.FmCard=Ua,e.FmCheckbox=Ja,e.FmClipboard=Xa,e.FmCollapsible=Za,e.FmDropdown=Qa,e.FmElement=o,e.FmPagination=$a,e.FmTab=Ka,e.FmTabs=Ga,e.themeStyles=t});
+    `}_getPagyObject(){let e=this.attr(`pagy`,``);if(e)try{let t=JSON.parse(e);if(typeof t==`object`&&t)return t}catch{console.warn(`[fm-pagination] Invalid pagy JSON`)}return null}_getPageSeries(e,t,n,r){let i=this._getPagyObject();if(i&&i.series&&Array.isArray(i.series))return i.series.map(e=>e===`:gap`||e===`gap`?`...`:typeof e==`number`?e:String(e));let a=this.attr(`series`,``);if(a)try{let e=JSON.parse(a);if(Array.isArray(e))return e.map(e=>e===`:gap`||e===`gap`?`...`:typeof e==`number`?e:String(e))}catch{console.warn(`[fm-pagination] Invalid series JSON`)}return this._getPageRange(e,t,n,r)}_getPageRange(e,t,n,r){let i=[],a=[];for(let e=1;e<=Math.min(r,t);e++)a.push(e);let o=[];for(let e=Math.max(r+1,t-r+1);e<=t;e++)o.push(e);let s=Math.max(r+1,e-n),c=Math.min(t-r,e+n);i.push(...a),s>r+1?i.push(`...`):s===r+1&&!a.includes(s)&&i.push(s);for(let e=Math.max(s,r+2);e<=c;e++)!a.includes(e)&&!o.includes(e)&&i.push(e);c<t-r?i.push(`...`):c===t-r&&!o.includes(c)&&i.push(c);for(let e of o)i.includes(e)||i.push(e);return i}getCurrent(){let e=this._getPagyObject();if(e&&typeof e.page==`number`)return Math.max(1,e.page);let t=this.attr(`page`,``),n=this.attr(`current`,``);return Math.max(1,parseInt(t||n||`1`,10)||1)}getTotal(){let e=this._getPagyObject();if(e&&typeof e.pages==`number`)return Math.max(1,e.pages);let t=this.attr(`pages`,``),n=this.attr(`total`,``);return Math.max(1,parseInt(t||n||`1`,10)||1)}connectedCallback(){super.connectedCallback(),this._bindEvents()}onEnter(){let e=this.root.querySelector(`.pagination`);e&&$(e,{opacity:[0,1],y:[8,0]},{type:`spring`,stiffness:350,damping:25})}_bindEvents(){this.boolAttr(`disabled`)||this.root.querySelectorAll(`.pagination-btn:not(:disabled)`).forEach(e=>{e.addEventListener(`click`,t=>{if(t.target.tagName===`A`&&!t.ctrlKey&&!t.metaKey)return;t.preventDefault();let n=this.getCurrent(),r=n;if(e.dataset.action===`prev`?r=Math.max(1,n-1):e.dataset.action===`next`?r=Math.min(this.getTotal(),n+1):e.dataset.action===`first`?r=1:e.dataset.action===`last`?r=this.getTotal():e.dataset.page&&(r=parseInt(e.dataset.page,10)),r!==n){let e=n;this.setAttribute(`current`,String(r)),this.dispatchEvent(new CustomEvent(`fm-page-change`,{bubbles:!0,detail:{page:r,previousPage:e}}))}}),Q(e,e=>($(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20}),()=>{$(e,{scale:1},{type:`spring`,stiffness:400,damping:20})})),Si(e,e=>($(e,{scale:.95},{type:`spring`,stiffness:500,damping:22}),()=>{$(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20})}))})}attributeChangedCallback(){this.render(),this._bindEvents()}};a($a,`observedAttributes`,[`pagy`,`current`,`page`,`total`,`pages`,`series`,`size`,`variant`,`sibling-count`,`boundary-count`,`disabled`,`show-first-last`,`hide-prev-next`,`prev-label`,`next-label`,`href-template`]),customElements.define(`fm-pagination`,$a);var eo=0,to=class extends o{constructor(){super(),eo+=1,this._gradientId=`fm-sparkline-gradient-${eo}`}template(){let e=this._parseData(),t=this._numberAttr(`width`,200),n=this._numberAttr(`height`,60),r=this.attr(`gradient-from`,`var(--fm-alpha-primary-20)`),i=this.attr(`gradient-to`,`transparent`),a=this.attr(`stroke-color`,`var(--fm-color-primary)`),o=this._numberAttr(`stroke-width`,2),s=this.attr(`aria-label`,`Sparkline trend`),{line:c,area:l,point:u}=this._buildPathData(e,t,n),d=this._formatPoint(Math.max(o*1.5,3));return`
+      <style>
+        :host {
+          display: inline-block;
+          line-height: 0;
+        }
+
+        .sparkline {
+          display: inline-block;
+          will-change: transform, opacity;
+        }
+
+        svg {
+          display: block;
+          overflow: visible;
+        }
+
+        .area {
+          transition: opacity var(--fm-transition-normal);
+        }
+
+        .line {
+          filter: drop-shadow(0 2px 6px var(--fm-alpha-primary-15));
+          transition: opacity var(--fm-transition-normal);
+        }
+
+        .point {
+          filter: drop-shadow(0 2px 6px var(--fm-alpha-primary-15));
+          transition: opacity var(--fm-transition-normal);
+        }
+      </style>
+
+      <div class="sparkline" part="sparkline">
+        <svg
+          width="${t}"
+          height="${n}"
+          viewBox="0 0 ${t} ${n}"
+          role="img"
+          aria-label="${this._escapeAttr(s)}"
+          part="svg"
+        >
+          <defs>
+            <linearGradient id="${this._gradientId}" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color: ${this._escapeAttr(r)};" />
+              <stop offset="100%" style="stop-color: ${this._escapeAttr(i)};" />
+            </linearGradient>
+          </defs>
+
+          ${l?`
+            <path
+              class="area"
+              d="${l}"
+              fill="url(#${this._gradientId})"
+              part="area"
+            ></path>
+          `:``}
+
+          ${c?`
+            <path
+              class="line"
+              d="${c}"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="stroke: ${this._escapeAttr(a)}; stroke-width: ${o}px;"
+              part="line"
+            ></path>
+          `:``}
+
+          ${u?`
+            <circle
+              class="point"
+              cx="${u[0]}"
+              cy="${u[1]}"
+              r="${d}"
+              style="fill: ${this._escapeAttr(a)};"
+              part="point"
+            ></circle>
+          `:``}
+        </svg>
+      </div>
+    `}onEnter(){this._animateSparkline()}attributeChangedCallback(){this.render(),this.isConnected&&this._entered&&this._animateSparkline()}_animateSparkline(){let e=this.root.querySelector(`.sparkline`);e&&$(e,{opacity:[.4,1],y:[6,0]},{type:`spring`,stiffness:320,damping:26})}_numberAttr(e,t){let n=Number(this.attr(e,String(t)));return Number.isFinite(n)&&n>0?n:t}_parseData(){let e=this.attr(`data`,``).trim();if(!e)return[];try{let t=JSON.parse(e);if(Array.isArray(t))return t.map(e=>Number(e)).filter(e=>Number.isFinite(e))}catch{}return e.split(`,`).map(e=>Number(e.trim())).filter(e=>Number.isFinite(e))}_buildPathData(e,t,n){if(e.length===0)return{line:``,area:``,point:null};let r=Math.min(...e),i=Math.max(...e)-r||1,a=Math.min(10,t/2,n/2),o=Math.max(t-a*2,0),s=Math.max(n-a*2,0),c=e.map((n,c)=>{let l=e.length===1?t/2:a+c/(e.length-1)*o,u=a+s-(n-r)/i*s;return[this._formatPoint(l),this._formatPoint(u)]});if(e.length===1)return{line:``,area:``,point:c[0]};let l=c.map(([e,t],n)=>`${n===0?`M`:`L`} ${e} ${t}`).join(` `),u=this._formatPoint(n-a);return{line:l,area:`${l} L ${c[c.length-1][0]} ${u} L ${c[0][0]} ${u} Z`,point:null}}_formatPoint(e){return Number(e.toFixed(2))}_escapeAttr(e){return String(e).replaceAll(`&`,`&amp;`).replaceAll(`"`,`&quot;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`)}};a(to,`observedAttributes`,[`data`,`width`,`height`,`gradient-from`,`gradient-to`,`stroke-color`,`stroke-width`,`aria-label`]),customElements.define(`fm-sparkline`,to),e.FmAlert=qa,e.FmBadge=Wa,e.FmBreadcrumb=Ya,e.FmButton=Ha,e.FmCard=Ua,e.FmCheckbox=Ja,e.FmClipboard=Xa,e.FmCollapsible=Za,e.FmDropdown=Qa,e.FmElement=o,e.FmPagination=$a,e.FmSparkline=to,e.FmTab=Ka,e.FmTabs=Ga,e.themeStyles=t});
