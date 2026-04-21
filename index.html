@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FM Design System — Playground</title>
+  <title>FeedMob Design System — Playground</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/icon.svg">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
@@ -88,7 +90,7 @@
   </style>
 </head>
 <body>
-  <img src="./logo.png" alt="FeedMob Design System Logo" class="logo" />
+  <img src="./assets/logo.png" alt="FeedMob Design System Logo" class="logo" />
   <header class="page-header">
     <h1><span class="accent">Design System</span></h1>
   </header>
@@ -664,6 +666,129 @@ npm install @fm-agency/design-system</code></pre>
 &lt;script&gt;
   document.querySelector('fm-tabs').addEventListener('fm-tab-change', (e) => {
     console.log('Tab changed:', e.detail.index, e.detail.label);
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ALERTS                                                        -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-alert</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0; display: flex; flex-direction: column; gap: 16px;">
+          <fm-alert variant="info" title="New Campaign Available" dismissible>
+            A new campaign template has been added to your library. Check it out in the templates section.
+          </fm-alert>
+          <fm-alert variant="success" title="Campaign Published" dismissible>
+            Your campaign "Summer Sale 2026" has been successfully published and is now live.
+          </fm-alert>
+          <fm-alert variant="warning" title="Budget Alert" dismissible>
+            You have used 85% of your monthly budget. Consider adjusting your spend to avoid overages.
+          </fm-alert>
+          <fm-alert variant="error" title="Connection Failed" dismissible>
+            Unable to sync with analytics provider. Please check your API credentials and try again.
+          </fm-alert>
+          <fm-alert variant="info">
+            Simple alert without title or dismiss button — just informational text.
+          </fm-alert>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"info"</td>
+                <td>Alert style: <code>info</code>, <code>success</code>, <code>warning</code>, <code>error</code></td>
+              </tr>
+              <tr>
+                <td><code>title</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Alert title text</td>
+              </tr>
+              <tr>
+                <td><code>dismissible</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Shows close button when present</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Alert message content</td></tr>
+              <tr><td><code>icon</code></td><td>Custom icon (overrides default)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>dismiss</code></td><td>Fired when alert is dismissed</td></tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Slide in from top with fade and spring physics</li>
+            <li><strong>Exit:</strong> Slide up and fade out when dismissed</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Info alert with title and dismiss button --&gt;
+&lt;fm-alert variant="info" title="New Campaign Available" dismissible&gt;
+  A new campaign template has been added to your library.
+&lt;/fm-alert&gt;
+
+&lt;!-- Success alert --&gt;
+&lt;fm-alert variant="success" title="Campaign Published" dismissible&gt;
+  Your campaign has been successfully published and is now live.
+&lt;/fm-alert&gt;
+
+&lt;!-- Warning alert --&gt;
+&lt;fm-alert variant="warning" title="Budget Alert" dismissible&gt;
+  You have used 85% of your monthly budget.
+&lt;/fm-alert&gt;
+
+&lt;!-- Error alert --&gt;
+&lt;fm-alert variant="error" title="Connection Failed" dismissible&gt;
+  Unable to sync with analytics provider.
+&lt;/fm-alert&gt;
+
+&lt;!-- Simple alert without title or dismiss --&gt;
+&lt;fm-alert variant="info"&gt;
+  Simple informational message without title.
+&lt;/fm-alert&gt;
+
+&lt;!-- Custom icon via slot --&gt;
+&lt;fm-alert variant="info" title="Custom Icon" dismissible&gt;
+  &lt;svg slot="icon" width="20" height="20" viewBox="0 0 20 20"&gt;...&lt;/svg&gt;
+  This alert uses a custom icon.
+&lt;/fm-alert&gt;
+
+&lt;!-- Listen for dismiss event --&gt;
+&lt;script&gt;
+  document.querySelector('fm-alert').addEventListener('dismiss', () => {
+    console.log('Alert was dismissed');
   });
 &lt;/script&gt;</code></pre>
         </div>
