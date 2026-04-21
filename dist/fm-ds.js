@@ -4539,11 +4539,7 @@ var Ya = class extends a {
 		this.attr("variant", "button"), e.classList.add("success");
 		let n = e.querySelector(".icon-check");
 		if (n && $(n, {
-			scale: [
-				.5,
-				1.2,
-				1
-			],
+			scale: [.5, 1],
 			opacity: [0, 1]
 		}, {
 			type: "spring",

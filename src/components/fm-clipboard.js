@@ -425,11 +425,11 @@ export class FmClipboard extends FmElement {
     // Add success class for icon swap
     btn.classList.add("success");
 
-    // Animate the checkmark
+    // Animate the checkmark (spring only supports 2 keyframes)
     const checkIcon = btn.querySelector(".icon-check");
     if (checkIcon) {
       animate(checkIcon, { 
-        scale: [0.5, 1.2, 1],
+        scale: [0.5, 1],
         opacity: [0, 1] 
       }, {
         type: "spring",
