@@ -789,6 +789,143 @@ npm install @fm-agency/design-system</code></pre>
   </section>
 
   <!-- ============================================================ -->
+  <!-- BREADCRUMBS                                                   -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-breadcrumb</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0; display: flex; flex-direction: column; gap: 24px;">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Default (JSON items)</p>
+            <fm-breadcrumb items='[
+              {"label": "Home", "href": "/"},
+              {"label": "Products", "href": "/products"},
+              {"label": "Campaigns", "href": "/products/campaigns"},
+              {"label": "Details"}
+            ]'></fm-breadcrumb>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Slash separator</p>
+            <fm-breadcrumb separator="slash" items='[
+              {"label": "Dashboard", "href": "/dashboard"},
+              {"label": "Analytics", "href": "/analytics"},
+              {"label": "Reports"}
+            ]'></fm-breadcrumb>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Arrow separator (small size)</p>
+            <fm-breadcrumb separator="arrow" size="sm" items='[
+              {"label": "Settings", "href": "/settings"},
+              {"label": "Account", "href": "/settings/account"},
+              {"label": "Profile"}
+            ]'></fm-breadcrumb>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Large size with slotted content</p>
+            <fm-breadcrumb size="lg">
+              <a href="/">Home</a>
+              <a href="/library">Library</a>
+              <span>Data</span>
+            </fm-breadcrumb>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>items</code></td>
+                <td>string (JSON)</td>
+                <td>""</td>
+                <td>JSON array of { label, href? } objects</td>
+              </tr>
+              <tr>
+                <td><code>separator</code></td>
+                <td>string</td>
+                <td>"chevron"</td>
+                <td>Separator style: <code>chevron</code>, <code>slash</code>, <code>arrow</code></td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Slotted links/spans for custom breadcrumb items</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-breadcrumb-click</code></td>
+                <td><code>{ index, label, href }</code></td>
+                <td>Fired when a breadcrumb link is clicked</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- JSON items (recommended) --&gt;
+&lt;fm-breadcrumb items='[
+  {"label": "Home", "href": "/"},
+  {"label": "Products", "href": "/products"},
+  {"label": "Details"}
+]'&gt;&lt;/fm-breadcrumb&gt;
+
+&lt;!-- Custom separator --&gt;
+&lt;fm-breadcrumb separator="slash" items='[
+  {"label": "Dashboard", "href": "/dashboard"},
+  {"label": "Reports"}
+]'&gt;&lt;/fm-breadcrumb&gt;
+
+&lt;!-- Different sizes --&gt;
+&lt;fm-breadcrumb size="sm" items='[...]'&gt;&lt;/fm-breadcrumb&gt;
+&lt;fm-breadcrumb size="md" items='[...]'&gt;&lt;/fm-breadcrumb&gt;
+&lt;fm-breadcrumb size="lg" items='[...]'&gt;&lt;/fm-breadcrumb&gt;
+
+&lt;!-- Slotted content (manual) --&gt;
+&lt;fm-breadcrumb separator="arrow" size="lg"&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;a href="/library"&gt;Library&lt;/a&gt;
+  &lt;span&gt;Data&lt;/span&gt;
+&lt;/fm-breadcrumb&gt;
+
+&lt;!-- Listen for clicks --&gt;
+&lt;script&gt;
+  document.querySelector('fm-breadcrumb').addEventListener('fm-breadcrumb-click', (e) => {
+    console.log('Clicked:', e.detail.index, e.detail.label, e.detail.href);
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- ALERTS                                                        -->
   <!-- ============================================================ -->
   <section>
