@@ -1053,8 +1053,164 @@ npm install @fm-agency/design-system</code></pre>
 
 &lt;!-- Listen for dismiss event --&gt;
 &lt;script&gt;
-  document.querySelector('fm-alert').addEventListener('dismiss', () => {
+  document.querySelector('fm-alert').addEventListener('dismiss', () =&gt; {
     console.log('Alert was dismissed');
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CLIPBOARD                                                     -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-clipboard</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0; display: flex; flex-direction: column; gap: 24px;">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Button variant with toast feedback</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-clipboard text="campaign-id-12345" label="Copy ID"></fm-clipboard>
+              <fm-clipboard text="https://app.feedmob.com/campaigns/abc123" variant="button" label="Copy URL"></fm-clipboard>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Icon variant with tooltip feedback</p>
+            <div class="row" style="align-items: center; gap: 16px; padding: 12px; background: var(--fm-color-surface-alt); border-radius: var(--fm-radius-md);">
+              <span style="font-family: var(--fm-font-family); font-size: var(--fm-font-size-sm); color: var(--fm-color-text-secondary);">API Key: sk_live_51H...</span>
+              <fm-clipboard text="sk_live_51H8x2jK9mLpQ3vR" variant="icon" feedback="tooltip"></fm-clipboard>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Inline variant with slotted text</p>
+            <div class="row" style="align-items: center; gap: 8px; font-family: var(--fm-font-family); font-size: var(--fm-font-size-sm);">
+              <span style="color: var(--fm-color-text-secondary);">Share code:</span>
+              <fm-clipboard variant="inline" position="right">SUMMER2026</fm-clipboard>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Custom feedback text</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-clipboard text="copied-content" feedback-text="Link copied!" label="Copy Link"></fm-clipboard>
+            </div>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>text</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Text to copy to clipboard (required unless using slotted text)</td>
+              </tr>
+              <tr>
+                <td><code>label</code></td>
+                <td>string</td>
+                <td>"Copy"</td>
+                <td>Button label text</td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"button"</td>
+                <td>Style: <code>button</code>, <code>icon</code>, <code>inline</code></td>
+              </tr>
+              <tr>
+                <td><code>feedback</code></td>
+                <td>string</td>
+                <td>"toast"</td>
+                <td>Feedback style: <code>toast</code>, <code>tooltip</code>, <code>none</code></td>
+              </tr>
+              <tr>
+                <td><code>feedback-text</code></td>
+                <td>string</td>
+                <td>"Copied!"</td>
+                <td>Text shown after successful copy</td>
+              </tr>
+              <tr>
+                <td><code>position</code></td>
+                <td>string</td>
+                <td>"right"</td>
+                <td>Icon position for inline variant: <code>right</code>, <code>left</code></td>
+              </tr>
+              <tr>
+                <td><code>hide-icon</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Hides the copy icon</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Text to copy (for inline variant)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-copy</code></td>
+                <td><code>{ text: string }</code></td>
+                <td>Fired when text is successfully copied</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade-in with subtle slide up</li>
+            <li><strong>Hover:</strong> Gentle lift with color change</li>
+            <li><strong>Press:</strong> Tactile press-down effect</li>
+            <li><strong>Success:</strong> Checkmark icon morph with pop animation</li>
+            <li><strong>Feedback:</strong> Toast/tooltip fade-in with spring physics</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Button variant with toast feedback --&gt;
+&lt;fm-clipboard text="campaign-id-12345" label="Copy ID"&gt;&lt;/fm-clipboard&gt;
+
+&lt;!-- Icon variant with tooltip feedback --&gt;
+&lt;fm-clipboard
+  text="sk_live_51H8x2jK9mLpQ3vR"
+  variant="icon"
+  feedback="tooltip"
+&gt;&lt;/fm-clipboard&gt;
+
+&lt;!-- Inline variant with slotted text --&gt;
+&lt;fm-clipboard variant="inline" position="right"&gt;
+  SUMMER2026
+&lt;/fm-clipboard&gt;
+
+&lt;!-- Custom feedback text --&gt;
+&lt;fm-clipboard
+  text="copied-content"
+  feedback-text="Link copied!"
+  label="Copy Link"
+&gt;&lt;/fm-clipboard&gt;
+
+&lt;!-- Listen for copy event --&gt;
+&lt;script&gt;
+  document.querySelector('fm-clipboard').addEventListener('fm-copy', (e) =&gt; {
+    console.log('Copied:', e.detail.text);
   });
 &lt;/script&gt;</code></pre>
         </div>

@@ -758,4 +758,400 @@
           <slot></slot>
         </span>
       </div>
-    `}onEnter(){$(this.root.querySelector(`.checkbox-wrapper`),{opacity:[0,1],scale:[.9,1]},{type:`spring`,stiffness:400,damping:25})}connectedCallback(){super.connectedCallback(),this._bindEvents()}_bindEvents(){let e=this.root.querySelector(`.checkbox-box`),t=this.root.querySelector(`.checkbox-wrapper`);!e||!t||(t.addEventListener(`click`,e=>{this.boolAttr(`disabled`)||(e.preventDefault(),this.toggle())}),e.addEventListener(`keydown`,e=>{this.boolAttr(`disabled`)||(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.toggle())}),di(e,e=>this.boolAttr(`disabled`)?()=>{}:($(e,{scale:1.08},{type:`spring`,stiffness:400,damping:20}),()=>{$(e,{scale:1},{type:`spring`,stiffness:400,damping:20})})),Si(e,e=>this.boolAttr(`disabled`)?()=>{}:($(e,{scale:.92},{type:`spring`,stiffness:500,damping:22}),()=>{$(e,{scale:1.08},{type:`spring`,stiffness:400,damping:18})})),(this.boolAttr(`checked`)||this.boolAttr(`indeterminate`))&&this._animateCheck(!0))}toggle(){let e=this.boolAttr(`checked`)||this.boolAttr(`indeterminate`);e?(this.removeAttribute(`checked`),this.removeAttribute(`indeterminate`)):this.setAttribute(`checked`,``),this._animateCheck(!e),this.dispatchEvent(new CustomEvent(`change`,{detail:{checked:!e},bubbles:!0,composed:!0}))}_animateCheck(e){let t=this.root.querySelector(`.checkbox-box`),n=this.root.querySelector(`.checkmark`),r=this.root.querySelector(`.indeterminate-dash`);if(!t)return;$(t,{backgroundColor:e?`var(--fm-color-primary)`:`var(--fm-color-surface)`,borderColor:e?`var(--fm-color-primary)`:`var(--fm-color-border-strong)`},{duration:.15});let i=n||r;i&&(e?$(i,{opacity:[0,1],scale:[0,1],x:[`-20%`,`0%`]},{type:`spring`,stiffness:500,damping:20}):$(i,{opacity:0,scale:.5},{duration:.15,ease:`easeOut`}))}attributeChangedCallback(e,t,n){if(e===`size`||e===`disabled`)this.render(),this._bindEvents();else if(e===`checked`||e===`indeterminate`){let e=t!==null,r=n!==null;if(e!==r){let e=this.root.querySelector(`.checkbox-box`);e&&(r?e.classList.add(`is-checked`):e.classList.remove(`is-checked`),e.setAttribute(`aria-checked`,r?`true`:`false`)),this._animateCheck(r)}}}};a(Ja,`observedAttributes`,[`checked`,`disabled`,`size`,`indeterminate`]),customElements.define(`fm-checkbox`,Ja),e.FmAlert=qa,e.FmBadge=Wa,e.FmButton=Ha,e.FmCard=Ua,e.FmCheckbox=Ja,e.FmElement=o,e.FmTab=Ka,e.FmTabs=Ga,e.themeStyles=t});
+    `}onEnter(){$(this.root.querySelector(`.checkbox-wrapper`),{opacity:[0,1],scale:[.9,1]},{type:`spring`,stiffness:400,damping:25})}connectedCallback(){super.connectedCallback(),this._bindEvents()}_bindEvents(){let e=this.root.querySelector(`.checkbox-box`),t=this.root.querySelector(`.checkbox-wrapper`);!e||!t||(t.addEventListener(`click`,e=>{this.boolAttr(`disabled`)||(e.preventDefault(),this.toggle())}),e.addEventListener(`keydown`,e=>{this.boolAttr(`disabled`)||(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.toggle())}),di(e,e=>this.boolAttr(`disabled`)?()=>{}:($(e,{scale:1.08},{type:`spring`,stiffness:400,damping:20}),()=>{$(e,{scale:1},{type:`spring`,stiffness:400,damping:20})})),Si(e,e=>this.boolAttr(`disabled`)?()=>{}:($(e,{scale:.92},{type:`spring`,stiffness:500,damping:22}),()=>{$(e,{scale:1.08},{type:`spring`,stiffness:400,damping:18})})),(this.boolAttr(`checked`)||this.boolAttr(`indeterminate`))&&this._animateCheck(!0))}toggle(){let e=this.boolAttr(`checked`)||this.boolAttr(`indeterminate`);e?(this.removeAttribute(`checked`),this.removeAttribute(`indeterminate`)):this.setAttribute(`checked`,``),this._animateCheck(!e),this.dispatchEvent(new CustomEvent(`change`,{detail:{checked:!e},bubbles:!0,composed:!0}))}_animateCheck(e){let t=this.root.querySelector(`.checkbox-box`),n=this.root.querySelector(`.checkmark`),r=this.root.querySelector(`.indeterminate-dash`);if(!t)return;$(t,{backgroundColor:e?`var(--fm-color-primary)`:`var(--fm-color-surface)`,borderColor:e?`var(--fm-color-primary)`:`var(--fm-color-border-strong)`},{duration:.15});let i=n||r;i&&(e?$(i,{opacity:[0,1],scale:[0,1],x:[`-20%`,`0%`]},{type:`spring`,stiffness:500,damping:20}):$(i,{opacity:0,scale:.5},{duration:.15,ease:`easeOut`}))}attributeChangedCallback(e,t,n){if(e===`size`||e===`disabled`)this.render(),this._bindEvents();else if(e===`checked`||e===`indeterminate`){let e=t!==null,r=n!==null;if(e!==r){let e=this.root.querySelector(`.checkbox-box`);e&&(r?e.classList.add(`is-checked`):e.classList.remove(`is-checked`),e.setAttribute(`aria-checked`,r?`true`:`false`)),this._animateCheck(r)}}}};a(Ja,`observedAttributes`,[`checked`,`disabled`,`size`,`indeterminate`]),customElements.define(`fm-checkbox`,Ja);var Ya=class extends o{template(){let e=this.attr(`separator`,`chevron`),t=this.attr(`size`,`md`),n=this.attr(`items`,``),r=[];if(n)try{r=JSON.parse(n)}catch{console.warn(`[fm-breadcrumb] Invalid items JSON`)}let i=this.innerHTML.trim().length>0,a={chevron:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`,slash:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 20"/></svg>`,arrow:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`}[e]||a.chevron;return`
+      <style>
+        :host { display: block; }
+
+        .breadcrumb {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          font-family: var(--fm-font-family);
+        }
+
+        .breadcrumb-item {
+          display: flex;
+          align-items: center;
+          gap: var(--fm-space-xs);
+        }
+
+        /* ---- Sizes ---- */
+        .breadcrumb.sm {
+          font-size: var(--fm-font-size-xs);
+          gap: var(--fm-space-xs);
+        }
+        .breadcrumb.sm .breadcrumb-separator {
+          width: 12px;
+          height: 12px;
+        }
+        .breadcrumb.sm .breadcrumb-separator svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        .breadcrumb.md {
+          font-size: var(--fm-font-size-sm);
+          gap: var(--fm-space-sm);
+        }
+        .breadcrumb.md .breadcrumb-separator {
+          width: 14px;
+          height: 14px;
+        }
+        .breadcrumb.md .breadcrumb-separator svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        .breadcrumb.lg {
+          font-size: var(--fm-font-size-md);
+          gap: var(--fm-space-sm);
+        }
+        .breadcrumb.lg .breadcrumb-separator {
+          width: 16px;
+          height: 16px;
+        }
+        .breadcrumb.lg .breadcrumb-separator svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        /* ---- Links ---- */
+        .breadcrumb-link {
+          color: var(--fm-color-text-secondary);
+          text-decoration: none;
+          font-weight: var(--fm-font-weight-medium);
+          padding: 2px 4px;
+          border-radius: var(--fm-radius-sm);
+          transition: color var(--fm-transition-fast), background var(--fm-transition-fast);
+        }
+
+        .breadcrumb-link:hover {
+          color: var(--fm-color-primary);
+          background: var(--fm-alpha-primary-10);
+        }
+
+        .breadcrumb-link:focus-visible {
+          outline: 2px solid var(--fm-color-primary-light);
+          outline-offset: 2px;
+        }
+
+        /* ---- Current page ---- */
+        .breadcrumb-current {
+          color: var(--fm-color-text);
+          font-weight: var(--fm-font-weight-semibold);
+          padding: 2px 4px;
+        }
+
+        /* ---- Separator ---- */
+        .breadcrumb-separator {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--fm-color-border-strong);
+          flex-shrink: 0;
+        }
+
+        /* ---- Slotted content styling ---- */
+        .breadcrumb-slot-container ::slotted(*) {
+          display: flex;
+          align-items: center;
+          gap: var(--fm-space-sm);
+        }
+
+        .breadcrumb-slot-container ::slotted(a) {
+          color: var(--fm-color-text-secondary);
+          text-decoration: none;
+          font-weight: var(--fm-font-weight-medium);
+          padding: 2px 4px;
+          border-radius: var(--fm-radius-sm);
+          transition: color var(--fm-transition-fast), background var(--fm-transition-fast);
+        }
+
+        .breadcrumb-slot-container ::slotted(a:hover) {
+          color: var(--fm-color-primary);
+          background: var(--fm-alpha-primary-10);
+        }
+
+        .breadcrumb-slot-container ::slotted(:last-child) {
+          color: var(--fm-color-text);
+          font-weight: var(--fm-font-weight-semibold);
+        }
+
+        /* Add separators between slotted items */
+        .breadcrumb-slot-container ::slotted(:not(:last-child))::after {
+          content: '';
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 14px;
+          height: 14px;
+          margin-left: var(--fm-space-sm);
+          color: var(--fm-color-border-strong);
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23CBD5E1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      </style>
+
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb ${t}" part="breadcrumb">
+          ${!r.length&&!i?``:r.length?r.map((e,t)=>{let n=t===r.length-1,i=e.href&&!n?`<a href="${e.href}" class="breadcrumb-link" data-index="${t}">${e.label}</a>`:`<span class="breadcrumb-current" aria-current="page">${e.label}</span>`;return`
+            <li class="breadcrumb-item ${n?`is-last`:``}" data-index="${t}">
+              ${i}
+              ${n?``:`<span class="breadcrumb-separator" aria-hidden="true">${a}</span>`}
+            </li>
+          `}).join(``):`<li class="breadcrumb-slot-container"><slot></slot></li>`}
+        </ol>
+      </nav>
+    `}connectedCallback(){super.connectedCallback(),this._bindEvents()}onEnter(){let e=this.root.querySelector(`.breadcrumb`);e&&$(e,{opacity:[0,1],y:[-4,0]},{type:`spring`,stiffness:400,damping:25})}_bindEvents(){this.root.querySelectorAll(`.breadcrumb-link`).forEach(e=>{e.addEventListener(`click`,t=>{let n=parseInt(e.dataset.index||`0`,10),r=e.getAttribute(`href`)||``,i=e.textContent||``;this.dispatchEvent(new CustomEvent(`fm-breadcrumb-click`,{bubbles:!0,detail:{index:n,label:i,href:r}}))})})}attributeChangedCallback(){this.render(),this._bindEvents()}};a(Ya,`observedAttributes`,[`items`,`separator`,`size`]),customElements.define(`fm-breadcrumb`,Ya);var Xa=class extends o{template(){let e=this.attr(`variant`,`button`),t=this.attr(`label`,`Copy`),n=this.attr(`position`,`right`),r=this.boolAttr(`hide-icon`),i=this.attr(`feedback-text`,`Copied!`),a=r?``:`
+      <span class="icon-container">
+        <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </span>
+    `,o=`
+      <div class="toast" role="status" aria-live="polite" aria-atomic="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>${i}</span>
+      </div>
+    `,s=`
+      <div class="tooltip" role="status" aria-live="polite" aria-atomic="true">
+        ${i}
+      </div>
+    `,c=``;return e===`button`?c=`
+        <button class="clipboard-btn ${e}" part="button" aria-label="Copy to clipboard">
+          ${a}
+          <span class="btn-label">${t}</span>
+        </button>
+      `:e===`icon`?c=`
+        <button class="clipboard-btn ${e}" part="button" aria-label="Copy to clipboard" title="${t}">
+          <span class="icon-container">
+            <svg class="icon-copy" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </span>
+        </button>
+      `:e===`inline`&&(c=n===`left`?`
+          <button class="clipboard-btn ${e}" part="button" aria-label="Copy to clipboard">
+            ${a}
+            <span class="inline-text"><slot></slot></span>
+          </button>
+        `:`
+          <button class="clipboard-btn ${e}" part="button" aria-label="Copy to clipboard">
+            <span class="inline-text"><slot></slot></span>
+            ${a}
+          </button>
+        `),`
+      <style>
+        :host {
+          display: inline-flex;
+          position: relative;
+        }
+
+        .clipboard-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          font-family: var(--fm-font-family);
+          font-weight: var(--fm-font-weight-medium);
+          cursor: pointer;
+          border: none;
+          outline: none;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          transition: box-shadow var(--fm-transition-fast);
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* ---- Button variant ---- */
+        .clipboard-btn.button {
+          padding: 8px 14px;
+          font-size: var(--fm-font-size-sm);
+          background: var(--fm-color-surface);
+          color: var(--fm-color-text-secondary);
+          border: 1.5px solid var(--fm-color-border);
+          border-radius: var(--fm-radius-md);
+          box-shadow: var(--fm-shadow-sm);
+        }
+        .clipboard-btn.button:hover:not(:disabled) {
+          background: var(--fm-color-surface-alt);
+          border-color: var(--fm-color-primary-light);
+          color: var(--fm-color-primary);
+        }
+        .clipboard-btn.button:focus-visible {
+          outline: 2px solid var(--fm-color-primary-light);
+          outline-offset: 2px;
+        }
+
+        /* ---- Icon variant ---- */
+        .clipboard-btn.icon {
+          padding: 8px;
+          background: transparent;
+          color: var(--fm-color-text-secondary);
+          border-radius: var(--fm-radius-md);
+        }
+        .clipboard-btn.icon:hover:not(:disabled) {
+          background: var(--fm-alpha-primary-10);
+          color: var(--fm-color-primary);
+        }
+        .clipboard-btn.icon:focus-visible {
+          outline: 2px solid var(--fm-color-primary-light);
+          outline-offset: 2px;
+        }
+
+        /* ---- Inline variant ---- */
+        .clipboard-btn.inline {
+          padding: 4px 8px;
+          background: transparent;
+          color: var(--fm-color-primary);
+          border-radius: var(--fm-radius-sm);
+          font-size: var(--fm-font-size-sm);
+          text-decoration: underline;
+          text-decoration-color: transparent;
+          transition: text-decoration-color var(--fm-transition-fast),
+                      background var(--fm-transition-fast);
+        }
+        .clipboard-btn.inline:hover:not(:disabled) {
+          background: var(--fm-alpha-primary-10);
+          text-decoration-color: currentColor;
+        }
+        .clipboard-btn.inline:focus-visible {
+          outline: 2px solid var(--fm-color-primary-light);
+          outline-offset: 2px;
+          text-decoration: none;
+        }
+        .clipboard-btn.inline .inline-text {
+          color: var(--fm-color-primary);
+        }
+
+        /* ---- Icon container ---- */
+        .icon-container {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 16px;
+          height: 16px;
+          flex-shrink: 0;
+        }
+        .clipboard-btn.icon .icon-container {
+          width: 18px;
+          height: 18px;
+        }
+        .clipboard-btn.inline .icon-container {
+          width: 14px;
+          height: 14px;
+        }
+
+        /* ---- Icons ---- */
+        .icon-container svg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          transition: opacity 0.2s ease;
+        }
+        .icon-check {
+          opacity: 0;
+          color: var(--fm-color-success);
+        }
+
+        /* ---- Success state ---- */
+        .clipboard-btn.success .icon-copy {
+          opacity: 0;
+        }
+        .clipboard-btn.success .icon-check {
+          opacity: 1;
+        }
+        .clipboard-btn.success .btn-label {
+          color: var(--fm-color-success);
+        }
+
+        /* ---- Toast notification ---- */
+        .toast {
+          position: absolute;
+          bottom: calc(100% + 8px);
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 12px;
+          background: var(--fm-color-secondary);
+          color: var(--fm-color-text-light);
+          font-size: var(--fm-font-size-xs);
+          font-weight: var(--fm-font-weight-medium);
+          border-radius: var(--fm-radius-md);
+          box-shadow: var(--fm-shadow-md);
+          opacity: 0;
+          pointer-events: none;
+          white-space: nowrap;
+          z-index: 1000;
+        }
+        .toast::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          border: 5px solid transparent;
+          border-top-color: var(--fm-color-secondary);
+        }
+        .toast svg {
+          color: var(--fm-color-success);
+        }
+
+        /* ---- Tooltip ---- */
+        .tooltip {
+          position: absolute;
+          bottom: calc(100% + 6px);
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 4px 10px;
+          background: var(--fm-color-secondary);
+          color: var(--fm-color-text-light);
+          font-size: var(--fm-font-size-xs);
+          font-weight: var(--fm-font-weight-medium);
+          border-radius: var(--fm-radius-sm);
+          opacity: 0;
+          pointer-events: none;
+          white-space: nowrap;
+          z-index: 1000;
+        }
+        .tooltip::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          border: 4px solid transparent;
+          border-top-color: var(--fm-color-secondary);
+        }
+
+        /* ---- Disabled ---- */
+        .clipboard-btn:disabled {
+          opacity: 0.45;
+          cursor: not-allowed;
+        }
+      </style>
+
+      ${this.attr(`feedback`,`toast`)===`toast`?o:``}
+      ${this.attr(`feedback`,`toast`)===`tooltip`?s:``}
+      ${c}
+    `}onEnter(){$(this.root.querySelector(`.clipboard-btn`),{opacity:[0,1],y:[4,0]},{type:`spring`,stiffness:400,damping:25})}connectedCallback(){super.connectedCallback(),this._bindEvents()}_bindEvents(){let e=this.root.querySelector(`.clipboard-btn`);e&&(e.addEventListener(`click`,e=>this._handleCopy(e)),di(e,e=>this.boolAttr(`disabled`)?()=>{}:($(e,{y:-1},{type:`spring`,stiffness:450,damping:20}),()=>{$(e,{y:0},{type:`spring`,stiffness:450,damping:20})})),Si(e,e=>this.boolAttr(`disabled`)?()=>{}:($(e,{scale:.96},{type:`spring`,stiffness:500,damping:22}),()=>{$(e,{scale:1},{type:`spring`,stiffness:450,damping:18})})))}async _handleCopy(e){e.preventDefault(),e.stopPropagation();let t=this.root.querySelector(`.clipboard-btn`),n=this.attr(`feedback`,`toast`),r=this.attr(`text`,``);if(!r&&this.attr(`variant`,`button`)===`inline`){let e=t.querySelector(`.inline-text slot`);e&&(r=e.assignedNodes({flatten:!0}).map(e=>e.textContent).join(``).trim())}if(!r){console.warn(`fm-clipboard: No text to copy`);return}try{await navigator.clipboard.writeText(r),this._showSuccess(t,n)}catch(e){console.error(`fm-clipboard: Failed to copy`,e),this._fallbackCopy(r,t,n)}}_fallbackCopy(e,t,n){let r=document.createElement(`textarea`);r.value=e,r.style.position=`fixed`,r.style.left=`-9999px`,document.body.appendChild(r),r.select();try{document.execCommand(`copy`)&&this._showSuccess(t,n)}catch(e){console.error(`fm-clipboard: Fallback copy failed`,e)}document.body.removeChild(r)}_showSuccess(e,t){this.attr(`variant`,`button`),e.classList.add(`success`);let n=e.querySelector(`.icon-check`);if(n&&$(n,{scale:[.5,1.2,1],opacity:[0,1]},{type:`spring`,stiffness:500,damping:20}),t===`toast`){let e=this.root.querySelector(`.toast`);e&&($(e,{opacity:[0,1],y:[4,0]},{type:`spring`,stiffness:400,damping:22}),setTimeout(()=>{$(e,{opacity:0,y:-4},{duration:.2})},2e3))}else if(t===`tooltip`){let e=this.root.querySelector(`.tooltip`);e&&($(e,{opacity:[0,1],y:[2,0]},{type:`spring`,stiffness:450,damping:20}),setTimeout(()=>{$(e,{opacity:0,y:-2},{duration:.2})},1500))}setTimeout(()=>{e.classList.remove(`success`)},2e3),this.dispatchEvent(new CustomEvent(`fm-copy`,{bubbles:!0,composed:!0,detail:{text:this.attr(`text`,``)}}))}attributeChangedCallback(){this.render(),this._bindEvents()}};a(Xa,`observedAttributes`,[`text`,`label`,`variant`,`feedback`,`feedback-text`,`position`,`hide-icon`]),customElements.define(`fm-clipboard`,Xa),e.FmAlert=qa,e.FmBadge=Wa,e.FmBreadcrumb=Ya,e.FmButton=Ha,e.FmCard=Ua,e.FmCheckbox=Ja,e.FmClipboard=Xa,e.FmElement=o,e.FmTab=Ka,e.FmTabs=Ga,e.themeStyles=t});

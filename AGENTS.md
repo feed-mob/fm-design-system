@@ -1,0 +1,1 @@
+- When a new component is created or updated, make sure we update the index.html as well
