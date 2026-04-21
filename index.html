@@ -652,6 +652,13 @@ npm install @fm-agency/design-system</code></pre>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
-  <script type="module" src="./dist/fm-ds.js"></script>
+  <!-- Auto-detect: use src in dev (localhost:5173), dist in production -->
+  <script type="module">
+    const isViteDev = location.port === '5173' || (location.hostname === 'localhost' && new URL(import.meta.url).searchParams.has('dev'));
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = isViteDev ? './src/index.js' : './dist/fm-ds.js';
+    document.head.appendChild(script);
+  </script>
 </body>
 </html>
