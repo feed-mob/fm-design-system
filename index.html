@@ -531,12 +531,22 @@ npm install @fm-agency/design-system</code></pre>
       </fm-tab>
       <fm-tab label="Code">
         <div class="code-panel">
-          <pre><code class="language-html">&lt;!-- Status badge with dot --&gt;
+          <pre><code class="language-html">&lt;!-- Different variants --&gt;
+&lt;fm-badge variant="primary"&gt;Design&lt;/fm-badge&gt;
+&lt;fm-badge variant="secondary"&gt;Strategy&lt;/fm-badge&gt;
+&lt;fm-badge variant="success"&gt;Approved&lt;/fm-badge&gt;
+&lt;fm-badge variant="warning"&gt;In Review&lt;/fm-badge&gt;
+&lt;fm-badge variant="error"&gt;Overdue&lt;/fm-badge&gt;
+&lt;fm-badge variant="neutral"&gt;Draft&lt;/fm-badge&gt;
+
+&lt;!-- Status badge with dot --&gt;
 &lt;fm-badge variant="success" dot&gt;Live&lt;/fm-badge&gt;
 &lt;fm-badge variant="primary" dot&gt;Active&lt;/fm-badge&gt;
 &lt;fm-badge variant="warning" dot&gt;Pending&lt;/fm-badge&gt;
+&lt;fm-badge variant="error" dot&gt;Offline&lt;/fm-badge&gt;
 
 &lt;!-- Pulsing alert badge --&gt;
+&lt;fm-badge variant="success" dot animate="pulse"&gt;Live Campaign&lt;/fm-badge&gt;
 &lt;fm-badge variant="error" animate="pulse"&gt;3 Alerts&lt;/fm-badge&gt;
 
 &lt;!-- Different sizes --&gt;
@@ -893,22 +903,26 @@ npm install @fm-agency/design-system</code></pre>
 &lt;fm-breadcrumb items='[
   {"label": "Home", "href": "/"},
   {"label": "Products", "href": "/products"},
+  {"label": "Campaigns", "href": "/products/campaigns"},
   {"label": "Details"}
 ]'&gt;&lt;/fm-breadcrumb&gt;
 
 &lt;!-- Custom separator --&gt;
 &lt;fm-breadcrumb separator="slash" items='[
   {"label": "Dashboard", "href": "/dashboard"},
+  {"label": "Analytics", "href": "/analytics"},
   {"label": "Reports"}
 ]'&gt;&lt;/fm-breadcrumb&gt;
 
 &lt;!-- Different sizes --&gt;
-&lt;fm-breadcrumb size="sm" items='[...]'&gt;&lt;/fm-breadcrumb&gt;
-&lt;fm-breadcrumb size="md" items='[...]'&gt;&lt;/fm-breadcrumb&gt;
-&lt;fm-breadcrumb size="lg" items='[...]'&gt;&lt;/fm-breadcrumb&gt;
+&lt;fm-breadcrumb separator="arrow" size="sm" items='[
+  {"label": "Settings", "href": "/settings"},
+  {"label": "Account", "href": "/settings/account"},
+  {"label": "Profile"}
+]'&gt;&lt;/fm-breadcrumb&gt;
 
 &lt;!-- Slotted content (manual) --&gt;
-&lt;fm-breadcrumb separator="arrow" size="lg"&gt;
+&lt;fm-breadcrumb size="lg"&gt;
   &lt;a href="/"&gt;Home&lt;/a&gt;
   &lt;a href="/library"&gt;Library&lt;/a&gt;
   &lt;span&gt;Data&lt;/span&gt;
