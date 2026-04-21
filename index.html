@@ -672,12 +672,7 @@ npm install @fm-agency/design-system</code></pre>
   &lt;fm-tab label="All"&gt;...&lt;/fm-tab&gt;
 &lt;/fm-tabs&gt;
 
-&lt;!-- Listen for tab changes --&gt;
-&lt;script&gt;
-  document.querySelector('fm-tabs').addEventListener('fm-tab-change', (e) => {
-    console.log('Tab changed:', e.detail.index, e.detail.label);
-  });
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
@@ -787,12 +782,7 @@ npm install @fm-agency/design-system</code></pre>
 &lt;!-- Indeterminate state --&gt;
 &lt;fm-checkbox indeterminate&gt;Indeterminate&lt;/fm-checkbox&gt;
 
-&lt;!-- Listen for changes --&gt;
-&lt;script&gt;
-  document.querySelector('fm-checkbox').addEventListener('change', (e) => {
-    console.log('Checked:', e.detail.checked);
-  });
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
@@ -928,12 +918,7 @@ npm install @fm-agency/design-system</code></pre>
   &lt;span&gt;Data&lt;/span&gt;
 &lt;/fm-breadcrumb&gt;
 
-&lt;!-- Listen for clicks --&gt;
-&lt;script&gt;
-  document.querySelector('fm-breadcrumb').addEventListener('fm-breadcrumb-click', (e) => {
-    console.log('Clicked:', e.detail.index, e.detail.label, e.detail.href);
-  });
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
@@ -1051,12 +1036,7 @@ npm install @fm-agency/design-system</code></pre>
   This alert uses a custom icon.
 &lt;/fm-alert&gt;
 
-&lt;!-- Listen for dismiss event --&gt;
-&lt;script&gt;
-  document.querySelector('fm-alert').addEventListener('dismiss', () =&gt; {
-    console.log('Alert was dismissed');
-  });
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
@@ -1207,12 +1187,7 @@ npm install @fm-agency/design-system</code></pre>
   label="Copy Link"
 &gt;&lt;/fm-clipboard&gt;
 
-&lt;!-- Listen for copy event --&gt;
-&lt;script&gt;
-  document.querySelector('fm-clipboard').addEventListener('fm-copy', (e) =&gt; {
-    console.log('Copied:', e.detail.text);
-  });
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
@@ -1393,18 +1368,7 @@ npm install @fm-agency/design-system</code></pre>
   &lt;p&gt;Campaign is currently running.&lt;/p&gt;
 &lt;/fm-collapsible&gt;
 
-&lt;!-- Programmatic control --&gt;
-&lt;script&gt;
-  const collapsible = document.querySelector('fm-collapsible');
-  
-  // Expand programmatically
-  collapsible.expand();
-  
-  // Listen for changes
-  collapsible.addEventListener('fm-collapse-change', (e) =&gt; {
-    console.log('Expanded:', e.detail.expanded);
-  });
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
@@ -1660,27 +1624,7 @@ npm install @fm-agency/design-system</code></pre>
 &lt;fm-dropdown variant="outline" items='[...]'&gt;&lt;/fm-dropdown&gt;
 &lt;fm-dropdown variant="ghost" items='[...]'&gt;&lt;/fm-dropdown&gt;
 
-&lt;!-- Listen for clicks --&gt;
-&lt;script&gt;
-  document.querySelector('fm-dropdown').addEventListener('fm-dropdown-click', (e) =&gt; {
-    console.log('Clicked:', e.detail.value, e.detail.label, e.detail.type);
-    // Handle button clicks
-    if (e.detail.type === 'button') {
-      // Perform action
-    }
-    // Links navigate automatically
-  });
-&lt;/script&gt;
-
-&lt;!-- Programmatic control --&gt;
-&lt;script&gt;
-  const dropdown = document.querySelector('fm-dropdown');
-  
-  // Open/close programmatically
-  dropdown.open();
-  dropdown.close();
-  dropdown.toggle();
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
