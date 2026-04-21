@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FM Design System — Playground</title>
+  <title>FeedMob Design System — Playground</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/icon.svg">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
@@ -13,91 +15,51 @@
   <!-- Prism.js for syntax highlighting -->
   <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="./playground.css" />
-  <style>
-    /* Additional styles for the tabbed interface */
-    .interface-panel h4 {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--fm-color-text);
-      margin: 20px 0 12px 0;
-    }
-    .interface-panel h4:first-child {
-      margin-top: 0;
-    }
-    .props-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.875rem;
-    }
-    .props-table th,
-    .props-table td {
-      padding: 10px 12px;
-      text-align: left;
-      border-bottom: 1px solid var(--fm-color-border);
-    }
-    .props-table th {
-      font-weight: 600;
-      color: var(--fm-color-text);
-      background: var(--fm-color-surface-alt);
-    }
-    .props-table td {
-      color: var(--fm-color-text-secondary);
-    }
-    .props-table code {
-      font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-      font-size: 0.8rem;
-      background: var(--fm-color-surface-muted);
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: var(--fm-color-primary-dark);
-    }
-    .animation-list {
-      margin: 0;
-      padding-left: 20px;
-      font-size: 0.875rem;
-      color: var(--fm-color-text-secondary);
-      line-height: 1.6;
-    }
-    .animation-list li {
-      margin-bottom: 6px;
-    }
-    .animation-list strong {
-      color: var(--fm-color-text);
-    }
-    .code-panel pre {
-      margin: 0;
-      border-radius: var(--fm-radius-md);
-      font-size: 0.8rem;
-      line-height: 1.5;
-    }
-    .code-panel pre code {
-      font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-    }
-    .manual-section {
-      margin-bottom: 40px;
-    }
-    .manual-text {
-      font-size: 0.9rem;
-      color: var(--fm-color-text-secondary);
-      margin: 12px 0;
-    }
-    .code-panel p.manual-text {
-      margin-top: 16px;
-      margin-bottom: 8px;
-    }
-  </style>
 </head>
 <body>
-  <img src="./logo.png" alt="FeedMob Design System Logo" class="logo" />
-  <header class="page-header">
-    <h1><span class="accent">Design System</span></h1>
-  </header>
-  <p class="subtitle">Professional UI components for FeedMob — built with Web Components &amp; Motion</p>
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="5" x2="17" y2="5"/>
+      <line x1="3" y1="10" x2="17" y2="10"/>
+      <line x1="3" y1="15" x2="17" y2="15"/>
+    </svg>
+  </button>
 
+  <!-- Sidebar backdrop (mobile) -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- Fixed sidebar navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="./assets/logo.png" alt="FM" class="sidebar-logo" />
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="#getting-started" class="sidebar-link" data-section="getting-started">Getting Started</a></li>
+      <li><a href="#theming" class="sidebar-link" data-section="theming">Theming</a></li>
+      <li class="sidebar-divider"></li>
+      <li class="sidebar-label">Components</li>
+      <li><a href="#fm-button" class="sidebar-link" data-section="fm-button">Button</a></li>
+      <li><a href="#fm-card" class="sidebar-link" data-section="fm-card">Card</a></li>
+      <li><a href="#fm-badge" class="sidebar-link" data-section="fm-badge">Badge</a></li>
+      <li><a href="#fm-tabs" class="sidebar-link" data-section="fm-tabs">Tabs</a></li>
+      <li><a href="#fm-checkbox" class="sidebar-link" data-section="fm-checkbox">Checkbox</a></li>
+      <li><a href="#fm-breadcrumb" class="sidebar-link" data-section="fm-breadcrumb">Breadcrumb</a></li>
+      <li><a href="#fm-alert" class="sidebar-link" data-section="fm-alert">Alert</a></li>
+      <li><a href="#fm-clipboard" class="sidebar-link" data-section="fm-clipboard">Clipboard</a></li>
+      <li><a href="#fm-collapsible" class="sidebar-link" data-section="fm-collapsible">Collapsible</a></li>
+      <li><a href="#fm-dropdown" class="sidebar-link" data-section="fm-dropdown">Dropdown</a></li>
+      <li><a href="#fm-pagination" class="sidebar-link" data-section="fm-pagination">Pagination</a></li>
+      <li><a href="#fm-sparkline" class="sidebar-link" data-section="fm-sparkline">Sparkline</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content area -->
+  <main class="main-content">
   <!-- ============================================================ -->
   <!-- GETTING STARTED                                               -->
   <!-- ============================================================ -->
-  <section class="manual-section">
+  <section id="getting-started" class="manual-section">
     <h2>Getting Started</h2>
     <div style="background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
       <p style="margin: 0; color: #92400E; font-size: 0.9rem;">
@@ -139,13 +101,120 @@ npm install @fm-agency/design-system</code></pre>
   </section>
 
   <!-- ============================================================ -->
+  <!-- THEMING                                                       -->
+  <!-- ============================================================ -->
+  <section id="theming">
+    <h2>Theming</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Overview">
+        <div style="padding: 16px 0;">
+          <p style="font-size: 0.9rem; color: var(--fm-color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
+            Override CSS custom properties to customise the design system. All components inherit from these theme tokens.
+          </p>
+          <div class="code-panel">
+            <pre><code class="language-css">/* Override theme tokens */
+:root {
+  --fm-color-primary: #0D9488;
+  --fm-color-primary-light: #14B8A6;
+  --fm-color-primary-dark: #0F766E;
+  --fm-color-secondary: #1E293B;
+  --fm-font-family: 'Inter', system-ui, sans-serif;
+  --fm-radius-md: 8px;
+}</code></pre>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Color Tokens">
+        <div class="interface-panel" style="padding: 16px 0;">
+          <h4>Primary Palette</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-primary</code></td><td><span class="color-swatch" style="background: #0D9488;"></span>#0D9488</td><td>Primary teal</td></tr>
+              <tr><td><code>--fm-color-primary-light</code></td><td><span class="color-swatch" style="background: #14B8A6;"></span>#14B8A6</td><td>Lighter teal</td></tr>
+              <tr><td><code>--fm-color-primary-dark</code></td><td><span class="color-swatch" style="background: #0F766E;"></span>#0F766E</td><td>Darker teal</td></tr>
+            </tbody>
+          </table>
+          <h4>Semantic Colors</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-success</code></td><td><span class="color-swatch" style="background: #059669;"></span>#059669</td><td>Success state</td></tr>
+              <tr><td><code>--fm-color-warning</code></td><td><span class="color-swatch" style="background: #D97706;"></span>#D97706</td><td>Warning state</td></tr>
+              <tr><td><code>--fm-color-error</code></td><td><span class="color-swatch" style="background: #DC2626;"></span>#DC2626</td><td>Error state</td></tr>
+              <tr><td><code>--fm-color-info</code></td><td><span class="color-swatch" style="background: #0284C7;"></span>#0284C7</td><td>Info state</td></tr>
+            </tbody>
+          </table>
+          <h4>Surfaces</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-surface</code></td><td><span class="color-swatch" style="background: #FFFFFF; border: 1px solid #E2E8F0;"></span>#FFFFFF</td><td>Surface (white)</td></tr>
+              <tr><td><code>--fm-color-surface-alt</code></td><td><span class="color-swatch" style="background: #F8FAFC;"></span>#F8FAFC</td><td>Surface alt</td></tr>
+              <tr><td><code>--fm-color-surface-muted</code></td><td><span class="color-swatch" style="background: #F1F5F9;"></span>#F1F5F9</td><td>Surface muted</td></tr>
+              <tr><td><code>--fm-color-text</code></td><td><span class="color-swatch" style="background: #0F172A;"></span>#0F172A</td><td>Text (dark)</td></tr>
+              <tr><td><code>--fm-color-text-secondary</code></td><td><span class="color-swatch" style="background: #475569;"></span>#475569</td><td>Text secondary</td></tr>
+              <tr><td><code>--fm-color-border</code></td><td><span class="color-swatch" style="background: #E2E8F0;"></span>#E2E8F0</td><td>Border</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </fm-tab>
+      <fm-tab label="Full Token List">
+        <div class="code-panel" style="padding: 16px 0;">
+          <pre><code class="language-css">/* Primary Teal Palette */
+--fm-color-primary: #0D9488;
+--fm-color-primary-light: #14B8A6;
+--fm-color-primary-dark: #0F766E;
+
+/* Secondary & Accent */
+--fm-color-secondary: #1E293B;
+--fm-color-secondary-light: #334155;
+--fm-color-accent: #F59E0B;
+
+/* Surfaces */
+--fm-color-surface: #FFFFFF;
+--fm-color-surface-alt: #F8FAFC;
+--fm-color-surface-muted: #F1F5F9;
+--fm-color-text: #0F172A;
+--fm-color-text-secondary: #475569;
+
+/* Typography */
+--fm-font-family: 'Inter', sans-serif;
+--fm-font-size-sm: 0.875rem;
+--fm-font-size-md: 1rem;
+
+/* Spacing */
+--fm-space-sm: 8px;
+--fm-space-md: 16px;
+--fm-space-lg: 24px;
+
+/* Radius */
+--fm-radius-md: 8px;
+--fm-radius-lg: 12px;
+--fm-radius-full: 9999px;
+
+/* Shadows */
+--fm-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+--fm-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- BUTTONS                                                       -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-button">
     <h2>fm-button</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
-        <div style="padding: 16px 0;">
+        <div class="preview-area">
           <div class="row" style="margin-bottom: 20px;">
             <fm-button variant="primary">Get Started</fm-button>
             <fm-button variant="secondary">Learn More</fm-button>
@@ -224,11 +293,11 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- CARDS                                                         -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-card">
     <h2>fm-card</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
-        <div style="padding: 16px 0;">
+        <div class="preview-area">
           <div class="grid" style="margin-bottom: 20px;">
             <fm-card hoverable>
               <span slot="header">Campaign Performance</span>
@@ -336,11 +405,11 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- BADGES                                                        -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-badge">
     <h2>fm-badge</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
-        <div style="padding: 16px 0;">
+        <div class="preview-area">
           <div class="row" style="margin-bottom: 20px;">
             <fm-badge variant="primary">Design</fm-badge>
             <fm-badge variant="secondary">Strategy</fm-badge>
@@ -408,12 +477,22 @@ npm install @fm-agency/design-system</code></pre>
       </fm-tab>
       <fm-tab label="Code">
         <div class="code-panel">
-          <pre><code class="language-html">&lt;!-- Status badge with dot --&gt;
+          <pre><code class="language-html">&lt;!-- Different variants --&gt;
+&lt;fm-badge variant="primary"&gt;Design&lt;/fm-badge&gt;
+&lt;fm-badge variant="secondary"&gt;Strategy&lt;/fm-badge&gt;
+&lt;fm-badge variant="success"&gt;Approved&lt;/fm-badge&gt;
+&lt;fm-badge variant="warning"&gt;In Review&lt;/fm-badge&gt;
+&lt;fm-badge variant="error"&gt;Overdue&lt;/fm-badge&gt;
+&lt;fm-badge variant="neutral"&gt;Draft&lt;/fm-badge&gt;
+
+&lt;!-- Status badge with dot --&gt;
 &lt;fm-badge variant="success" dot&gt;Live&lt;/fm-badge&gt;
 &lt;fm-badge variant="primary" dot&gt;Active&lt;/fm-badge&gt;
 &lt;fm-badge variant="warning" dot&gt;Pending&lt;/fm-badge&gt;
+&lt;fm-badge variant="error" dot&gt;Offline&lt;/fm-badge&gt;
 
 &lt;!-- Pulsing alert badge --&gt;
+&lt;fm-badge variant="success" dot animate="pulse"&gt;Live Campaign&lt;/fm-badge&gt;
 &lt;fm-badge variant="error" animate="pulse"&gt;3 Alerts&lt;/fm-badge&gt;
 
 &lt;!-- Different sizes --&gt;
@@ -427,11 +506,11 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- TABS                                                          -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-tabs">
     <h2>fm-tabs</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
-        <div style="padding: 16px 0;">
+        <div class="preview-area">
           <div style="margin-bottom: 24px;">
             <fm-tabs active="0">
               <fm-tab label="Overview">
@@ -539,112 +618,1415 @@ npm install @fm-agency/design-system</code></pre>
   &lt;fm-tab label="All"&gt;...&lt;/fm-tab&gt;
 &lt;/fm-tabs&gt;
 
-&lt;!-- Listen for tab changes --&gt;
-&lt;script&gt;
-  document.querySelector('fm-tabs').addEventListener('fm-tab-change', (e) => {
-    console.log('Tab changed:', e.detail.index, e.detail.label);
-  });
-&lt;/script&gt;</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
   </section>
 
   <!-- ============================================================ -->
-  <!-- THEMING                                                       -->
+  <!-- CHECKBOXES                                                    -->
   <!-- ============================================================ -->
-  <section>
-    <h2>Theming</h2>
+  <section id="fm-checkbox">
+    <h2>fm-checkbox</h2>
     <fm-tabs active="0" variant="pills">
-      <fm-tab label="Overview">
-        <div style="padding: 16px 0;">
-          <p style="font-size: 0.9rem; color: var(--fm-color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
-            Override CSS custom properties to customise the design system. All components inherit from these theme tokens.
-          </p>
-          <div class="code-panel">
-            <pre><code class="language-css">/* Override theme tokens */
-:root {
-  --fm-color-primary: #0D9488;
-  --fm-color-primary-light: #14B8A6;
-  --fm-color-primary-dark: #0F766E;
-  --fm-color-secondary: #1E293B;
-  --fm-font-family: 'Inter', system-ui, sans-serif;
-  --fm-radius-md: 8px;
-}</code></pre>
+      <fm-tab label="Preview">
+        <div class="preview-area">
+          <div class="row" style="margin-bottom: 20px; align-items: center;">
+            <fm-checkbox checked>Accept terms and conditions</fm-checkbox>
+            <fm-checkbox>Subscribe to newsletter</fm-checkbox>
+          </div>
+          <div class="row" style="margin-bottom: 20px; align-items: center;">
+            <fm-checkbox size="sm" checked>Small checkbox</fm-checkbox>
+            <fm-checkbox size="md" checked>Medium checkbox (default)</fm-checkbox>
+            <fm-checkbox size="lg" checked>Large checkbox</fm-checkbox>
+          </div>
+          <div class="row" style="margin-bottom: 20px; align-items: center;">
+            <fm-checkbox disabled>Disabled unchecked</fm-checkbox>
+            <fm-checkbox disabled checked>Disabled checked</fm-checkbox>
+          </div>
+          <div class="row" style="align-items: center;">
+            <fm-checkbox indeterminate>Indeterminate state</fm-checkbox>
           </div>
         </div>
       </fm-tab>
-      <fm-tab label="Color Tokens">
-        <div class="interface-panel" style="padding: 16px 0;">
-          <h4>Primary Palette</h4>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
           <table class="props-table">
             <thead>
-              <tr><th>Token</th><th>Default</th><th>Description</th></tr>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>--fm-color-primary</code></td><td>#0D9488</td><td>Primary teal</td></tr>
-              <tr><td><code>--fm-color-primary-light</code></td><td>#14B8A6</td><td>Lighter teal</td></tr>
-              <tr><td><code>--fm-color-primary-dark</code></td><td>#0F766E</td><td>Darker teal</td></tr>
+              <tr>
+                <td><code>checked</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Sets the checked state</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables interaction</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Checkbox size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>indeterminate</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Shows indeterminate dash instead of checkmark</td>
+              </tr>
             </tbody>
           </table>
-          <h4>Semantic Colors</h4>
+          <h4>Events</h4>
           <table class="props-table">
             <thead>
-              <tr><th>Token</th><th>Default</th><th>Description</th></tr>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>--fm-color-success</code></td><td>#059669</td><td>Success state</td></tr>
-              <tr><td><code>--fm-color-warning</code></td><td>#D97706</td><td>Warning state</td></tr>
-              <tr><td><code>--fm-color-error</code></td><td>#DC2626</td><td>Error state</td></tr>
-              <tr><td><code>--fm-color-info</code></td><td>#0284C7</td><td>Info state</td></tr>
+              <tr>
+                <td><code>change</code></td>
+                <td><code>{ checked: boolean }</code></td>
+                <td>Fired when checkbox state changes</td>
+              </tr>
             </tbody>
           </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade-in + scale with spring physics</li>
+            <li><strong>Check:</strong> Spring-pop on checkmark with path draw</li>
+            <li><strong>Uncheck:</strong> Fade-out with scale down</li>
+            <li><strong>Hover:</strong> Gentle lift with enhanced shadow</li>
+            <li><strong>Press:</strong> Tactile press-down effect</li>
+            <li><strong>Focus:</strong> Teal ring indicator</li>
+          </ul>
         </div>
       </fm-tab>
-      <fm-tab label="Full Token List">
-        <div class="code-panel" style="padding: 16px 0;">
-          <pre><code class="language-css">/* Primary Teal Palette */
---fm-color-primary: #0D9488;
---fm-color-primary-light: #14B8A6;
---fm-color-primary-dark: #0F766E;
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic checkbox --&gt;
+&lt;fm-checkbox&gt;Accept terms and conditions&lt;/fm-checkbox&gt;
 
-/* Secondary & Accent */
---fm-color-secondary: #1E293B;
---fm-color-secondary-light: #334155;
---fm-color-accent: #F59E0B;
+&lt;!-- Checked by default --&gt;
+&lt;fm-checkbox checked&gt;Subscribe to newsletter&lt;/fm-checkbox&gt;
 
-/* Surfaces */
---fm-color-surface: #FFFFFF;
---fm-color-surface-alt: #F8FAFC;
---fm-color-surface-muted: #F1F5F9;
---fm-color-text: #0F172A;
---fm-color-text-secondary: #475569;
+&lt;!-- Different sizes --&gt;
+&lt;fm-checkbox size="sm"&gt;Small&lt;/fm-checkbox&gt;
+&lt;fm-checkbox size="md"&gt;Medium (default)&lt;/fm-checkbox&gt;
+&lt;fm-checkbox size="lg"&gt;Large&lt;/fm-checkbox&gt;
 
-/* Typography */
---fm-font-family: 'Inter', sans-serif;
---fm-font-size-sm: 0.875rem;
---fm-font-size-md: 1rem;
+&lt;!-- Disabled states --&gt;
+&lt;fm-checkbox disabled&gt;Disabled unchecked&lt;/fm-checkbox&gt;
+&lt;fm-checkbox disabled checked&gt;Disabled checked&lt;/fm-checkbox&gt;
 
-/* Spacing */
---fm-space-sm: 8px;
---fm-space-md: 16px;
---fm-space-lg: 24px;
+&lt;!-- Indeterminate state --&gt;
+&lt;fm-checkbox indeterminate&gt;Indeterminate&lt;/fm-checkbox&gt;
 
-/* Radius */
---fm-radius-md: 8px;
---fm-radius-lg: 12px;
---fm-radius-full: 9999px;
-
-/* Shadows */
---fm-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
---fm-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);</code></pre>
+</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
   </section>
 
+  <!-- ============================================================ -->
+  <!-- BREADCRUMBS                                                   -->
+  <!-- ============================================================ -->
+  <section id="fm-breadcrumb">
+    <h2>fm-breadcrumb</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Default (JSON items)</p>
+            <fm-breadcrumb items='[
+              {"label": "Home", "href": "/"},
+              {"label": "Products", "href": "/products"},
+              {"label": "Campaigns", "href": "/products/campaigns"},
+              {"label": "Details"}
+            ]'></fm-breadcrumb>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Slash separator</p>
+            <fm-breadcrumb separator="slash" items='[
+              {"label": "Dashboard", "href": "/dashboard"},
+              {"label": "Analytics", "href": "/analytics"},
+              {"label": "Reports"}
+            ]'></fm-breadcrumb>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Arrow separator (small size)</p>
+            <fm-breadcrumb separator="arrow" size="sm" items='[
+              {"label": "Settings", "href": "/settings"},
+              {"label": "Account", "href": "/settings/account"},
+              {"label": "Profile"}
+            ]'></fm-breadcrumb>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Large size with slotted content</p>
+            <fm-breadcrumb size="lg">
+              <a href="/">Home</a>
+              <a href="/library">Library</a>
+              <span>Data</span>
+            </fm-breadcrumb>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>items</code></td>
+                <td>string (JSON)</td>
+                <td>""</td>
+                <td>JSON array of { label, href? } objects</td>
+              </tr>
+              <tr>
+                <td><code>separator</code></td>
+                <td>string</td>
+                <td>"chevron"</td>
+                <td>Separator style: <code>chevron</code>, <code>slash</code>, <code>arrow</code></td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Slotted links/spans for custom breadcrumb items</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-breadcrumb-click</code></td>
+                <td><code>{ index, label, href }</code></td>
+                <td>Fired when a breadcrumb link is clicked</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- JSON items (recommended) --&gt;
+&lt;fm-breadcrumb items='[
+  {"label": "Home", "href": "/"},
+  {"label": "Products", "href": "/products"},
+  {"label": "Campaigns", "href": "/products/campaigns"},
+  {"label": "Details"}
+]'&gt;&lt;/fm-breadcrumb&gt;
+
+&lt;!-- Custom separator --&gt;
+&lt;fm-breadcrumb separator="slash" items='[
+  {"label": "Dashboard", "href": "/dashboard"},
+  {"label": "Analytics", "href": "/analytics"},
+  {"label": "Reports"}
+]'&gt;&lt;/fm-breadcrumb&gt;
+
+&lt;!-- Different sizes --&gt;
+&lt;fm-breadcrumb separator="arrow" size="sm" items='[
+  {"label": "Settings", "href": "/settings"},
+  {"label": "Account", "href": "/settings/account"},
+  {"label": "Profile"}
+]'&gt;&lt;/fm-breadcrumb&gt;
+
+&lt;!-- Slotted content (manual) --&gt;
+&lt;fm-breadcrumb size="lg"&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;a href="/library"&gt;Library&lt;/a&gt;
+  &lt;span&gt;Data&lt;/span&gt;
+&lt;/fm-breadcrumb&gt;
+
+</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ALERTS                                                        -->
+  <!-- ============================================================ -->
+  <section id="fm-alert">
+    <h2>fm-alert</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack-sm">
+          <fm-alert variant="info" title="New Campaign Available" dismissible>
+            A new campaign template has been added to your library. Check it out in the templates section.
+          </fm-alert>
+          <fm-alert variant="success" title="Campaign Published" dismissible>
+            Your campaign "Summer Sale 2026" has been successfully published and is now live.
+          </fm-alert>
+          <fm-alert variant="warning" title="Budget Alert" dismissible>
+            You have used 85% of your monthly budget. Consider adjusting your spend to avoid overages.
+          </fm-alert>
+          <fm-alert variant="error" title="Connection Failed" dismissible>
+            Unable to sync with analytics provider. Please check your API credentials and try again.
+          </fm-alert>
+          <fm-alert variant="info">
+            Simple alert without title or dismiss button — just informational text.
+          </fm-alert>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"info"</td>
+                <td>Alert style: <code>info</code>, <code>success</code>, <code>warning</code>, <code>error</code></td>
+              </tr>
+              <tr>
+                <td><code>title</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Alert title text</td>
+              </tr>
+              <tr>
+                <td><code>dismissible</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Shows close button when present</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Alert message content</td></tr>
+              <tr><td><code>icon</code></td><td>Custom icon (overrides default)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>dismiss</code></td><td>Fired when alert is dismissed</td></tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Slide in from top with fade and spring physics</li>
+            <li><strong>Exit:</strong> Slide up and fade out when dismissed</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Info alert with title and dismiss button --&gt;
+&lt;fm-alert variant="info" title="New Campaign Available" dismissible&gt;
+  A new campaign template has been added to your library.
+&lt;/fm-alert&gt;
+
+&lt;!-- Success alert --&gt;
+&lt;fm-alert variant="success" title="Campaign Published" dismissible&gt;
+  Your campaign has been successfully published and is now live.
+&lt;/fm-alert&gt;
+
+&lt;!-- Warning alert --&gt;
+&lt;fm-alert variant="warning" title="Budget Alert" dismissible&gt;
+  You have used 85% of your monthly budget.
+&lt;/fm-alert&gt;
+
+&lt;!-- Error alert --&gt;
+&lt;fm-alert variant="error" title="Connection Failed" dismissible&gt;
+  Unable to sync with analytics provider.
+&lt;/fm-alert&gt;
+
+&lt;!-- Simple alert without title or dismiss --&gt;
+&lt;fm-alert variant="info"&gt;
+  Simple informational message without title.
+&lt;/fm-alert&gt;
+
+&lt;!-- Custom icon via slot --&gt;
+&lt;fm-alert variant="info" title="Custom Icon" dismissible&gt;
+  &lt;svg slot="icon" width="20" height="20" viewBox="0 0 20 20"&gt;...&lt;/svg&gt;
+  This alert uses a custom icon.
+&lt;/fm-alert&gt;
+
+</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CLIPBOARD                                                     -->
+  <!-- ============================================================ -->
+  <section id="fm-clipboard">
+    <h2>fm-clipboard</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Button variant with toast feedback</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-clipboard text="campaign-id-12345" label="Copy ID"></fm-clipboard>
+              <fm-clipboard text="https://app.feedmob.com/campaigns/abc123" variant="button" label="Copy URL"></fm-clipboard>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Icon variant with tooltip feedback</p>
+            <div class="row" style="align-items: center; gap: 16px; padding: 12px; background: var(--fm-color-surface-alt); border-radius: var(--fm-radius-md);">
+              <span style="font-family: var(--fm-font-family); font-size: var(--fm-font-size-sm); color: var(--fm-color-text-secondary);">API Key: sk_live_51H...</span>
+              <fm-clipboard text="sk_live_51H8x2jK9mLpQ3vR" variant="icon" feedback="tooltip"></fm-clipboard>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Inline variant with slotted text</p>
+            <div class="row" style="align-items: center; gap: 8px; font-family: var(--fm-font-family); font-size: var(--fm-font-size-sm);">
+              <span style="color: var(--fm-color-text-secondary);">Share code:</span>
+              <fm-clipboard variant="inline" position="right">SUMMER2026</fm-clipboard>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Custom feedback text</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-clipboard text="copied-content" feedback-text="Link copied!" label="Copy Link"></fm-clipboard>
+            </div>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>text</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Text to copy to clipboard (required unless using slotted text)</td>
+              </tr>
+              <tr>
+                <td><code>label</code></td>
+                <td>string</td>
+                <td>"Copy"</td>
+                <td>Button label text</td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"button"</td>
+                <td>Style: <code>button</code>, <code>icon</code>, <code>inline</code></td>
+              </tr>
+              <tr>
+                <td><code>feedback</code></td>
+                <td>string</td>
+                <td>"toast"</td>
+                <td>Feedback style: <code>toast</code>, <code>tooltip</code>, <code>none</code></td>
+              </tr>
+              <tr>
+                <td><code>feedback-text</code></td>
+                <td>string</td>
+                <td>"Copied!"</td>
+                <td>Text shown after successful copy</td>
+              </tr>
+              <tr>
+                <td><code>position</code></td>
+                <td>string</td>
+                <td>"right"</td>
+                <td>Icon position for inline variant: <code>right</code>, <code>left</code></td>
+              </tr>
+              <tr>
+                <td><code>hide-icon</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Hides the copy icon</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Text to copy (for inline variant)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-copy</code></td>
+                <td><code>{ text: string }</code></td>
+                <td>Fired when text is successfully copied</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade-in with subtle slide up</li>
+            <li><strong>Hover:</strong> Gentle lift with color change</li>
+            <li><strong>Press:</strong> Tactile press-down effect</li>
+            <li><strong>Success:</strong> Checkmark icon morph with pop animation</li>
+            <li><strong>Feedback:</strong> Toast/tooltip fade-in with spring physics</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Button variant with toast feedback --&gt;
+&lt;fm-clipboard text="campaign-id-12345" label="Copy ID"&gt;&lt;/fm-clipboard&gt;
+
+&lt;!-- Icon variant with tooltip feedback --&gt;
+&lt;fm-clipboard
+  text="sk_live_51H8x2jK9mLpQ3vR"
+  variant="icon"
+  feedback="tooltip"
+&gt;&lt;/fm-clipboard&gt;
+
+&lt;!-- Inline variant with slotted text --&gt;
+&lt;fm-clipboard variant="inline" position="right"&gt;
+  SUMMER2026
+&lt;/fm-clipboard&gt;
+
+&lt;!-- Custom feedback text --&gt;
+&lt;fm-clipboard
+  text="copied-content"
+  feedback-text="Link copied!"
+  label="Copy Link"
+&gt;&lt;/fm-clipboard&gt;
+
+</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- COLLAPSIBLE                                                   -->
+  <!-- ============================================================ -->
+  <section id="fm-collapsible">
+    <h2>fm-collapsible</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack-sm">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic collapsible (collapsed by default)</p>
+            <fm-collapsible header="Campaign Settings">
+              <p style="margin: 0 0 12px 0;">Configure your campaign targeting, budget, and scheduling options. All changes are saved automatically.</p>
+              <div class="row" style="gap: 8px;">
+                <fm-badge variant="primary" size="sm">Auto-save</fm-badge>
+                <fm-badge variant="neutral" size="sm">Draft</fm-badge>
+              </div>
+            </fm-collapsible>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Expanded by default</p>
+            <fm-collapsible header="Analytics Overview" expanded>
+              <p style="margin: 0 0 12px 0;">Real-time campaign performance metrics showing impressions, clicks, and conversions across all channels.</p>
+              <fm-card variant="outlined">
+                <span slot="header">Key Metrics</span>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
+                  <div>
+                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-primary);">24.5K</div>
+                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">Impressions</div>
+                  </div>
+                  <div>
+                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-success);">1.2K</div>
+                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">Clicks</div>
+                  </div>
+                  <div>
+                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-accent);">4.9%</div>
+                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">CTR</div>
+                  </div>
+                </div>
+              </fm-card>
+            </fm-collapsible>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <fm-collapsible header="Advanced Options" disabled>
+              <p>This content is not accessible when the collapsible is disabled.</p>
+            </fm-collapsible>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Custom header slot</p>
+            <fm-collapsible>
+              <div slot="header" style="display: flex; align-items: center; gap: 12px;">
+                <fm-badge variant="success" dot>Active</fm-badge>
+                <span style="font-weight: var(--fm-font-weight-semibold);">Live Campaign: Summer Sale</span>
+              </div>
+              <p style="margin: 0 0 12px 0;">Campaign is currently running with full budget allocation. Performance is tracking 15% above target.</p>
+              <fm-button variant="primary" size="sm">View Dashboard</fm-button>
+            </fm-collapsible>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>header</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Header text (use slot for custom content)</td>
+              </tr>
+              <tr>
+                <td><code>expanded</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Initial expanded state</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables interaction</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Collapsible content body</td></tr>
+              <tr><td><code>header</code></td><td>Custom header content (overrides header attribute)</td></tr>
+              <tr><td><code>icon</code></td><td>Custom toggle icon (overrides default chevron)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-collapse-change</code></td>
+                <td><code>{ expanded: boolean }</code></td>
+                <td>Fired when expand/collapse state changes</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Methods</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>expand()</code></td>
+                <td>void</td>
+                <td>Expand the panel programmatically</td>
+              </tr>
+              <tr>
+                <td><code>collapse()</code></td>
+                <td>void</td>
+                <td>Collapse the panel programmatically</td>
+              </tr>
+              <tr>
+                <td><code>toggle()</code></td>
+                <td>void</td>
+                <td>Toggle expand/collapse state</td>
+              </tr>
+              <tr>
+                <td><code>expanded</code></td>
+                <td>boolean</td>
+                <td>Get current expanded state</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
+            <li><strong>Expand:</strong> Height and fade animation (250ms ease-out)</li>
+            <li><strong>Collapse:</strong> Height and fade animation (200ms ease-in)</li>
+            <li><strong>Icon:</strong> Rotation 0° → 180° synced with content</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic collapsible --&gt;
+&lt;fm-collapsible header="Campaign Settings"&gt;
+  &lt;p&gt;Configure your campaign targeting and budget options.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+&lt;!-- Expanded by default --&gt;
+&lt;fm-collapsible header="Analytics" expanded&gt;
+  &lt;p&gt;View real-time performance metrics.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+&lt;!-- Disabled state --&gt;
+&lt;fm-collapsible header="Advanced" disabled&gt;
+  &lt;p&gt;This content is not accessible.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+&lt;!-- Custom header slot --&gt;
+&lt;fm-collapsible&gt;
+  &lt;div slot="header"&gt;
+    &lt;fm-badge variant="success" dot&gt;Active&lt;/fm-badge&gt;
+    &lt;span&gt;Live Campaign&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;p&gt;Campaign is currently running.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- DROPDOWN                                                      -->
+  <!-- ============================================================ -->
+  <section id="fm-dropdown">
+    <h2>fm-dropdown</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic menu with buttons and links</p>
+            <fm-dropdown 
+              items='[
+                {"value": "edit", "label": "Edit Campaign", "type": "button"},
+                {"value": "duplicate", "label": "Duplicate", "type": "button"},
+                {"value": "view", "label": "View Report", "type": "link", "href": "#reports"},
+                {"value": "export", "label": "Export Data", "type": "link", "href": "#export"}
+              ]'
+              placeholder="Actions">
+            </fm-dropdown>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Different sizes</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-dropdown 
+                size="sm"
+                items='[
+                  {"value": "1", "label": "Small Menu", "type": "button"}
+                ]'
+                placeholder="Small">
+              </fm-dropdown>
+              <fm-dropdown 
+                size="md"
+                items='[
+                  {"value": "1", "label": "Medium Menu", "type": "button"}
+                ]'
+                placeholder="Medium (default)">
+              </fm-dropdown>
+              <fm-dropdown 
+                size="lg"
+                items='[
+                  {"value": "1", "label": "Large Menu", "type": "button"}
+                ]'
+                placeholder="Large">
+              </fm-dropdown>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Variants</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-dropdown 
+                variant="default"
+                items='[
+                  {"value": "1", "label": "Default", "type": "button"}
+                ]'
+                placeholder="Default">
+              </fm-dropdown>
+              <fm-dropdown 
+                variant="outline"
+                items='[
+                  {"value": "1", "label": "Outline", "type": "button"}
+                ]'
+                placeholder="Outline">
+              </fm-dropdown>
+              <fm-dropdown 
+                variant="ghost"
+                items='[
+                  {"value": "1", "label": "Ghost", "type": "button"}
+                ]'
+                placeholder="Ghost">
+              </fm-dropdown>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">With disabled items</p>
+            <fm-dropdown 
+              items='[
+                {"value": "edit", "label": "Edit", "type": "button"},
+                {"value": "delete", "label": "Delete", "type": "button", "disabled": true}
+              ]'
+              placeholder="Actions...">
+            </fm-dropdown>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <fm-dropdown 
+              disabled
+              items='[
+                {"value": "1", "label": "Option 1", "type": "button"}
+              ]'
+              placeholder="Disabled">
+            </fm-dropdown>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>items</code></td>
+                <td>string (JSON)</td>
+                <td>""</td>
+                <td>JSON array of { value, label, type, href?, disabled? } objects. Type can be "button" or "link"</td>
+              </tr>
+              <tr>
+                <td><code>placeholder</code></td>
+                <td>string</td>
+                <td>"Menu"</td>
+                <td>Text shown on trigger button</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Style: <code>default</code>, <code>outline</code>, <code>ghost</code></td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables interaction</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>trigger</code></td><td>Custom trigger content (overrides default button)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-dropdown-click</code></td>
+                <td><code>{ value, label, index, type }</code></td>
+                <td>Fired when an item is clicked. Type is "button" or "link"</td>
+              </tr>
+              <tr>
+                <td><code>fm-dropdown-open</code></td>
+                <td>—</td>
+                <td>Fired when dropdown opens</td>
+              </tr>
+              <tr>
+                <td><code>fm-dropdown-close</code></td>
+                <td>—</td>
+                <td>Fired when dropdown closes</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Methods</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>open()</code></td>
+                <td>void</td>
+                <td>Open the dropdown programmatically</td>
+              </tr>
+              <tr>
+                <td><code>close()</code></td>
+                <td>void</td>
+                <td>Close the dropdown programmatically</td>
+              </tr>
+              <tr>
+                <td><code>toggle()</code></td>
+                <td>void</td>
+                <td>Toggle open/close state</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
+            <li><strong>Open:</strong> Scale + fade animation with spring physics</li>
+            <li><strong>Items:</strong> Staggered fade-in when dropdown opens</li>
+            <li><strong>Hover:</strong> Background color change on items</li>
+            <li><strong>Press:</strong> Tactile feedback on trigger</li>
+            <li><strong>Close:</strong> Fade out with scale down</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic menu with buttons and links --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "edit", "label": "Edit Campaign", "type": "button"},
+    {"value": "duplicate", "label": "Duplicate", "type": "button"},
+    {"value": "view", "label": "View Report", "type": "link", "href": "#reports"},
+    {"value": "export", "label": "Export Data", "type": "link", "href": "#export"}
+  ]'
+  placeholder="Actions"&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- Button items (default) --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "save", "label": "Save Changes", "type": "button"},
+    {"value": "discard", "label": "Discard", "type": "button"}
+  ]'
+  placeholder="Options"&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- Link items --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "docs", "label": "Documentation", "type": "link", "href": "/docs"},
+    {"value": "api", "label": "API Reference", "type": "link", "href": "/api"}
+  ]'
+  placeholder="Resources"&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- With disabled items --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "edit", "label": "Edit", "type": "button"},
+    {"value": "delete", "label": "Delete", "type": "button", "disabled": true}
+  ]'
+  placeholder="Actions..."&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- Different sizes --&gt;
+&lt;fm-dropdown size="sm" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown size="md" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown size="lg" items='[...]'&gt;&lt;/fm-dropdown&gt;
+
+&lt;!-- Variants --&gt;
+&lt;fm-dropdown variant="default" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown variant="outline" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown variant="ghost" items='[...]'&gt;&lt;/fm-dropdown&gt;
+
+</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PAGINATION                                                  -->
+  <!-- ============================================================ -->
+  <section id="fm-pagination">
+    <h2>fm-pagination</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Default (with many pages)</p>
+            <fm-pagination current="5" total="20"></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">With Pagy object (simplest Ruby integration)</p>
+            <fm-pagination pagy='{"page":7,"pages":20,"series":[1,":gap",6,7,8,":gap",20]}' variant="outline" href-template="/items?page=:page"></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Small size with first/last buttons</p>
+            <fm-pagination current="3" total="15" size="sm" show-first-last></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Large size with custom sibling count</p>
+            <fm-pagination current="8" total="50" size="lg" sibling-count="2"></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Outline variant</p>
+            <fm-pagination current="7" total="12" variant="outline"></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Ghost variant with prev/next labels</p>
+            <fm-pagination current="4" total="8" variant="ghost" prev-label="Prev" next-label="Next"></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <fm-pagination current="3" total="10" disabled></fm-pagination>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>pagy</code></td>
+                <td>string (JSON)</td>
+                <td>""</td>
+                <td>Entire Pagy object as JSON. Extracts <code>page</code>, <code>pages</code>, and <code>series</code> automatically</td>
+              </tr>
+              <tr>
+                <td><code>current</code></td>
+                <td>number</td>
+                <td>1</td>
+                <td>Current active page (1-based index)</td>
+              </tr>
+              <tr>
+                <td><code>page</code></td>
+                <td>number</td>
+                <td>1</td>
+                <td>Alias for <code>current</code> (Pagy compatibility)</td>
+              </tr>
+              <tr>
+                <td><code>total</code></td>
+                <td>number</td>
+                <td>1</td>
+                <td>Total number of pages</td>
+              </tr>
+              <tr>
+                <td><code>pages</code></td>
+                <td>number</td>
+                <td>1</td>
+                <td>Alias for <code>total</code> (Pagy compatibility)</td>
+              </tr>
+              <tr>
+                <td><code>series</code></td>
+                <td>string (JSON)</td>
+                <td>""</td>
+                <td>Pagy's <code>series</code> array with page numbers and <code>:gap</code> symbols</td>
+              </tr>
+              <tr>
+                <td><code>href-template</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>URL template with <code>:page</code> placeholder for SSR links (e.g., <code>/items?page=:page</code>)</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Button size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Style: <code>default</code>, <code>outline</code>, <code>ghost</code></td>
+              </tr>
+              <tr>
+                <td><code>sibling-count</code></td>
+                <td>number</td>
+                <td>1</td>
+                <td>Number of pages to show on each side of current page (when not using series)</td>
+              </tr>
+              <tr>
+                <td><code>boundary-count</code></td>
+                <td>number</td>
+                <td>1</td>
+                <td>Number of pages to always show at boundaries (when not using series)</td>
+              </tr>
+              <tr>
+                <td><code>show-first-last</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Show first/last page navigation buttons</td>
+              </tr>
+              <tr>
+                <td><code>hide-prev-next</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Hide previous/next navigation buttons</td>
+              </tr>
+              <tr>
+                <td><code>prev-label</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Text label for previous button</td>
+              </tr>
+              <tr>
+                <td><code>next-label</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Text label for next button</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables all interaction</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-page-change</code></td>
+                <td><code>{ page: number, previousPage: number }</code></td>
+                <td>Fired when page changes (SPA navigation)</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Pagy Compatibility</h4>
+          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin: 12px 0;">
+            The component is designed to work seamlessly with <a href="https://github.com/ddnexus/pagy" target="_blank" style="color: var(--fm-color-primary);">Ruby's Pagy gem</a>. Use <code>page</code> instead of <code>current</code>, <code>pages</code> instead of <code>total</code>, and pass Pagy's <code>series</code> array directly.
+          </p>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
+            <li><strong>Hover:</strong> Gentle scale up (1.05x) on page buttons</li>
+            <li><strong>Press:</strong> Tactile press-down effect (0.95x)</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic pagination --&gt;
+&lt;fm-pagination current="5" total="20"&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Small size with first/last buttons --&gt;
+&lt;fm-pagination 
+  current="3" 
+  total="15" 
+  size="sm" 
+  show-first-last
+&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Large with more siblings visible --&gt;
+&lt;fm-pagination 
+  current="8" 
+  total="50" 
+  size="lg" 
+  sibling-count="2"
+&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Outline variant --&gt;
+&lt;fm-pagination 
+  current="7" 
+  total="12" 
+  variant="outline"
+&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Ghost with custom labels --&gt;
+&lt;fm-pagination 
+  current="4" 
+  total="8" 
+  variant="ghost" 
+  prev-label="Prev" 
+  next-label="Next"
+&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Disabled state --&gt;
+&lt;fm-pagination current="3" total="10" disabled&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Listen for page changes (SPA mode) --&gt;
+&lt;script&gt;
+  document.querySelector('fm-pagination').addEventListener('fm-page-change', (e) =&gt; {
+    console.log('Page changed from', e.detail.previousPage, 'to', e.detail.page);
+  });
+&lt;/script&gt;
+
+</code></pre>
+        </div>
+      </fm-tab>
+      <fm-tab label="Ruby (Pagy)">
+        <div class="code-panel">
+          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin-bottom: 16px;">
+            The component is designed to work seamlessly with <a href="https://github.com/ddnexus/pagy" target="_blank" style="color: var(--fm-color-primary);">Ruby's Pagy gem</a>. Simply pass the entire <code>@pagy</code> object and the component extracts <code>page</code>, <code>pages</code>, and <code>series</code> automatically.
+          </p>
+          <pre><code class="language-erb">&lt;!-- In your Rails controller --&gt;
+@pagy, @records = pagy(Product.all, items: 20)
+
+&lt;!-- In your ERB template --&gt;
+&lt;!-- Option 1: Simplest - just pass the @pagy object --&gt;
+&lt;fm-pagination pagy='&lt;%= @pagy.to_json %&gt;'&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Option 2: With custom styling and SEO links --&gt;
+&lt;fm-pagination
+  pagy='&lt;%= @pagy.to_json %&gt;'
+  variant="outline"
+  href-template="/products?page=:page"
+  show-first-last
+&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Option 3: With custom prev/next labels --&gt;
+&lt;fm-pagination
+  pagy='&lt;%= @pagy.to_json %&gt;'
+  prev-label="Previous"
+  next-label="Next"
+  href-template="&lt;%= url_for(page: ':page') %&gt;"
+&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Option 4: Small size without first/last buttons --&gt;
+&lt;fm-pagination
+  pagy='&lt;%= @pagy.to_json %&gt;'
+  size="sm"
+  href-template="/items?page=:page"
+&gt;&lt;/fm-pagination&gt;
+
+&lt;!-- Option 5: Manual attributes (if you need granular control) --&gt;
+&lt;fm-pagination
+  page="&lt;%= @pagy.page %&gt;"
+  pages="&lt;%= @pagy.pages %&gt;"
+  series='&lt;%= @pagy.series.to_json %&gt;'
+  variant="outline"
+&gt;&lt;/fm-pagination&gt;</code></pre>
+          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin-top: 16px; margin-bottom: 8px;">
+            <strong>Why this works:</strong> The <code>pagy</code> attribute accepts the entire Pagy object as JSON. The component automatically extracts:
+          </p>
+          <ul style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin: 0; padding-left: 20px; line-height: 1.6;">
+            <li><code>pagy.page</code> → current page</li>
+            <li><code>pagy.pages</code> → total pages</li>
+            <li><code>pagy.series</code> → page series array with <code>:gap</code> symbols</li>
+          </ul>
+          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin-top: 16px; margin-bottom: 8px;">
+            <strong>SEO & SSR:</strong> When <code>href-template</code> is provided, the component renders actual <code>&lt;a&gt;</code> tags for each page link. This enables:
+          </p>
+          <ul style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin: 0; padding-left: 20px; line-height: 1.6;">
+            <li>SEO-friendly crawlable links</li>
+            <li>Right-click "Open in new tab" functionality</li>
+            <li>Graceful degradation without JavaScript</li>
+          </ul>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SPARKLINE                                                     -->
+  <!-- ============================================================ -->
+  <section id="fm-sparkline">
+    <h2>fm-sparkline</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div class="grid">
+            <fm-card variant="elevated">
+              <span slot="header">Campaign Lift</span>
+              <div style="display: flex; align-items: end; justify-content: space-between; gap: 16px;">
+                <div>
+                  <div style="font-size: 1.875rem; font-weight: 700; color: var(--fm-color-text); line-height: 1; margin-bottom: 6px;">+18.4%</div>
+                  <div style="font-size: 0.875rem; color: var(--fm-color-text-secondary);">Compared to the previous 30 days</div>
+                </div>
+                <fm-sparkline
+                  data='[18, 22, 19, 27, 24, 29, 35, 33, 41]'
+                  width="180"
+                  height="64"
+                  aria-label="Campaign lift trend"
+                ></fm-sparkline>
+              </div>
+            </fm-card>
+
+            <fm-card variant="elevated">
+              <span slot="header">Qualified Leads</span>
+              <div style="display: flex; align-items: end; justify-content: space-between; gap: 16px;">
+                <div>
+                  <div style="font-size: 1.875rem; font-weight: 700; color: var(--fm-color-text); line-height: 1; margin-bottom: 6px;">247</div>
+                  <div style="font-size: 0.875rem; color: var(--fm-color-text-secondary);">Weekly volume with a mid-cycle dip</div>
+                </div>
+                <fm-sparkline
+                  data='[42, 46, 51, 39, 44, 49, 55, 58, 61]'
+                  width="180"
+                  height="64"
+                  stroke-color="var(--fm-color-info)"
+                  gradient-from="rgba(2, 132, 199, 0.22)"
+                  gradient-to="rgba(2, 132, 199, 0)"
+                  aria-label="Qualified leads trend"
+                ></fm-sparkline>
+              </div>
+            </fm-card>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
+            <div>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Compact default</p>
+              <fm-sparkline data='[10, 14, 12, 16, 19, 18, 24]' width="160" height="52"></fm-sparkline>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Negative trend</p>
+              <fm-sparkline
+                data='[34, 31, 29, 28, 24, 22, 18]'
+                width="160"
+                height="52"
+                stroke-color="var(--fm-color-error)"
+                gradient-from="rgba(220, 38, 38, 0.18)"
+                gradient-to="rgba(220, 38, 38, 0)"
+              ></fm-sparkline>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">CSV input</p>
+              <fm-sparkline data="6, 9, 8, 13, 11, 17, 15" width="160" height="52"></fm-sparkline>
+            </div>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>data</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Series values as a JSON array or comma-separated list, e.g. <code>[12, 18, 14]</code> or <code>12,18,14</code></td>
+              </tr>
+              <tr>
+                <td><code>width</code></td>
+                <td>number</td>
+                <td>200</td>
+                <td>SVG width in pixels</td>
+              </tr>
+              <tr>
+                <td><code>height</code></td>
+                <td>number</td>
+                <td>60</td>
+                <td>SVG height in pixels</td>
+              </tr>
+              <tr>
+                <td><code>gradient-from</code></td>
+                <td>string</td>
+                <td><code>var(--fm-alpha-primary-20)</code></td>
+                <td>Top fill color for the area gradient</td>
+              </tr>
+              <tr>
+                <td><code>gradient-to</code></td>
+                <td>string</td>
+                <td><code>transparent</code></td>
+                <td>Bottom fill color for the area gradient</td>
+              </tr>
+              <tr>
+                <td><code>stroke-color</code></td>
+                <td>string</td>
+                <td><code>var(--fm-color-primary)</code></td>
+                <td>Line color</td>
+              </tr>
+              <tr>
+                <td><code>stroke-width</code></td>
+                <td>number</td>
+                <td>2</td>
+                <td>Line thickness in pixels</td>
+              </tr>
+              <tr>
+                <td><code>aria-label</code></td>
+                <td>string</td>
+                <td>"Sparkline trend"</td>
+                <td>Accessible label announced to assistive technology</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Subtle fade and upward settle with spring easing</li>
+            <li><strong>Updates:</strong> Re-animates when observed attributes change</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Default sparkline --&gt;
+&lt;fm-sparkline
+  data='[18, 22, 19, 27, 24, 29, 35]'
+  width="200"
+  height="60"
+&gt;&lt;/fm-sparkline&gt;
+
+&lt;!-- Custom colours --&gt;
+&lt;fm-sparkline
+  data='[34, 31, 29, 28, 24, 22, 18]'
+  stroke-color="var(--fm-color-error)"
+  gradient-from="rgba(220, 38, 38, 0.18)"
+  gradient-to="rgba(220, 38, 38, 0)"
+&gt;&lt;/fm-sparkline&gt;
+
+&lt;!-- CSV input is supported too --&gt;
+&lt;fm-sparkline data="6, 9, 8, 13, 11, 17, 15"&gt;&lt;/fm-sparkline&gt;</code></pre>
+
+          <p class="manual-text">ERB / Rails usage with a server-side array:</p>
+          <pre><code class="language-erb">&lt;fm-sparkline
+  data='&lt;%= [18, 22, 19, 27, 24, 29, 35].to_json %&gt;'
+  width="200"
+  height="60"
+  stroke-color="var(--fm-color-primary)"
+&gt;&lt;/fm-sparkline&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  </main>
+
   <footer>
-    FM Design System v0.1.0 — Built with Web Components &amp; Motion
+    <a href="https://feedmob.com/" target="_blank" rel="noopener">FeedMob</a> Design System v0.1.0 — Built with Web Components &amp; Motion
   </footer>
 
   <!-- Prism.js for syntax highlighting -->
@@ -652,6 +2034,101 @@ npm install @fm-agency/design-system</code></pre>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
-  <script type="module" src="./dist/fm-ds.js"></script>
+  <!-- Auto-detect: use src in dev (localhost:5173), dist in production -->
+  <script type="module">
+    const isViteDev = location.port === '5173' || (location.hostname === 'localhost' && new URL(import.meta.url).searchParams.has('dev'));
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = isViteDev ? './src/index.js' : './dist/fm-ds.js';
+    document.head.appendChild(script);
+  </script>
+
+  <!-- Sidebar: scroll spy + mobile toggle -->
+  <script>
+    (function () {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('sidebarToggle');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      const links = document.querySelectorAll('.sidebar-link');
+      const sections = document.querySelectorAll('section[id]');
+
+      function isMobile() {
+        return window.matchMedia('(max-width: 768px)').matches;
+      }
+
+      function openSidebar() {
+        sidebar.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        backdrop.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        backdrop.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', function () {
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+
+      backdrop.addEventListener('click', closeSidebar);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+          closeSidebar();
+        }
+      });
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          if (isMobile()) {
+            closeSidebar();
+          }
+        });
+      });
+
+      var activeId = null;
+
+      function updateActiveLink() {
+        var scrollY = window.scrollY + 80;
+        var current = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          var sec = sections[i];
+          if (sec.offsetTop <= scrollY) {
+            current = sec.id;
+            break;
+          }
+        }
+        if (current !== activeId) {
+          activeId = current;
+          links.forEach(function (link) {
+            if (link.getAttribute('data-section') === current) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+          var activeLink = sidebar.querySelector('.sidebar-link.active');
+          if (activeLink && !isMobile()) {
+            var linkRect = activeLink.getBoundingClientRect();
+            var sidebarRect = sidebar.getBoundingClientRect();
+            if (linkRect.top < sidebarRect.top + 40 || linkRect.bottom > sidebarRect.bottom - 40) {
+              activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      updateActiveLink();
+    })();
+  </script>
 </body>
 </html>

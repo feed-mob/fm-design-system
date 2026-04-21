@@ -123,7 +123,7 @@ export class FmBadge extends FmElement {
       this._pulseAnim = animate(
         el,
         { scale: [1, 1.06, 1] },
-        { duration: 1.8, ease: "ease-in-out" },
+        { duration: 1.8, ease: "easeInOut" },
       );
       this._pulseAnim.finished.then(() => {
         if (this.isConnected) run();
