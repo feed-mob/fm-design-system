@@ -1410,6 +1410,282 @@ npm install @fm-agency/design-system</code></pre>
     </fm-tabs>
   </section>
 
+  <!-- ============================================================ -->
+  <!-- DROPDOWN                                                      -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-dropdown</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0; display: flex; flex-direction: column; gap: 24px;">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic menu with buttons and links</p>
+            <fm-dropdown 
+              items='[
+                {"value": "edit", "label": "Edit Campaign", "type": "button"},
+                {"value": "duplicate", "label": "Duplicate", "type": "button"},
+                {"value": "view", "label": "View Report", "type": "link", "href": "#reports"},
+                {"value": "export", "label": "Export Data", "type": "link", "href": "#export"}
+              ]'
+              placeholder="Actions">
+            </fm-dropdown>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Different sizes</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-dropdown 
+                size="sm"
+                items='[
+                  {"value": "1", "label": "Small Menu", "type": "button"}
+                ]'
+                placeholder="Small">
+              </fm-dropdown>
+              <fm-dropdown 
+                size="md"
+                items='[
+                  {"value": "1", "label": "Medium Menu", "type": "button"}
+                ]'
+                placeholder="Medium (default)">
+              </fm-dropdown>
+              <fm-dropdown 
+                size="lg"
+                items='[
+                  {"value": "1", "label": "Large Menu", "type": "button"}
+                ]'
+                placeholder="Large">
+              </fm-dropdown>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Variants</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-dropdown 
+                variant="default"
+                items='[
+                  {"value": "1", "label": "Default", "type": "button"}
+                ]'
+                placeholder="Default">
+              </fm-dropdown>
+              <fm-dropdown 
+                variant="outline"
+                items='[
+                  {"value": "1", "label": "Outline", "type": "button"}
+                ]'
+                placeholder="Outline">
+              </fm-dropdown>
+              <fm-dropdown 
+                variant="ghost"
+                items='[
+                  {"value": "1", "label": "Ghost", "type": "button"}
+                ]'
+                placeholder="Ghost">
+              </fm-dropdown>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">With disabled items</p>
+            <fm-dropdown 
+              items='[
+                {"value": "edit", "label": "Edit", "type": "button"},
+                {"value": "delete", "label": "Delete", "type": "button", "disabled": true}
+              ]'
+              placeholder="Actions...">
+            </fm-dropdown>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <fm-dropdown 
+              disabled
+              items='[
+                {"value": "1", "label": "Option 1", "type": "button"}
+              ]'
+              placeholder="Disabled">
+            </fm-dropdown>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>items</code></td>
+                <td>string (JSON)</td>
+                <td>""</td>
+                <td>JSON array of { value, label, type, href?, disabled? } objects. Type can be "button" or "link"</td>
+              </tr>
+              <tr>
+                <td><code>placeholder</code></td>
+                <td>string</td>
+                <td>"Menu"</td>
+                <td>Text shown on trigger button</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Style: <code>default</code>, <code>outline</code>, <code>ghost</code></td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables interaction</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>trigger</code></td><td>Custom trigger content (overrides default button)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-dropdown-click</code></td>
+                <td><code>{ value, label, index, type }</code></td>
+                <td>Fired when an item is clicked. Type is "button" or "link"</td>
+              </tr>
+              <tr>
+                <td><code>fm-dropdown-open</code></td>
+                <td>—</td>
+                <td>Fired when dropdown opens</td>
+              </tr>
+              <tr>
+                <td><code>fm-dropdown-close</code></td>
+                <td>—</td>
+                <td>Fired when dropdown closes</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Methods</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>open()</code></td>
+                <td>void</td>
+                <td>Open the dropdown programmatically</td>
+              </tr>
+              <tr>
+                <td><code>close()</code></td>
+                <td>void</td>
+                <td>Close the dropdown programmatically</td>
+              </tr>
+              <tr>
+                <td><code>toggle()</code></td>
+                <td>void</td>
+                <td>Toggle open/close state</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
+            <li><strong>Open:</strong> Scale + fade animation with spring physics</li>
+            <li><strong>Items:</strong> Staggered fade-in when dropdown opens</li>
+            <li><strong>Hover:</strong> Background color change on items</li>
+            <li><strong>Press:</strong> Tactile feedback on trigger</li>
+            <li><strong>Close:</strong> Fade out with scale down</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic menu with buttons and links --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "edit", "label": "Edit Campaign", "type": "button"},
+    {"value": "duplicate", "label": "Duplicate", "type": "button"},
+    {"value": "view", "label": "View Report", "type": "link", "href": "#reports"},
+    {"value": "export", "label": "Export Data", "type": "link", "href": "#export"}
+  ]'
+  placeholder="Actions"&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- Button items (default) --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "save", "label": "Save Changes", "type": "button"},
+    {"value": "discard", "label": "Discard", "type": "button"}
+  ]'
+  placeholder="Options"&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- Link items --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "docs", "label": "Documentation", "type": "link", "href": "/docs"},
+    {"value": "api", "label": "API Reference", "type": "link", "href": "/api"}
+  ]'
+  placeholder="Resources"&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- With disabled items --&gt;
+&lt;fm-dropdown 
+  items='[
+    {"value": "edit", "label": "Edit", "type": "button"},
+    {"value": "delete", "label": "Delete", "type": "button", "disabled": true}
+  ]'
+  placeholder="Actions..."&gt;
+&lt;/fm-dropdown&gt;
+
+&lt;!-- Different sizes --&gt;
+&lt;fm-dropdown size="sm" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown size="md" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown size="lg" items='[...]'&gt;&lt;/fm-dropdown&gt;
+
+&lt;!-- Variants --&gt;
+&lt;fm-dropdown variant="default" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown variant="outline" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;fm-dropdown variant="ghost" items='[...]'&gt;&lt;/fm-dropdown&gt;
+
+&lt;!-- Listen for clicks --&gt;
+&lt;script&gt;
+  document.querySelector('fm-dropdown').addEventListener('fm-dropdown-click', (e) =&gt; {
+    console.log('Clicked:', e.detail.value, e.detail.label, e.detail.type);
+    // Handle button clicks
+    if (e.detail.type === 'button') {
+      // Perform action
+    }
+    // Links navigate automatically
+  });
+&lt;/script&gt;
+
+&lt;!-- Programmatic control --&gt;
+&lt;script&gt;
+  const dropdown = document.querySelector('fm-dropdown');
+  
+  // Open/close programmatically
+  dropdown.open();
+  dropdown.close();
+  dropdown.toggle();
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
   <footer>
     FM Design System v0.1.0 — Built with Web Components &amp; Motion
   </footer>
