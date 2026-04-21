@@ -87,10 +87,274 @@
       margin-top: 16px;
       margin-bottom: 8px;
     }
+
+    /* ========== SIDEBAR NAVIGATION ========== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 220px;
+      background: #FFFFFF;
+      border-right: 1px solid #E2E8F0;
+      padding: 24px 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 100;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      scrollbar-width: thin;
+      scrollbar-color: #CBD5E1 transparent;
+    }
+    .sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 2px;
+    }
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #E2E8F0;
+      margin-bottom: 12px;
+    }
+    .sidebar-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+    .sidebar-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+    }
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-nav li {
+      margin: 0;
+    }
+    .sidebar-link {
+      display: block;
+      padding: 7px 20px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #64748B;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s ease;
+      line-height: 1.4;
+    }
+    .sidebar-link:hover {
+      color: #0D9488;
+      background: #F0FDFA;
+      border-left-color: #99F6E4;
+    }
+    .sidebar-link.active {
+      color: #0D9488;
+      background: #F0FDFA;
+      border-left-color: #0D9488;
+      font-weight: 600;
+    }
+    .sidebar-divider {
+      height: 1px;
+      background: #E2E8F0;
+      margin: 10px 16px;
+    }
+    .sidebar-label {
+      padding: 10px 20px 4px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94A3B8;
+      user-select: none;
+    }
+
+    /* ========== MAIN CONTENT OFFSET ========== */
+    .main-content {
+      margin-left: 220px;
+      max-width: 960px;
+      padding: 48px 32px 80px;
+    }
+
+    /* ========== MOBILE TOGGLE ========== */
+    .sidebar-toggle {
+      display: none;
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 200;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      color: #0F172A;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+      transition: background 0.15s ease, box-shadow 0.15s ease;
+    }
+    .sidebar-toggle:hover {
+      background: #F8FAFC;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.1);
+    }
+    .sidebar-toggle:focus-visible {
+      outline: 2px solid #0D9488;
+      outline-offset: 2px;
+    }
+
+    /* ========== SIDEBAR BACKDROP (MOBILE) ========== */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.3);
+      z-index: 90;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .sidebar-backdrop.visible {
+      opacity: 1;
+    }
+
+    /* ========== RESPONSIVE: TABLET ========== */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 200px;
+      }
+      .main-content {
+        margin-left: 200px;
+        padding: 48px 24px 80px;
+      }
+    }
+
+    /* ========== RESPONSIVE: MOBILE ========== */
+    @media (max-width: 768px) {
+      .sidebar-toggle {
+        display: flex;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+        width: 260px;
+        box-shadow: none;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(15, 23, 42, 0.12);
+      }
+      .sidebar-backdrop {
+        display: block;
+      }
+      .sidebar-backdrop.visible {
+        opacity: 1;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 64px 16px 80px;
+        max-width: 100%;
+      }
+      .page-header {
+        padding-left: 48px;
+      }
+      .subtitle {
+        padding-left: 48px;
+      }
+    }
+
+    /* ========== RESPONSIVE: SMALL MOBILE ========== */
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 56px 12px 64px;
+      }
+      .sidebar {
+        width: 240px;
+      }
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      margin-left: 220px;
+      padding: 24px 32px;
+      max-width: 960px;
+    }
+    @media (max-width: 1024px) {
+      footer {
+        margin-left: 200px;
+      }
+    }
+    @media (max-width: 768px) {
+      footer {
+        margin-left: 0;
+        padding: 24px 16px;
+      }
+    }
+
+    /* ========== SMOOTH SCROLL ========== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ========== SCROLL PADDING FOR FIXED HEADER ========== */
+    section[id] {
+      scroll-margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      section[id] {
+        scroll-margin-top: 16px;
+      }
+    }
   </style>
 </head>
 <body>
-  <img src="./assets/logo.png" alt="FeedMob Design System Logo" class="logo" />
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="5" x2="17" y2="5"/>
+      <line x1="3" y1="10" x2="17" y2="10"/>
+      <line x1="3" y1="15" x2="17" y2="15"/>
+    </svg>
+  </button>
+
+  <!-- Sidebar backdrop (mobile) -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- Fixed sidebar navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="./assets/logo.png" alt="FM" class="sidebar-logo" />
+      <span class="sidebar-title">FM <span class="accent">DS</span></span>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="#getting-started" class="sidebar-link" data-section="getting-started">Getting Started</a></li>
+      <li><a href="#theming" class="sidebar-link" data-section="theming">Theming</a></li>
+      <li class="sidebar-divider"></li>
+      <li class="sidebar-label">Components</li>
+      <li><a href="#fm-button" class="sidebar-link" data-section="fm-button">Button</a></li>
+      <li><a href="#fm-card" class="sidebar-link" data-section="fm-card">Card</a></li>
+      <li><a href="#fm-badge" class="sidebar-link" data-section="fm-badge">Badge</a></li>
+      <li><a href="#fm-tabs" class="sidebar-link" data-section="fm-tabs">Tabs</a></li>
+      <li><a href="#fm-checkbox" class="sidebar-link" data-section="fm-checkbox">Checkbox</a></li>
+      <li><a href="#fm-breadcrumb" class="sidebar-link" data-section="fm-breadcrumb">Breadcrumb</a></li>
+      <li><a href="#fm-alert" class="sidebar-link" data-section="fm-alert">Alert</a></li>
+      <li><a href="#fm-clipboard" class="sidebar-link" data-section="fm-clipboard">Clipboard</a></li>
+      <li><a href="#fm-collapsible" class="sidebar-link" data-section="fm-collapsible">Collapsible</a></li>
+      <li><a href="#fm-dropdown" class="sidebar-link" data-section="fm-dropdown">Dropdown</a></li>
+      <li><a href="#fm-pagination" class="sidebar-link" data-section="fm-pagination">Pagination</a></li>
+      <li><a href="#fm-sparkline" class="sidebar-link" data-section="fm-sparkline">Sparkline</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content area -->
+  <main class="main-content">
   <header class="page-header">
     <h1><span class="accent">Design System</span></h1>
   </header>
@@ -99,7 +363,7 @@
   <!-- ============================================================ -->
   <!-- GETTING STARTED                                               -->
   <!-- ============================================================ -->
-  <section class="manual-section">
+  <section id="getting-started" class="manual-section">
     <h2>Getting Started</h2>
     <div style="background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
       <p style="margin: 0; color: #92400E; font-size: 0.9rem;">
@@ -143,7 +407,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- THEMING                                                       -->
   <!-- ============================================================ -->
-  <section>
+  <section id="theming">
     <h2>Theming</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Overview">
@@ -264,7 +528,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- BUTTONS                                                       -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-button">
     <h2>fm-button</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -347,7 +611,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- CARDS                                                         -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-card">
     <h2>fm-card</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -459,7 +723,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- BADGES                                                        -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-badge">
     <h2>fm-badge</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -560,7 +824,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- TABS                                                          -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-tabs">
     <h2>fm-tabs</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -681,7 +945,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- CHECKBOXES                                                    -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-checkbox">
     <h2>fm-checkbox</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -791,7 +1055,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- BREADCRUMBS                                                   -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-breadcrumb">
     <h2>fm-breadcrumb</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -927,7 +1191,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- ALERTS                                                        -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-alert">
     <h2>fm-alert</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -1045,7 +1309,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- CLIPBOARD                                                     -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-clipboard">
     <h2>fm-clipboard</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -1196,7 +1460,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- COLLAPSIBLE                                                   -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-collapsible">
     <h2>fm-collapsible</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -1377,7 +1641,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- DROPDOWN                                                      -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-dropdown">
     <h2>fm-dropdown</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -1633,7 +1897,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- PAGINATION                                                  -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-pagination">
     <h2>fm-pagination</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -1915,7 +2179,7 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- SPARKLINE                                                     -->
   <!-- ============================================================ -->
-  <section>
+  <section id="fm-sparkline">
     <h2>fm-sparkline</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
@@ -2077,6 +2341,8 @@ npm install @fm-agency/design-system</code></pre>
     </fm-tabs>
   </section>
 
+  </main>
+
   <footer>
     FM Design System v0.1.0 — Built with Web Components &amp; Motion
   </footer>
@@ -2093,6 +2359,94 @@ npm install @fm-agency/design-system</code></pre>
     script.type = 'module';
     script.src = isViteDev ? './src/index.js' : './dist/fm-ds.js';
     document.head.appendChild(script);
+  </script>
+
+  <!-- Sidebar: scroll spy + mobile toggle -->
+  <script>
+    (function () {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('sidebarToggle');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      const links = document.querySelectorAll('.sidebar-link');
+      const sections = document.querySelectorAll('section[id]');
+
+      function isMobile() {
+        return window.matchMedia('(max-width: 768px)').matches;
+      }
+
+      function openSidebar() {
+        sidebar.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        backdrop.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        backdrop.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', function () {
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+
+      backdrop.addEventListener('click', closeSidebar);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+          closeSidebar();
+        }
+      });
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          if (isMobile()) {
+            closeSidebar();
+          }
+        });
+      });
+
+      var activeId = null;
+
+      function updateActiveLink() {
+        var scrollY = window.scrollY + 80;
+        var current = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          var sec = sections[i];
+          if (sec.offsetTop <= scrollY) {
+            current = sec.id;
+            break;
+          }
+        }
+        if (current !== activeId) {
+          activeId = current;
+          links.forEach(function (link) {
+            if (link.getAttribute('data-section') === current) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+          var activeLink = sidebar.querySelector('.sidebar-link.active');
+          if (activeLink && !isMobile()) {
+            var linkRect = activeLink.getBoundingClientRect();
+            var sidebarRect = sidebar.getBoundingClientRect();
+            if (linkRect.top < sidebarRect.top + 40 || linkRect.bottom > sidebarRect.bottom - 40) {
+              activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      updateActiveLink();
+    })();
   </script>
 </body>
 </html>
