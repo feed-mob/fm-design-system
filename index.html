@@ -1218,6 +1218,198 @@ npm install @fm-agency/design-system</code></pre>
     </fm-tabs>
   </section>
 
+  <!-- ============================================================ -->
+  <!-- COLLAPSIBLE                                                   -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>fm-collapsible</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div style="padding: 16px 0; display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic collapsible (collapsed by default)</p>
+            <fm-collapsible header="Campaign Settings">
+              <p style="margin: 0 0 12px 0;">Configure your campaign targeting, budget, and scheduling options. All changes are saved automatically.</p>
+              <div class="row" style="gap: 8px;">
+                <fm-badge variant="primary" size="sm">Auto-save</fm-badge>
+                <fm-badge variant="neutral" size="sm">Draft</fm-badge>
+              </div>
+            </fm-collapsible>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Expanded by default</p>
+            <fm-collapsible header="Analytics Overview" expanded>
+              <p style="margin: 0 0 12px 0;">Real-time campaign performance metrics showing impressions, clicks, and conversions across all channels.</p>
+              <fm-card variant="outlined">
+                <span slot="header">Key Metrics</span>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
+                  <div>
+                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-primary);">24.5K</div>
+                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">Impressions</div>
+                  </div>
+                  <div>
+                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-success);">1.2K</div>
+                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">Clicks</div>
+                  </div>
+                  <div>
+                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-accent);">4.9%</div>
+                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">CTR</div>
+                  </div>
+                </div>
+              </fm-card>
+            </fm-collapsible>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <fm-collapsible header="Advanced Options" disabled>
+              <p>This content is not accessible when the collapsible is disabled.</p>
+            </fm-collapsible>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Custom header slot</p>
+            <fm-collapsible>
+              <div slot="header" style="display: flex; align-items: center; gap: 12px;">
+                <fm-badge variant="success" dot>Active</fm-badge>
+                <span style="font-weight: var(--fm-font-weight-semibold);">Live Campaign: Summer Sale</span>
+              </div>
+              <p style="margin: 0 0 12px 0;">Campaign is currently running with full budget allocation. Performance is tracking 15% above target.</p>
+              <fm-button variant="primary" size="sm">View Dashboard</fm-button>
+            </fm-collapsible>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>header</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Header text (use slot for custom content)</td>
+              </tr>
+              <tr>
+                <td><code>expanded</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Initial expanded state</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables interaction</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>Collapsible content body</td></tr>
+              <tr><td><code>header</code></td><td>Custom header content (overrides header attribute)</td></tr>
+              <tr><td><code>icon</code></td><td>Custom toggle icon (overrides default chevron)</td></tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-collapse-change</code></td>
+                <td><code>{ expanded: boolean }</code></td>
+                <td>Fired when expand/collapse state changes</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Methods</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>expand()</code></td>
+                <td>void</td>
+                <td>Expand the panel programmatically</td>
+              </tr>
+              <tr>
+                <td><code>collapse()</code></td>
+                <td>void</td>
+                <td>Collapse the panel programmatically</td>
+              </tr>
+              <tr>
+                <td><code>toggle()</code></td>
+                <td>void</td>
+                <td>Toggle expand/collapse state</td>
+              </tr>
+              <tr>
+                <td><code>expanded</code></td>
+                <td>boolean</td>
+                <td>Get current expanded state</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
+            <li><strong>Expand:</strong> Height and fade animation (250ms ease-out)</li>
+            <li><strong>Collapse:</strong> Height and fade animation (200ms ease-in)</li>
+            <li><strong>Icon:</strong> Rotation 0° → 180° synced with content</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic collapsible --&gt;
+&lt;fm-collapsible header="Campaign Settings"&gt;
+  &lt;p&gt;Configure your campaign targeting and budget options.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+&lt;!-- Expanded by default --&gt;
+&lt;fm-collapsible header="Analytics" expanded&gt;
+  &lt;p&gt;View real-time performance metrics.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+&lt;!-- Disabled state --&gt;
+&lt;fm-collapsible header="Advanced" disabled&gt;
+  &lt;p&gt;This content is not accessible.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+&lt;!-- Custom header slot --&gt;
+&lt;fm-collapsible&gt;
+  &lt;div slot="header"&gt;
+    &lt;fm-badge variant="success" dot&gt;Active&lt;/fm-badge&gt;
+    &lt;span&gt;Live Campaign&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;p&gt;Campaign is currently running.&lt;/p&gt;
+&lt;/fm-collapsible&gt;
+
+&lt;!-- Programmatic control --&gt;
+&lt;script&gt;
+  const collapsible = document.querySelector('fm-collapsible');
+  
+  // Expand programmatically
+  collapsible.expand();
+  
+  // Listen for changes
+  collapsible.addEventListener('fm-collapse-change', (e) =&gt; {
+    console.log('Expanded:', e.detail.expanded);
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
   <footer>
     FM Design System v0.1.0 — Built with Web Components &amp; Motion
   </footer>

@@ -4598,4 +4598,205 @@ i(Ya, "observedAttributes", [
 	"hide-icon"
 ]), customElements.define("fm-clipboard", Ya);
 //#endregion
-export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, a as FmElement, Ga as FmTab, Wa as FmTabs, e as themeStyles };
+//#region src/components/fm-collapsible.js
+var Xa = class extends a {
+	constructor(...e) {
+		super(...e), i(this, "_isExpanded", !1);
+	}
+	template() {
+		let e = this.attr("header", ""), t = this.boolAttr("disabled"), n = this.boolAttr("expanded");
+		return this._isExpanded = n, `
+      <style>
+        :host {
+          display: block;
+        }
+
+        .collapsible {
+          border: 1px solid var(--fm-color-border);
+          border-radius: var(--fm-radius-lg);
+          background: var(--fm-color-surface);
+          font-family: var(--fm-font-family);
+          overflow: hidden;
+          will-change: transform, opacity;
+        }
+
+        /* ---- Header ---- */
+        .header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: var(--fm-space-md) var(--fm-space-lg);
+          cursor: ${t ? "not-allowed" : "pointer"};
+          background: var(--fm-color-surface);
+          transition: background var(--fm-transition-fast);
+          user-select: none;
+          gap: var(--fm-space-md);
+        }
+
+        .header:hover {
+          background: ${t ? "var(--fm-color-surface)" : "var(--fm-color-surface-alt)"};
+        }
+
+        .header-content {
+          flex: 1;
+          min-width: 0;
+          font-size: var(--fm-font-size-md);
+          font-weight: var(--fm-font-weight-semibold);
+          color: var(--fm-color-text);
+        }
+        .header-content:empty {
+          display: none;
+        }
+
+        /* ---- Icon wrapper ---- */
+        .icon-wrapper {
+          flex-shrink: 0;
+          width: 20px;
+          height: 20px;
+          color: var(--fm-color-text-secondary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform var(--fm-transition-normal);
+          transform-origin: center;
+        }
+
+        .icon-wrapper.expanded {
+          transform: rotate(180deg);
+        }
+
+        .icon-wrapper ::slotted(svg),
+        .icon-wrapper ::slotted(img) {
+          width: 100%;
+          height: 100%;
+        }
+
+        /* ---- Content wrapper ---- */
+        .content-wrapper {
+          overflow: hidden;
+          height: ${n ? "auto" : "0"};
+          opacity: ${n ? "1" : "0"};
+        }
+
+        .content {
+          padding: 0 var(--fm-space-lg) var(--fm-space-lg) var(--fm-space-lg);
+          font-size: var(--fm-font-size-sm);
+          color: var(--fm-color-text-secondary);
+          line-height: var(--fm-line-height);
+        }
+
+        /* ---- Disabled state ---- */
+        .collapsible.disabled {
+          opacity: 0.6;
+        }
+
+        .collapsible.disabled .header {
+          cursor: not-allowed;
+        }
+
+        .collapsible.disabled .header:hover {
+          background: var(--fm-color-surface);
+        }
+      </style>
+
+      <div class="collapsible ${t ? "disabled" : ""}" part="collapsible">
+        <div class="header" part="header" role="button" tabindex="${t ? "-1" : "0"}" aria-expanded="${n}">
+          <div class="header-content">
+            ${e ? `<span>${e}</span>` : ""}
+            <slot name="header"></slot>
+          </div>
+          <div class="icon-wrapper ${n ? "expanded" : ""}" part="icon">
+            <slot name="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9l6 6 6-6"/>
+    </svg></slot>
+          </div>
+        </div>
+        <div class="content-wrapper" part="content-wrapper">
+          <div class="content" part="content">
+            <slot></slot>
+          </div>
+        </div>
+      </div>
+    `;
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._bindEvents(), this._isExpanded = this.boolAttr("expanded");
+	}
+	_bindEvents() {
+		if (this.boolAttr("disabled")) return;
+		let e = this.root.querySelector(".header");
+		e && (e.addEventListener("click", () => this.toggle()), e.addEventListener("keydown", (e) => {
+			(e.key === "Enter" || e.key === " ") && (e.preventDefault(), this.toggle());
+		}));
+	}
+	onEnter() {
+		$(this.root.querySelector(".collapsible"), {
+			opacity: [0, 1],
+			y: [8, 0]
+		}, {
+			type: "spring",
+			stiffness: 300,
+			damping: 24
+		});
+	}
+	expand() {
+		if (this._isExpanded || this.boolAttr("disabled")) return;
+		this._isExpanded = !0, this.setAttribute("expanded", "");
+		let e = this.root.querySelector(".content-wrapper"), t = this.root.querySelector(".content"), n = this.root.querySelector(".icon-wrapper");
+		if (!e || !t) return;
+		let r = t.scrollHeight;
+		$(e, {
+			height: [0, r + "px"],
+			opacity: [0, 1]
+		}, {
+			duration: .25,
+			ease: "easeOut"
+		}), n && $(n, { rotate: 180 }, {
+			duration: .2,
+			ease: "easeInOut"
+		}), this.dispatchEvent(new CustomEvent("fm-collapse-change", {
+			detail: { expanded: !0 },
+			bubbles: !0
+		}));
+	}
+	collapse() {
+		if (!this._isExpanded || this.boolAttr("disabled")) return;
+		this._isExpanded = !1, this.removeAttribute("expanded");
+		let e = this.root.querySelector(".content-wrapper"), t = this.root.querySelector(".icon-wrapper");
+		e && ($(e, {
+			height: 0,
+			opacity: 0
+		}, {
+			duration: .2,
+			ease: "easeIn"
+		}), t && $(t, { rotate: 0 }, {
+			duration: .2,
+			ease: "easeInOut"
+		}), this.dispatchEvent(new CustomEvent("fm-collapse-change", {
+			detail: { expanded: !1 },
+			bubbles: !0
+		})));
+	}
+	toggle() {
+		this._isExpanded ? this.collapse() : this.expand();
+	}
+	get expanded() {
+		return this._isExpanded;
+	}
+	attributeChangedCallback(e, t, n) {
+		if (t === n) return;
+		if (e !== "expanded") {
+			this.render(), this._bindEvents();
+			return;
+		}
+		let r = n !== null;
+		r !== this._isExpanded && (r ? this.expand() : this.collapse());
+	}
+};
+i(Xa, "observedAttributes", [
+	"expanded",
+	"disabled",
+	"header"
+]), customElements.define("fm-collapsible", Xa);
+//#endregion
+export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, a as FmElement, Ga as FmTab, Wa as FmTabs, e as themeStyles };
