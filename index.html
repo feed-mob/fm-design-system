@@ -139,6 +139,127 @@ npm install @fm-agency/design-system</code></pre>
   </section>
 
   <!-- ============================================================ -->
+  <!-- THEMING                                                       -->
+  <!-- ============================================================ -->
+  <section>
+    <h2>Theming</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Overview">
+        <div style="padding: 16px 0;">
+          <p style="font-size: 0.9rem; color: var(--fm-color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
+            Override CSS custom properties to customise the design system. All components inherit from these theme tokens.
+          </p>
+          <div class="code-panel">
+            <pre><code class="language-css">/* Override theme tokens */
+:root {
+  --fm-color-primary: #0D9488;
+  --fm-color-primary-light: #14B8A6;
+  --fm-color-primary-dark: #0F766E;
+  --fm-color-secondary: #1E293B;
+  --fm-font-family: 'Inter', system-ui, sans-serif;
+  --fm-radius-md: 8px;
+}</code></pre>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Color Tokens">
+        <div class="interface-panel" style="padding: 16px 0;">
+          <h4>Primary Palette</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-primary</code></td><td><span class="color-swatch" style="background: #0D9488;"></span>#0D9488</td><td>Primary teal</td></tr>
+              <tr><td><code>--fm-color-primary-light</code></td><td><span class="color-swatch" style="background: #14B8A6;"></span>#14B8A6</td><td>Lighter teal</td></tr>
+              <tr><td><code>--fm-color-primary-dark</code></td><td><span class="color-swatch" style="background: #0F766E;"></span>#0F766E</td><td>Darker teal</td></tr>
+            </tbody>
+          </table>
+          <h4>Semantic Colors</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-success</code></td><td><span class="color-swatch" style="background: #059669;"></span>#059669</td><td>Success state</td></tr>
+              <tr><td><code>--fm-color-warning</code></td><td><span class="color-swatch" style="background: #D97706;"></span>#D97706</td><td>Warning state</td></tr>
+              <tr><td><code>--fm-color-error</code></td><td><span class="color-swatch" style="background: #DC2626;"></span>#DC2626</td><td>Error state</td></tr>
+              <tr><td><code>--fm-color-info</code></td><td><span class="color-swatch" style="background: #0284C7;"></span>#0284C7</td><td>Info state</td></tr>
+            </tbody>
+          </table>
+          <h4>Surfaces</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--fm-color-surface</code></td><td><span class="color-swatch" style="background: #FFFFFF; border: 1px solid #E2E8F0;"></span>#FFFFFF</td><td>Surface (white)</td></tr>
+              <tr><td><code>--fm-color-surface-alt</code></td><td><span class="color-swatch" style="background: #F8FAFC;"></span>#F8FAFC</td><td>Surface alt</td></tr>
+              <tr><td><code>--fm-color-surface-muted</code></td><td><span class="color-swatch" style="background: #F1F5F9;"></span>#F1F5F9</td><td>Surface muted</td></tr>
+              <tr><td><code>--fm-color-text</code></td><td><span class="color-swatch" style="background: #0F172A;"></span>#0F172A</td><td>Text (dark)</td></tr>
+              <tr><td><code>--fm-color-text-secondary</code></td><td><span class="color-swatch" style="background: #475569;"></span>#475569</td><td>Text secondary</td></tr>
+              <tr><td><code>--fm-color-border</code></td><td><span class="color-swatch" style="background: #E2E8F0;"></span>#E2E8F0</td><td>Border</td></tr>
+            </tbody>
+          </table>
+          <style>
+            .color-swatch {
+              display: inline-block;
+              width: 20px;
+              height: 20px;
+              border-radius: 4px;
+              vertical-align: middle;
+              margin-right: 8px;
+              box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+            }
+            .props-table td {
+              vertical-align: middle;
+            }
+          </style>
+        </div>
+      </fm-tab>
+      <fm-tab label="Full Token List">
+        <div class="code-panel" style="padding: 16px 0;">
+          <pre><code class="language-css">/* Primary Teal Palette */
+--fm-color-primary: #0D9488;
+--fm-color-primary-light: #14B8A6;
+--fm-color-primary-dark: #0F766E;
+
+/* Secondary & Accent */
+--fm-color-secondary: #1E293B;
+--fm-color-secondary-light: #334155;
+--fm-color-accent: #F59E0B;
+
+/* Surfaces */
+--fm-color-surface: #FFFFFF;
+--fm-color-surface-alt: #F8FAFC;
+--fm-color-surface-muted: #F1F5F9;
+--fm-color-text: #0F172A;
+--fm-color-text-secondary: #475569;
+
+/* Typography */
+--fm-font-family: 'Inter', sans-serif;
+--fm-font-size-sm: 0.875rem;
+--fm-font-size-md: 1rem;
+
+/* Spacing */
+--fm-space-sm: 8px;
+--fm-space-md: 16px;
+--fm-space-lg: 24px;
+
+/* Radius */
+--fm-radius-md: 8px;
+--fm-radius-lg: 12px;
+--fm-radius-full: 9999px;
+
+/* Shadows */
+--fm-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+--fm-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- BUTTONS                                                       -->
   <!-- ============================================================ -->
   <section>
@@ -545,99 +666,6 @@ npm install @fm-agency/design-system</code></pre>
     console.log('Tab changed:', e.detail.index, e.detail.label);
   });
 &lt;/script&gt;</code></pre>
-        </div>
-      </fm-tab>
-    </fm-tabs>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- THEMING                                                       -->
-  <!-- ============================================================ -->
-  <section>
-    <h2>Theming</h2>
-    <fm-tabs active="0" variant="pills">
-      <fm-tab label="Overview">
-        <div style="padding: 16px 0;">
-          <p style="font-size: 0.9rem; color: var(--fm-color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
-            Override CSS custom properties to customise the design system. All components inherit from these theme tokens.
-          </p>
-          <div class="code-panel">
-            <pre><code class="language-css">/* Override theme tokens */
-:root {
-  --fm-color-primary: #0D9488;
-  --fm-color-primary-light: #14B8A6;
-  --fm-color-primary-dark: #0F766E;
-  --fm-color-secondary: #1E293B;
-  --fm-font-family: 'Inter', system-ui, sans-serif;
-  --fm-radius-md: 8px;
-}</code></pre>
-          </div>
-        </div>
-      </fm-tab>
-      <fm-tab label="Color Tokens">
-        <div class="interface-panel" style="padding: 16px 0;">
-          <h4>Primary Palette</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Token</th><th>Default</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>--fm-color-primary</code></td><td>#0D9488</td><td>Primary teal</td></tr>
-              <tr><td><code>--fm-color-primary-light</code></td><td>#14B8A6</td><td>Lighter teal</td></tr>
-              <tr><td><code>--fm-color-primary-dark</code></td><td>#0F766E</td><td>Darker teal</td></tr>
-            </tbody>
-          </table>
-          <h4>Semantic Colors</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Token</th><th>Default</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>--fm-color-success</code></td><td>#059669</td><td>Success state</td></tr>
-              <tr><td><code>--fm-color-warning</code></td><td>#D97706</td><td>Warning state</td></tr>
-              <tr><td><code>--fm-color-error</code></td><td>#DC2626</td><td>Error state</td></tr>
-              <tr><td><code>--fm-color-info</code></td><td>#0284C7</td><td>Info state</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </fm-tab>
-      <fm-tab label="Full Token List">
-        <div class="code-panel" style="padding: 16px 0;">
-          <pre><code class="language-css">/* Primary Teal Palette */
---fm-color-primary: #0D9488;
---fm-color-primary-light: #14B8A6;
---fm-color-primary-dark: #0F766E;
-
-/* Secondary & Accent */
---fm-color-secondary: #1E293B;
---fm-color-secondary-light: #334155;
---fm-color-accent: #F59E0B;
-
-/* Surfaces */
---fm-color-surface: #FFFFFF;
---fm-color-surface-alt: #F8FAFC;
---fm-color-surface-muted: #F1F5F9;
---fm-color-text: #0F172A;
---fm-color-text-secondary: #475569;
-
-/* Typography */
---fm-font-family: 'Inter', sans-serif;
---fm-font-size-sm: 0.875rem;
---fm-font-size-md: 1rem;
-
-/* Spacing */
---fm-space-sm: 8px;
---fm-space-md: 16px;
---fm-space-lg: 24px;
-
-/* Radius */
---fm-radius-md: 8px;
---fm-radius-lg: 12px;
---fm-radius-full: 9999px;
-
-/* Shadows */
---fm-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
---fm-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
