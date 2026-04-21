@@ -1107,31 +1107,31 @@ var An = /* @__PURE__ */ kn(() => window.ScrollTimeline !== void 0, "scrollTimel
 		return !1;
 	}
 	return !0;
-}, "linearEasing"), X = ([e, t, n, r]) => `cubic-bezier(${e}, ${t}, ${n}, ${r})`, Mn = {
+}, "linearEasing"), Mn = ([e, t, n, r]) => `cubic-bezier(${e}, ${t}, ${n}, ${r})`, Nn = {
 	linear: "linear",
 	ease: "ease",
 	easeIn: "ease-in",
 	easeOut: "ease-out",
 	easeInOut: "ease-in-out",
-	circIn: /* @__PURE__ */ X([
+	circIn: /* @__PURE__ */ Mn([
 		0,
 		.65,
 		.55,
 		1
 	]),
-	circOut: /* @__PURE__ */ X([
+	circOut: /* @__PURE__ */ Mn([
 		.55,
 		0,
 		1,
 		.45
 	]),
-	backIn: /* @__PURE__ */ X([
+	backIn: /* @__PURE__ */ Mn([
 		.31,
 		.01,
 		.66,
 		-.59
 	]),
-	backOut: /* @__PURE__ */ X([
+	backOut: /* @__PURE__ */ Mn([
 		.33,
 		1.53,
 		.69,
@@ -1140,15 +1140,15 @@ var An = /* @__PURE__ */ kn(() => window.ScrollTimeline !== void 0, "scrollTimel
 };
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/waapi/easing/map-easing.mjs
-function Nn(e, t) {
-	if (e) return typeof e == "function" ? jn() ? Dt(e, t) : "ease-out" : me(e) ? X(e) : Array.isArray(e) ? e.map((e) => Nn(e, t) || Mn.easeOut) : Mn[e];
+function Pn(e, t) {
+	if (e) return typeof e == "function" ? jn() ? Dt(e, t) : "ease-out" : me(e) ? Mn(e) : Array.isArray(e) ? e.map((e) => Pn(e, t) || Nn.easeOut) : Nn[e];
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/waapi/start-waapi-animation.mjs
-function Pn(e, t, n, { delay: r = 0, duration: i = 300, repeat: a = 0, repeatType: o = "loop", ease: s = "easeOut", times: c } = {}, l = void 0) {
+function Fn(e, t, n, { delay: r = 0, duration: i = 300, repeat: a = 0, repeatType: o = "loop", ease: s = "easeOut", times: c } = {}, l = void 0) {
 	let u = { [t]: n };
 	c && (u.offset = c);
-	let d = Nn(s, i);
+	let d = Pn(s, i);
 	Array.isArray(d) && (u.easing = d), ye.value && Oe.waapi++;
 	let f = {
 		delay: r,
@@ -1166,23 +1166,23 @@ function Pn(e, t, n, { delay: r = 0, duration: i = 300, repeat: a = 0, repeatTyp
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/generators/utils/is-generator.mjs
-function Fn(e) {
+function In(e) {
 	return typeof e == "function" && "applyToOptions" in e;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/waapi/utils/apply-generator.mjs
-function In({ type: e, ...t }) {
-	return Fn(e) && jn() ? e.applyToOptions(t) : (t.duration ??= 300, t.ease ??= "easeOut", t);
+function Ln({ type: e, ...t }) {
+	return In(e) && jn() ? e.applyToOptions(t) : (t.duration ??= 300, t.ease ??= "easeOut", t);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/NativeAnimation.mjs
-var Ln = class extends $t {
+var Rn = class extends $t {
 	constructor(e) {
 		if (super(), this.finishedTime = null, this.isStopped = !1, this.manualStartTime = null, !e) return;
 		let { element: t, name: n, keyframes: r, pseudoElement: i, allowFlatten: a = !1, finalKeyframe: o, onComplete: s } = e;
 		this.isPseudoElement = !!i, this.allowFlatten = a, this.options = e, e.type;
-		let c = In(e);
-		this.animation = Pn(t, n, r, c, i), c.autoplay === !1 && this.animation.pause(), this.animation.onfinish = () => {
+		let c = Ln(e);
+		this.animation = Fn(t, n, r, c, i), c.autoplay === !1 && this.animation.pause(), this.animation.onfinish = () => {
 			if (this.finishedTime = this.time, !i) {
 				let e = Xt(r, this.options, o, this.speed);
 				this.updateMotionValue && this.updateMotionValue(e), Dn(t, n, e), this.animation.cancel();
@@ -1247,22 +1247,22 @@ var Ln = class extends $t {
 	attachTimeline({ timeline: e, rangeStart: t, rangeEnd: n, observe: r }) {
 		return this.allowFlatten && this.animation.effect?.updateTiming({ easing: "linear" }), this.animation.onfinish = null, e && An() ? (this.animation.timeline = e, t && (this.animation.rangeStart = t), n && (this.animation.rangeEnd = n), m) : r(this);
 	}
-}, Rn = {
+}, zn = {
 	anticipate: ae,
 	backInOut: ie,
 	circInOut: ce
 };
-function zn(e) {
-	return e in Rn;
-}
 function Bn(e) {
-	typeof e.ease == "string" && zn(e.ease) && (e.ease = Rn[e.ease]);
+	return e in zn;
+}
+function Vn(e) {
+	typeof e.ease == "string" && Bn(e.ease) && (e.ease = zn[e.ease]);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/NativeAnimationExtended.mjs
-var Vn = 10, Hn = class extends Ln {
+var Hn = 10, Un = class extends Rn {
 	constructor(e) {
-		Bn(e), Qt(e), super(e), e.startTime !== void 0 && e.autoplay !== !1 && (this.startTime = e.startTime), this.options = e;
+		Vn(e), Qt(e), super(e), e.startTime !== void 0 && e.autoplay !== !1 && (this.startTime = e.startTime), this.options = e;
 	}
 	updateMotionValue(e) {
 		let { motionValue: t, onUpdate: n, onComplete: r, element: i, ...a } = this.options;
@@ -1274,44 +1274,44 @@ var Vn = 10, Hn = class extends Ln {
 		let o = new tn({
 			...a,
 			autoplay: !1
-		}), s = Math.max(Vn, k.now() - this.startTime), l = c(0, Vn, s - Vn), u = o.sample(s).value, { name: d } = this.options;
+		}), s = Math.max(Hn, k.now() - this.startTime), l = c(0, Hn, s - Hn), u = o.sample(s).value, { name: d } = this.options;
 		i && d && Dn(i, d, u), t.setWithVelocity(o.sample(Math.max(0, s - l)).value, u, l), o.stop();
 	}
-}, Un = (e, t) => t === "zIndex" ? !1 : !!(typeof e == "number" || Array.isArray(e) || typeof e == "string" && (B.test(e) || e === "0") && !e.startsWith("url("));
+}, Wn = (e, t) => t === "zIndex" ? !1 : !!(typeof e == "number" || Array.isArray(e) || typeof e == "string" && (B.test(e) || e === "0") && !e.startsWith("url("));
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/utils/can-animate.mjs
-function Wn(e) {
+function Gn(e) {
 	let t = e[0];
 	if (e.length === 1) return !0;
 	for (let n = 0; n < e.length; n++) if (e[n] !== t) return !0;
 }
-function Gn(e, t, n, r) {
+function Kn(e, t, n, r) {
 	let i = e[0];
 	if (i === null) return !1;
 	if (t === "display" || t === "visibility") return !0;
-	let a = e[e.length - 1], o = Un(i, t), s = Un(a, t);
-	return `${t}${i}${a}${o ? a : i}`, !o || !s ? !1 : Wn(e) || (n === "spring" || Fn(n)) && r;
+	let a = e[e.length - 1], o = Wn(i, t), s = Wn(a, t);
+	return `${t}${i}${a}${o ? a : i}`, !o || !s ? !1 : Gn(e) || (n === "spring" || In(n)) && r;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/utils/make-animation-instant.mjs
-function Kn(e) {
+function qn(e) {
 	e.duration = 0, e.type = "keyframes";
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/waapi/utils/accelerated-values.mjs
-var qn = new Set([
+var Jn = new Set([
 	"opacity",
 	"clipPath",
 	"filter",
 	"transform"
-]), Jn = /^(?:oklch|oklab|lab|lch|color|color-mix|light-dark)\(/;
-function Yn(e) {
-	for (let t = 0; t < e.length; t++) if (typeof e[t] == "string" && Jn.test(e[t])) return !0;
+]), Yn = /^(?:oklch|oklab|lab|lch|color|color-mix|light-dark)\(/;
+function Xn(e) {
+	for (let t = 0; t < e.length; t++) if (typeof e[t] == "string" && Yn.test(e[t])) return !0;
 	return !1;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/waapi/supports/waapi.mjs
-var Xn = new Set([
+var Zn = new Set([
 	"color",
 	"backgroundColor",
 	"outlineColor",
@@ -1322,16 +1322,16 @@ var Xn = new Set([
 	"borderRightColor",
 	"borderBottomColor",
 	"borderLeftColor"
-]), Zn = /* @__PURE__ */ p(() => Object.hasOwnProperty.call(Element.prototype, "animate"));
-function Qn(e) {
+]), Qn = /* @__PURE__ */ p(() => Object.hasOwnProperty.call(Element.prototype, "animate"));
+function $n(e) {
 	let { motionValue: t, name: n, repeatDelay: r, repeatType: i, damping: a, type: o, keyframes: s } = e;
 	if (!(t?.owner?.current instanceof HTMLElement)) return !1;
 	let { onUpdate: c, transformTemplate: l } = t.owner.getProps();
-	return Zn() && n && (qn.has(n) || Xn.has(n) && Yn(s)) && (n !== "transform" || !l) && !c && !r && i !== "mirror" && a !== 0 && o !== "inertia";
+	return Qn() && n && (Jn.has(n) || Zn.has(n) && Xn(s)) && (n !== "transform" || !l) && !c && !r && i !== "mirror" && a !== 0 && o !== "inertia";
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/AsyncMotionValueAnimation.mjs
-var $n = 40, er = class extends $t {
+var er = 40, tr = class extends $t {
 	constructor({ autoplay: e = !0, delay: t = 0, type: n = "keyframes", repeat: r = 0, repeatDelay: i = 0, repeatType: a = "loop", keyframes: o, name: s, motionValue: c, element: l, ...u }) {
 		super(), this.stop = () => {
 			this._animation && (this._animation.stop(), this.stopTimeline?.()), this.keyframeResolver?.cancel();
@@ -1355,15 +1355,15 @@ var $n = 40, er = class extends $t {
 		let { name: i, type: a, velocity: o, delay: s, isHandoff: c, onUpdate: u } = n;
 		this.resolvedAt = k.now();
 		let d = !0;
-		Gn(e, i, a, o) || (d = !1, (l.instantAnimations || !s) && u?.(Xt(e, n, t)), e[0] = e[e.length - 1], Kn(n), n.repeat = 0);
+		Kn(e, i, a, o) || (d = !1, (l.instantAnimations || !s) && u?.(Xt(e, n, t)), e[0] = e[e.length - 1], qn(n), n.repeat = 0);
 		let f = {
-			startTime: r ? this.resolvedAt && this.resolvedAt - this.createdAt > $n ? this.resolvedAt : this.createdAt : void 0,
+			startTime: r ? this.resolvedAt && this.resolvedAt - this.createdAt > er ? this.resolvedAt : this.createdAt : void 0,
 			finalKeyframe: t,
 			...n,
 			keyframes: e
-		}, p = d && !c && Qn(f), h = f.motionValue?.owner?.current, g;
+		}, p = d && !c && $n(f), h = f.motionValue?.owner?.current, g;
 		if (p) try {
-			g = new Hn({
+			g = new Un({
 				...f,
 				element: h
 			});
@@ -1423,7 +1423,7 @@ var $n = 40, er = class extends $t {
 	cancel() {
 		this._animation && this.animation.cancel(), this.keyframeResolver?.cancel();
 	}
-}, tr = class {
+}, nr = class {
 	constructor(e) {
 		this.stop = () => this.runAll("stop"), this.animations = e.filter(Boolean);
 	}
@@ -1463,10 +1463,10 @@ var $n = 40, er = class extends $t {
 		return this.getAll("startTime");
 	}
 	get duration() {
-		return nr(this.animations, "duration");
+		return rr(this.animations, "duration");
 	}
 	get iterationDuration() {
-		return nr(this.animations, "iterationDuration");
+		return rr(this.animations, "iterationDuration");
 	}
 	runAll(e) {
 		this.animations.forEach((t) => t[e]());
@@ -1484,7 +1484,7 @@ var $n = 40, er = class extends $t {
 		this.runAll("complete");
 	}
 };
-function nr(e, t) {
+function rr(e, t) {
 	let n = 0;
 	for (let r = 0; r < e.length; r++) {
 		let i = e[r][t];
@@ -1494,44 +1494,44 @@ function nr(e, t) {
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/GroupAnimationWithThen.mjs
-var rr = class extends tr {
+var ir = class extends nr {
 	then(e, t) {
 		return this.finished.finally(e).then(() => {});
 	}
-}, ir = /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
-function ar(e) {
-	let t = ir.exec(e);
+}, ar = /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
+function or(e) {
+	let t = ar.exec(e);
 	if (!t) return [,];
 	let [, n, r, i] = t;
 	return [`--${n ?? r}`, i];
 }
-function or(e, t, n = 1) {
+function sr(e, t, n = 1) {
 	`${e}`;
-	let [r, i] = ar(e);
+	let [r, i] = or(e);
 	if (!r) return;
 	let a = window.getComputedStyle(t).getPropertyValue(r);
 	if (a) {
 		let e = a.trim();
 		return u(e) ? parseFloat(e) : e;
 	}
-	return Me(i) ? or(i, t, n + 1) : i;
+	return Me(i) ? sr(i, t, n + 1) : i;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/utils/default-transitions.mjs
-var sr = {
+var cr = {
 	type: "spring",
 	stiffness: 500,
 	damping: 25,
 	restSpeed: 10
-}, cr = (e) => ({
+}, lr = (e) => ({
 	type: "spring",
 	stiffness: 550,
 	damping: e === 0 ? 2 * Math.sqrt(550) : 30,
 	restSpeed: 10
-}), lr = {
+}), ur = {
 	type: "keyframes",
 	duration: .8
-}, ur = {
+}, dr = {
 	type: "keyframes",
 	ease: [
 		.25,
@@ -1540,10 +1540,10 @@ var sr = {
 		1
 	],
 	duration: .3
-}, dr = (e, { keyframes: t }) => t.length > 2 ? lr : q.has(e) ? e.startsWith("scale") ? cr(t[1]) : sr : ur;
+}, fr = (e, { keyframes: t }) => t.length > 2 ? ur : q.has(e) ? e.startsWith("scale") ? lr(t[1]) : cr : dr;
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/utils/resolve-transition.mjs
-function fr(e, t) {
+function pr(e, t) {
 	if (e?.inherit && t) {
 		let { inherit: n, ...r } = e;
 		return {
@@ -1555,13 +1555,13 @@ function fr(e, t) {
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/utils/get-value-transition.mjs
-function pr(e, t) {
+function mr(e, t) {
 	let n = e?.[t] ?? e?.default ?? e;
-	return n === e ? n : fr(n, e);
+	return n === e ? n : pr(n, e);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/utils/is-transition-defined.mjs
-var mr = new Set([
+var hr = new Set([
 	"when",
 	"delay",
 	"delayChildren",
@@ -1573,14 +1573,14 @@ var mr = new Set([
 	"from",
 	"elapsed"
 ]);
-function hr(e) {
-	for (let t in e) if (!mr.has(t)) return !0;
+function gr(e) {
+	for (let t in e) if (!hr.has(t)) return !0;
 	return !1;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/interfaces/motion-value.mjs
-var gr = (e, t, n, r = {}, i, a) => (o) => {
-	let s = pr(r, e) || {}, c = s.delay || r.delay || 0, { elapsed: u = 0 } = r;
+var _r = (e, t, n, r = {}, i, a) => (o) => {
+	let s = mr(r, e) || {}, c = s.delay || r.delay || 0, { elapsed: u = 0 } = r;
 	u -= /* @__PURE__ */ y(c);
 	let d = {
 		keyframes: Array.isArray(n) ? n : [null, n],
@@ -1598,9 +1598,9 @@ var gr = (e, t, n, r = {}, i, a) => (o) => {
 		motionValue: t,
 		element: a ? void 0 : i
 	};
-	hr(s) || Object.assign(d, dr(e, d)), d.duration &&= /* @__PURE__ */ y(d.duration), d.repeatDelay &&= /* @__PURE__ */ y(d.repeatDelay), d.from !== void 0 && (d.keyframes[0] = d.from);
+	gr(s) || Object.assign(d, fr(e, d)), d.duration &&= /* @__PURE__ */ y(d.duration), d.repeatDelay &&= /* @__PURE__ */ y(d.repeatDelay), d.from !== void 0 && (d.keyframes[0] = d.from);
 	let f = !1;
-	if ((d.type === !1 || d.duration === 0 && !d.repeatDelay) && (Kn(d), d.delay === 0 && (f = !0)), (l.instantAnimations || l.skipAnimations || i?.shouldSkipAnimations) && (f = !0, Kn(d), d.delay = 0), d.allowFlatten = !s.type && !s.ease, f && !a && t.get() !== void 0) {
+	if ((d.type === !1 || d.duration === 0 && !d.repeatDelay) && (qn(d), d.delay === 0 && (f = !0)), (l.instantAnimations || l.skipAnimations || i?.shouldSkipAnimations) && (f = !0, qn(d), d.delay = 0), d.allowFlatten = !s.type && !s.ease, f && !a && t.get() !== void 0) {
 		let e = Xt(d.keyframes, s);
 		if (e !== void 0) {
 			O.update(() => {
@@ -1609,36 +1609,36 @@ var gr = (e, t, n, r = {}, i, a) => (o) => {
 			return;
 		}
 	}
-	return s.isSync ? new tn(d) : new er(d);
+	return s.isSync ? new tn(d) : new tr(d);
 };
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/utils/resolve-variants.mjs
-function _r(e) {
+function vr(e) {
 	let t = [{}, {}];
 	return e?.values.forEach((e, n) => {
 		t[0][n] = e.get(), t[1][n] = e.getVelocity();
 	}), t;
 }
-function vr(e, t, n, r) {
+function yr(e, t, n, r) {
 	if (typeof t == "function") {
-		let [i, a] = _r(r);
+		let [i, a] = vr(r);
 		t = t(n === void 0 ? e.custom : n, i, a);
 	}
 	if (typeof t == "string" && (t = e.variants && e.variants[t]), typeof t == "function") {
-		let [i, a] = _r(r);
+		let [i, a] = vr(r);
 		t = t(n === void 0 ? e.custom : n, i, a);
 	}
 	return t;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/utils/resolve-dynamic-variants.mjs
-function yr(e, t, n) {
+function br(e, t, n) {
 	let r = e.getProps();
-	return vr(r, t, n === void 0 ? r.custom : n, e);
+	return yr(r, t, n === void 0 ? r.custom : n, e);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/utils/keys-position.mjs
-var br = new Set([
+var xr = new Set([
 	"width",
 	"height",
 	"top",
@@ -1646,7 +1646,7 @@ var br = new Set([
 	"right",
 	"bottom",
 	...K
-]), xr = 30, Sr = (e) => !isNaN(parseFloat(e)), Cr = { current: void 0 }, wr = class {
+]), Sr = 30, Cr = (e) => !isNaN(parseFloat(e)), wr = { current: void 0 }, Tr = class {
 	constructor(e, t = {}) {
 		this.canTrackVelocity = null, this.events = {}, this.updateAndNotify = (e) => {
 			let t = k.now();
@@ -1654,7 +1654,7 @@ var br = new Set([
 		}, this.hasAnimated = !1, this.setCurrent(e), this.owner = t.owner;
 	}
 	setCurrent(e) {
-		this.current = e, this.updatedAt = k.now(), this.canTrackVelocity === null && e !== void 0 && (this.canTrackVelocity = Sr(this.current));
+		this.current = e, this.updatedAt = k.now(), this.canTrackVelocity === null && e !== void 0 && (this.canTrackVelocity = Cr(this.current));
 	}
 	setPrevFrameValue(e = this.current) {
 		this.prevFrameValue = e, this.prevUpdatedAt = this.updatedAt;
@@ -1696,15 +1696,15 @@ var br = new Set([
 		this.dependents && this.dependents.delete(e);
 	}
 	get() {
-		return Cr.current && Cr.current.push(this), this.current;
+		return wr.current && wr.current.push(this), this.current;
 	}
 	getPrevious() {
 		return this.prev;
 	}
 	getVelocity() {
 		let e = k.now();
-		if (!this.canTrackVelocity || this.prevFrameValue === void 0 || e - this.updatedAt > xr) return 0;
-		let t = Math.min(this.updatedAt - this.prevUpdatedAt, xr);
+		if (!this.canTrackVelocity || this.prevFrameValue === void 0 || e - this.updatedAt > Sr) return 0;
+		let t = Math.min(this.updatedAt - this.prevUpdatedAt, Sr);
 		return x(parseFloat(this.current) - parseFloat(this.prevFrameValue), t);
 	}
 	start(e) {
@@ -1727,41 +1727,41 @@ var br = new Set([
 		this.dependents?.clear(), this.events.destroy?.notify(), this.clearListeners(), this.stop(), this.stopPassiveEffect && this.stopPassiveEffect();
 	}
 };
-function Z(e, t) {
-	return new wr(e, t);
+function X(e, t) {
+	return new Tr(e, t);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/utils/is-keyframes-target.mjs
-var Tr = (e) => Array.isArray(e);
+var Er = (e) => Array.isArray(e);
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/utils/setters.mjs
-function Er(e, t, n) {
-	e.hasValue(t) ? e.getValue(t).set(n) : e.addValue(t, Z(n));
+function Dr(e, t, n) {
+	e.hasValue(t) ? e.getValue(t).set(n) : e.addValue(t, X(n));
 }
-function Dr(e) {
-	return Tr(e) ? e[e.length - 1] || 0 : e;
+function Or(e) {
+	return Er(e) ? e[e.length - 1] || 0 : e;
 }
-function Or(e, t) {
-	let { transitionEnd: n = {}, transition: r = {}, ...i } = yr(e, t) || {};
+function kr(e, t) {
+	let { transitionEnd: n = {}, transition: r = {}, ...i } = br(e, t) || {};
 	i = {
 		...i,
 		...n
 	};
-	for (let t in i) Er(e, t, Dr(i[t]));
+	for (let t in i) Dr(e, t, Or(i[t]));
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/utils/is-motion-value.mjs
-var Q = (e) => !!(e && e.getVelocity);
+var Z = (e) => !!(e && e.getVelocity);
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/will-change/is.mjs
-function kr(e) {
-	return !!(Q(e) && e.add);
+function Ar(e) {
+	return !!(Z(e) && e.add);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/will-change/add-will-change.mjs
-function Ar(e, t) {
+function jr(e, t) {
 	let n = e.getValue("willChange");
-	if (kr(n)) return n.add(t);
+	if (Ar(n)) return n.add(t);
 	if (!n && l.WillChange) {
 		let n = new l.WillChange("auto");
 		e.addValue("willChange", n), n.add(t);
@@ -1769,33 +1769,33 @@ function Ar(e, t) {
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/dom/utils/camel-to-dash.mjs
-function jr(e) {
+function Mr(e) {
 	return e.replace(/([A-Z])/g, (e) => `-${e.toLowerCase()}`);
 }
-var Mr = "data-" + jr("framerAppearId");
+var Nr = "data-" + Mr("framerAppearId");
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/optimized-appear/get-appear-id.mjs
-function Nr(e) {
-	return e.props[Mr];
+function Pr(e) {
+	return e.props[Nr];
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element-target.mjs
-function Pr({ protectedKeys: e, needsAnimating: t }, n) {
+function Fr({ protectedKeys: e, needsAnimating: t }, n) {
 	let r = e.hasOwnProperty(n) && t[n] !== !0;
 	return t[n] = !1, r;
 }
-function Fr(e, t, { delay: n = 0, transitionOverride: r, type: i } = {}) {
+function Ir(e, t, { delay: n = 0, transitionOverride: r, type: i } = {}) {
 	let { transition: a, transitionEnd: o, ...s } = t, c = e.getDefaultTransition();
-	a = a ? fr(a, c) : c;
+	a = a ? pr(a, c) : c;
 	let l = a?.reduceMotion;
 	r && (a = r);
 	let u = [], d = i && e.animationState && e.animationState.getState()[i];
 	for (let t in s) {
 		let r = e.getValue(t, e.latestValues[t] ?? null), i = s[t];
-		if (i === void 0 || d && Pr(d, t)) continue;
+		if (i === void 0 || d && Fr(d, t)) continue;
 		let o = {
 			delay: n,
-			...pr(a || {}, t)
+			...mr(a || {}, t)
 		}, c = r.get();
 		if (c !== void 0 && !r.isAnimating() && !Array.isArray(i) && i === c && !o.velocity) {
 			O.update(() => r.set(i));
@@ -1803,21 +1803,21 @@ function Fr(e, t, { delay: n = 0, transitionOverride: r, type: i } = {}) {
 		}
 		let f = !1;
 		if (window.MotionHandoffAnimation) {
-			let n = Nr(e);
+			let n = Pr(e);
 			if (n) {
 				let e = window.MotionHandoffAnimation(n, t, O);
 				e !== null && (o.startTime = e, f = !0);
 			}
 		}
-		Ar(e, t);
+		jr(e, t);
 		let p = l ?? e.shouldReduceMotion;
-		r.start(gr(t, r, i, p && br.has(t) ? { type: !1 } : o, e, f));
+		r.start(_r(t, r, i, p && xr.has(t) ? { type: !1 } : o, e, f));
 		let m = r.animation;
 		m && u.push(m);
 	}
 	if (o) {
 		let t = () => O.update(() => {
-			o && Or(e, o);
+			o && kr(e, o);
 		});
 		u.length ? Promise.all(u).then(t) : t();
 	}
@@ -1825,46 +1825,46 @@ function Fr(e, t, { delay: n = 0, transitionOverride: r, type: i } = {}) {
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/auto.mjs
-var Ir = {
+var Lr = {
 	test: (e) => e === "auto",
 	parse: (e) => e
-}, Lr = (e) => (t) => t.test(e), Rr = [
+}, Rr = (e) => (t) => t.test(e), zr = [
 	A,
 	I,
 	F,
 	P,
 	qe,
 	Ke,
-	Ir
-], zr = (e) => Rr.find(Lr(e));
+	Lr
+], Br = (e) => zr.find(Rr(e));
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/keyframes/utils/is-none.mjs
-function Br(e) {
+function Vr(e) {
 	return typeof e == "number" ? e === 0 : e === null ? !0 : e === "none" || e === "0" || f(e);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/complex/filter.mjs
-var Vr = new Set([
+var Hr = new Set([
 	"brightness",
 	"contrast",
 	"saturate",
 	"opacity"
 ]);
-function Hr(e) {
+function Ur(e) {
 	let [t, n] = e.slice(0, -1).split("(");
 	if (t === "drop-shadow") return e;
 	let [r] = n.match(Ie) || [];
 	if (!r) return e;
-	let i = n.replace(r, ""), a = +!!Vr.has(t);
+	let i = n.replace(r, ""), a = +!!Hr.has(t);
 	return r !== n && (a *= 100), t + "(" + a + i + ")";
 }
-var Ur = /\b([a-z-]*)\(.*?\)/gu, Wr = {
+var Wr = /\b([a-z-]*)\(.*?\)/gu, Gr = {
 	...B,
 	getAnimatableNone: (e) => {
-		let t = e.match(Ur);
-		return t ? t.map(Hr).join(" ") : e;
+		let t = e.match(Wr);
+		return t ? t.map(Ur).join(" ") : e;
 	}
-}, Gr = {
+}, Kr = {
 	...B,
 	getAnimatableNone: (e) => {
 		let t = B.parse(e);
@@ -1873,10 +1873,10 @@ var Ur = /\b([a-z-]*)\(.*?\)/gu, Wr = {
 			alpha: 1
 		} : e));
 	}
-}, Kr = {
+}, qr = {
 	...A,
 	transform: Math.round
-}, qr = {
+}, Jr = {
 	borderWidth: I,
 	borderTopWidth: I,
 	borderRightWidth: I,
@@ -1951,12 +1951,12 @@ var Ur = /\b([a-z-]*)\(.*?\)/gu, Wr = {
 	originX: Je,
 	originY: Je,
 	originZ: I,
-	zIndex: Kr,
+	zIndex: qr,
 	fillOpacity: j,
 	strokeOpacity: j,
-	numOctaves: Kr
-}, Jr = {
-	...qr,
+	numOctaves: qr
+}, Yr = {
+	...Jr,
 	color: R,
 	backgroundColor: R,
 	outlineColor: R,
@@ -1967,33 +1967,33 @@ var Ur = /\b([a-z-]*)\(.*?\)/gu, Wr = {
 	borderRightColor: R,
 	borderBottomColor: R,
 	borderLeftColor: R,
-	filter: Wr,
-	WebkitFilter: Wr,
-	mask: Gr,
-	WebkitMask: Gr
-}, Yr = (e) => Jr[e], Xr = /* @__PURE__ */ new Set([Wr, Gr]);
-function Zr(e, t) {
-	let n = Yr(e);
-	return Xr.has(n) || (n = B), n.getAnimatableNone ? n.getAnimatableNone(t) : void 0;
+	filter: Gr,
+	WebkitFilter: Gr,
+	mask: Kr,
+	WebkitMask: Kr
+}, Xr = (e) => Yr[e], Zr = /* @__PURE__ */ new Set([Gr, Kr]);
+function Qr(e, t) {
+	let n = Xr(e);
+	return Zr.has(n) || (n = B), n.getAnimatableNone ? n.getAnimatableNone(t) : void 0;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/keyframes/utils/make-none-animatable.mjs
-var Qr = new Set([
+var $r = new Set([
 	"auto",
 	"none",
 	"0"
 ]);
-function $r(e, t, n) {
+function ei(e, t, n) {
 	let r = 0, i;
 	for (; r < e.length && !i;) {
 		let t = e[r];
-		typeof t == "string" && !Qr.has(t) && z(t).values.length && (i = e[r]), r++;
+		typeof t == "string" && !$r.has(t) && z(t).values.length && (i = e[r]), r++;
 	}
-	if (i && n) for (let r of t) e[r] = Zr(n, i);
+	if (i && n) for (let r of t) e[r] = Qr(n, i);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/keyframes/DOMKeyframesResolver.mjs
-var ei = class extends Tn {
+var ti = class extends Tn {
 	constructor(e, t, n, r, i) {
 		super(e, t, n, r, i, !0);
 	}
@@ -2004,12 +2004,12 @@ var ei = class extends Tn {
 		for (let n = 0; n < e.length; n++) {
 			let r = e[n];
 			if (typeof r == "string" && (r = r.trim(), Me(r))) {
-				let i = or(r, t.current);
+				let i = sr(r, t.current);
 				i !== void 0 && (e[n] = i), n === e.length - 1 && (this.finalKeyframe = r);
 			}
 		}
-		if (this.resolveNoneKeyframes(), !br.has(n) || e.length !== 2) return;
-		let [r, i] = e, a = zr(r), o = zr(i);
+		if (this.resolveNoneKeyframes(), !xr.has(n) || e.length !== 2) return;
+		let [r, i] = e, a = Br(r), o = Br(i);
 		if (Pe(r) !== Pe(i) && J[n]) {
 			this.needsMeasurement = !0;
 			return;
@@ -2022,8 +2022,8 @@ var ei = class extends Tn {
 	}
 	resolveNoneKeyframes() {
 		let { unresolvedKeyframes: e, name: t } = this, n = [];
-		for (let t = 0; t < e.length; t++) (e[t] === null || Br(e[t])) && n.push(t);
-		n.length && $r(e, n, t);
+		for (let t = 0; t < e.length; t++) (e[t] === null || Vr(e[t])) && n.push(t);
+		n.length && ei(e, n, t);
 	}
 	measureInitialState() {
 		let { element: e, unresolvedKeyframes: t, name: n } = this;
@@ -2045,7 +2045,7 @@ var ei = class extends Tn {
 };
 //#endregion
 //#region node_modules/motion-dom/dist/es/utils/resolve-elements.mjs
-function ti(e, t, n) {
+function ni(e, t, n) {
 	if (e == null) return [];
 	if (e instanceof EventTarget) return [e];
 	if (typeof e == "string") {
@@ -2058,25 +2058,25 @@ function ti(e, t, n) {
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/utils/get-as-type.mjs
-var ni = (e, t) => t && typeof e == "number" ? t.transform(e) : e;
+var ri = (e, t) => t && typeof e == "number" ? t.transform(e) : e;
 //#endregion
 //#region node_modules/motion-dom/dist/es/utils/is-html-element.mjs
-function ri(e) {
+function ii(e) {
 	return d(e) && "offsetHeight" in e && !("ownerSVGElement" in e);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/frameloop/microtask.mjs
-var { schedule: ii, cancel: ai } = /* @__PURE__ */ Se(queueMicrotask, !1), oi = {
+var { schedule: ai, cancel: oi } = /* @__PURE__ */ Se(queueMicrotask, !1), si = {
 	x: !1,
 	y: !1
 };
-function si() {
-	return oi.x || oi.y;
+function ci() {
+	return si.x || si.y;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/gestures/utils/setup.mjs
-function ci(e, t) {
-	let n = ti(e), r = new AbortController();
+function li(e, t) {
+	let n = ni(e), r = new AbortController();
 	return [
 		n,
 		{
@@ -2089,11 +2089,11 @@ function ci(e, t) {
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/gestures/hover.mjs
-function li(e) {
-	return !(e.pointerType === "touch" || si());
+function ui(e) {
+	return !(e.pointerType === "touch" || ci());
 }
-function ui(e, t, n = {}) {
-	let [r, i, a] = ci(e, n);
+function Q(e, t, n = {}) {
+	let [r, i, a] = li(e, n);
 	return r.forEach((e) => {
 		let n = !1, r = !1, a, o = () => {
 			e.removeEventListener("pointerleave", u);
@@ -2113,7 +2113,7 @@ function ui(e, t, n = {}) {
 			}
 		};
 		e.addEventListener("pointerenter", (n) => {
-			if (!li(n)) return;
+			if (!ui(n)) return;
 			r = !1;
 			let o = t(e, n);
 			typeof o == "function" && (a = o, e.addEventListener("pointerleave", u, i));
@@ -2164,11 +2164,11 @@ var vi = (e, t) => {
 //#endregion
 //#region node_modules/motion-dom/dist/es/gestures/press/index.mjs
 function yi(e) {
-	return fi(e) && !si();
+	return fi(e) && !ci();
 }
 var bi = /* @__PURE__ */ new WeakSet();
 function xi(e, t, n = {}) {
-	let [r, i, a] = ci(e, n), o = (e) => {
+	let [r, i, a] = li(e, n), o = (e) => {
 		let r = e.currentTarget;
 		if (!yi(e) || bi.has(e)) return;
 		hi.add(r), n.stopPropagation && bi.add(e);
@@ -2182,7 +2182,7 @@ function xi(e, t, n = {}) {
 		window.addEventListener("pointerup", s, i), window.addEventListener("pointercancel", c, i);
 	};
 	return r.forEach((e) => {
-		(n.useGlobalTarget ? window : e).addEventListener("pointerdown", o, i), ri(e) && (e.addEventListener("focus", (e) => vi(e, i)), !mi(e) && !e.hasAttribute("tabindex") && (e.tabIndex = 0));
+		(n.useGlobalTarget ? window : e).addEventListener("pointerdown", o, i), ii(e) && (e.addEventListener("focus", (e) => vi(e, i)), !mi(e) && !e.hasAttribute("tabindex") && (e.tabIndex = 0));
 	}), a;
 }
 //#endregion
@@ -2198,10 +2198,10 @@ function Ci(e) {
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/utils/find.mjs
 var wi = [
-	...Rr,
+	...zr,
 	R,
 	B
-], Ti = (e) => wi.find(Lr(e)), Ei = () => ({
+], Ti = (e) => wi.find(Rr(e)), Ei = () => ({
 	min: 0,
 	max: 0
 }), Di = () => ({
@@ -2240,14 +2240,14 @@ function Ni(e) {
 function Pi(e, t, n) {
 	for (let r in t) {
 		let i = t[r], a = n[r];
-		if (Q(i)) e.addValue(r, i);
-		else if (Q(a)) e.addValue(r, Z(i, { owner: e }));
+		if (Z(i)) e.addValue(r, i);
+		else if (Z(a)) e.addValue(r, X(i, { owner: e }));
 		else if (a !== i) if (e.hasValue(r)) {
 			let t = e.getValue(r);
 			t.liveStyle === !0 ? t.jump(i) : t.hasAnimated || t.set(i);
 		} else {
 			let t = e.getStaticValue(r);
-			e.addValue(r, Z(t === void 0 ? i : t, { owner: e }));
+			e.addValue(r, X(t === void 0 ? i : t, { owner: e }));
 		}
 	}
 	for (let r in n) t[r] === void 0 && e.removeValue(r);
@@ -2288,7 +2288,7 @@ var zi = [
 		let { willChange: u, ...d } = this.scrapeMotionValuesFromProps(t, {}, this);
 		for (let e in d) {
 			let t = d[e];
-			c[e] !== void 0 && Q(t) && t.set(c[e]);
+			c[e] !== void 0 && Z(t) && t.set(c[e]);
 		}
 	}
 	mount(e) {
@@ -2311,8 +2311,8 @@ var zi = [
 		this.children.delete(e), this.enteringChildren && this.enteringChildren.delete(e);
 	}
 	bindToMotionValue(e, t) {
-		if (this.valueSubscriptions.has(e) && this.valueSubscriptions.get(e)(), t.accelerate && qn.has(e) && this.current instanceof HTMLElement) {
-			let { factory: n, keyframes: r, times: i, ease: a, duration: o } = t.accelerate, s = new Ln({
+		if (this.valueSubscriptions.has(e) && this.valueSubscriptions.get(e)(), t.accelerate && Jn.has(e) && this.current instanceof HTMLElement) {
+			let { factory: n, keyframes: r, times: i, ease: a, duration: o } = t.accelerate, s = new Rn({
 				element: this.current,
 				name: e,
 				keyframes: r,
@@ -2405,11 +2405,11 @@ var zi = [
 	getValue(e, t) {
 		if (this.props.values && this.props.values[e]) return this.props.values[e];
 		let n = this.values.get(e);
-		return n === void 0 && t !== void 0 && (n = Z(t === null ? void 0 : t, { owner: this }), this.addValue(e, n)), n;
+		return n === void 0 && t !== void 0 && (n = X(t === null ? void 0 : t, { owner: this }), this.addValue(e, n)), n;
 	}
 	readValue(e, t) {
 		let n = this.latestValues[e] !== void 0 || !this.current ? this.latestValues[e] : this.getBaseTargetFromProps(this.props, e) ?? this.readValueFromInstance(this.current, e, this.options);
-		return n != null && (typeof n == "string" && (u(n) || f(n)) ? n = parseFloat(n) : !Ti(n) && B.test(t) && (n = Zr(e, t)), this.setBaseTarget(e, Q(n) ? n.get() : n)), Q(n) ? n.get() : n;
+		return n != null && (typeof n == "string" && (u(n) || f(n)) ? n = parseFloat(n) : !Ti(n) && B.test(t) && (n = Qr(e, t)), this.setBaseTarget(e, Z(n) ? n.get() : n)), Z(n) ? n.get() : n;
 	}
 	setBaseTarget(e, t) {
 		this.baseTarget[e] = t;
@@ -2417,12 +2417,12 @@ var zi = [
 	getBaseTarget(e) {
 		let { initial: t } = this.props, n;
 		if (typeof t == "string" || typeof t == "object") {
-			let r = vr(this.props, t, this.presenceContext?.custom);
+			let r = yr(this.props, t, this.presenceContext?.custom);
 			r && (n = r[e]);
 		}
 		if (t && n !== void 0) return n;
 		let r = this.getBaseTargetFromProps(this.props, e);
-		return r !== void 0 && !Q(r) ? r : this.initialValues[e] !== void 0 && n === void 0 ? void 0 : this.baseTarget[e];
+		return r !== void 0 && !Z(r) ? r : this.initialValues[e] !== void 0 && n === void 0 ? void 0 : this.baseTarget[e];
 	}
 	on(e, t) {
 		return this.events[e] || (this.events[e] = new v()), this.events[e].add(t);
@@ -2431,11 +2431,11 @@ var zi = [
 		this.events[e] && this.events[e].notify(...t);
 	}
 	scheduleRenderMicrotask() {
-		ii.render(this.render);
+		ai.render(this.render);
 	}
 }, Hi = class extends Vi {
 	constructor() {
-		super(...arguments), this.KeyframeResolver = ei;
+		super(...arguments), this.KeyframeResolver = ti;
 	}
 	sortInstanceNodePosition(e, t) {
 		return e.compareDocumentPosition(t) & 2 ? 1 : -1;
@@ -2450,7 +2450,7 @@ var zi = [
 	handleChildMotionValue() {
 		this.childSubscription && (this.childSubscription(), delete this.childSubscription);
 		let { children: e } = this.props;
-		Q(e) && (this.childSubscription = e.on("change", (e) => {
+		Z(e) && (this.childSubscription = e.on("change", (e) => {
 			this.current && (this.current.textContent = `${e}`);
 		}));
 	}
@@ -2510,7 +2510,7 @@ function Ji(e, t, n) {
 			c = o.startsWith("scale") ? e === 1 : e === 0;
 		}
 		if (!c || n) {
-			let e = ni(s, qr[o]);
+			let e = ri(s, Jr[o]);
 			if (!c) {
 				i = !1;
 				let t = Ki[o] || o;
@@ -2534,7 +2534,7 @@ function Yi(e, t, n) {
 			i[e] = n;
 			continue;
 		} else {
-			let t = ni(n, qr[e]);
+			let t = ri(n, Jr[e]);
 			e.startsWith("origin") ? (s = !0, a[e] = t) : r[e] = t;
 		}
 	}
@@ -2593,7 +2593,7 @@ function ta(e, { layout: t, layoutId: n }) {
 function na(e, t, n) {
 	let r = e.style, i = t?.style, a = {};
 	if (!r) return a;
-	for (let t in r) (Q(r[t]) || i && Q(i[t]) || ta(t, e) || n?.getValue(t)?.liveStyle !== void 0) && (a[t] = r[t]);
+	for (let t in r) (Z(r[t]) || i && Z(i[t]) || ta(t, e) || n?.getValue(t)?.liveStyle !== void 0) && (a[t] = r[t]);
 	return a;
 }
 //#endregion
@@ -2715,13 +2715,13 @@ var fa = new Set([
 //#region node_modules/motion-dom/dist/es/render/svg/utils/render.mjs
 function ma(e, t, n, r) {
 	Xi(e, t, void 0, r);
-	for (let n in t.attrs) e.setAttribute(fa.has(n) ? n : jr(n), t.attrs[n]);
+	for (let n in t.attrs) e.setAttribute(fa.has(n) ? n : Mr(n), t.attrs[n]);
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/svg/utils/scrape-motion-values.mjs
 function ha(e, t, n) {
 	let r = na(e, t, n);
-	for (let n in e) if (Q(e[n]) || Q(t[n])) {
+	for (let n in e) if (Z(e[n]) || Z(t[n])) {
 		let t = K.indexOf(n) === -1 ? n : "attr" + n.charAt(0).toUpperCase() + n.substring(1);
 		r[t] = e[n];
 	}
@@ -2738,10 +2738,10 @@ var ga = class extends Hi {
 	}
 	readValueFromInstance(e, t) {
 		if (q.has(t)) {
-			let e = Yr(t);
+			let e = Xr(t);
 			return e && e.default || 0;
 		}
-		return t = fa.has(t) ? t : jr(t), e.getAttribute(t);
+		return t = fa.has(t) ? t : Mr(t), e.getAttribute(t);
 	}
 	scrapeMotionValuesFromProps(e, t, n) {
 		return ha(e, t, n);
@@ -2759,8 +2759,8 @@ var ga = class extends Hi {
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/animate/single-value.mjs
 function _a(e, t, n) {
-	let r = Q(e) ? e : Z(e);
-	return r.start(gr("", r, t, n)), r.animation;
+	let r = Z(e) ? e : X(e);
+	return r.start(_r("", r, t, n)), r.animation;
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/animation/utils/is-dom-keyframes.mjs
@@ -2770,7 +2770,7 @@ function va(e) {
 //#endregion
 //#region node_modules/framer-motion/dist/es/animation/animate/resolve-subjects.mjs
 function ya(e, t, n, r) {
-	return e == null ? [] : typeof e == "string" && va(t) ? ti(e, n, r) : e instanceof NodeList ? Array.from(e) : Array.isArray(e) ? e.filter((e) => e != null) : [e];
+	return e == null ? [] : typeof e == "string" && va(t) ? ni(e, n, r) : e instanceof NodeList ? Array.from(e) : Array.isArray(e) ? e.filter((e) => e != null) : [e];
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/animation/sequence/utils/calc-repeat-duration.mjs
@@ -2825,7 +2825,7 @@ function Da(e, { defaultTransition: t = {}, ...n } = {}, r, i) {
 		let [p, m, h = {}] = o;
 		h.at !== void 0 && (d = xa(d, h.at, u, l));
 		let g = 0, _ = (e, n, r, o = 0, s = 0) => {
-			let c = Aa(e), { delay: l = 0, times: u = Kt(c), type: p = t.type || "keyframes", repeat: m, repeatType: h, repeatDelay: _ = 0, ...v } = n, { ease: b = t.ease || "easeOut", duration: x } = n, S = typeof l == "function" ? l(o, s) : l, C = c.length, w = Fn(p) ? p : i?.[p || "keyframes"];
+			let c = Aa(e), { delay: l = 0, times: u = Kt(c), type: p = t.type || "keyframes", repeat: m, repeatType: h, repeatDelay: _ = 0, ...v } = n, { ease: b = t.ease || "easeOut", duration: x } = n, S = typeof l == "function" ? l(o, s) : l, C = c.length, w = In(p) ? p : i?.[p || "keyframes"];
 			if (C <= 2 && w) {
 				let e = 100;
 				if (C === 2 && Na(c)) {
@@ -2858,7 +2858,7 @@ function Da(e, { defaultTransition: t = {}, ...n } = {}, r, i) {
 			let D = T + x;
 			Ca(r, c, b, u, T, D), g = Math.max(S + x, g), f = Math.max(D, f);
 		};
-		if (Q(p)) {
+		if (Z(p)) {
 			let e = Oa(p, s);
 			_(m, h, ka("default", e));
 		} else {
@@ -2946,7 +2946,7 @@ function Fa(e) {
 //#endregion
 //#region node_modules/framer-motion/dist/es/animation/animate/subject.mjs
 function Ia(e, t) {
-	return Q(e) || typeof e == "number" || typeof e == "string" && !va(t);
+	return Z(e) || typeof e == "number" || typeof e == "string" && !va(t);
 }
 function La(e, t, n, r) {
 	let i = [];
@@ -2958,7 +2958,7 @@ function La(e, t, n, r) {
 			let r = a[e], s = r instanceof Element ? Pa : Fa;
 			Oi.has(r) || s(r);
 			let c = Oi.get(r), l = { ...n };
-			"delay" in l && typeof l.delay == "function" && (l.delay = l.delay(e, o)), i.push(...Fr(c, {
+			"delay" in l && typeof l.delay == "function" && (l.delay = l.delay(e, o)), i.push(...Ir(c, {
 				...t,
 				transition: l
 			}, {}));
@@ -2972,7 +2972,7 @@ function Ra(e, t, n) {
 	let r = [];
 	return Da(e.map((e) => {
 		if (Array.isArray(e) && typeof e[0] == "function") {
-			let t = e[0], n = Z(0);
+			let t = e[0], n = X(0);
 			return n.on("change", t), e.length === 1 ? [n, [0, 1]] : e.length === 2 ? [
 				n,
 				[0, 1],
@@ -3010,7 +3010,7 @@ function Ba(e = {}) {
 				...c
 			}, t);
 		}
-		let c = new rr(a);
+		let c = new ir(a);
 		return o && c.finished.then(o), t && (t.animations.push(c), c.finished.then(() => {
 			s(t.animations, c);
 		})), c;
@@ -3140,7 +3140,7 @@ var $ = Ba(), Va = class extends a {
 	}
 	_bindEvents() {
 		let e = this.root.querySelector("button");
-		e && (ui(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, {
+		e && (Q(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, {
 			scale: 1.03,
 			y: -1
 		}, {
@@ -3287,7 +3287,7 @@ var Ha = class extends a {
 	_bindHoverEvents() {
 		if (!this.boolAttr("hoverable")) return;
 		let e = this.root.querySelector(".card");
-		e && ui(e, (e) => ($(e, {
+		e && Q(e, (e) => ($(e, {
 			y: -3,
 			scale: 1.01
 		}, {
@@ -3949,7 +3949,7 @@ var qa = class extends a {
 			this.boolAttr("disabled") || (e.preventDefault(), this.toggle());
 		}), e.addEventListener("keydown", (e) => {
 			this.boolAttr("disabled") || (e.key === " " || e.key === "Enter") && (e.preventDefault(), this.toggle());
-		}), ui(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { scale: 1.08 }, {
+		}), Q(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { scale: 1.08 }, {
 			type: "spring",
 			stiffness: 400,
 			damping: 20
@@ -4486,7 +4486,7 @@ var Ya = class extends a {
 	}
 	_bindEvents() {
 		let e = this.root.querySelector(".clipboard-btn");
-		e && (e.addEventListener("click", (e) => this._handleCopy(e)), ui(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { y: -1 }, {
+		e && (e.addEventListener("click", (e) => this._handleCopy(e)), Q(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { y: -1 }, {
 			type: "spring",
 			stiffness: 450,
 			damping: 20
@@ -4799,4 +4799,755 @@ i(Xa, "observedAttributes", [
 	"header"
 ]), customElements.define("fm-collapsible", Xa);
 //#endregion
-export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, a as FmElement, Ga as FmTab, Wa as FmTabs, e as themeStyles };
+//#region src/components/fm-dropdown.js
+var Za = class extends a {
+	constructor(...e) {
+		super(...e), i(this, "_isOpen", !1), i(this, "_items", []);
+	}
+	template() {
+		let e = this.attr("placeholder", "Menu"), t = this.boolAttr("disabled"), n = this.attr("size", "md"), r = this.attr("variant", "default"), i = this.attr("items", "");
+		if (i) try {
+			this._items = JSON.parse(i);
+		} catch {
+			this._items = [];
+		}
+		else this._items = [];
+		return `
+      <style>
+        :host {
+          display: inline-block;
+          position: relative;
+        }
+
+        /* ---- Trigger Button ---- */
+        .trigger {
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--fm-space-sm);
+          font-family: var(--fm-font-family);
+          font-weight: var(--fm-font-weight-semibold);
+          letter-spacing: var(--fm-letter-spacing);
+          line-height: 1;
+          border-radius: var(--fm-radius-md);
+          cursor: ${t ? "not-allowed" : "pointer"};
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          white-space: nowrap;
+          transition: box-shadow var(--fm-transition-fast), border-color var(--fm-transition-fast);
+          width: 100%;
+        }
+
+        /* Sizes */
+        .trigger.sm {
+          padding: 6px 12px;
+          font-size: var(--fm-font-size-xs);
+          border-radius: var(--fm-radius-sm);
+        }
+        .trigger.md {
+          padding: 10px 16px;
+          font-size: var(--fm-font-size-sm);
+        }
+        .trigger.lg {
+          padding: 14px 20px;
+          font-size: var(--fm-font-size-md);
+          border-radius: var(--fm-radius-lg);
+        }
+
+        /* Variants */
+        .trigger.default {
+          background: var(--fm-color-surface);
+          color: var(--fm-color-text);
+          border: 1.5px solid var(--fm-color-border);
+          box-shadow: var(--fm-shadow-sm);
+        }
+        .trigger.default:hover:not(:disabled) {
+          border-color: var(--fm-color-primary);
+          background: var(--fm-color-surface-alt);
+        }
+
+        .trigger.outline {
+          background: transparent;
+          color: var(--fm-color-primary);
+          border: 1.5px solid var(--fm-color-primary);
+          box-shadow: none;
+        }
+        .trigger.outline:hover:not(:disabled) {
+          background: var(--fm-alpha-primary-10);
+        }
+
+        .trigger.ghost {
+          background: transparent;
+          color: var(--fm-color-text);
+          border: none;
+          box-shadow: none;
+        }
+        .trigger.ghost:hover:not(:disabled) {
+          background: var(--fm-color-surface-alt);
+        }
+
+        .trigger:disabled {
+          opacity: 0.45;
+          cursor: not-allowed;
+        }
+
+        .trigger:focus-visible {
+          outline: 2px solid var(--fm-color-primary-light);
+          outline-offset: 2px;
+        }
+
+        /* Display text */
+        .trigger-text {
+          flex: 1;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        /* Chevron icon */
+        .trigger-icon {
+          flex-shrink: 0;
+          width: 16px;
+          height: 16px;
+          color: var(--fm-color-text-secondary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform var(--fm-transition-normal);
+        }
+        .trigger-icon.open {
+          transform: rotate(180deg);
+        }
+
+        /* ---- Dropdown Menu ---- */
+        .dropdown {
+          position: absolute;
+          top: calc(100% + 4px);
+          left: 0;
+          min-width: 100%;
+          background: var(--fm-color-surface);
+          border: 1px solid var(--fm-color-border);
+          border-radius: var(--fm-radius-lg);
+          box-shadow: var(--fm-shadow-md);
+          z-index: 1000;
+          overflow: hidden;
+          opacity: 0;
+          pointer-events: none;
+          transform-origin: top center;
+        }
+
+        .dropdown.open {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        /* ---- Dropdown Items ---- */
+        .items {
+          padding: 4px 0;
+          max-height: 280px;
+          overflow-y: auto;
+        }
+
+        .item {
+          display: flex;
+          align-items: center;
+          font-size: var(--fm-font-size-sm);
+          color: var(--fm-color-text);
+          user-select: none;
+          transition: background var(--fm-transition-fast);
+        }
+
+        .item-button,
+        .item-link {
+          all: unset;
+          display: flex;
+          align-items: center;
+          width: 100%;
+          padding: 8px var(--fm-space-md);
+          font-family: var(--fm-font-family);
+          font-size: var(--fm-font-size-sm);
+          color: var(--fm-color-text);
+          cursor: pointer;
+          text-decoration: none;
+          box-sizing: border-box;
+        }
+
+        .item-button:hover:not(:disabled),
+        .item-link:hover:not([disabled]) {
+          background: var(--fm-color-surface-alt);
+        }
+
+        .item-button:disabled,
+        .item-link[disabled] {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
+
+        .item.disabled {
+          opacity: 0.4;
+        }
+        .item.disabled .item-button,
+        .item.disabled .item-link {
+          cursor: not-allowed;
+        }
+
+        /* Empty state */
+        .empty {
+          padding: var(--fm-space-md);
+          text-align: center;
+          font-size: var(--fm-font-size-sm);
+          color: var(--fm-color-text-secondary);
+        }
+      </style>
+
+      <button 
+        class="trigger ${n} ${r}" 
+        part="trigger"
+        ?disabled="${t}"
+        aria-haspopup="true"
+        aria-expanded="${this._isOpen}"
+      >
+        <span class="trigger-content" part="trigger-content">
+          <slot name="trigger">
+            <span class="trigger-text" part="trigger-text">${e}</span>
+          </slot>
+        </span>
+        <span class="trigger-icon ${this._isOpen ? "open" : ""}" part="trigger-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+        </span>
+      </button>
+
+      <div class="dropdown ${this._isOpen ? "open" : ""}" part="dropdown">
+        <div class="items" part="items">
+          ${this._renderItems()}
+        </div>
+      </div>
+    `;
+	}
+	_renderItems() {
+		return this._items.length === 0 ? "<div class=\"empty\">No items</div>" : this._items.map((e, t) => {
+			let n = e.type || "button", r = e.disabled || !1, i = e.href || "javascript:void(0)";
+			return n === "link" ? `
+          <div class="item ${r ? "disabled" : ""}" part="item link-item" data-index="${t}">
+            <a class="item-link" href="${i}" ${r ? "tabindex=-1" : ""} data-value="${e.value}">
+              ${e.label}
+            </a>
+          </div>
+        ` : `
+          <div class="item ${r ? "disabled" : ""}" part="item button-item" data-index="${t}">
+            <button class="item-button" ${r ? "disabled" : ""} data-value="${e.value}">
+              ${e.label}
+            </button>
+          </div>
+        `;
+		}).join("");
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._bindEvents();
+	}
+	disconnectedCallback() {
+		this._removeOutsideClickListener();
+	}
+	_bindEvents() {
+		if (this.boolAttr("disabled")) return;
+		let e = this.root.querySelector(".trigger");
+		if (!e) return;
+		e.addEventListener("click", (e) => {
+			e.stopPropagation(), this.toggle();
+		}), e.addEventListener("keydown", (e) => {
+			e.key === "Enter" || e.key === " " ? (e.preventDefault(), this.toggle()) : e.key === "Escape" && this._isOpen && (e.preventDefault(), this.close());
+		});
+		let t = this.root.querySelector(".items");
+		t && t.addEventListener("click", (e) => {
+			let t = e.target.closest(".item");
+			if (!t || t.classList.contains("disabled")) return;
+			let n = parseInt(t.dataset.index, 10), r = this._items[n];
+			r && (this.dispatchEvent(new CustomEvent("fm-dropdown-click", {
+				detail: {
+					value: r.value,
+					label: r.label,
+					index: n,
+					type: r.type || "button"
+				},
+				bubbles: !0
+			})), this.close());
+		}), Q(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { scale: 1.02 }, {
+			type: "spring",
+			stiffness: 450,
+			damping: 20
+		}), () => {
+			$(e, { scale: 1 }, {
+				type: "spring",
+				stiffness: 450,
+				damping: 20
+			});
+		})), xi(e, (e) => this.boolAttr("disabled") ? () => {} : ($(e, { scale: .98 }, {
+			type: "spring",
+			stiffness: 500,
+			damping: 22
+		}), () => {
+			$(e, { scale: 1.02 }, {
+				type: "spring",
+				stiffness: 450,
+				damping: 18
+			});
+		}));
+	}
+	_addOutsideClickListener() {
+		this._outsideClickHandler = (e) => {
+			!this.contains(e.target) && !this.root.contains(e.target) && this.close();
+		}, document.addEventListener("click", this._outsideClickHandler);
+	}
+	_removeOutsideClickListener() {
+		this._outsideClickHandler &&= (document.removeEventListener("click", this._outsideClickHandler), null);
+	}
+	onEnter() {
+		$(this.root.querySelector(".trigger"), {
+			opacity: [0, 1],
+			y: [6, 0]
+		}, {
+			type: "spring",
+			stiffness: 350,
+			damping: 25
+		});
+	}
+	_animateOpen() {
+		let e = this.root.querySelector(".dropdown");
+		if (!e) return;
+		$(e, {
+			opacity: [0, 1],
+			scaleY: [.9, 1],
+			y: [-8, 0]
+		}, {
+			type: "spring",
+			stiffness: 400,
+			damping: 28
+		});
+		let t = this.root.querySelectorAll(".item");
+		t.length > 0 && t.forEach((e, t) => {
+			$(e, {
+				opacity: [0, 1],
+				x: [-10, 0]
+			}, {
+				type: "spring",
+				stiffness: 400,
+				damping: 25,
+				delay: t * .03
+			});
+		});
+	}
+	_animateClose() {
+		let e = this.root.querySelector(".dropdown");
+		e && $(e, {
+			opacity: 0,
+			scaleY: .95,
+			y: -4
+		}, {
+			duration: .15,
+			ease: "easeIn"
+		});
+	}
+	open() {
+		this._isOpen || this.boolAttr("disabled") || (this._isOpen = !0, this.render(), this._bindEvents(), this._animateOpen(), this._addOutsideClickListener(), this.dispatchEvent(new CustomEvent("fm-dropdown-open", { bubbles: !0 })));
+	}
+	close() {
+		this._isOpen && (this._animateClose(), this._isOpen = !1, this._removeOutsideClickListener(), setTimeout(() => {
+			this.render(), this._bindEvents();
+		}, 150), this.dispatchEvent(new CustomEvent("fm-dropdown-close", { bubbles: !0 })));
+	}
+	toggle() {
+		this._isOpen ? this.close() : this.open();
+	}
+	attributeChangedCallback(e, t, n) {
+		t !== n && (this.render(), this._bindEvents());
+	}
+};
+i(Za, "observedAttributes", [
+	"items",
+	"placeholder",
+	"disabled",
+	"size",
+	"variant"
+]), customElements.define("fm-dropdown", Za);
+//#endregion
+//#region src/components/fm-pagination.js
+var Qa = class extends a {
+	template() {
+		let e = Math.max(1, Math.min(this.getTotal(), this.getCurrent())), t = this.getTotal(), n = this.attr("size", "md"), r = this.attr("variant", "default"), i = this.boolAttr("disabled"), a = this.boolAttr("show-first-last"), o = !this.boolAttr("hide-prev-next"), s = this.attr("prev-label", ""), c = this.attr("next-label", ""), l = this.attr("href-template", ""), u = parseInt(this.attr("sibling-count", "1"), 10) || 1, d = parseInt(this.attr("boundary-count", "1"), 10) || 1, f = this._getPageSeries(e, t, u, d), p = (e) => l ? l.replace(":page", e) : null, m = p(e - 1), h = p(e + 1), g = p(1), _ = p(t), v = o ? `
+      <button 
+        class="pagination-btn pagination-nav ${n} ${r}" 
+        data-action="prev"
+        ${e <= 1 || i ? "disabled" : ""}
+        aria-label="Go to previous page"
+      >
+        ${m && e > 1 ? `<a href="${m}" class="nav-link" tabindex="-1">` : ""}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          ${s ? `<span class="nav-label">${s}</span>` : ""}
+        ${m && e > 1 ? "</a>" : ""}
+      </button>
+    ` : "", y = o ? `
+      <button 
+        class="pagination-btn pagination-nav ${n} ${r}" 
+        data-action="next"
+        ${e >= t || i ? "disabled" : ""}
+        aria-label="Go to next page"
+      >
+        ${h && e < t ? `<a href="${h}" class="nav-link" tabindex="-1">` : ""}
+          ${c ? `<span class="nav-label">${c}</span>` : ""}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        ${h && e < t ? "</a>" : ""}
+      </button>
+    ` : "", b = a ? `
+      <button 
+        class="pagination-btn pagination-nav ${n} ${r}" 
+        data-action="first"
+        ${e <= 1 || i ? "disabled" : ""}
+        aria-label="Go to first page"
+      >
+        ${g && e > 1 ? `<a href="${g}" class="nav-link" tabindex="-1">` : ""}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
+        ${g && e > 1 ? "</a>" : ""}
+      </button>
+    ` : "", x = a ? `
+      <button 
+        class="pagination-btn pagination-nav ${n} ${r}" 
+        data-action="last"
+        ${e >= t || i ? "disabled" : ""}
+        aria-label="Go to last page"
+      >
+        ${_ && e < t ? `<a href="${_}" class="nav-link" tabindex="-1">` : ""}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 17 5-5-5-5"/><path d="m6 17 5-5-5-5"/></svg>
+        ${_ && e < t ? "</a>" : ""}
+      </button>
+    ` : "";
+		return `
+      <style>
+        :host { display: inline-block; }
+
+        .pagination {
+          display: flex;
+          align-items: center;
+          gap: var(--fm-space-xs);
+          font-family: var(--fm-font-family);
+        }
+
+        .pagination-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          cursor: pointer;
+          outline: none;
+          font-family: var(--fm-font-family);
+          font-weight: var(--fm-font-weight-medium);
+          line-height: 1;
+          border-radius: var(--fm-radius-md);
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          transition: all var(--fm-transition-fast);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .pagination-btn:focus-visible {
+          outline: 2px solid var(--fm-color-primary-light);
+          outline-offset: 2px;
+        }
+
+        .pagination-btn:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
+
+        /* ---- Sizes ---- */
+        .pagination-btn.sm {
+          min-width: 28px;
+          height: 28px;
+          padding: 0 8px;
+          font-size: var(--fm-font-size-xs);
+          gap: 4px;
+        }
+        .pagination-btn.sm svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        .pagination-btn.md {
+          min-width: 36px;
+          height: 36px;
+          padding: 0 12px;
+          font-size: var(--fm-font-size-sm);
+          gap: 6px;
+        }
+        .pagination-btn.md svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        .pagination-btn.lg {
+          min-width: 44px;
+          height: 44px;
+          padding: 0 16px;
+          font-size: var(--fm-font-size-md);
+          gap: 8px;
+        }
+        .pagination-btn.lg svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        /* ---- Default variant ---- */
+        .pagination-btn.default {
+          background: var(--fm-color-surface);
+          color: var(--fm-color-text-secondary);
+          border: 1px solid var(--fm-color-border);
+        }
+        .pagination-btn.default:hover:not(:disabled):not(.active) {
+          background: var(--fm-color-surface-muted);
+          color: var(--fm-color-text);
+          border-color: var(--fm-color-border-strong);
+        }
+        .pagination-btn.default.active {
+          background: var(--fm-color-primary);
+          color: var(--fm-color-text-light);
+          border-color: var(--fm-color-primary);
+          font-weight: var(--fm-font-weight-semibold);
+        }
+
+        /* ---- Outline variant ---- */
+        .pagination-btn.outline {
+          background: transparent;
+          color: var(--fm-color-text-secondary);
+          border: 1.5px solid var(--fm-color-border);
+        }
+        .pagination-btn.outline:hover:not(:disabled):not(.active) {
+          background: var(--fm-alpha-primary-10);
+          color: var(--fm-color-primary);
+          border-color: var(--fm-color-primary);
+        }
+        .pagination-btn.outline.active {
+          background: transparent;
+          color: var(--fm-color-primary);
+          border-color: var(--fm-color-primary);
+          font-weight: var(--fm-font-weight-semibold);
+        }
+
+        /* ---- Ghost variant ---- */
+        .pagination-btn.ghost {
+          background: transparent;
+          color: var(--fm-color-text-secondary);
+          border: 1px solid transparent;
+        }
+        .pagination-btn.ghost:hover:not(:disabled):not(.active) {
+          background: var(--fm-color-surface-muted);
+          color: var(--fm-color-text);
+        }
+        .pagination-btn.ghost.active {
+          background: var(--fm-color-surface-muted);
+          color: var(--fm-color-primary);
+          font-weight: var(--fm-font-weight-semibold);
+        }
+
+        /* ---- Navigation buttons ---- */
+        .pagination-nav {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+        .pagination-nav .nav-label {
+          margin: 0 4px;
+        }
+
+        /* ---- Links inside buttons (for SSR/SEO) ---- */
+        .nav-link, .page-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: inherit;
+          width: 100%;
+          height: 100%;
+          color: inherit;
+          text-decoration: none;
+          pointer-events: none; /* Let button handle clicks for SPA, but allow right-click open */
+        }
+
+        /* ---- Ellipsis ---- */
+        .pagination-ellipsis {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--fm-color-text-secondary);
+          user-select: none;
+          padding: 0 4px;
+        }
+        .pagination-ellipsis.sm {
+          min-width: 28px;
+          height: 28px;
+          font-size: var(--fm-font-size-xs);
+        }
+        .pagination-ellipsis.md {
+          min-width: 36px;
+          height: 36px;
+          font-size: var(--fm-font-size-sm);
+        }
+        .pagination-ellipsis.lg {
+          min-width: 44px;
+          height: 44px;
+          font-size: var(--fm-font-size-md);
+        }
+
+        /* ---- Info text ---- */
+        .pagination-info {
+          color: var(--fm-color-text-secondary);
+          font-size: var(--fm-font-size-sm);
+          margin: 0 var(--fm-space-sm);
+        }
+      </style>
+
+      <nav class="pagination" role="navigation" aria-label="Pagination">
+        ${b}
+        ${v}
+        ${f.map((t) => {
+			if (t === "..." || t === ":gap" || t === "gap") return `<span class="pagination-ellipsis ${n}">...</span>`;
+			let a = parseInt(t, 10), o = a === e, s = p(a);
+			return `
+          <button 
+            class="pagination-btn pagination-page ${n} ${r} ${o ? "active" : ""}" 
+            data-page="${a}"
+            ${i ? "disabled" : ""}
+            aria-label="Go to page ${a}"
+            aria-current="${o ? "page" : "false"}"
+          >
+            ${s && !o ? `<a href="${s}" class="page-link" tabindex="-1">${a}</a>` : a}
+          </button>
+        `;
+		}).join("")}
+        ${y}
+        ${x}
+      </nav>
+    `;
+	}
+	_getPagyObject() {
+		let e = this.attr("pagy", "");
+		if (e) try {
+			let t = JSON.parse(e);
+			if (typeof t == "object" && t) return t;
+		} catch {
+			console.warn("[fm-pagination] Invalid pagy JSON");
+		}
+		return null;
+	}
+	_getPageSeries(e, t, n, r) {
+		let i = this._getPagyObject();
+		if (i && i.series && Array.isArray(i.series)) return i.series.map((e) => e === ":gap" || e === "gap" ? "..." : typeof e == "number" ? e : String(e));
+		let a = this.attr("series", "");
+		if (a) try {
+			let e = JSON.parse(a);
+			if (Array.isArray(e)) return e.map((e) => e === ":gap" || e === "gap" ? "..." : typeof e == "number" ? e : String(e));
+		} catch {
+			console.warn("[fm-pagination] Invalid series JSON");
+		}
+		return this._getPageRange(e, t, n, r);
+	}
+	_getPageRange(e, t, n, r) {
+		let i = [], a = [];
+		for (let e = 1; e <= Math.min(r, t); e++) a.push(e);
+		let o = [];
+		for (let e = Math.max(r + 1, t - r + 1); e <= t; e++) o.push(e);
+		let s = Math.max(r + 1, e - n), c = Math.min(t - r, e + n);
+		i.push(...a), s > r + 1 ? i.push("...") : s === r + 1 && !a.includes(s) && i.push(s);
+		for (let e = Math.max(s, r + 2); e <= c; e++) !a.includes(e) && !o.includes(e) && i.push(e);
+		c < t - r ? i.push("...") : c === t - r && !o.includes(c) && i.push(c);
+		for (let e of o) i.includes(e) || i.push(e);
+		return i;
+	}
+	getCurrent() {
+		let e = this._getPagyObject();
+		if (e && typeof e.page == "number") return Math.max(1, e.page);
+		let t = this.attr("page", ""), n = this.attr("current", "");
+		return Math.max(1, parseInt(t || n || "1", 10) || 1);
+	}
+	getTotal() {
+		let e = this._getPagyObject();
+		if (e && typeof e.pages == "number") return Math.max(1, e.pages);
+		let t = this.attr("pages", ""), n = this.attr("total", "");
+		return Math.max(1, parseInt(t || n || "1", 10) || 1);
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._bindEvents();
+	}
+	onEnter() {
+		let e = this.root.querySelector(".pagination");
+		e && $(e, {
+			opacity: [0, 1],
+			y: [8, 0]
+		}, {
+			type: "spring",
+			stiffness: 350,
+			damping: 25
+		});
+	}
+	_bindEvents() {
+		this.boolAttr("disabled") || this.root.querySelectorAll(".pagination-btn:not(:disabled)").forEach((e) => {
+			e.addEventListener("click", (t) => {
+				if (t.target.tagName === "A" && !t.ctrlKey && !t.metaKey) return;
+				t.preventDefault();
+				let n = this.getCurrent(), r = n;
+				if (e.dataset.action === "prev" ? r = Math.max(1, n - 1) : e.dataset.action === "next" ? r = Math.min(this.getTotal(), n + 1) : e.dataset.action === "first" ? r = 1 : e.dataset.action === "last" ? r = this.getTotal() : e.dataset.page && (r = parseInt(e.dataset.page, 10)), r !== n) {
+					let e = n;
+					this.setAttribute("current", String(r)), this.dispatchEvent(new CustomEvent("fm-page-change", {
+						bubbles: !0,
+						detail: {
+							page: r,
+							previousPage: e
+						}
+					}));
+				}
+			}), Q(e, (e) => ($(e, { scale: 1.05 }, {
+				type: "spring",
+				stiffness: 400,
+				damping: 20
+			}), () => {
+				$(e, { scale: 1 }, {
+					type: "spring",
+					stiffness: 400,
+					damping: 20
+				});
+			})), xi(e, (e) => ($(e, { scale: .95 }, {
+				type: "spring",
+				stiffness: 500,
+				damping: 22
+			}), () => {
+				$(e, { scale: 1.05 }, {
+					type: "spring",
+					stiffness: 400,
+					damping: 20
+				});
+			}));
+		});
+	}
+	attributeChangedCallback() {
+		this.render(), this._bindEvents();
+	}
+};
+i(Qa, "observedAttributes", [
+	"pagy",
+	"current",
+	"page",
+	"total",
+	"pages",
+	"series",
+	"size",
+	"variant",
+	"sibling-count",
+	"boundary-count",
+	"disabled",
+	"show-first-last",
+	"hide-prev-next",
+	"prev-label",
+	"next-label",
+	"href-template"
+]), customElements.define("fm-pagination", Qa);
+//#endregion
+export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, Za as FmDropdown, a as FmElement, Qa as FmPagination, Ga as FmTab, Wa as FmTabs, e as themeStyles };

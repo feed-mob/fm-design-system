@@ -13,3 +13,4 @@ export { FmBreadcrumb } from "./components/fm-breadcrumb.js";
 export { FmClipboard } from "./components/fm-clipboard.js";
 export { FmCollapsible } from "./components/fm-collapsible.js";
 export { FmDropdown } from "./components/fm-dropdown.js";
+export { FmPagination } from "./components/fm-pagination.js";
