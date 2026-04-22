@@ -269,34 +269,34 @@ var A = {
 }, Fe = {
 	...A,
 	default: 1
-}, M = (e) => Math.round(e * 1e5) / 1e5, Ie = /-?(?:\d+(?:\.\d+)?|\.\d+)/gu;
+}, Ie = (e) => Math.round(e * 1e5) / 1e5, Le = /-?(?:\d+(?:\.\d+)?|\.\d+)/gu;
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/utils/is-nullish.mjs
-function Le(e) {
+function Re(e) {
 	return e == null;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/utils/single-color-regex.mjs
-var Re = /^(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))$/iu, ze = (e, t) => (n) => !!(typeof n == "string" && Re.test(n) && n.startsWith(e) || t && !Le(n) && Object.prototype.hasOwnProperty.call(n, t)), Be = (e, t, n) => (r) => {
+var ze = /^(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))$/iu, Be = (e, t) => (n) => !!(typeof n == "string" && ze.test(n) && n.startsWith(e) || t && !Re(n) && Object.prototype.hasOwnProperty.call(n, t)), Ve = (e, t, n) => (r) => {
 	if (typeof r != "string") return r;
-	let [i, a, o, s] = r.match(Ie);
+	let [i, a, o, s] = r.match(Le);
 	return {
 		[e]: parseFloat(i),
 		[t]: parseFloat(a),
 		[n]: parseFloat(o),
 		alpha: s === void 0 ? 1 : parseFloat(s)
 	};
-}, Ve = (e) => c(0, 255, e), He = {
+}, He = (e) => c(0, 255, e), Ue = {
 	...A,
-	transform: (e) => Math.round(Ve(e))
-}, N = {
-	test: /* @__PURE__ */ ze("rgb", "red"),
-	parse: /* @__PURE__ */ Be("red", "green", "blue"),
-	transform: ({ red: e, green: t, blue: n, alpha: r = 1 }) => "rgba(" + He.transform(e) + ", " + He.transform(t) + ", " + He.transform(n) + ", " + M(j.transform(r)) + ")"
+	transform: (e) => Math.round(He(e))
+}, M = {
+	test: /* @__PURE__ */ Be("rgb", "red"),
+	parse: /* @__PURE__ */ Ve("red", "green", "blue"),
+	transform: ({ red: e, green: t, blue: n, alpha: r = 1 }) => "rgba(" + Ue.transform(e) + ", " + Ue.transform(t) + ", " + Ue.transform(n) + ", " + Ie(j.transform(r)) + ")"
 };
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/color/hex.mjs
-function Ue(e) {
+function We(e) {
 	let t = "", n = "", r = "", i = "";
 	return e.length > 5 ? (t = e.substring(1, 3), n = e.substring(3, 5), r = e.substring(5, 7), i = e.substring(7, 9)) : (t = e.substring(1, 2), n = e.substring(2, 3), r = e.substring(3, 4), i = e.substring(4, 5), t += t, n += n, r += r, i += i), {
 		red: parseInt(t, 16),
@@ -305,26 +305,26 @@ function Ue(e) {
 		alpha: i ? parseInt(i, 16) / 255 : 1
 	};
 }
-var We = {
-	test: /* @__PURE__ */ ze("#"),
-	parse: Ue,
-	transform: N.transform
-}, Ge = /* @__NO_SIDE_EFFECTS__ */ (e) => ({
+var Ge = {
+	test: /* @__PURE__ */ Be("#"),
+	parse: We,
+	transform: M.transform
+}, N = /* @__NO_SIDE_EFFECTS__ */ (e) => ({
 	test: (t) => typeof t == "string" && t.endsWith(e) && t.split(" ").length === 1,
 	parse: parseFloat,
 	transform: (t) => `${t}${e}`
-}), P = /* @__PURE__ */ Ge("deg"), F = /* @__PURE__ */ Ge("%"), I = /* @__PURE__ */ Ge("px"), Ke = /* @__PURE__ */ Ge("vh"), qe = /* @__PURE__ */ Ge("vw"), Je = {
+}), P = /* @__PURE__ */ N("deg"), F = /* @__PURE__ */ N("%"), I = /* @__PURE__ */ N("px"), Ke = /* @__PURE__ */ N("vh"), qe = /* @__PURE__ */ N("vw"), Je = {
 	...F,
 	parse: (e) => F.parse(e) / 100,
 	transform: (e) => F.transform(e * 100)
 }, L = {
-	test: /* @__PURE__ */ ze("hsl", "hue"),
-	parse: /* @__PURE__ */ Be("hue", "saturation", "lightness"),
-	transform: ({ hue: e, saturation: t, lightness: n, alpha: r = 1 }) => "hsla(" + Math.round(e) + ", " + F.transform(M(t)) + ", " + F.transform(M(n)) + ", " + M(j.transform(r)) + ")"
+	test: /* @__PURE__ */ Be("hsl", "hue"),
+	parse: /* @__PURE__ */ Ve("hue", "saturation", "lightness"),
+	transform: ({ hue: e, saturation: t, lightness: n, alpha: r = 1 }) => "hsla(" + Math.round(e) + ", " + F.transform(Ie(t)) + ", " + F.transform(Ie(n)) + ", " + Ie(j.transform(r)) + ")"
 }, R = {
-	test: (e) => N.test(e) || We.test(e) || L.test(e),
-	parse: (e) => N.test(e) ? N.parse(e) : L.test(e) ? L.parse(e) : We.parse(e),
-	transform: (e) => typeof e == "string" ? e : e.hasOwnProperty("red") ? N.transform(e) : L.transform(e),
+	test: (e) => M.test(e) || Ge.test(e) || L.test(e),
+	parse: (e) => M.test(e) ? M.parse(e) : L.test(e) ? L.parse(e) : Ge.parse(e),
+	transform: (e) => typeof e == "string" ? e : e.hasOwnProperty("red") ? M.transform(e) : L.transform(e),
 	getAnimatableNone: (e) => {
 		let t = R.parse(e);
 		return t.alpha = 0, R.transform(t);
@@ -333,7 +333,7 @@ var We = {
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/complex/index.mjs
 function Xe(e) {
-	return isNaN(e) && typeof e == "string" && (e.match(Ie)?.length || 0) + (e.match(Ye)?.length || 0) > 0;
+	return isNaN(e) && typeof e == "string" && (e.match(Le)?.length || 0) + (e.match(Ye)?.length || 0) > 0;
 }
 var Ze = "number", Qe = "color", $e = "var", et = "var(", tt = "${}", nt = /var\s*\(\s*--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)|#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\)|-?(?:\d+(?:\.\d+)?|\.\d+)/giu;
 function z(e) {
@@ -358,7 +358,7 @@ function it({ split: e, types: t }) {
 		let i = "";
 		for (let a = 0; a < n; a++) if (i += e[a], r[a] !== void 0) {
 			let e = t[a];
-			e === Ze ? i += M(r[a]) : e === Qe ? i += R.transform(r[a]) : i += r[a];
+			e === Ze ? i += Ie(r[a]) : e === Qe ? i += R.transform(r[a]) : i += r[a];
 		}
 		return i;
 	};
@@ -408,8 +408,8 @@ var V = (e, t, n) => e + (t - e) * n, ft = (e, t, n) => {
 	let r = e * e, i = n * (t * t - r) + r;
 	return i < 0 ? 0 : Math.sqrt(i);
 }, pt = [
-	We,
-	N,
+	Ge,
+	M,
 	L
 ], mt = (e) => pt.find((t) => t.test(e));
 function ht(e) {
@@ -422,7 +422,7 @@ var gt = (e, t) => {
 	let n = ht(e), r = ht(t);
 	if (!n || !r) return dt(e, t);
 	let i = { ...n };
-	return (e) => (i.red = ft(n.red, r.red, e), i.green = ft(n.green, r.green, e), i.blue = ft(n.blue, r.blue, e), i.alpha = V(n.alpha, r.alpha, e), N.transform(i));
+	return (e) => (i.red = ft(n.red, r.red, e), i.green = ft(n.green, r.green, e), i.blue = ft(n.blue, r.blue, e), i.alpha = V(n.alpha, r.alpha, e), M.transform(i));
 }, _t = new Set(["none", "hidden"]);
 function vt(e, t) {
 	return _t.has(e) ? (n) => n <= 0 ? e : t : (n) => n >= 1 ? t : e;
@@ -1853,7 +1853,7 @@ var Hr = new Set([
 function Ur(e) {
 	let [t, n] = e.slice(0, -1).split("(");
 	if (t === "drop-shadow") return e;
-	let [r] = n.match(Ie) || [];
+	let [r] = n.match(Le) || [];
 	if (!r) return e;
 	let i = n.replace(r, ""), a = +!!Hr.has(t);
 	return r !== n && (a *= 100), t + "(" + a + i + ")";
@@ -5003,7 +5003,7 @@ var Za = class extends a {
       <button 
         class="trigger ${n} ${r}" 
         part="trigger"
-        ?disabled="${t}"
+        ${t ? "disabled" : ""}
         aria-haspopup="true"
         aria-expanded="${this._isOpen}"
       >
@@ -5904,4 +5904,592 @@ i(to, "observedAttributes", [
 	"variant"
 ]), customElements.define("fm-tooltip", to);
 //#endregion
-export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, Za as FmDropdown, a as FmElement, Qa as FmPagination, eo as FmSparkline, Ga as FmTab, Wa as FmTabs, to as FmTooltip, e as themeStyles };
+//#region src/components/fm-input.js
+var no = class extends a {
+	template() {
+		let e = this.attr("type", "text"), t = this.attr("value", ""), n = this.attr("placeholder", ""), r = this.boolAttr("disabled"), i = this.boolAttr("readonly"), a = this.boolAttr("required"), o = this.attr("error", ""), s = this.attr("size", "md"), c = this.attr("variant", "default"), l = t.length > 0, u = o.length > 0;
+		return `
+      <style>
+        :host {
+          display: block;
+          width: 100%;
+        }
+
+        .input-wrapper {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        /* ---- Variants ---- */
+        .variant-default .input-field {
+          background: var(--fm-color-surface);
+          border: 1.5px solid var(--fm-color-border-strong);
+          border-radius: var(--fm-radius-md);
+        }
+        .variant-default .input-field:hover:not(:disabled) {
+          border-color: var(--fm-color-border);
+        }
+        .variant-default.is-focused .input-field {
+          border-color: var(--fm-color-primary);
+          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
+        }
+        .variant-default.has-error .input-field {
+          border-color: var(--fm-color-error);
+        }
+        .variant-default.has-error.is-focused .input-field {
+          box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+        }
+
+        .variant-filled .input-field {
+          background: var(--fm-color-surface-muted);
+          border: 1.5px solid transparent;
+          border-radius: var(--fm-radius-md);
+        }
+        .variant-filled .input-field:hover:not(:disabled) {
+          background: var(--fm-color-surface-alt);
+        }
+        .variant-filled.is-focused .input-field {
+          background: var(--fm-color-surface);
+          border-color: var(--fm-color-primary);
+          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
+        }
+        .variant-filled.has-error .input-field {
+          border-color: var(--fm-color-error);
+        }
+
+        .variant-outlined .input-field {
+          background: transparent;
+          border: 1.5px solid var(--fm-color-border-strong);
+          border-radius: var(--fm-radius-md);
+        }
+        .variant-outlined .input-field:hover:not(:disabled) {
+          border-color: var(--fm-color-primary-light);
+        }
+        .variant-outlined.is-focused .input-field {
+          border-color: var(--fm-color-primary);
+          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
+        }
+        .variant-outlined.has-error .input-field {
+          border-color: var(--fm-color-error);
+        }
+
+        /* ---- Sizes ---- */
+        .input-field {
+          width: 100%;
+          font-family: var(--fm-font-family);
+          font-weight: var(--fm-font-weight-normal);
+          color: var(--fm-color-text);
+          transition: all var(--fm-transition-fast);
+          outline: none;
+        }
+        .input-field::placeholder {
+          color: var(--fm-color-text-secondary);
+          opacity: 0.6;
+        }
+        .input-field:disabled {
+          background: var(--fm-color-surface-muted);
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+
+        .size-sm .input-field {
+          height: 36px;
+          padding: 0 var(--fm-space-sm);
+          font-size: var(--fm-font-size-sm);
+        }
+
+        .size-md .input-field {
+          height: 44px;
+          padding: 0 var(--fm-space-md);
+          font-size: var(--fm-font-size-md);
+        }
+
+        .size-lg .input-field {
+          height: 52px;
+          padding: 0 var(--fm-space-lg);
+          font-size: var(--fm-font-size-lg);
+        }
+
+        /* ---- Error Message ---- */
+        .error-message {
+          display: flex;
+          align-items: center;
+          gap: var(--fm-space-xs);
+          margin-top: var(--fm-space-xs);
+          font-size: var(--fm-font-size-xs);
+          color: var(--fm-color-error);
+          font-weight: var(--fm-font-weight-medium);
+        }
+        .error-message svg {
+          width: 14px;
+          height: 14px;
+          flex-shrink: 0;
+        }
+
+        /* ---- Helper Text ---- */
+        .helper-text {
+          margin-top: var(--fm-space-xs);
+          font-size: var(--fm-font-size-xs);
+          color: var(--fm-color-text-secondary);
+        }
+        .helper-text.has-error {
+          display: none;
+        }
+      </style>
+
+      <div class="input-wrapper ${{
+			sm: "size-sm",
+			md: "size-md",
+			lg: "size-lg"
+		}[s] || "size-md"} ${{
+			default: "variant-default",
+			filled: "variant-filled",
+			outlined: "variant-outlined"
+		}[c] || "variant-default"} ${r ? "is-disabled" : ""} ${u ? "has-error" : ""} ${this._focused ? "is-focused" : ""} ${l || this._focused ? "is-filled" : ""}">
+        <input
+          class="input-field"
+          part="input"
+          type="${e}"
+          value="${t}"
+          placeholder="${n}"
+          ${r ? "disabled" : ""}
+          ${i ? "readonly" : ""}
+          ${a ? "required" : ""}
+          aria-invalid="${u ? "true" : "false"}"
+          aria-describedby="${u ? "error-msg" : ""}"
+        />
+        ${u ? `
+          <div class="error-message" id="error-msg" part="error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/>
+              <path d="M12 8v4"/>
+              <path d="M12 16h.01"/>
+            </svg>
+            ${o}
+          </div>
+        ` : "\n          <slot name=\"helper\">\n            <div class=\"helper-text\" part=\"helper\">\n              <slot name=\"helper-text\"></slot>\n            </div>\n          </slot>\n        "}
+      </div>
+    `;
+	}
+	onEnter() {
+		let e = this.root.querySelector(".input-wrapper");
+		e && $(e, {
+			opacity: [0, 1],
+			y: [8, 0]
+		}, {
+			type: "spring",
+			stiffness: 400,
+			damping: 30
+		});
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._focused = !1, this._bindEvents();
+	}
+	_bindEvents() {
+		let e = this.root.querySelector(".input-field");
+		e && (e.addEventListener("input", (e) => {
+			let t = e.target.value, n = this.root.querySelector(".input-wrapper");
+			n && (t.length > 0 ? n.classList.add("is-filled") : n.classList.remove("is-filled")), this.dispatchEvent(new CustomEvent("input", {
+				detail: { value: t },
+				bubbles: !0,
+				composed: !0
+			}));
+		}), e.addEventListener("focus", () => {
+			this._focused = !0;
+			let e = this.root.querySelector(".input-wrapper");
+			e && e.classList.add("is-focused"), this.dispatchEvent(new CustomEvent("focus", {
+				bubbles: !0,
+				composed: !0
+			}));
+		}), e.addEventListener("blur", () => {
+			this._focused = !1;
+			let t = this.root.querySelector(".input-wrapper");
+			t && t.classList.remove("is-focused"), this.dispatchEvent(new CustomEvent("blur", {
+				bubbles: !0,
+				composed: !0
+			})), this.dispatchEvent(new CustomEvent("change", {
+				detail: { value: e.value },
+				bubbles: !0,
+				composed: !0
+			}));
+		}));
+	}
+	attributeChangedCallback(e, t, n) {
+		if (t !== n) if (e === "value") {
+			let e = this.root.querySelector(".input-field");
+			if (e && e.value !== n) {
+				e.value = n ?? "";
+				let t = this.root.querySelector(".input-wrapper");
+				t && (n && n.length > 0 ? t.classList.add("is-filled") : t.classList.remove("is-filled"));
+			}
+		} else if (e === "error") {
+			let e = this.root.querySelector(".input-wrapper");
+			e && (n && n.length > 0 ? (e.classList.add("has-error"), $(e, { x: [
+				0,
+				-4,
+				4,
+				-4,
+				4,
+				0
+			] }, {
+				duration: .4,
+				ease: "easeInOut"
+			})) : e.classList.remove("has-error")), this.render(), this._bindEvents();
+		} else this.render(), this._bindEvents();
+	}
+	focus() {
+		let e = this.root.querySelector(".input-field");
+		e && e.focus();
+	}
+	blur() {
+		let e = this.root.querySelector(".input-field");
+		e && e.blur();
+	}
+	clear() {
+		this.setAttribute("value", "");
+		let e = this.root.querySelector(".input-field");
+		e && (e.value = "");
+		let t = this.root.querySelector(".input-wrapper");
+		t && t.classList.remove("is-filled");
+	}
+	get value() {
+		return this.attr("value", "");
+	}
+	set value(e) {
+		this.setAttribute("value", e);
+	}
+};
+i(no, "observedAttributes", [
+	"type",
+	"value",
+	"placeholder",
+	"disabled",
+	"readonly",
+	"required",
+	"error",
+	"size",
+	"variant"
+]), customElements.define("fm-input", no);
+//#endregion
+//#region src/components/fm-textarea.js
+var ro = class extends a {
+	template() {
+		let e = this.attr("value", ""), t = this.attr("placeholder", ""), n = this.boolAttr("disabled"), r = this.boolAttr("readonly"), i = this.boolAttr("required"), a = this.attr("error", ""), o = this.attr("size", "md"), s = this.attr("variant", "default"), c = parseInt(this.attr("rows", "3"), 10) || 3, l = parseInt(this.attr("maxrows", "10"), 10) || 10, u = this.boolAttr("autoresize"), d = this.attr("maxlength", ""), f = this.boolAttr("showcount"), p = e.length > 0, m = a.length > 0, h = d && d.length > 0, g = e.length, _ = h ? parseInt(d, 10) : 0, v = {
+			sm: "size-sm",
+			md: "size-md",
+			lg: "size-lg"
+		}[o] || "size-md", y = {
+			default: "variant-default",
+			filled: "variant-filled",
+			outlined: "variant-outlined"
+		}[s] || "variant-default", b = n ? "is-disabled" : "", x = m ? "has-error" : "", S = this._focused ? "is-focused" : "", C = p || this._focused ? "is-filled" : "", w = o === "sm" ? 20 : o === "lg" ? 28 : 24, T = o === "sm" ? 24 : o === "lg" ? 40 : 32, E = c * w + T;
+		return `
+      <style>
+        :host {
+          display: block;
+          width: 100%;
+        }
+
+        .textarea-wrapper {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        /* ---- Variants ---- */
+        .variant-default .textarea-field {
+          background: var(--fm-color-surface);
+          border: 1.5px solid var(--fm-color-border-strong);
+          border-radius: var(--fm-radius-md);
+        }
+        .variant-default .textarea-field:hover:not(:disabled) {
+          border-color: var(--fm-color-border);
+        }
+        .variant-default.is-focused .textarea-field {
+          border-color: var(--fm-color-primary);
+          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
+        }
+        .variant-default.has-error .textarea-field {
+          border-color: var(--fm-color-error);
+        }
+        .variant-default.has-error.is-focused .textarea-field {
+          box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+        }
+
+        .variant-filled .textarea-field {
+          background: var(--fm-color-surface-muted);
+          border: 1.5px solid transparent;
+          border-radius: var(--fm-radius-md);
+        }
+        .variant-filled .textarea-field:hover:not(:disabled) {
+          background: var(--fm-color-surface-alt);
+        }
+        .variant-filled.is-focused .textarea-field {
+          background: var(--fm-color-surface);
+          border-color: var(--fm-color-primary);
+          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
+        }
+        .variant-filled.has-error .textarea-field {
+          border-color: var(--fm-color-error);
+        }
+
+        .variant-outlined .textarea-field {
+          background: transparent;
+          border: 1.5px solid var(--fm-color-border-strong);
+          border-radius: var(--fm-radius-md);
+        }
+        .variant-outlined .textarea-field:hover:not(:disabled) {
+          border-color: var(--fm-color-primary-light);
+        }
+        .variant-outlined.is-focused .textarea-field {
+          border-color: var(--fm-color-primary);
+          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
+        }
+        .variant-outlined.has-error .textarea-field {
+          border-color: var(--fm-color-error);
+        }
+
+        /* ---- Sizes ---- */
+        .textarea-field {
+          width: 100%;
+          min-height: ${E}px;
+          max-height: ${u ? l * w + T + "px" : "none"};
+          font-family: var(--fm-font-family);
+          font-weight: var(--fm-font-weight-normal);
+          color: var(--fm-color-text);
+          transition: all var(--fm-transition-fast);
+          outline: none;
+          resize: vertical;
+          line-height: 1.5;
+        }
+        .textarea-field::placeholder {
+          color: var(--fm-color-text-secondary);
+          opacity: 0.6;
+        }
+        .textarea-field:disabled {
+          background: var(--fm-color-surface-muted);
+          cursor: not-allowed;
+          opacity: 0.6;
+          resize: none;
+        }
+
+        .size-sm .textarea-field {
+          padding: var(--fm-space-sm) var(--fm-space-sm);
+          font-size: var(--fm-font-size-sm);
+          min-height: ${Math.max(E, 60)}px;
+        }
+
+        .size-md .textarea-field {
+          padding: var(--fm-space-md);
+          font-size: var(--fm-font-size-md);
+          min-height: ${Math.max(E, 76)}px;
+        }
+
+        .size-lg .textarea-field {
+          padding: var(--fm-space-lg);
+          font-size: var(--fm-font-size-lg);
+          min-height: ${Math.max(E, 92)}px;
+        }
+
+        /* ---- Error Message ---- */
+        .error-message {
+          display: flex;
+          align-items: center;
+          gap: var(--fm-space-xs);
+          margin-top: var(--fm-space-xs);
+          font-size: var(--fm-font-size-xs);
+          color: var(--fm-color-error);
+          font-weight: var(--fm-font-weight-medium);
+        }
+        .error-message svg {
+          width: 14px;
+          height: 14px;
+          flex-shrink: 0;
+        }
+
+        /* ---- Character Count ---- */
+        .char-count {
+          display: flex;
+          justify-content: flex-end;
+          margin-top: var(--fm-space-xs);
+          font-size: var(--fm-font-size-xs);
+          color: var(--fm-color-text-secondary);
+        }
+        .char-count.has-error {
+          color: var(--fm-color-error);
+        }
+        .char-count.is-near-limit {
+          color: var(--fm-color-warning);
+        }
+
+        /* ---- Helper Text ---- */
+        .helper-text {
+          margin-top: var(--fm-space-xs);
+          font-size: var(--fm-font-size-xs);
+          color: var(--fm-color-text-secondary);
+        }
+        .helper-text.has-error {
+          display: none;
+        }
+      </style>
+
+      <div class="textarea-wrapper ${v} ${y} ${b} ${x} ${S} ${C}">
+        <textarea
+          class="textarea-field"
+          part="textarea"
+          rows="${c}"
+          placeholder="${t}"
+          ${n ? "disabled" : ""}
+          ${r ? "readonly" : ""}
+          ${i ? "required" : ""}
+          ${h ? `maxlength="${d}"` : ""}
+          aria-invalid="${m ? "true" : "false"}"
+          aria-describedby="${m ? "error-msg" : ""}"
+        >${e}</textarea>
+        ${f && h ? `
+          <div class="char-count ${g > _ * .9 ? "is-near-limit" : ""} ${m ? "has-error" : ""}" part="count">
+            ${g}/${_}
+          </div>
+        ` : ""}
+        ${m ? `
+          <div class="error-message" id="error-msg" part="error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/>
+              <path d="M12 8v4"/>
+              <path d="M12 16h.01"/>
+            </svg>
+            ${a}
+          </div>
+        ` : f ? "" : "\n          <slot name=\"helper\">\n            <div class=\"helper-text\" part=\"helper\">\n              <slot name=\"helper-text\"></slot>\n            </div>\n          </slot>\n        "}
+      </div>
+    `;
+	}
+	onEnter() {
+		let e = this.root.querySelector(".textarea-wrapper");
+		e && $(e, {
+			opacity: [0, 1],
+			y: [8, 0]
+		}, {
+			type: "spring",
+			stiffness: 400,
+			damping: 30
+		});
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._focused = !1, this._bindEvents();
+	}
+	_bindEvents() {
+		let e = this.root.querySelector(".textarea-field");
+		e && (e.addEventListener("input", (t) => {
+			let n = t.target.value, r = this.root.querySelector(".textarea-wrapper");
+			r && (n.length > 0 ? r.classList.add("is-filled") : r.classList.remove("is-filled")), this.boolAttr("autoresize") && this._autoResize(e), this.boolAttr("showcount") && this._updateCharCount(n.length), this.dispatchEvent(new CustomEvent("input", {
+				detail: { value: n },
+				bubbles: !0,
+				composed: !0
+			}));
+		}), e.addEventListener("focus", () => {
+			this._focused = !0;
+			let e = this.root.querySelector(".textarea-wrapper");
+			e && e.classList.add("is-focused"), this.dispatchEvent(new CustomEvent("focus", {
+				bubbles: !0,
+				composed: !0
+			}));
+		}), e.addEventListener("blur", () => {
+			this._focused = !1;
+			let t = this.root.querySelector(".textarea-wrapper");
+			t && t.classList.remove("is-focused"), this.dispatchEvent(new CustomEvent("blur", {
+				bubbles: !0,
+				composed: !0
+			})), this.dispatchEvent(new CustomEvent("change", {
+				detail: { value: e.value },
+				bubbles: !0,
+				composed: !0
+			}));
+		}));
+	}
+	_autoResize(e) {
+		e.style.height = "auto";
+		let t = parseInt(getComputedStyle(e).lineHeight, 10) || 24, n = parseInt(getComputedStyle(e).paddingTop, 10) + parseInt(getComputedStyle(e).paddingBottom, 10), r = (parseInt(this.attr("maxrows", "10"), 10) || 10) * t + n, i = Math.min(e.scrollHeight, r);
+		e.style.height = `${i}px`, e.style.resize = e.scrollHeight > r ? "vertical" : "none";
+	}
+	_updateCharCount(e) {
+		let t = this.root.querySelector(".char-count");
+		if (!t) return;
+		let n = parseInt(this.attr("maxlength", "0"), 10) || 0, r = n > 0 && e > n * .9;
+		t.textContent = `${e}/${n}`, r ? t.classList.add("is-near-limit") : t.classList.remove("is-near-limit");
+	}
+	attributeChangedCallback(e, t, n) {
+		if (t !== n) if (e === "value") {
+			let e = this.root.querySelector(".textarea-field");
+			if (e && e.value !== n) {
+				e.value = n ?? "";
+				let t = this.root.querySelector(".textarea-wrapper");
+				t && (n && n.length > 0 ? t.classList.add("is-filled") : t.classList.remove("is-filled")), this.boolAttr("autoresize") && this._autoResize(e), this.boolAttr("showcount") && this._updateCharCount((n ?? "").length);
+			}
+		} else if (e === "error") {
+			let e = this.root.querySelector(".textarea-wrapper");
+			e && (n && n.length > 0 ? (e.classList.add("has-error"), $(e, { x: [
+				0,
+				-4,
+				4,
+				-4,
+				4,
+				0
+			] }, {
+				duration: .4,
+				ease: "easeInOut"
+			})) : e.classList.remove("has-error")), this.render(), this._bindEvents();
+		} else this.render(), this._bindEvents();
+	}
+	focus() {
+		let e = this.root.querySelector(".textarea-field");
+		e && e.focus();
+	}
+	blur() {
+		let e = this.root.querySelector(".textarea-field");
+		e && e.blur();
+	}
+	clear() {
+		this.setAttribute("value", "");
+		let e = this.root.querySelector(".textarea-field");
+		e && (e.value = "", e.style.height = "auto");
+		let t = this.root.querySelector(".textarea-wrapper");
+		t && t.classList.remove("is-filled"), this.boolAttr("showcount") && this._updateCharCount(0);
+	}
+	insertText(e) {
+		let t = this.root.querySelector(".textarea-field");
+		if (!t) return;
+		let n = t.selectionStart, r = t.selectionEnd, i = t.value, a = i.substring(0, n) + e + i.substring(r);
+		this.value = a, setTimeout(() => {
+			t.selectionStart = t.selectionEnd = n + e.length;
+		}, 0);
+	}
+	get value() {
+		return this.attr("value", "");
+	}
+	set value(e) {
+		this.setAttribute("value", e);
+	}
+};
+i(ro, "observedAttributes", [
+	"value",
+	"placeholder",
+	"disabled",
+	"readonly",
+	"required",
+	"error",
+	"size",
+	"variant",
+	"rows",
+	"maxrows",
+	"autoresize",
+	"maxlength",
+	"showcount"
+]), customElements.define("fm-textarea", ro);
+//#endregion
+export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, Za as FmDropdown, a as FmElement, no as FmInput, Qa as FmPagination, eo as FmSparkline, Ga as FmTab, Wa as FmTabs, ro as FmTextarea, to as FmTooltip, e as themeStyles };

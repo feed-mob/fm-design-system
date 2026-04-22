@@ -16,3 +16,5 @@ export { FmDropdown } from "./components/fm-dropdown.js";
 export { FmPagination } from "./components/fm-pagination.js";
 export { FmSparkline } from "./components/fm-sparkline.js";
 export { FmTooltip } from "./components/fm-tooltip.js";
+export { FmInput } from "./components/fm-input.js";
+export { FmTextarea } from "./components/fm-textarea.js";

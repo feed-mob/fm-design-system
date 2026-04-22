@@ -250,7 +250,7 @@ export class FmDropdown extends FmElement {
       <button 
         class="trigger ${size} ${variant}" 
         part="trigger"
-        ?disabled="${disabled}"
+        ${disabled ? 'disabled' : ''}
         aria-haspopup="true"
         aria-expanded="${this._isOpen}"
       >

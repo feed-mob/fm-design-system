@@ -52,6 +52,8 @@
       <li><a href="#fm-pagination" class="sidebar-link" data-section="fm-pagination">Pagination</a></li>
       <li><a href="#fm-sparkline" class="sidebar-link" data-section="fm-sparkline">Sparkline</a></li>
       <li><a href="#fm-tooltip" class="sidebar-link" data-section="fm-tooltip">Tooltip</a></li>
+      <li><a href="#fm-input" class="sidebar-link" data-section="fm-input">Input</a></li>
+      <li><a href="#fm-textarea" class="sidebar-link" data-section="fm-textarea">Textarea</a></li>
     </ul>
   </nav>
 
@@ -2195,6 +2197,519 @@ npm install @fm-agency/design-system</code></pre>
     &lt;svg&gt;...&lt;/svg&gt;
   &lt;/button&gt;
 &lt;/fm-tooltip&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- INPUT                                                         -->
+  <!-- ============================================================ -->
+  <section id="fm-input">
+    <h2>fm-input</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Basic inputs</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
+              <fm-input placeholder="Enter campaign name"></fm-input>
+              <fm-input type="email" placeholder="you@company.com"></fm-input>
+              <fm-input type="password" placeholder="Enter password"></fm-input>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Sizes</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
+              <fm-input size="sm" placeholder="Small size"></fm-input>
+              <fm-input size="md" placeholder="Medium size (default)"></fm-input>
+              <fm-input size="lg" placeholder="Large size"></fm-input>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Variants</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
+              <fm-input variant="default" placeholder="Default variant"></fm-input>
+              <fm-input variant="filled" placeholder="Filled variant"></fm-input>
+              <fm-input variant="outlined" placeholder="Outlined variant"></fm-input>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">States</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
+              <fm-input value="Disabled input" disabled></fm-input>
+              <fm-input value="Read only input" readonly></fm-input>
+              <fm-input placeholder="Required input" required></fm-input>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">With Error</p>
+            <div style="max-width: 400px;">
+              <fm-input type="number" placeholder="Enter amount" error="Budget must be at least $1,000"></fm-input>
+            </div>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>type</code></td>
+                <td>string</td>
+                <td>"text"</td>
+                <td>Input type: <code>text</code>, <code>password</code>, <code>email</code>, <code>number</code>, <code>search</code>, <code>tel</code>, <code>url</code></td>
+              </tr>
+              <tr>
+                <td><code>value</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Current input value</td>
+              </tr>
+              <tr>
+                <td><code>placeholder</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Placeholder text when empty</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables the input</td>
+              </tr>
+              <tr>
+                <td><code>readonly</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Makes input read-only</td>
+              </tr>
+              <tr>
+                <td><code>required</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>HTML5 required attribute</td>
+              </tr>
+              <tr>
+                <td><code>error</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Error message (shows error state when set)</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Input size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Visual style: <code>default</code>, <code>filled</code>, <code>outlined</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>input</code></td>
+                <td><code>{ value: string }</code></td>
+                <td>Fired on every keystroke</td>
+              </tr>
+              <tr>
+                <td><code>change</code></td>
+                <td><code>{ value: string }</code></td>
+                <td>Fired on blur after value changes</td>
+              </tr>
+              <tr>
+                <td><code>focus</code></td>
+                <td>—</td>
+                <td>Fired when input receives focus</td>
+              </tr>
+              <tr>
+                <td><code>blur</code></td>
+                <td>—</td>
+                <td>Fired when input loses focus</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Methods</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>focus()</code></td>
+                <td>void</td>
+                <td>Focus the input programmatically</td>
+              </tr>
+              <tr>
+                <td><code>blur()</code></td>
+                <td>void</td>
+                <td>Blur the input programmatically</td>
+              </tr>
+              <tr>
+                <td><code>clear()</code></td>
+                <td>void</td>
+                <td>Clear the input value</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Parts</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>input</code></td><td>The native input element</td></tr>
+              <tr><td><code>error</code></td><td>The error message container</td></tr>
+              <tr><td><code>helper</code></td><td>The helper text container</td></tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up (spring physics)</li>
+            <li><strong>Focus:</strong> Border color transition + focus ring</li>
+            <li><strong>Error:</strong> Shake animation when error appears</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic input --&gt;
+&lt;fm-input placeholder="Enter campaign name"&gt;&lt;/fm-input&gt;
+
+&lt;!-- Different types --&gt;
+&lt;fm-input type="email" placeholder="you@company.com"&gt;&lt;/fm-input&gt;
+&lt;fm-input type="password" placeholder="Enter password"&gt;&lt;/fm-input&gt;
+&lt;fm-input type="number" placeholder="Enter amount"&gt;&lt;/fm-input&gt;
+&lt;fm-input type="search" placeholder="Search..."&gt;&lt;/fm-input&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;fm-input size="sm" placeholder="Small input"&gt;&lt;/fm-input&gt;
+&lt;fm-input size="md" placeholder="Medium input"&gt;&lt;/fm-input&gt;
+&lt;fm-input size="lg" placeholder="Large input"&gt;&lt;/fm-input&gt;
+
+&lt;!-- Variants --&gt;
+&lt;fm-input variant="default"&gt;&lt;/fm-input&gt;
+&lt;fm-input variant="filled"&gt;&lt;/fm-input&gt;
+&lt;fm-input variant="outlined"&gt;&lt;/fm-input&gt;
+
+&lt;!-- States --&gt;
+&lt;fm-input value="Disabled" disabled&gt;&lt;/fm-input&gt;
+&lt;fm-input value="Read only" readonly&gt;&lt;/fm-input&gt;
+&lt;fm-input required&gt;&lt;/fm-input&gt;
+
+&lt;!-- With error --&gt;
+&lt;fm-input error="Must be at least $1,000"&gt;&lt;/fm-input&gt;
+
+&lt;!-- Listen for events --&gt;
+&lt;script&gt;
+  const input = document.querySelector('fm-input');
+  
+  input.addEventListener('input', (e) =&gt; {
+    console.log('Current value:', e.detail.value);
+  });
+  
+  input.addEventListener('change', (e) =&gt; {
+    console.log('Final value:', e.detail.value);
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TEXTAREA                                                      -->
+  <!-- ============================================================ -->
+  <section id="fm-textarea">
+    <h2>fm-textarea</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Basic textarea</p>
+            <div style="max-width: 400px;">
+              <fm-textarea placeholder="Describe your campaign objectives, target audience, and key messaging..." rows="4"></fm-textarea>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Sizes</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
+              <fm-textarea size="sm" placeholder="Small textarea" rows="2"></fm-textarea>
+              <fm-textarea size="md" placeholder="Medium textarea (default)" rows="2"></fm-textarea>
+              <fm-textarea size="lg" placeholder="Large textarea" rows="2"></fm-textarea>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Auto-resize (grows as you type)</p>
+            <div style="max-width: 400px;">
+              <fm-textarea placeholder="Type to see auto-resize in action..." rows="3" autoresize maxrows="8"></fm-textarea>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">With character count</p>
+            <div style="max-width: 400px;">
+              <fm-textarea placeholder="Tell us about yourself..." rows="3" maxlength="200" showcount value="Started in digital marketing back in 2015..."></fm-textarea>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Variants</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
+              <fm-textarea variant="default" placeholder="Default variant" rows="2"></fm-textarea>
+              <fm-textarea variant="filled" placeholder="Filled variant" rows="2"></fm-textarea>
+              <fm-textarea variant="outlined" placeholder="Outlined variant" rows="2"></fm-textarea>
+            </div>
+          </div>
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">States</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
+              <fm-textarea rows="2" value="This textarea is disabled and cannot be edited." disabled></fm-textarea>
+              <fm-textarea rows="2" value="This content is read-only." readonly></fm-textarea>
+              <fm-textarea rows="2" placeholder="This field is required" required></fm-textarea>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">With Error</p>
+            <div style="max-width: 400px;">
+              <fm-textarea rows="3" error="Brief must be at least 50 characters long"></fm-textarea>
+            </div>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>value</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Current textarea value</td>
+              </tr>
+              <tr>
+                <td><code>placeholder</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Placeholder text when empty</td>
+              </tr>
+              <tr>
+                <td><code>rows</code></td>
+                <td>number</td>
+                <td>3</td>
+                <td>Minimum number of visible rows</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables the textarea</td>
+              </tr>
+              <tr>
+                <td><code>readonly</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Makes textarea read-only</td>
+              </tr>
+              <tr>
+                <td><code>required</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>HTML5 required attribute</td>
+              </tr>
+              <tr>
+                <td><code>error</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Error message (shows error state when set)</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td>string</td>
+                <td>"md"</td>
+                <td>Textarea size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Visual style: <code>default</code>, <code>filled</code>, <code>outlined</code></td>
+              </tr>
+              <tr>
+                <td><code>autoresize</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Auto-expand height as user types</td>
+              </tr>
+              <tr>
+                <td><code>maxrows</code></td>
+                <td>number</td>
+                <td>10</td>
+                <td>Maximum rows for auto-resize</td>
+              </tr>
+              <tr>
+                <td><code>maxlength</code></td>
+                <td>number</td>
+                <td>—</td>
+                <td>Maximum character count</td>
+              </tr>
+              <tr>
+                <td><code>showcount</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Show character count (requires maxlength)</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>input</code></td>
+                <td><code>{ value: string }</code></td>
+                <td>Fired on every keystroke</td>
+              </tr>
+              <tr>
+                <td><code>change</code></td>
+                <td><code>{ value: string }</code></td>
+                <td>Fired on blur after value changes</td>
+              </tr>
+              <tr>
+                <td><code>focus</code></td>
+                <td>—</td>
+                <td>Fired when textarea receives focus</td>
+              </tr>
+              <tr>
+                <td><code>blur</code></td>
+                <td>—</td>
+                <td>Fired when textarea loses focus</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Methods</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>focus()</code></td>
+                <td>void</td>
+                <td>Focus the textarea programmatically</td>
+              </tr>
+              <tr>
+                <td><code>blur()</code></td>
+                <td>void</td>
+                <td>Blur the textarea programmatically</td>
+              </tr>
+              <tr>
+                <td><code>clear()</code></td>
+                <td>void</td>
+                <td>Clear the textarea value</td>
+              </tr>
+              <tr>
+                <td><code>insertText(text)</code></td>
+                <td>void</td>
+                <td>Insert text at cursor position</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Parts</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>textarea</code></td><td>The native textarea element</td></tr>
+              <tr><td><code>error</code></td><td>The error message container</td></tr>
+              <tr><td><code>count</code></td><td>The character count element</td></tr>
+              <tr><td><code>helper</code></td><td>The helper text container</td></tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide up (spring physics)</li>
+            <li><strong>Focus:</strong> Border color transition + focus ring</li>
+            <li><strong>Error:</strong> Shake animation when error appears</li>
+            <li><strong>Auto-resize:</strong> Smooth height transition</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic textarea --&gt;
+&lt;fm-textarea 
+  placeholder="Describe your campaign..." 
+  rows="4"
+&gt;&lt;/fm-textarea&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;fm-textarea size="sm" rows="2"&gt;&lt;/fm-textarea&gt;
+&lt;fm-textarea size="md" rows="2"&gt;&lt;/fm-textarea&gt;
+&lt;fm-textarea size="lg" rows="2"&gt;&lt;/fm-textarea&gt;
+
+&lt;!-- Auto-resize (grows with content) --&gt;
+&lt;fm-textarea 
+  placeholder="Type to auto-expand..." 
+  rows="3" 
+  autoresize 
+  maxrows="8"
+&gt;&lt;/fm-textarea&gt;
+
+&lt;!-- Character count --&gt;
+&lt;fm-textarea 
+  placeholder="Tell us about yourself..." 
+  rows="3" 
+  maxlength="200" 
+  showcount
+&gt;&lt;/fm-textarea&gt;
+
+&lt;!-- Variants --&gt;
+&lt;fm-textarea variant="default" rows="2"&gt;&lt;/fm-textarea&gt;
+&lt;fm-textarea variant="filled" rows="2"&gt;&lt;/fm-textarea&gt;
+&lt;fm-textarea variant="outlined" rows="2"&gt;&lt;/fm-textarea&gt;
+
+&lt;!-- States --&gt;
+&lt;fm-textarea rows="2" disabled&gt;&lt;/fm-textarea&gt;
+&lt;fm-textarea rows="2" readonly&gt;&lt;/fm-textarea&gt;
+&lt;fm-textarea rows="2" required&gt;&lt;/fm-textarea&gt;
+
+&lt;!-- With error --&gt;
+&lt;fm-textarea 
+  rows="3" 
+  error="Must be at least 50 characters"
+&gt;&lt;/fm-textarea&gt;
+
+&lt;!-- Listen for events --&gt;
+&lt;script&gt;
+  const textarea = document.querySelector('fm-textarea');
+  
+  textarea.addEventListener('input', (e) =&gt; {
+    console.log('Current value:', e.detail.value);
+  });
+  
+  textarea.addEventListener('change', (e) =&gt; {
+    console.log('Final value:', e.detail.value);
+  });
+&lt;/script&gt;</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
