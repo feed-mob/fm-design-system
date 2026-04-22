@@ -2119,9 +2119,9 @@ npm install @fm-agency/design-system</code></pre>
           if (activeLink && !isMobile()) {
             var linkRect = activeLink.getBoundingClientRect();
             var sidebarRect = sidebar.getBoundingClientRect();
-            if (linkRect.top < sidebarRect.top + 40 || linkRect.bottom > sidebarRect.bottom - 40) {
-              activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            }
+          if (linkRect.top < sidebarRect.top + 40 || linkRect.bottom > sidebarRect.bottom - 40) {
+            activeLink.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+          }
           }
         }
       }

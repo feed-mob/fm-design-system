@@ -496,8 +496,9 @@ footer a:hover {
 }
 
 /* ========== SMOOTH SCROLL ========== */
+/* Note: disabled for instant navigation */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* ========== SCROLL PADDING FOR FIXED HEADER ========== */
