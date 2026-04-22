@@ -51,6 +51,7 @@
       <li><a href="#fm-dropdown" class="sidebar-link" data-section="fm-dropdown">Dropdown</a></li>
       <li><a href="#fm-pagination" class="sidebar-link" data-section="fm-pagination">Pagination</a></li>
       <li><a href="#fm-sparkline" class="sidebar-link" data-section="fm-sparkline">Sparkline</a></li>
+      <li><a href="#fm-tooltip" class="sidebar-link" data-section="fm-tooltip">Tooltip</a></li>
     </ul>
   </nav>
 
@@ -2018,6 +2019,182 @@ npm install @fm-agency/design-system</code></pre>
   height="60"
   stroke-color="var(--fm-color-primary)"
 &gt;&lt;/fm-sparkline&gt;</code></pre>
+        </div>
+      </fm-tab>
+    </fm-tabs>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TOOLTIP                                                       -->
+  <!-- ============================================================ -->
+  <section id="fm-tooltip">
+    <h2>fm-tooltip</h2>
+    <fm-tabs active="0" variant="pills">
+      <fm-tab label="Preview">
+        <div class="preview-area preview-stack">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic tooltip (hover to show)</p>
+            <div class="row" style="align-items: center; gap: 24px; padding: 40px;">
+              <fm-tooltip text="This is a helpful tooltip">
+                <fm-button variant="outline" size="sm">Hover me</fm-button>
+              </fm-tooltip>
+              <fm-tooltip text="Tooltip appears on top" position="top">
+                <span style="color: var(--fm-color-text-secondary);">Top (default)</span>
+              </fm-tooltip>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Different positions</p>
+            <div class="row" style="align-items: center; gap: 24px; padding: 40px;">
+              <fm-tooltip text="Position: top" position="top">
+                <fm-button variant="outline" size="sm">Top</fm-button>
+              </fm-tooltip>
+              <fm-tooltip text="Position: bottom" position="bottom">
+                <fm-button variant="outline" size="sm">Bottom</fm-button>
+              </fm-tooltip>
+              <fm-tooltip text="Position: left" position="left">
+                <fm-button variant="outline" size="sm">Left</fm-button>
+              </fm-tooltip>
+              <fm-tooltip text="Position: right" position="right">
+                <fm-button variant="outline" size="sm">Right</fm-button>
+              </fm-tooltip>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Variants</p>
+            <div class="row" style="align-items: center; gap: 24px; padding: 40px; background: var(--fm-color-surface-alt); border-radius: var(--fm-radius-md);">
+              <fm-tooltip text="Dark variant (default)" variant="dark">
+                <fm-button variant="primary" size="sm">Dark</fm-button>
+              </fm-tooltip>
+              <fm-tooltip text="Primary variant" variant="primary">
+                <fm-button variant="secondary" size="sm">Primary</fm-button>
+              </fm-tooltip>
+              <fm-tooltip text="Secondary variant" variant="secondary">
+                <fm-badge variant="secondary">Secondary</fm-badge>
+              </fm-tooltip>
+              <fm-tooltip text="Light variant" variant="light">
+                <fm-button variant="ghost" size="sm">Light</fm-button>
+              </fm-tooltip>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">With icon trigger</p>
+            <div class="row" style="align-items: center; gap: 24px; padding: 40px;">
+              <fm-tooltip text="Get more information">
+                <button style="background: none; border: none; cursor: pointer; padding: 8px; color: var(--fm-color-text-secondary); display: flex; align-items: center; justify-content: center;">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="10" cy="10" r="8"/>
+                    <path d="M10 14v-4"/>
+                    <path d="M10 7h.01"/>
+                  </svg>
+                </button>
+              </fm-tooltip>
+              <fm-tooltip text="Copy to clipboard" position="right" variant="primary">
+                <fm-clipboard variant="icon" text="example-text"></fm-clipboard>
+              </fm-tooltip>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Long text content</p>
+            <div style="padding: 40px; display: flex; justify-content: center;">
+              <fm-tooltip text="This is a longer tooltip message that explains the feature in more detail">
+                <fm-badge variant="info">Hover for info</fm-badge>
+              </fm-tooltip>
+            </div>
+          </div>
+        </div>
+      </fm-tab>
+      <fm-tab label="Interface">
+        <div class="interface-panel">
+          <h4>Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>text</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>The tooltip text to display</td>
+              </tr>
+              <tr>
+                <td><code>position</code></td>
+                <td>string</td>
+                <td>"top"</td>
+                <td>Tooltip position: <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code></td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"dark"</td>
+                <td>Visual style: <code>dark</code>, <code>primary</code>, <code>secondary</code>, <code>light</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Slots</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(default)</code></td><td>The trigger element that shows the tooltip on hover/focus</td></tr>
+            </tbody>
+          </table>
+          <h4>Parts (CSS Shadow Parts)</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>trigger</code></td><td>The trigger container element</td></tr>
+              <tr><td><code>tip</code></td><td>The tooltip bubble element</td></tr>
+            </tbody>
+          </table>
+          <h4>Animations</h4>
+          <ul class="animation-list">
+            <li><strong>Entrance:</strong> Fade in with subtle slide from the tooltip direction</li>
+            <li><strong>Show:</strong> Spring pop-in animation (stiffness: 400, damping: 20)</li>
+            <li><strong>Hide:</strong> Quick fade out (150ms)</li>
+          </ul>
+        </div>
+      </fm-tab>
+      <fm-tab label="Code">
+        <div class="code-panel">
+          <pre><code class="language-html">&lt;!-- Basic tooltip --&gt;
+&lt;fm-tooltip text="This is a helpful tooltip"&gt;
+  &lt;fm-button variant="outline"&gt;Hover me&lt;/fm-button&gt;
+&lt;/fm-tooltip&gt;
+
+&lt;!-- Different positions --&gt;
+&lt;fm-tooltip text="Appears on top" position="top"&gt;
+  &lt;button&gt;Top&lt;/button&gt;
+&lt;/fm-tooltip&gt;
+
+&lt;fm-tooltip text="Appears below" position="bottom"&gt;
+  &lt;button&gt;Bottom&lt;/button&gt;
+&lt;/fm-tooltip&gt;
+
+&lt;fm-tooltip text="Appears to left" position="left"&gt;
+  &lt;button&gt;Left&lt;/button&gt;
+&lt;/fm-tooltip&gt;
+
+&lt;fm-tooltip text="Appears to right" position="right"&gt;
+  &lt;button&gt;Right&lt;/button&gt;
+&lt;/fm-tooltip&gt;
+
+&lt;!-- Visual variants --&gt;
+&lt;fm-tooltip text="Dark variant" variant="dark"&gt;...&lt;/fm-tooltip&gt;
+&lt;fm-tooltip text="Primary variant" variant="primary"&gt;...&lt;/fm-tooltip&gt;
+&lt;fm-tooltip text="Secondary variant" variant="secondary"&gt;...&lt;/fm-tooltip&gt;
+&lt;fm-tooltip text="Light variant" variant="light"&gt;...&lt;/fm-tooltip&gt;
+
+&lt;!-- With icon trigger --&gt;
+&lt;fm-tooltip text="Get more information"&gt;
+  &lt;button aria-label="Info"&gt;
+    &lt;svg&gt;...&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/fm-tooltip&gt;</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>

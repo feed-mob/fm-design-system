@@ -15,3 +15,4 @@ export { FmCollapsible } from "./components/fm-collapsible.js";
 export { FmDropdown } from "./components/fm-dropdown.js";
 export { FmPagination } from "./components/fm-pagination.js";
 export { FmSparkline } from "./components/fm-sparkline.js";
+export { FmTooltip } from "./components/fm-tooltip.js";

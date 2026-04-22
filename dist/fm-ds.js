@@ -5710,4 +5710,198 @@ i(eo, "observedAttributes", [
 	"aria-label"
 ]), customElements.define("fm-sparkline", eo);
 //#endregion
-export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, Za as FmDropdown, a as FmElement, Qa as FmPagination, eo as FmSparkline, Ga as FmTab, Wa as FmTabs, e as themeStyles };
+//#region src/components/fm-tooltip.js
+var to = class extends a {
+	constructor(...e) {
+		super(...e), i(this, "_handleShow", () => {
+			let e = this.root.querySelector(".tip");
+			if (!e) return;
+			let t = this.attr("position", "top"), n = t === "top" || t === "bottom" ? "translateX(-50%)" : "translateY(-50%)", r = {
+				top: `${n} translateY(6px)`,
+				bottom: `${n} translateY(-6px)`,
+				left: `${n} translateX(6px)`,
+				right: `${n} translateX(-6px)`
+			}, i = {
+				top: `${n} translateY(0)`,
+				bottom: `${n} translateY(0)`,
+				left: `${n} translateX(0)`,
+				right: `${n} translateX(0)`
+			};
+			e.style.visibility = "visible", $(e, {
+				opacity: [0, 1],
+				transform: [r[t] ?? r.top, i[t] ?? i.top]
+			}, {
+				type: "spring",
+				stiffness: 400,
+				damping: 20
+			});
+		}), i(this, "_handleHide", () => {
+			let e = this.root.querySelector(".tip");
+			e && $(e, { opacity: 0 }, { duration: .15 }).then(() => {
+				e.style.opacity === "0" && (e.style.visibility = "hidden");
+			});
+		});
+	}
+	template() {
+		let e = this.attr("text", "");
+		return `
+      <style>
+        :host {
+          display: inline-block;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .trigger {
+          display: inline-block;
+          cursor: inherit;
+        }
+
+        .tip {
+          position: absolute;
+          z-index: 1000;
+          padding: var(--fm-space-xs) var(--fm-space-sm);
+          border-radius: var(--fm-radius-sm);
+          font-family: var(--fm-font-family);
+          font-size: var(--fm-font-size-xs);
+          font-weight: var(--fm-font-weight-medium);
+          white-space: nowrap;
+          pointer-events: none;
+          opacity: 0;
+          visibility: hidden;
+          will-change: transform, opacity;
+          box-shadow: var(--fm-shadow-md);
+        }
+
+        /* ---- Variants ---- */
+        .tip.dark {
+          background: var(--fm-color-text);
+          color: var(--fm-color-text-light);
+        }
+
+        .tip.primary {
+          background: var(--fm-color-primary);
+          color: var(--fm-color-text-light);
+        }
+
+        .tip.secondary {
+          background: var(--fm-color-secondary);
+          color: var(--fm-color-text-light);
+        }
+
+        .tip.light {
+          background: var(--fm-color-surface);
+          color: var(--fm-color-text);
+          border: 1px solid var(--fm-color-border);
+        }
+
+        /* ---- Positions ---- */
+        .tip.top {
+          bottom: calc(100% + 8px);
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .tip.bottom {
+          top: calc(100% + 8px);
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .tip.left {
+          right: calc(100% + 8px);
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .tip.right {
+          left: calc(100% + 8px);
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        /* ---- Arrow ---- */
+        .tip::after {
+          content: "";
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: inherit;
+          transform: rotate(45deg);
+        }
+
+        .tip.top::after {
+          bottom: -4px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.bottom::after {
+          top: -4px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.left::after {
+          right: -4px;
+          top: calc(50% - 4px);
+        }
+
+        .tip.right::after {
+          left: -4px;
+          top: calc(50% - 4px);
+        }
+
+        /* ---- Light variant arrow border ---- */
+        .tip.light::before {
+          content: "";
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: var(--fm-color-border);
+          transform: rotate(45deg);
+          z-index: -1;
+        }
+
+        .tip.light.top::before {
+          bottom: -5px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.light.bottom::before {
+          top: -5px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.light.left::before {
+          right: -5px;
+          top: calc(50% - 4px);
+        }
+
+        .tip.light.right::before {
+          left: -5px;
+          top: calc(50% - 4px);
+        }
+      </style>
+
+      <div class="trigger" part="trigger">
+        <slot></slot>
+      </div>
+      <div class="tip ${this.attr("position", "top")} ${this.attr("variant", "dark")}" part="tip">${e}</div>
+    `;
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._bindEvents();
+	}
+	_bindEvents() {
+		this.addEventListener("mouseenter", this._handleShow), this.addEventListener("mouseleave", this._handleHide), this.addEventListener("focusin", this._handleShow), this.addEventListener("focusout", this._handleHide);
+	}
+	attributeChangedCallback() {
+		this.render(), this._bindEvents();
+	}
+};
+i(to, "observedAttributes", [
+	"text",
+	"position",
+	"variant"
+]), customElements.define("fm-tooltip", to);
+//#endregion
+export { Ka as FmAlert, Ua as FmBadge, Ja as FmBreadcrumb, Va as FmButton, Ha as FmCard, qa as FmCheckbox, Ya as FmClipboard, Xa as FmCollapsible, Za as FmDropdown, a as FmElement, Qa as FmPagination, eo as FmSparkline, Ga as FmTab, Wa as FmTabs, to as FmTooltip, e as themeStyles };

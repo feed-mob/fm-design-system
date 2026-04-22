@@ -1817,4 +1817,146 @@
           `:``}
         </svg>
       </div>
-    `}onEnter(){this._animateSparkline()}attributeChangedCallback(){this.render(),this.isConnected&&this._entered&&this._animateSparkline()}_animateSparkline(){let e=this.root.querySelector(`.sparkline`);e&&$(e,{opacity:[.4,1],y:[6,0]},{type:`spring`,stiffness:320,damping:26})}_numberAttr(e,t){let n=Number(this.attr(e,String(t)));return Number.isFinite(n)&&n>0?n:t}_parseData(){let e=this.attr(`data`,``).trim();if(!e)return[];try{let t=JSON.parse(e);if(Array.isArray(t))return t.map(e=>Number(e)).filter(e=>Number.isFinite(e))}catch{}return e.split(`,`).map(e=>Number(e.trim())).filter(e=>Number.isFinite(e))}_buildPathData(e,t,n){if(e.length===0)return{line:``,area:``,point:null};let r=Math.min(...e),i=Math.max(...e)-r||1,a=Math.min(10,t/2,n/2),o=Math.max(t-a*2,0),s=Math.max(n-a*2,0),c=e.map((n,c)=>{let l=e.length===1?t/2:a+c/(e.length-1)*o,u=a+s-(n-r)/i*s;return[this._formatPoint(l),this._formatPoint(u)]});if(e.length===1)return{line:``,area:``,point:c[0]};let l=c.map(([e,t],n)=>`${n===0?`M`:`L`} ${e} ${t}`).join(` `),u=this._formatPoint(n-a);return{line:l,area:`${l} L ${c[c.length-1][0]} ${u} L ${c[0][0]} ${u} Z`,point:null}}_formatPoint(e){return Number(e.toFixed(2))}_escapeAttr(e){return String(e).replaceAll(`&`,`&amp;`).replaceAll(`"`,`&quot;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`)}};a(to,`observedAttributes`,[`data`,`width`,`height`,`gradient-from`,`gradient-to`,`stroke-color`,`stroke-width`,`aria-label`]),customElements.define(`fm-sparkline`,to),e.FmAlert=qa,e.FmBadge=Wa,e.FmBreadcrumb=Ya,e.FmButton=Ha,e.FmCard=Ua,e.FmCheckbox=Ja,e.FmClipboard=Xa,e.FmCollapsible=Za,e.FmDropdown=Qa,e.FmElement=o,e.FmPagination=$a,e.FmSparkline=to,e.FmTab=Ka,e.FmTabs=Ga,e.themeStyles=t});
+    `}onEnter(){this._animateSparkline()}attributeChangedCallback(){this.render(),this.isConnected&&this._entered&&this._animateSparkline()}_animateSparkline(){let e=this.root.querySelector(`.sparkline`);e&&$(e,{opacity:[.4,1],y:[6,0]},{type:`spring`,stiffness:320,damping:26})}_numberAttr(e,t){let n=Number(this.attr(e,String(t)));return Number.isFinite(n)&&n>0?n:t}_parseData(){let e=this.attr(`data`,``).trim();if(!e)return[];try{let t=JSON.parse(e);if(Array.isArray(t))return t.map(e=>Number(e)).filter(e=>Number.isFinite(e))}catch{}return e.split(`,`).map(e=>Number(e.trim())).filter(e=>Number.isFinite(e))}_buildPathData(e,t,n){if(e.length===0)return{line:``,area:``,point:null};let r=Math.min(...e),i=Math.max(...e)-r||1,a=Math.min(10,t/2,n/2),o=Math.max(t-a*2,0),s=Math.max(n-a*2,0),c=e.map((n,c)=>{let l=e.length===1?t/2:a+c/(e.length-1)*o,u=a+s-(n-r)/i*s;return[this._formatPoint(l),this._formatPoint(u)]});if(e.length===1)return{line:``,area:``,point:c[0]};let l=c.map(([e,t],n)=>`${n===0?`M`:`L`} ${e} ${t}`).join(` `),u=this._formatPoint(n-a);return{line:l,area:`${l} L ${c[c.length-1][0]} ${u} L ${c[0][0]} ${u} Z`,point:null}}_formatPoint(e){return Number(e.toFixed(2))}_escapeAttr(e){return String(e).replaceAll(`&`,`&amp;`).replaceAll(`"`,`&quot;`).replaceAll(`<`,`&lt;`).replaceAll(`>`,`&gt;`)}};a(to,`observedAttributes`,[`data`,`width`,`height`,`gradient-from`,`gradient-to`,`stroke-color`,`stroke-width`,`aria-label`]),customElements.define(`fm-sparkline`,to);var no=class extends o{constructor(...e){super(...e),a(this,`_handleShow`,()=>{let e=this.root.querySelector(`.tip`);if(!e)return;let t=this.attr(`position`,`top`),n=t===`top`||t===`bottom`?`translateX(-50%)`:`translateY(-50%)`,r={top:`${n} translateY(6px)`,bottom:`${n} translateY(-6px)`,left:`${n} translateX(6px)`,right:`${n} translateX(-6px)`},i={top:`${n} translateY(0)`,bottom:`${n} translateY(0)`,left:`${n} translateX(0)`,right:`${n} translateX(0)`};e.style.visibility=`visible`,$(e,{opacity:[0,1],transform:[r[t]??r.top,i[t]??i.top]},{type:`spring`,stiffness:400,damping:20})}),a(this,`_handleHide`,()=>{let e=this.root.querySelector(`.tip`);e&&$(e,{opacity:0},{duration:.15}).then(()=>{e.style.opacity===`0`&&(e.style.visibility=`hidden`)})})}template(){let e=this.attr(`text`,``);return`
+      <style>
+        :host {
+          display: inline-block;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .trigger {
+          display: inline-block;
+          cursor: inherit;
+        }
+
+        .tip {
+          position: absolute;
+          z-index: 1000;
+          padding: var(--fm-space-xs) var(--fm-space-sm);
+          border-radius: var(--fm-radius-sm);
+          font-family: var(--fm-font-family);
+          font-size: var(--fm-font-size-xs);
+          font-weight: var(--fm-font-weight-medium);
+          white-space: nowrap;
+          pointer-events: none;
+          opacity: 0;
+          visibility: hidden;
+          will-change: transform, opacity;
+          box-shadow: var(--fm-shadow-md);
+        }
+
+        /* ---- Variants ---- */
+        .tip.dark {
+          background: var(--fm-color-text);
+          color: var(--fm-color-text-light);
+        }
+
+        .tip.primary {
+          background: var(--fm-color-primary);
+          color: var(--fm-color-text-light);
+        }
+
+        .tip.secondary {
+          background: var(--fm-color-secondary);
+          color: var(--fm-color-text-light);
+        }
+
+        .tip.light {
+          background: var(--fm-color-surface);
+          color: var(--fm-color-text);
+          border: 1px solid var(--fm-color-border);
+        }
+
+        /* ---- Positions ---- */
+        .tip.top {
+          bottom: calc(100% + 8px);
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .tip.bottom {
+          top: calc(100% + 8px);
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .tip.left {
+          right: calc(100% + 8px);
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .tip.right {
+          left: calc(100% + 8px);
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        /* ---- Arrow ---- */
+        .tip::after {
+          content: "";
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: inherit;
+          transform: rotate(45deg);
+        }
+
+        .tip.top::after {
+          bottom: -4px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.bottom::after {
+          top: -4px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.left::after {
+          right: -4px;
+          top: calc(50% - 4px);
+        }
+
+        .tip.right::after {
+          left: -4px;
+          top: calc(50% - 4px);
+        }
+
+        /* ---- Light variant arrow border ---- */
+        .tip.light::before {
+          content: "";
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: var(--fm-color-border);
+          transform: rotate(45deg);
+          z-index: -1;
+        }
+
+        .tip.light.top::before {
+          bottom: -5px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.light.bottom::before {
+          top: -5px;
+          left: calc(50% - 4px);
+        }
+
+        .tip.light.left::before {
+          right: -5px;
+          top: calc(50% - 4px);
+        }
+
+        .tip.light.right::before {
+          left: -5px;
+          top: calc(50% - 4px);
+        }
+      </style>
+
+      <div class="trigger" part="trigger">
+        <slot></slot>
+      </div>
+      <div class="tip ${this.attr(`position`,`top`)} ${this.attr(`variant`,`dark`)}" part="tip">${e}</div>
+    `}connectedCallback(){super.connectedCallback(),this._bindEvents()}_bindEvents(){this.addEventListener(`mouseenter`,this._handleShow),this.addEventListener(`mouseleave`,this._handleHide),this.addEventListener(`focusin`,this._handleShow),this.addEventListener(`focusout`,this._handleHide)}attributeChangedCallback(){this.render(),this._bindEvents()}};a(no,`observedAttributes`,[`text`,`position`,`variant`]),customElements.define(`fm-tooltip`,no),e.FmAlert=qa,e.FmBadge=Wa,e.FmBreadcrumb=Ya,e.FmButton=Ha,e.FmCard=Ua,e.FmCheckbox=Ja,e.FmClipboard=Xa,e.FmCollapsible=Za,e.FmDropdown=Qa,e.FmElement=o,e.FmPagination=$a,e.FmSparkline=to,e.FmTab=Ka,e.FmTabs=Ga,e.FmTooltip=no,e.themeStyles=t});
