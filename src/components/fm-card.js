@@ -93,7 +93,8 @@ export class FmCard extends FmElement {
           padding-top: var(--fm-space-md);
           border-top: 1px solid var(--fm-color-border);
         }
-        .footer-wrapper:empty {
+        .footer-wrapper:empty,
+        .footer-wrapper.no-content {
           display: none;
           margin: 0;
           padding: 0;
@@ -128,6 +129,22 @@ export class FmCard extends FmElement {
   connectedCallback() {
     super.connectedCallback();
     this._bindHoverEvents();
+    this._updateFooterVisibility();
+
+    // Listen for slot changes to update footer visibility
+    const footerSlot = this.root.querySelector('slot[name="footer"]');
+    if (footerSlot) {
+      footerSlot.addEventListener('slotchange', () => this._updateFooterVisibility());
+    }
+  }
+
+  _updateFooterVisibility() {
+    const footerSlot = this.root.querySelector('slot[name="footer"]');
+    const footerWrapper = this.root.querySelector('.footer-wrapper');
+    if (!footerSlot || !footerWrapper) return;
+
+    const hasContent = footerSlot.assignedNodes().length > 0;
+    footerWrapper.classList.toggle('no-content', !hasContent);
   }
 
   _bindHoverEvents() {

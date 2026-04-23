@@ -7,7 +7,6 @@ import { animate, hover, press } from "motion";
  * Attributes:
  *   checked   — boolean
  *   disabled  — boolean
- *   size      — "sm" | "md" (default) | "lg"
  *   indeterminate — boolean (visual only, shows dash instead of check)
  *
  * Animations (Motion):
@@ -19,19 +18,12 @@ import { animate, hover, press } from "motion";
  *   - Focus: teal ring indicator
  */
 export class FmCheckbox extends FmElement {
-  static observedAttributes = ["checked", "disabled", "size", "indeterminate"];
+  static observedAttributes = ["checked", "disabled", "indeterminate"];
 
   template() {
-    const size = this.attr("size", "md");
     const disabled = this.boolAttr("disabled");
     const checked = this.boolAttr("checked");
     const indeterminate = this.boolAttr("indeterminate");
-
-    const sizeClasses = {
-      sm: "size-sm",
-      md: "size-md",
-      lg: "size-lg",
-    }[size] || "size-md";
 
     const stateClass = checked || indeterminate ? "is-checked" : "";
     const disabledClass = disabled ? "is-disabled" : "";
@@ -72,36 +64,13 @@ export class FmCheckbox extends FmElement {
                       box-shadow var(--fm-transition-fast);
           position: relative;
           overflow: hidden;
-        }
-
-        /* ---- Sizes ---- */
-        .checkbox-box.size-sm {
-          width: 16px;
-          height: 16px;
-          border-radius: 4px;
-        }
-        .checkbox-box.size-sm svg {
-          width: 10px;
-          height: 10px;
-        }
-
-        .checkbox-box.size-md {
           width: 20px;
           height: 20px;
         }
-        .checkbox-box.size-md svg {
+
+        .checkbox-box svg {
           width: 12px;
           height: 12px;
-        }
-
-        .checkbox-box.size-lg {
-          width: 24px;
-          height: 24px;
-          border-radius: var(--fm-radius-md);
-        }
-        .checkbox-box.size-lg svg {
-          width: 14px;
-          height: 14px;
         }
 
         /* ---- States ---- */
@@ -160,19 +129,11 @@ export class FmCheckbox extends FmElement {
           color: var(--fm-color-text);
           font-weight: var(--fm-font-weight-normal);
         }
-
-        .checkbox-box.size-sm ~ .label {
-          font-size: var(--fm-font-size-xs);
-        }
-
-        .checkbox-box.size-lg ~ .label {
-          font-size: var(--fm-font-size-md);
-        }
       </style>
 
       <div class="checkbox-wrapper">
         <div
-          class="checkbox-box ${sizeClasses} ${stateClass} ${disabledClass}"
+          class="checkbox-box ${stateClass} ${disabledClass}"
           part="checkbox"
           role="checkbox"
           aria-checked="${checked || indeterminate ? "true" : "false"}"
@@ -328,7 +289,7 @@ export class FmCheckbox extends FmElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     // Only re-render for structural changes, not for animation state
-    if (name === "size" || name === "disabled") {
+    if (name === "disabled") {
       this.render();
       this._bindEvents();
     } else if (name === "checked" || name === "indeterminate") {

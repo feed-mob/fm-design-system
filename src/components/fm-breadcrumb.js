@@ -21,17 +21,15 @@ import { animate } from "motion";
  * Attributes:
  *   items     — JSON array of { label, href? } objects
  *   separator — "chevron" (default) | "slash" | "arrow"
- *   size      — "sm" | "md" (default) | "lg"
  *
  * Events:
  *   fm-breadcrumb-click — fired when a breadcrumb item is clicked, detail: { index, label, href? }
  */
 export class FmBreadcrumb extends FmElement {
-  static observedAttributes = ["items", "separator", "size"];
+  static observedAttributes = ["items", "separator"];
 
   template() {
     const separator = this.attr("separator", "chevron");
-    const size = this.attr("size", "md");
     const itemsAttr = this.attr("items", "");
 
     let items = [];
@@ -96,43 +94,17 @@ export class FmBreadcrumb extends FmElement {
         }
 
         /* ---- Sizes ---- */
-        .breadcrumb.sm {
-          font-size: var(--fm-font-size-xs);
-          gap: var(--fm-space-xs);
-        }
-        .breadcrumb.sm .breadcrumb-separator {
-          width: 12px;
-          height: 12px;
-        }
-        .breadcrumb.sm .breadcrumb-separator svg {
-          width: 12px;
-          height: 12px;
-        }
-
-        .breadcrumb.md {
+        .breadcrumb {
           font-size: var(--fm-font-size-sm);
           gap: var(--fm-space-sm);
         }
-        .breadcrumb.md .breadcrumb-separator {
+        .breadcrumb .breadcrumb-separator {
           width: 14px;
           height: 14px;
         }
-        .breadcrumb.md .breadcrumb-separator svg {
+        .breadcrumb .breadcrumb-separator svg {
           width: 14px;
           height: 14px;
-        }
-
-        .breadcrumb.lg {
-          font-size: var(--fm-font-size-md);
-          gap: var(--fm-space-sm);
-        }
-        .breadcrumb.lg .breadcrumb-separator {
-          width: 16px;
-          height: 16px;
-        }
-        .breadcrumb.lg .breadcrumb-separator svg {
-          width: 16px;
-          height: 16px;
         }
 
         /* ---- Links ---- */
@@ -214,7 +186,7 @@ export class FmBreadcrumb extends FmElement {
       </style>
 
       <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb ${size}" part="breadcrumb">
+        <ol class="breadcrumb" part="breadcrumb">
           ${renderItems()}
         </ol>
       </nav>

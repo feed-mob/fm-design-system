@@ -1,58 +1,40 @@
 import { FmElement } from "../core/fm-element.js";
-import { animate, hover, press } from "motion";
 
 /**
- * <fm-dropdown> — A dropdown menu with buttons and links for FM Agency.
+ * <fm-dropdown> — A dropdown menu component for FM Agency.
  *
  * Attributes:
- *   items       — JSON array of { value, label, type, href?, disabled? } objects
- *                 type can be "button" or "link"
  *   placeholder — string, text shown on trigger button (default: "Menu")
  *   disabled    — boolean, disables interaction
- *   size        — "sm" | "md" (default) | "lg"
  *   variant     — "default" (default) | "outline" | "ghost"
+ *   icon-only   — boolean, shows only a custom icon (use with icon slot)
  *
  * Slots:
- *   trigger     — Custom trigger content (overrides default button)
+ *   icon        — Custom icon for icon-only trigger (optional, defaults to chevron)
+ *   default     — Dropdown content (fm-dropdown-item elements or any custom content)
  *
  * Events:
  *   - fm-dropdown-open   — when dropdown opens
  *   - fm-dropdown-close  — when dropdown closes
- *   - fm-dropdown-click — { value, label, index, type } when an item is clicked
+ *   - fm-dropdown-select — { value } when an item is selected
  *
- * Animations (Motion):
- *   - Entrance: Fade in with subtle slide up
- *   - Open:     Scale + fade with spring physics
- *   - Close:    Reverse open animation
- *   - Hover:    Background color change on items
- *   - Press:    Tactile feedback
+ * Styling (CSS Parts):
+ *   - trigger     — The trigger button element
+ *   - trigger-content — The content wrapper inside trigger
+ *   - trigger-icon    — The chevron icon
+ *   - dropdown    — The dropdown menu container
  */
 export class FmDropdown extends FmElement {
-  static observedAttributes = ["items", "placeholder", "disabled", "size", "variant"];
+  static observedAttributes = ["placeholder", "disabled", "variant", "icon-only"];
 
   /** @type {boolean} Tracks if dropdown is open */
   _isOpen = false;
 
-  /** @type {Array} Parsed items array */
-  _items = [];
-
   template() {
     const placeholder = this.attr("placeholder", "Menu");
     const disabled = this.boolAttr("disabled");
-    const size = this.attr("size", "md");
     const variant = this.attr("variant", "default");
-
-    // Parse items from attribute
-    const itemsAttr = this.attr("items", "");
-    if (itemsAttr) {
-      try {
-        this._items = JSON.parse(itemsAttr);
-      } catch {
-        this._items = [];
-      }
-    } else {
-      this._items = [];
-    }
+    const iconOnly = this.boolAttr("icon-only");
 
     // Chevron icon
     const chevronIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -70,7 +52,7 @@ export class FmDropdown extends FmElement {
         .trigger {
           display: inline-flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
           gap: var(--fm-space-sm);
           font-family: var(--fm-font-family);
           font-weight: var(--fm-font-weight-semibold);
@@ -81,24 +63,10 @@ export class FmDropdown extends FmElement {
           user-select: none;
           -webkit-tap-highlight-color: transparent;
           white-space: nowrap;
-          transition: box-shadow var(--fm-transition-fast), border-color var(--fm-transition-fast);
-          width: 100%;
-        }
-
-        /* Sizes */
-        .trigger.sm {
-          padding: 6px 12px;
-          font-size: var(--fm-font-size-xs);
-          border-radius: var(--fm-radius-sm);
-        }
-        .trigger.md {
+          transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+          width: ${iconOnly ? "auto" : "100%"};
           padding: 10px 16px;
           font-size: var(--fm-font-size-sm);
-        }
-        .trigger.lg {
-          padding: 14px 20px;
-          font-size: var(--fm-font-size-md);
-          border-radius: var(--fm-radius-lg);
         }
 
         /* Variants */
@@ -143,6 +111,31 @@ export class FmDropdown extends FmElement {
           outline-offset: 2px;
         }
 
+        /* Icon-only variant - square shape with centered icon */
+        .trigger.icon-only {
+          width: 40px;
+          height: 40px;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Icon slot container */
+        .icon-slot {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          color: var(--fm-color-text-secondary);
+        }
+
+        .icon-slot ::slotted(*) {
+          width: 100%;
+          height: 100%;
+        }
+
         /* Display text */
         .trigger-text {
           flex: 1;
@@ -160,7 +153,7 @@ export class FmDropdown extends FmElement {
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: transform var(--fm-transition-normal);
+          transition: transform 0.2s ease;
         }
         .trigger-icon.open {
           transform: rotate(180deg);
@@ -171,139 +164,69 @@ export class FmDropdown extends FmElement {
           position: absolute;
           top: calc(100% + 4px);
           left: 0;
-          min-width: 100%;
+          min-width: 180px;
           background: var(--fm-color-surface);
           border: 1px solid var(--fm-color-border);
-          border-radius: var(--fm-radius-lg);
+          border-radius: var(--fm-radius-md);
           box-shadow: var(--fm-shadow-md);
           z-index: 1000;
           overflow: hidden;
           opacity: 0;
-          pointer-events: none;
+          visibility: hidden;
           transform-origin: top center;
+          transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+          transform: scaleY(0.95) translateY(-4px);
         }
 
         .dropdown.open {
           opacity: 1;
-          pointer-events: auto;
+          visibility: visible;
+          transform: scaleY(1) translateY(0);
         }
 
-        /* ---- Dropdown Items ---- */
-        .items {
+        /* ---- Content Area ---- */
+        .content {
           padding: 4px 0;
-          max-height: 280px;
+          max-height: 320px;
           overflow-y: auto;
         }
 
-        .item {
-          display: flex;
-          align-items: center;
-          font-size: var(--fm-font-size-sm);
-          color: var(--fm-color-text);
-          user-select: none;
-          transition: background var(--fm-transition-fast);
-        }
-
-        .item-button,
-        .item-link {
-          all: unset;
-          display: flex;
-          align-items: center;
-          width: 100%;
-          padding: 8px var(--fm-space-md);
-          font-family: var(--fm-font-family);
-          font-size: var(--fm-font-size-sm);
-          color: var(--fm-color-text);
-          cursor: pointer;
-          text-decoration: none;
-          box-sizing: border-box;
-        }
-
-        .item-button:hover:not(:disabled),
-        .item-link:hover:not([disabled]) {
-          background: var(--fm-color-surface-alt);
-        }
-
-        .item-button:disabled,
-        .item-link[disabled] {
-          opacity: 0.4;
-          cursor: not-allowed;
-        }
-
-        .item.disabled {
-          opacity: 0.4;
-        }
-        .item.disabled .item-button,
-        .item.disabled .item-link {
-          cursor: not-allowed;
-        }
-
-        /* Empty state */
-        .empty {
-          padding: var(--fm-space-md);
-          text-align: center;
-          font-size: var(--fm-font-size-sm);
-          color: var(--fm-color-text-secondary);
+        /* ---- Divider ---- */
+        ::slotted([slot="divider"]) {
+          display: block;
+          height: 1px;
+          margin: 4px 0;
+          background: var(--fm-color-border);
         }
       </style>
 
       <button 
-        class="trigger ${size} ${variant}" 
+        class="trigger ${variant} ${iconOnly ? "icon-only" : ""}" 
         part="trigger"
-        ?disabled="${disabled}"
+        ${disabled ? "disabled" : ""}
         aria-haspopup="true"
         aria-expanded="${this._isOpen}"
       >
-        <span class="trigger-content" part="trigger-content">
-          <slot name="trigger">
+        ${iconOnly ? /* html */ `
+          <span class="icon-slot" part="icon-slot">
+            <slot name="icon">${chevronIcon}</slot>
+          </span>
+        ` : /* html */ `
+          <span class="trigger-content" part="trigger-content">
             <span class="trigger-text" part="trigger-text">${placeholder}</span>
-          </slot>
-        </span>
-        <span class="trigger-icon ${this._isOpen ? "open" : ""}" part="trigger-icon">
-          ${chevronIcon}
-        </span>
+          </span>
+          <span class="trigger-icon ${this._isOpen ? "open" : ""}" part="trigger-icon">
+            ${chevronIcon}
+          </span>
+        `}
       </button>
 
       <div class="dropdown ${this._isOpen ? "open" : ""}" part="dropdown">
-        <div class="items" part="items">
-          ${this._renderItems()}
+        <div class="content" part="content">
+          <slot></slot>
         </div>
       </div>
     `;
-  }
-
-  /**
-   * Render dropdown items
-   */
-  _renderItems() {
-    if (this._items.length === 0) {
-      return `<div class="empty">No items</div>`;
-    }
-
-    return this._items.map((item, index) => {
-      const type = item.type || "button";
-      const isDisabled = item.disabled || false;
-      const href = item.href || "javascript:void(0)";
-
-      if (type === "link") {
-        return /* html */ `
-          <div class="item ${isDisabled ? "disabled" : ""}" part="item link-item" data-index="${index}">
-            <a class="item-link" href="${href}" ${isDisabled ? "tabindex=-1" : ""} data-value="${item.value}">
-              ${item.label}
-            </a>
-          </div>
-        `;
-      } else {
-        // button type (default)
-        return /* html */ `
-          <div class="item ${isDisabled ? "disabled" : ""}" part="item button-item" data-index="${index}">
-            <button class="item-button" ${isDisabled ? "disabled" : ""} data-value="${item.value}">
-              ${item.label}
-            </button>
-          </div>
-        `;
-      }
-    }).join("");
   }
 
   /* ---- Lifecycle ---- */
@@ -340,70 +263,18 @@ export class FmDropdown extends FmElement {
       }
     });
 
-    // Item clicks
-    const itemsContainer = this.root.querySelector(".items");
-    if (itemsContainer) {
-      itemsContainer.addEventListener("click", (e) => {
-        const itemEl = e.target.closest(".item");
-        if (!itemEl || itemEl.classList.contains("disabled")) return;
-
-        const index = parseInt(itemEl.dataset.index, 10);
-        const item = this._items[index];
-        if (!item) return;
-
-        // Dispatch click event
-        this.dispatchEvent(new CustomEvent("fm-dropdown-click", {
-          detail: {
-            value: item.value,
-            label: item.label,
-            index: index,
-            type: item.type || "button"
-          },
-          bubbles: true,
-        }));
-
-        // Close dropdown for both button and link clicks
-        // (links will navigate, buttons just close)
-        this.close();
-      });
-    }
-
-    // Hover animations on trigger
-    hover(trigger, (element) => {
-      if (this.boolAttr("disabled")) return () => {};
-
-      animate(element, { scale: 1.02 }, {
-        type: "spring",
-        stiffness: 450,
-        damping: 20,
-      });
-
-      return () => {
-        animate(element, { scale: 1 }, {
-          type: "spring",
-          stiffness: 450,
-          damping: 20,
-        });
-      };
-    });
-
-    // Press animation on trigger
-    press(trigger, (element) => {
-      if (this.boolAttr("disabled")) return () => {};
-
-      animate(element, { scale: 0.98 }, {
-        type: "spring",
-        stiffness: 500,
-        damping: 22,
-      });
-
-      return () => {
-        animate(element, { scale: 1.02 }, {
-          type: "spring",
-          stiffness: 450,
-          damping: 18,
-        });
-      };
+    // Listen for dropdown item selection events
+    this.addEventListener("fm-dropdown-item-select", (e) => {
+      e.stopPropagation();
+      
+      // Re-dispatch as fm-dropdown-select with item value
+      this.dispatchEvent(new CustomEvent("fm-dropdown-select", {
+        detail: { value: e.detail.value },
+        bubbles: true,
+      }));
+      
+      // Close dropdown after selection
+      this.close();
     });
   }
 
@@ -423,53 +294,6 @@ export class FmDropdown extends FmElement {
     }
   }
 
-  /* ---- Animations ---- */
-
-  onEnter() {
-    const trigger = this.root.querySelector(".trigger");
-    animate(trigger, { opacity: [0, 1], y: [6, 0] }, {
-      type: "spring",
-      stiffness: 350,
-      damping: 25,
-    });
-  }
-
-  _animateOpen() {
-    const dropdown = this.root.querySelector(".dropdown");
-    if (!dropdown) return;
-
-    animate(dropdown, 
-      { opacity: [0, 1], scaleY: [0.9, 1], y: [-8, 0] },
-      { type: "spring", stiffness: 400, damping: 28 }
-    );
-
-    // Animate items in staggered
-    const items = this.root.querySelectorAll(".item");
-    if (items.length > 0) {
-      items.forEach((item, index) => {
-        animate(item, 
-          { opacity: [0, 1], x: [-10, 0] },
-          { 
-            type: "spring", 
-            stiffness: 400, 
-            damping: 25,
-            delay: index * 0.03
-          }
-        );
-      });
-    }
-  }
-
-  _animateClose() {
-    const dropdown = this.root.querySelector(".dropdown");
-    if (!dropdown) return;
-
-    animate(dropdown, 
-      { opacity: 0, scaleY: 0.95, y: -4 },
-      { duration: 0.15, ease: "easeIn" }
-    );
-  }
-
   /* ---- Public API ---- */
 
   open() {
@@ -478,7 +302,6 @@ export class FmDropdown extends FmElement {
     this._isOpen = true;
     this.render();
     this._bindEvents();
-    this._animateOpen();
     this._addOutsideClickListener();
 
     this.dispatchEvent(new CustomEvent("fm-dropdown-open", {
@@ -489,14 +312,10 @@ export class FmDropdown extends FmElement {
   close() {
     if (!this._isOpen) return;
 
-    this._animateClose();
     this._isOpen = false;
     this._removeOutsideClickListener();
-
-    setTimeout(() => {
-      this.render();
-      this._bindEvents();
-    }, 150);
+    this.render();
+    this._bindEvents();
 
     this.dispatchEvent(new CustomEvent("fm-dropdown-close", {
       bubbles: true,
