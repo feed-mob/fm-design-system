@@ -11,23 +11,15 @@ import { animate, hover, press } from "motion";
  *   current        — Current active page (1-based, default: 1)
  *   total          — Total number of pages (default: 1)
  *   variant        — "default" (default) | "outline" | "ghost"
- *   sibling-count  — Number of pages to show on each side of current (default: 1)
- *   boundary-count — Number of pages to always show at boundaries (default: 1)
  *   disabled       — Disables all interaction
- *   show-first-last — Show first/last page buttons (default: false)
- *   hide-prev-next — Hide previous/next buttons (default: false)
- *   prev-label     — Label for previous button (default: "")
- *   next-label     — Label for next button (default: "")
  *   href-template  — URL template with :page placeholder, e.g., "/items?page=:page"
  *
  * Events:
  *   fm-page-change — fired when page changes, detail: { page: number, previousPage: number }
  *
  * Examples:
- *   <!-- Standard HTML -->
  *   <fm-pagination current="5" total="20"></fm-pagination>
- *
- *   <!-- With href-template for SSR/SEO -->
+ *   <fm-pagination current="3" total="10" variant="outline"></fm-pagination>
  *   <fm-pagination current="5" total="20" href-template="/items?page=:page"></fm-pagination>
  */
 export class FmPagination extends FmElement {
@@ -35,13 +27,7 @@ export class FmPagination extends FmElement {
     "current",
     "total",
     "variant",
-    "sibling-count",
-    "boundary-count",
     "disabled",
-    "show-first-last",
-    "hide-prev-next",
-    "prev-label",
-    "next-label",
     "href-template",
   ];
 
@@ -50,20 +36,12 @@ export class FmPagination extends FmElement {
     const total = this.getTotal();
     const variant = this.attr("variant", "default");
     const disabled = this.boolAttr("disabled");
-    const showFirstLast = this.boolAttr("show-first-last");
-    const showPrevNext = !this.boolAttr("hide-prev-next");
-    const prevLabel = this.attr("prev-label", "");
-    const nextLabel = this.attr("next-label", "");
     const hrefTemplate = this.attr("href-template", "");
-    const siblingCount = parseInt(this.attr("sibling-count", "1"), 10) || 1;
-    const boundaryCount = parseInt(this.attr("boundary-count", "1"), 10) || 1;
 
-    const pages = this._getPageRange(current, total, siblingCount, boundaryCount);
+    const pages = this._getPageRange(current, total);
 
     const chevronLeft = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>`;
     const chevronRight = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
-    const chevronsLeft = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>`;
-    const chevronsRight = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 17 5-5-5-5"/><path d="m6 17 5-5-5-5"/></svg>`;
 
     const makeHref = (pageNum) => {
       if (!hrefTemplate) return null;
@@ -72,84 +50,6 @@ export class FmPagination extends FmElement {
 
     const prevHref = makeHref(current - 1);
     const nextHref = makeHref(current + 1);
-    const firstHref = makeHref(1);
-    const lastHref = makeHref(total);
-
-    const prevButton = showPrevNext ? `
-      <button 
-        class="pagination-btn pagination-nav ${variant}" 
-        data-action="prev"
-        ${current <= 1 || disabled ? "disabled" : ""}
-        aria-label="Go to previous page"
-      >
-        ${prevHref && current > 1 ? `<a href="${prevHref}" class="nav-link" tabindex="-1">` : ""}
-          ${chevronLeft}
-          ${prevLabel ? `<span class="nav-label">${prevLabel}</span>` : ""}
-        ${prevHref && current > 1 ? `</a>` : ""}
-      </button>
-    ` : "";
-
-    const nextButton = showPrevNext ? `
-      <button 
-        class="pagination-btn pagination-nav ${variant}" 
-        data-action="next"
-        ${current >= total || disabled ? "disabled" : ""}
-        aria-label="Go to next page"
-      >
-        ${nextHref && current < total ? `<a href="${nextHref}" class="nav-link" tabindex="-1">` : ""}
-          ${nextLabel ? `<span class="nav-label">${nextLabel}</span>` : ""}
-          ${chevronRight}
-        ${nextHref && current < total ? `</a>` : ""}
-      </button>
-    ` : "";
-
-    const firstButton = showFirstLast ? `
-      <button 
-        class="pagination-btn pagination-nav ${variant}" 
-        data-action="first"
-        ${current <= 1 || disabled ? "disabled" : ""}
-        aria-label="Go to first page"
-      >
-        ${firstHref && current > 1 ? `<a href="${firstHref}" class="nav-link" tabindex="-1">` : ""}
-          ${chevronsLeft}
-        ${firstHref && current > 1 ? `</a>` : ""}
-      </button>
-    ` : "";
-
-    const lastButton = showFirstLast ? `
-      <button 
-        class="pagination-btn pagination-nav ${variant}" 
-        data-action="last"
-        ${current >= total || disabled ? "disabled" : ""}
-        aria-label="Go to last page"
-      >
-        ${lastHref && current < total ? `<a href="${lastHref}" class="nav-link" tabindex="-1">` : ""}
-          ${chevronsRight}
-        ${lastHref && current < total ? `</a>` : ""}
-      </button>
-    ` : "";
-
-    const renderPageButtons = () => {
-      return pages.map((page) => {
-        if (page === "...") {
-          return `<span class="pagination-ellipsis">...</span>`;
-        }
-        const pageNum = parseInt(page, 10);
-        const isActive = pageNum === current;
-        const href = makeHref(pageNum);
-        return `
-          <button 
-            class="pagination-btn pagination-page ${variant} ${isActive ? "active" : ""}" 
-            data-page="${pageNum}"
-            ${disabled ? "disabled" : ""}
-            aria-label="Go to page ${pageNum}"
-            aria-current="${isActive ? "page" : "false"}"
-          >
-            ${href && !isActive ? `<a href="${href}" class="page-link" tabindex="-1">${pageNum}</a>` : pageNum}
-          </button>
-        `;
-      }).join("");
-    };
 
     return /* html */ `
       <style>
@@ -257,9 +157,6 @@ export class FmPagination extends FmElement {
           padding-left: 8px;
           padding-right: 8px;
         }
-        .pagination-nav .nav-label {
-          margin: 0 4px;
-        }
 
         /* ---- Links inside buttons (for SSR/SEO) ---- */
         .nav-link, .page-link {
@@ -286,26 +183,57 @@ export class FmPagination extends FmElement {
           height: 36px;
           font-size: var(--fm-font-size-sm);
         }
-
-        /* ---- Info text ---- */
-        .pagination-info {
-          color: var(--fm-color-text-secondary);
-          font-size: var(--fm-font-size-sm);
-          margin: 0 var(--fm-space-sm);
-        }
       </style>
 
       <nav class="pagination" role="navigation" aria-label="Pagination">
-        ${firstButton}
-        ${prevButton}
-        ${renderPageButtons()}
-        ${nextButton}
-        ${lastButton}
+        <button 
+          class="pagination-btn pagination-nav ${variant}" 
+          data-action="prev"
+          ${current <= 1 || disabled ? "disabled" : ""}
+          aria-label="Go to previous page"
+        >
+          ${prevHref && current > 1 ? `<a href="${prevHref}" class="nav-link" tabindex="-1">` : ""}
+            ${chevronLeft}
+          ${prevHref && current > 1 ? `</a>` : ""}
+        </button>
+
+        ${pages.map((page) => {
+          if (page === "...") {
+            return `<span class="pagination-ellipsis">...</span>`;
+          }
+          const pageNum = parseInt(page, 10);
+          const isActive = pageNum === current;
+          const href = makeHref(pageNum);
+          return `
+            <button 
+              class="pagination-btn pagination-page ${variant} ${isActive ? "active" : ""}" 
+              data-page="${pageNum}"
+              ${disabled ? "disabled" : ""}
+              aria-label="Go to page ${pageNum}"
+              aria-current="${isActive ? "page" : "false"}"
+            >
+              ${href && !isActive ? `<a href="${href}" class="page-link" tabindex="-1">${pageNum}</a>` : pageNum}
+            </button>
+          `;
+        }).join("")}
+
+        <button 
+          class="pagination-btn pagination-nav ${variant}" 
+          data-action="next"
+          ${current >= total || disabled ? "disabled" : ""}
+          aria-label="Go to next page"
+        >
+          ${nextHref && current < total ? `<a href="${nextHref}" class="nav-link" tabindex="-1">` : ""}
+            ${chevronRight}
+          ${nextHref && current < total ? `</a>` : ""}
+        </button>
       </nav>
     `;
   }
 
-  _getPageRange(current, total, siblingCount, boundaryCount) {
+  _getPageRange(current, total) {
+    const siblingCount = 1;
+    const boundaryCount = 1;
     const pages = [];
     
     const startPages = [];
@@ -394,10 +322,6 @@ export class FmPagination extends FmElement {
           newPage = Math.max(1, current - 1);
         } else if (btn.dataset.action === "next") {
           newPage = Math.min(this.getTotal(), current + 1);
-        } else if (btn.dataset.action === "first") {
-          newPage = 1;
-        } else if (btn.dataset.action === "last") {
-          newPage = this.getTotal();
         } else if (btn.dataset.page) {
           newPage = parseInt(btn.dataset.page, 10);
         }

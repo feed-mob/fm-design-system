@@ -1465,28 +1465,28 @@ npm install @fm-agency/design-system</code></pre>
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Default (with many pages)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Default</p>
             <fm-pagination current="5" total="20"></fm-pagination>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With first/last buttons</p>
-            <fm-pagination current="3" total="15" show-first-last></fm-pagination>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Custom sibling count</p>
-            <fm-pagination current="8" total="50" sibling-count="2"></fm-pagination>
           </div>
           <div>
             <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Outline variant</p>
             <fm-pagination current="7" total="12" variant="outline"></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Ghost variant with prev/next labels</p>
-            <fm-pagination current="4" total="8" variant="ghost" prev-label="Prev" next-label="Next"></fm-pagination>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Ghost variant</p>
+            <fm-pagination current="4" total="8" variant="ghost"></fm-pagination>
           </div>
           <div>
             <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Disabled state</p>
             <fm-pagination current="3" total="10" disabled></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">First page</p>
+            <fm-pagination current="1" total="10"></fm-pagination>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Last page</p>
+            <fm-pagination current="10" total="10"></fm-pagination>
           </div>
         </div>
       </fm-tab>
@@ -1514,55 +1514,19 @@ npm install @fm-agency/design-system</code></pre>
                 <td><code>variant</code></td>
                 <td>string</td>
                 <td>"default"</td>
-                <td>Style: <code>default</code>, <code>outline</code>, <code>ghost</code></td>
-              </tr>
-              <tr>
-                <td><code>href-template</code></td>
-                <td>string</td>
-                <td>""</td>
-                <td>URL template with <code>:page</code> placeholder for SSR links (e.g., <code>/items?page=:page</code>)</td>
-              </tr>
-              <tr>
-                <td><code>sibling-count</code></td>
-                <td>number</td>
-                <td>1</td>
-                <td>Number of pages to show on each side of current page</td>
-              </tr>
-              <tr>
-                <td><code>boundary-count</code></td>
-                <td>number</td>
-                <td>1</td>
-                <td>Number of pages to always show at boundaries</td>
-              </tr>
-              <tr>
-                <td><code>show-first-last</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Show first/last page navigation buttons</td>
-              </tr>
-              <tr>
-                <td><code>hide-prev-next</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Hide previous/next navigation buttons</td>
-              </tr>
-              <tr>
-                <td><code>prev-label</code></td>
-                <td>string</td>
-                <td>""</td>
-                <td>Text label for previous button</td>
-              </tr>
-              <tr>
-                <td><code>next-label</code></td>
-                <td>string</td>
-                <td>""</td>
-                <td>Text label for next button</td>
+                <td>Visual style: <code>default</code>, <code>outline</code>, or <code>ghost</code></td>
               </tr>
               <tr>
                 <td><code>disabled</code></td>
                 <td>boolean</td>
                 <td>false</td>
                 <td>Disables all interaction</td>
+              </tr>
+              <tr>
+                <td><code>href-template</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>URL template with <code>:page</code> placeholder for SSR links (e.g., <code>/items?page=:page</code>)</td>
               </tr>
             </tbody>
           </table>
@@ -1592,20 +1556,6 @@ npm install @fm-agency/design-system</code></pre>
           <pre><code class="language-html">&lt;!-- Basic pagination --&gt;
 &lt;fm-pagination current="5" total="20"&gt;&lt;/fm-pagination&gt;
 
-&lt;!-- With first/last buttons --&gt;
-&lt;fm-pagination 
-  current="3" 
-  total="15" 
-  show-first-last
-&gt;&lt;/fm-pagination&gt;
-
-&lt;!-- More siblings visible --&gt;
-&lt;fm-pagination 
-  current="8" 
-  total="50" 
-  sibling-count="2"
-&gt;&lt;/fm-pagination&gt;
-
 &lt;!-- Outline variant --&gt;
 &lt;fm-pagination 
   current="7" 
@@ -1613,13 +1563,11 @@ npm install @fm-agency/design-system</code></pre>
   variant="outline"
 &gt;&lt;/fm-pagination&gt;
 
-&lt;!-- Ghost with custom labels --&gt;
+&lt;!-- Ghost variant --&gt;
 &lt;fm-pagination 
   current="4" 
   total="8" 
-  variant="ghost" 
-  prev-label="Prev" 
-  next-label="Next"
+  variant="ghost"
 &gt;&lt;/fm-pagination&gt;
 
 &lt;!-- Disabled state --&gt;

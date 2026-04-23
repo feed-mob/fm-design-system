@@ -1393,53 +1393,7 @@
           ${i}
         </button>
       `}
-    `}connectedCallback(){super.connectedCallback(),this._bindEvents()}_bindEvents(){if(this.boolAttr(`disabled`))return;let e=this.root.querySelector(`.item`);e&&e.addEventListener(`click`,e=>{if(this.boolAttr(`disabled`))return;let t=this.attr(`value`,``);this.dispatchEvent(new CustomEvent(`fm-dropdown-item-select`,{detail:{value:t},bubbles:!0,composed:!0}))})}attributeChangedCallback(){this.render(),this._bindEvents()}};a(Qa,`observedAttributes`,[`value`,`disabled`,`href`]),customElements.define(`fm-dropdown-item`,Qa);var $a=class extends o{template(){let e=Math.max(1,Math.min(this.getTotal(),this.getCurrent())),t=this.getTotal(),n=this.attr(`size`,`md`),r=this.attr(`variant`,`default`),i=this.boolAttr(`disabled`),a=this.boolAttr(`show-first-last`),o=!this.boolAttr(`hide-prev-next`),s=this.attr(`prev-label`,``),c=this.attr(`next-label`,``),l=this.attr(`href-template`,``),u=parseInt(this.attr(`sibling-count`,`1`),10)||1,d=parseInt(this.attr(`boundary-count`,`1`),10)||1,f=this._getPageSeries(e,t,u,d),p=e=>l?l.replace(`:page`,e):null,m=p(e-1),h=p(e+1),g=p(1),_=p(t),v=o?`
-      <button 
-        class="pagination-btn pagination-nav ${n} ${r}" 
-        data-action="prev"
-        ${e<=1||i?`disabled`:``}
-        aria-label="Go to previous page"
-      >
-        ${m&&e>1?`<a href="${m}" class="nav-link" tabindex="-1">`:``}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          ${s?`<span class="nav-label">${s}</span>`:``}
-        ${m&&e>1?`</a>`:``}
-      </button>
-    `:``,y=o?`
-      <button 
-        class="pagination-btn pagination-nav ${n} ${r}" 
-        data-action="next"
-        ${e>=t||i?`disabled`:``}
-        aria-label="Go to next page"
-      >
-        ${h&&e<t?`<a href="${h}" class="nav-link" tabindex="-1">`:``}
-          ${c?`<span class="nav-label">${c}</span>`:``}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        ${h&&e<t?`</a>`:``}
-      </button>
-    `:``,b=a?`
-      <button 
-        class="pagination-btn pagination-nav ${n} ${r}" 
-        data-action="first"
-        ${e<=1||i?`disabled`:``}
-        aria-label="Go to first page"
-      >
-        ${g&&e>1?`<a href="${g}" class="nav-link" tabindex="-1">`:``}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
-        ${g&&e>1?`</a>`:``}
-      </button>
-    `:``,x=a?`
-      <button 
-        class="pagination-btn pagination-nav ${n} ${r}" 
-        data-action="last"
-        ${e>=t||i?`disabled`:``}
-        aria-label="Go to last page"
-      >
-        ${_&&e<t?`<a href="${_}" class="nav-link" tabindex="-1">`:``}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 17 5-5-5-5"/><path d="m6 17 5-5-5-5"/></svg>
-        ${_&&e<t?`</a>`:``}
-      </button>
-    `:``;return`
+    `}connectedCallback(){super.connectedCallback(),this._bindEvents()}_bindEvents(){if(this.boolAttr(`disabled`))return;let e=this.root.querySelector(`.item`);e&&e.addEventListener(`click`,e=>{if(this.boolAttr(`disabled`))return;let t=this.attr(`value`,``);this.dispatchEvent(new CustomEvent(`fm-dropdown-item-select`,{detail:{value:t},bubbles:!0,composed:!0}))})}attributeChangedCallback(){this.render(),this._bindEvents()}};a(Qa,`observedAttributes`,[`value`,`disabled`,`href`]),customElements.define(`fm-dropdown-item`,Qa);var $a=class extends o{template(){let e=Math.max(1,Math.min(this.getTotal(),this.getCurrent())),t=this.getTotal(),n=this.attr(`variant`,`default`),r=this.boolAttr(`disabled`),i=this.attr(`href-template`,``),a=this._getPageRange(e,t),o=e=>i?i.replace(`:page`,e):null,s=o(e-1),c=o(e+1);return`
       <style>
         :host { display: inline-block; }
 
@@ -1466,6 +1420,11 @@
           transition: all var(--fm-transition-fast);
           position: relative;
           overflow: hidden;
+          min-width: 36px;
+          height: 36px;
+          padding: 0 12px;
+          font-size: var(--fm-font-size-sm);
+          gap: 6px;
         }
 
         .pagination-btn:focus-visible {
@@ -1478,41 +1437,9 @@
           cursor: not-allowed;
         }
 
-        /* ---- Sizes ---- */
-        .pagination-btn.sm {
-          min-width: 28px;
-          height: 28px;
-          padding: 0 8px;
-          font-size: var(--fm-font-size-xs);
-          gap: 4px;
-        }
-        .pagination-btn.sm svg {
-          width: 14px;
-          height: 14px;
-        }
-
-        .pagination-btn.md {
-          min-width: 36px;
-          height: 36px;
-          padding: 0 12px;
-          font-size: var(--fm-font-size-sm);
-          gap: 6px;
-        }
-        .pagination-btn.md svg {
+        .pagination-btn svg {
           width: 16px;
           height: 16px;
-        }
-
-        .pagination-btn.lg {
-          min-width: 44px;
-          height: 44px;
-          padding: 0 16px;
-          font-size: var(--fm-font-size-md);
-          gap: 8px;
-        }
-        .pagination-btn.lg svg {
-          width: 18px;
-          height: 18px;
         }
 
         /* ---- Default variant ---- */
@@ -1572,9 +1499,6 @@
           padding-left: 8px;
           padding-right: 8px;
         }
-        .pagination-nav .nav-label {
-          margin: 0 4px;
-        }
 
         /* ---- Links inside buttons (for SSR/SEO) ---- */
         .nav-link, .page-link {
@@ -1586,7 +1510,7 @@
           height: 100%;
           color: inherit;
           text-decoration: none;
-          pointer-events: none; /* Let button handle clicks for SPA, but allow right-click open */
+          pointer-events: none;
         }
 
         /* ---- Ellipsis ---- */
@@ -1597,49 +1521,48 @@
           color: var(--fm-color-text-secondary);
           user-select: none;
           padding: 0 4px;
-        }
-        .pagination-ellipsis.sm {
-          min-width: 28px;
-          height: 28px;
-          font-size: var(--fm-font-size-xs);
-        }
-        .pagination-ellipsis.md {
           min-width: 36px;
           height: 36px;
           font-size: var(--fm-font-size-sm);
         }
-        .pagination-ellipsis.lg {
-          min-width: 44px;
-          height: 44px;
-          font-size: var(--fm-font-size-md);
-        }
-
-        /* ---- Info text ---- */
-        .pagination-info {
-          color: var(--fm-color-text-secondary);
-          font-size: var(--fm-font-size-sm);
-          margin: 0 var(--fm-space-sm);
-        }
       </style>
 
       <nav class="pagination" role="navigation" aria-label="Pagination">
-        ${b}
-        ${v}
-        ${f.map(t=>{if(t===`...`||t===`:gap`||t===`gap`)return`<span class="pagination-ellipsis ${n}">...</span>`;let a=parseInt(t,10),o=a===e,s=p(a);return`
-          <button 
-            class="pagination-btn pagination-page ${n} ${r} ${o?`active`:``}" 
-            data-page="${a}"
-            ${i?`disabled`:``}
-            aria-label="Go to page ${a}"
-            aria-current="${o?`page`:`false`}"
-          >
-            ${s&&!o?`<a href="${s}" class="page-link" tabindex="-1">${a}</a>`:a}
-          </button>
-        `}).join(``)}
-        ${y}
-        ${x}
+        <button 
+          class="pagination-btn pagination-nav ${n}" 
+          data-action="prev"
+          ${e<=1||r?`disabled`:``}
+          aria-label="Go to previous page"
+        >
+          ${s&&e>1?`<a href="${s}" class="nav-link" tabindex="-1">`:``}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          ${s&&e>1?`</a>`:``}
+        </button>
+
+        ${a.map(t=>{if(t===`...`)return`<span class="pagination-ellipsis">...</span>`;let i=parseInt(t,10),a=i===e,s=o(i);return`
+            <button 
+              class="pagination-btn pagination-page ${n} ${a?`active`:``}" 
+              data-page="${i}"
+              ${r?`disabled`:``}
+              aria-label="Go to page ${i}"
+              aria-current="${a?`page`:`false`}"
+            >
+              ${s&&!a?`<a href="${s}" class="page-link" tabindex="-1">${i}</a>`:i}
+            </button>
+          `}).join(``)}
+
+        <button 
+          class="pagination-btn pagination-nav ${n}" 
+          data-action="next"
+          ${e>=t||r?`disabled`:``}
+          aria-label="Go to next page"
+        >
+          ${c&&e<t?`<a href="${c}" class="nav-link" tabindex="-1">`:``}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          ${c&&e<t?`</a>`:``}
+        </button>
       </nav>
-    `}_getPagyObject(){let e=this.attr(`pagy`,``);if(e)try{let t=JSON.parse(e);if(typeof t==`object`&&t)return t}catch{console.warn(`[fm-pagination] Invalid pagy JSON`)}return null}_getPageSeries(e,t,n,r){let i=this._getPagyObject();if(i&&i.series&&Array.isArray(i.series))return i.series.map(e=>e===`:gap`||e===`gap`?`...`:typeof e==`number`?e:String(e));let a=this.attr(`series`,``);if(a)try{let e=JSON.parse(a);if(Array.isArray(e))return e.map(e=>e===`:gap`||e===`gap`?`...`:typeof e==`number`?e:String(e))}catch{console.warn(`[fm-pagination] Invalid series JSON`)}return this._getPageRange(e,t,n,r)}_getPageRange(e,t,n,r){let i=[],a=[];for(let e=1;e<=Math.min(r,t);e++)a.push(e);let o=[];for(let e=Math.max(r+1,t-r+1);e<=t;e++)o.push(e);let s=Math.max(r+1,e-n),c=Math.min(t-r,e+n);i.push(...a),s>r+1?i.push(`...`):s===r+1&&!a.includes(s)&&i.push(s);for(let e=Math.max(s,r+2);e<=c;e++)!a.includes(e)&&!o.includes(e)&&i.push(e);c<t-r?i.push(`...`):c===t-r&&!o.includes(c)&&i.push(c);for(let e of o)i.includes(e)||i.push(e);return i}getCurrent(){let e=this._getPagyObject();if(e&&typeof e.page==`number`)return Math.max(1,e.page);let t=this.attr(`page`,``),n=this.attr(`current`,``);return Math.max(1,parseInt(t||n||`1`,10)||1)}getTotal(){let e=this._getPagyObject();if(e&&typeof e.pages==`number`)return Math.max(1,e.pages);let t=this.attr(`pages`,``),n=this.attr(`total`,``);return Math.max(1,parseInt(t||n||`1`,10)||1)}connectedCallback(){super.connectedCallback(),this._bindEvents()}onEnter(){let e=this.root.querySelector(`.pagination`);e&&$(e,{opacity:[0,1],y:[8,0]},{type:`spring`,stiffness:350,damping:25})}_bindEvents(){this.boolAttr(`disabled`)||this.root.querySelectorAll(`.pagination-btn:not(:disabled)`).forEach(e=>{e.addEventListener(`click`,t=>{if(t.target.tagName===`A`&&!t.ctrlKey&&!t.metaKey)return;t.preventDefault();let n=this.getCurrent(),r=n;if(e.dataset.action===`prev`?r=Math.max(1,n-1):e.dataset.action===`next`?r=Math.min(this.getTotal(),n+1):e.dataset.action===`first`?r=1:e.dataset.action===`last`?r=this.getTotal():e.dataset.page&&(r=parseInt(e.dataset.page,10)),r!==n){let e=n;this.setAttribute(`current`,String(r)),this.dispatchEvent(new CustomEvent(`fm-page-change`,{bubbles:!0,detail:{page:r,previousPage:e}}))}}),fi(e,e=>($(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20}),()=>{$(e,{scale:1},{type:`spring`,stiffness:400,damping:20})})),Ci(e,e=>($(e,{scale:.95},{type:`spring`,stiffness:500,damping:22}),()=>{$(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20})}))})}attributeChangedCallback(){this.render(),this._bindEvents()}};a($a,`observedAttributes`,[`pagy`,`current`,`page`,`total`,`pages`,`series`,`size`,`variant`,`sibling-count`,`boundary-count`,`disabled`,`show-first-last`,`hide-prev-next`,`prev-label`,`next-label`,`href-template`]),customElements.define(`fm-pagination`,$a);var eo=0,to=class extends o{constructor(){super(),eo+=1,this._gradientId=`fm-sparkline-gradient-${eo}`}template(){let e=this._parseData(),t=this._numberAttr(`width`,200),n=this._numberAttr(`height`,60),r=this.attr(`gradient-from`,`var(--fm-alpha-primary-20)`),i=this.attr(`gradient-to`,`transparent`),a=this.attr(`stroke-color`,`var(--fm-color-primary)`),o=this._numberAttr(`stroke-width`,2),s=this.attr(`aria-label`,`Sparkline trend`),{line:c,area:l,point:u}=this._buildPathData(e,t,n),d=this._formatPoint(Math.max(o*1.5,3));return`
+    `}_getPageRange(e,t){let n=[],r=[];for(let e=1;e<=Math.min(1,t);e++)r.push(e);let i=[];for(let e=Math.max(2,t-1+1);e<=t;e++)i.push(e);let a=Math.max(2,e-1),o=Math.min(t-1,e+1);n.push(...r),a>2?n.push(`...`):a===2&&!r.includes(a)&&n.push(a);for(let e=Math.max(a,3);e<=o;e++)!r.includes(e)&&!i.includes(e)&&n.push(e);o<t-1?n.push(`...`):o===t-1&&!i.includes(o)&&n.push(o);for(let e of i)n.includes(e)||n.push(e);return n}getCurrent(){let e=this.attr(`current`,`1`);return Math.max(1,parseInt(e,10)||1)}getTotal(){let e=this.attr(`total`,`1`);return Math.max(1,parseInt(e,10)||1)}connectedCallback(){super.connectedCallback(),this._bindEvents()}onEnter(){let e=this.root.querySelector(`.pagination`);e&&$(e,{opacity:[0,1],y:[8,0]},{type:`spring`,stiffness:350,damping:25})}_bindEvents(){this.boolAttr(`disabled`)||this.root.querySelectorAll(`.pagination-btn:not(:disabled)`).forEach(e=>{e.addEventListener(`click`,t=>{if(t.target.tagName===`A`&&!t.ctrlKey&&!t.metaKey)return;t.preventDefault();let n=this.getCurrent(),r=n;if(e.dataset.action===`prev`?r=Math.max(1,n-1):e.dataset.action===`next`?r=Math.min(this.getTotal(),n+1):e.dataset.page&&(r=parseInt(e.dataset.page,10)),r!==n){let e=n;this.setAttribute(`current`,String(r)),this.dispatchEvent(new CustomEvent(`fm-page-change`,{bubbles:!0,detail:{page:r,previousPage:e}}))}}),fi(e,e=>($(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20}),()=>{$(e,{scale:1},{type:`spring`,stiffness:400,damping:20})})),Ci(e,e=>($(e,{scale:.95},{type:`spring`,stiffness:500,damping:22}),()=>{$(e,{scale:1.05},{type:`spring`,stiffness:400,damping:20})}))})}attributeChangedCallback(){this.render(),this._bindEvents()}};a($a,`observedAttributes`,[`current`,`total`,`variant`,`disabled`,`href-template`]),customElements.define(`fm-pagination`,$a);var eo=0,to=class extends o{constructor(){super(),eo+=1,this._gradientId=`fm-sparkline-gradient-${eo}`}template(){let e=this._parseData(),t=this._numberAttr(`width`,200),n=this._numberAttr(`height`,60),r=this.attr(`gradient-from`,`var(--fm-alpha-primary-20)`),i=this.attr(`gradient-to`,`transparent`),a=this.attr(`stroke-color`,`var(--fm-color-primary)`),o=this._numberAttr(`stroke-width`,2),s=this.attr(`aria-label`,`Sparkline trend`),{line:c,area:l,point:u}=this._buildPathData(e,t,n),d=this._formatPoint(Math.max(o*1.5,3));return`
       <style>
         :host {
           display: inline-block;
