@@ -8,7 +8,7 @@ import { animate, hover, press } from "motion";
  *   text       — The text to copy (required unless using slotted text)
  *   label      — Button label text (default: "Copy")
  *   variant    — "button" (default) | "icon" | "inline"
- *   feedback   — "toast" (default) | "tooltip" | "none"
+ *   feedback   — "tooltip" | "none" (default: "tooltip")
  *   feedback-text — Text shown after copy (default: "Copied!")
  *   position   — "right" (default) | "left" — Icon position for inline variant
  *   hide-icon  — boolean, hides the copy icon
@@ -41,16 +41,6 @@ export class FmClipboard extends FmElement {
         </svg>
       </span>
     ` : "";
-
-    // Toast notification (hidden by default)
-    const toast = `
-      <div class="toast" role="status" aria-live="polite" aria-atomic="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-        <span>${feedbackText}</span>
-      </div>
-    `;
 
     // Tooltip (hidden by default)
     const tooltip = `
@@ -211,7 +201,6 @@ export class FmClipboard extends FmElement {
           left: 0;
           width: 100%;
           height: 100%;
-          transition: opacity 0.2s ease;
         }
         .icon-check {
           opacity: 0;
@@ -226,40 +215,6 @@ export class FmClipboard extends FmElement {
           opacity: 1;
         }
         .clipboard-btn.success .btn-label {
-          color: var(--fm-color-success);
-        }
-
-        /* ---- Toast notification ---- */
-        .toast {
-          position: absolute;
-          bottom: calc(100% + 8px);
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 12px;
-          background: var(--fm-color-secondary);
-          color: var(--fm-color-text-light);
-          font-size: var(--fm-font-size-xs);
-          font-weight: var(--fm-font-weight-medium);
-          border-radius: var(--fm-radius-md);
-          box-shadow: var(--fm-shadow-md);
-          opacity: 0;
-          pointer-events: none;
-          white-space: nowrap;
-          z-index: 1000;
-        }
-        .toast::after {
-          content: '';
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-          border: 5px solid transparent;
-          border-top-color: var(--fm-color-secondary);
-        }
-        .toast svg {
           color: var(--fm-color-success);
         }
 
@@ -297,8 +252,7 @@ export class FmClipboard extends FmElement {
         }
       </style>
 
-      ${this.attr("feedback", "toast") === "toast" ? toast : ""}
-      ${this.attr("feedback", "toast") === "tooltip" ? tooltip : ""}
+      ${this.attr("feedback", "tooltip") === "tooltip" ? tooltip : ""}
       ${content}
     `;
   }
@@ -370,7 +324,7 @@ export class FmClipboard extends FmElement {
     e.stopPropagation();
 
     const btn = this.root.querySelector(".clipboard-btn");
-    const feedback = this.attr("feedback", "toast");
+    const feedback = this.attr("feedback", "tooltip");
 
     // Get text to copy
     let textToCopy = this.attr("text", "");
@@ -439,34 +393,14 @@ export class FmClipboard extends FmElement {
     }
 
     // Show feedback
-    if (feedback === "toast") {
-      const toast = this.root.querySelector(".toast");
-      if (toast) {
-        animate(toast, { 
-          opacity: [0, 1], 
-          y: [4, 0] 
-        }, {
-          type: "spring",
-          stiffness: 400,
-          damping: 22,
-        });
-
-        // Hide toast after delay
-        setTimeout(() => {
-          animate(toast, { 
-            opacity: 0, 
-            y: -4 
-          }, {
-            duration: 0.2,
-          });
-        }, 2000);
-      }
-    } else if (feedback === "tooltip") {
+    if (feedback === "tooltip") {
       const tooltip = this.root.querySelector(".tooltip");
       if (tooltip) {
-        animate(tooltip, { 
-          opacity: [0, 1], 
-          y: [2, 0] 
+        // Note: tooltip has transform: translateX(-50%) in CSS for centering
+        // We animate y via margin-top to avoid overriding the transform
+        animate(tooltip, {
+          opacity: [0, 1],
+          marginTop: ["4px", "0px"]
         }, {
           type: "spring",
           stiffness: 450,
@@ -474,9 +408,9 @@ export class FmClipboard extends FmElement {
         });
 
         setTimeout(() => {
-          animate(tooltip, { 
-            opacity: 0, 
-            y: -2 
+          animate(tooltip, {
+            opacity: 0,
+            marginTop: "-4px"
           }, {
             duration: 0.2,
           });
@@ -487,6 +421,12 @@ export class FmClipboard extends FmElement {
     // Reset after animation
     setTimeout(() => {
       btn.classList.remove("success");
+      // Reset check icon to hidden state - clear Motion's inline styles
+      const checkIcon = btn.querySelector(".icon-check");
+      if (checkIcon) {
+        checkIcon.style.opacity = "0";
+        checkIcon.style.scale = "0.5";
+      }
     }, 2000);
 
     // Dispatch success event
