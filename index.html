@@ -1469,16 +1469,12 @@ npm install @fm-agency/design-system</code></pre>
             <fm-pagination current="5" total="20"></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With Pagy object (simplest Ruby integration)</p>
-            <fm-pagination pagy='{"page":7,"pages":20,"series":[1,":gap",6,7,8,":gap",20]}' variant="outline" href-template="/items?page=:page"></fm-pagination>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With first/last buttons</p>
+            <fm-pagination current="3" total="15" show-first-last></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Small size with first/last buttons</p>
-            <fm-pagination current="3" total="15" size="sm" show-first-last></fm-pagination>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Large size with custom sibling count</p>
-            <fm-pagination current="8" total="50" size="lg" sibling-count="2"></fm-pagination>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Custom sibling count</p>
+            <fm-pagination current="8" total="50" sibling-count="2"></fm-pagination>
           </div>
           <div>
             <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Outline variant</p>
@@ -1503,22 +1499,10 @@ npm install @fm-agency/design-system</code></pre>
             </thead>
             <tbody>
               <tr>
-                <td><code>pagy</code></td>
-                <td>string (JSON)</td>
-                <td>""</td>
-                <td>Entire Pagy object as JSON. Extracts <code>page</code>, <code>pages</code>, and <code>series</code> automatically</td>
-              </tr>
-              <tr>
                 <td><code>current</code></td>
                 <td>number</td>
                 <td>1</td>
                 <td>Current active page (1-based index)</td>
-              </tr>
-              <tr>
-                <td><code>page</code></td>
-                <td>number</td>
-                <td>1</td>
-                <td>Alias for <code>current</code> (Pagy compatibility)</td>
               </tr>
               <tr>
                 <td><code>total</code></td>
@@ -1527,16 +1511,10 @@ npm install @fm-agency/design-system</code></pre>
                 <td>Total number of pages</td>
               </tr>
               <tr>
-                <td><code>pages</code></td>
-                <td>number</td>
-                <td>1</td>
-                <td>Alias for <code>total</code> (Pagy compatibility)</td>
-              </tr>
-              <tr>
-                <td><code>series</code></td>
-                <td>string (JSON)</td>
-                <td>""</td>
-                <td>Pagy's <code>series</code> array with page numbers and <code>:gap</code> symbols</td>
+                <td><code>variant</code></td>
+                <td>string</td>
+                <td>"default"</td>
+                <td>Style: <code>default</code>, <code>outline</code>, <code>ghost</code></td>
               </tr>
               <tr>
                 <td><code>href-template</code></td>
@@ -1545,28 +1523,16 @@ npm install @fm-agency/design-system</code></pre>
                 <td>URL template with <code>:page</code> placeholder for SSR links (e.g., <code>/items?page=:page</code>)</td>
               </tr>
               <tr>
-                <td><code>size</code></td>
-                <td>string</td>
-                <td>"md"</td>
-                <td>Button size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
-              </tr>
-              <tr>
-                <td><code>variant</code></td>
-                <td>string</td>
-                <td>"default"</td>
-                <td>Style: <code>default</code>, <code>outline</code>, <code>ghost</code></td>
-              </tr>
-              <tr>
                 <td><code>sibling-count</code></td>
                 <td>number</td>
                 <td>1</td>
-                <td>Number of pages to show on each side of current page (when not using series)</td>
+                <td>Number of pages to show on each side of current page</td>
               </tr>
               <tr>
                 <td><code>boundary-count</code></td>
                 <td>number</td>
                 <td>1</td>
-                <td>Number of pages to always show at boundaries (when not using series)</td>
+                <td>Number of pages to always show at boundaries</td>
               </tr>
               <tr>
                 <td><code>show-first-last</code></td>
@@ -1613,10 +1579,6 @@ npm install @fm-agency/design-system</code></pre>
               </tr>
             </tbody>
           </table>
-          <h4>Pagy Compatibility</h4>
-          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin: 12px 0;">
-            The component is designed to work seamlessly with <a href="https://github.com/ddnexus/pagy" target="_blank" style="color: var(--fm-color-primary);">Ruby's Pagy gem</a>. Use <code>page</code> instead of <code>current</code>, <code>pages</code> instead of <code>total</code>, and pass Pagy's <code>series</code> array directly.
-          </p>
           <h4>Animations</h4>
           <ul class="animation-list">
             <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
@@ -1630,19 +1592,17 @@ npm install @fm-agency/design-system</code></pre>
           <pre><code class="language-html">&lt;!-- Basic pagination --&gt;
 &lt;fm-pagination current="5" total="20"&gt;&lt;/fm-pagination&gt;
 
-&lt;!-- Small size with first/last buttons --&gt;
+&lt;!-- With first/last buttons --&gt;
 &lt;fm-pagination 
   current="3" 
   total="15" 
-  size="sm" 
   show-first-last
 &gt;&lt;/fm-pagination&gt;
 
-&lt;!-- Large with more siblings visible --&gt;
+&lt;!-- More siblings visible --&gt;
 &lt;fm-pagination 
   current="8" 
   total="50" 
-  size="lg" 
   sibling-count="2"
 &gt;&lt;/fm-pagination&gt;
 
@@ -1665,6 +1625,13 @@ npm install @fm-agency/design-system</code></pre>
 &lt;!-- Disabled state --&gt;
 &lt;fm-pagination current="3" total="10" disabled&gt;&lt;/fm-pagination&gt;
 
+&lt;!-- With SSR/SEO links --&gt;
+&lt;fm-pagination 
+  current="5" 
+  total="20" 
+  href-template="/items?page=:page"
+&gt;&lt;/fm-pagination&gt;
+
 &lt;!-- Listen for page changes (SPA mode) --&gt;
 &lt;script&gt;
   document.querySelector('fm-pagination').addEventListener('fm-page-change', (e) =&gt; {
@@ -1673,66 +1640,6 @@ npm install @fm-agency/design-system</code></pre>
 &lt;/script&gt;
 
 </code></pre>
-        </div>
-      </fm-tab>
-      <fm-tab label="Ruby (Pagy)">
-        <div class="code-panel">
-          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin-bottom: 16px;">
-            The component is designed to work seamlessly with <a href="https://github.com/ddnexus/pagy" target="_blank" style="color: var(--fm-color-primary);">Ruby's Pagy gem</a>. Simply pass the entire <code>@pagy</code> object and the component extracts <code>page</code>, <code>pages</code>, and <code>series</code> automatically.
-          </p>
-          <pre><code class="language-erb">&lt;!-- In your Rails controller --&gt;
-@pagy, @records = pagy(Product.all, items: 20)
-
-&lt;!-- In your ERB template --&gt;
-&lt;!-- Option 1: Simplest - just pass the @pagy object --&gt;
-&lt;fm-pagination pagy='&lt;%= @pagy.to_json %&gt;'&gt;&lt;/fm-pagination&gt;
-
-&lt;!-- Option 2: With custom styling and SEO links --&gt;
-&lt;fm-pagination
-  pagy='&lt;%= @pagy.to_json %&gt;'
-  variant="outline"
-  href-template="/products?page=:page"
-  show-first-last
-&gt;&lt;/fm-pagination&gt;
-
-&lt;!-- Option 3: With custom prev/next labels --&gt;
-&lt;fm-pagination
-  pagy='&lt;%= @pagy.to_json %&gt;'
-  prev-label="Previous"
-  next-label="Next"
-  href-template="&lt;%= url_for(page: ':page') %&gt;"
-&gt;&lt;/fm-pagination&gt;
-
-&lt;!-- Option 4: Small size without first/last buttons --&gt;
-&lt;fm-pagination
-  pagy='&lt;%= @pagy.to_json %&gt;'
-  size="sm"
-  href-template="/items?page=:page"
-&gt;&lt;/fm-pagination&gt;
-
-&lt;!-- Option 5: Manual attributes (if you need granular control) --&gt;
-&lt;fm-pagination
-  page="&lt;%= @pagy.page %&gt;"
-  pages="&lt;%= @pagy.pages %&gt;"
-  series='&lt;%= @pagy.series.to_json %&gt;'
-  variant="outline"
-&gt;&lt;/fm-pagination&gt;</code></pre>
-          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin-top: 16px; margin-bottom: 8px;">
-            <strong>Why this works:</strong> The <code>pagy</code> attribute accepts the entire Pagy object as JSON. The component automatically extracts:
-          </p>
-          <ul style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin: 0; padding-left: 20px; line-height: 1.6;">
-            <li><code>pagy.page</code> → current page</li>
-            <li><code>pagy.pages</code> → total pages</li>
-            <li><code>pagy.series</code> → page series array with <code>:gap</code> symbols</li>
-          </ul>
-          <p style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin-top: 16px; margin-bottom: 8px;">
-            <strong>SEO & SSR:</strong> When <code>href-template</code> is provided, the component renders actual <code>&lt;a&gt;</code> tags for each page link. This enables:
-          </p>
-          <ul style="font-size: 0.875rem; color: var(--fm-color-text-secondary); margin: 0; padding-left: 20px; line-height: 1.6;">
-            <li>SEO-friendly crawlable links</li>
-            <li>Right-click "Open in new tab" functionality</li>
-            <li>Graceful degradation without JavaScript</li>
-          </ul>
         </div>
       </fm-tab>
       </fm-tabs>
