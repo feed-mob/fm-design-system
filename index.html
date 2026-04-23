@@ -1917,43 +1917,26 @@ npm install @fm-agency/design-system</code></pre>
       <span slot="header">Input</span>
       <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
-        <div class="preview-area preview-stack">
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Basic inputs</p>
-            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
-              <fm-input placeholder="Enter campaign name"></fm-input>
-              <fm-input type="email" placeholder="you@company.com"></fm-input>
-              <fm-input type="password" placeholder="Enter password"></fm-input>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Sizes</p>
-            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
-              <fm-input size="sm" placeholder="Small size"></fm-input>
-              <fm-input size="md" placeholder="Medium size (default)"></fm-input>
-              <fm-input size="lg" placeholder="Large size"></fm-input>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Variants</p>
-            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
-              <fm-input variant="default" placeholder="Default variant"></fm-input>
-              <fm-input variant="filled" placeholder="Filled variant"></fm-input>
-              <fm-input variant="outlined" placeholder="Outlined variant"></fm-input>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">States</p>
-            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
-              <fm-input value="Disabled input" disabled></fm-input>
-              <fm-input value="Read only input" readonly></fm-input>
-              <fm-input placeholder="Required input" required></fm-input>
+        <div class="preview-area preview-stack-sm">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">Basic inputs</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 16px;">
+              <fm-input placeholder="Enter campaign name" label="Campaign name"></fm-input>
+              <fm-input type="email" placeholder="you@company.com" label="Email"></fm-input>
+              <fm-input type="password" placeholder="Enter password" label="Password"></fm-input>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">With Error</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">States</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 16px;">
+              <fm-input value="Disabled input" disabled label="Disabled"></fm-input>
+              <fm-input placeholder="Required input" required label="Required"></fm-input>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">With Error</p>
             <div style="max-width: 400px;">
-              <fm-input type="number" placeholder="Enter amount" error="Budget must be at least $1,000"></fm-input>
+              <fm-input type="number" placeholder="Enter amount" error="Budget must be at least $1,000" label="Budget"></fm-input>
             </div>
           </div>
         </div>
@@ -1991,16 +1974,10 @@ npm install @fm-agency/design-system</code></pre>
                 <td>Disables the input</td>
               </tr>
               <tr>
-                <td><code>readonly</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Makes input read-only</td>
-              </tr>
-              <tr>
                 <td><code>required</code></td>
                 <td>boolean</td>
                 <td>false</td>
-                <td>HTML5 required attribute</td>
+                <td>HTML5 required attribute for form validation</td>
               </tr>
               <tr>
                 <td><code>error</code></td>
@@ -2009,16 +1986,10 @@ npm install @fm-agency/design-system</code></pre>
                 <td>Error message (shows error state when set)</td>
               </tr>
               <tr>
-                <td><code>size</code></td>
+                <td><code>label</code></td>
                 <td>string</td>
-                <td>"md"</td>
-                <td>Input size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
-              </tr>
-              <tr>
-                <td><code>variant</code></td>
-                <td>string</td>
-                <td>"default"</td>
-                <td>Visual style: <code>default</code>, <code>filled</code>, <code>outlined</code></td>
+                <td>""</td>
+                <td>Accessible label (visually hidden, for screen readers)</td>
               </tr>
             </tbody>
           </table>
@@ -2094,32 +2065,17 @@ npm install @fm-agency/design-system</code></pre>
       </fm-tab>
       <fm-tab label="Code">
         <div class="code-panel">
-          <pre><code class="language-html">&lt;!-- Basic input --&gt;
-&lt;fm-input placeholder="Enter campaign name"&gt;&lt;/fm-input&gt;
-
-&lt;!-- Different types --&gt;
-&lt;fm-input type="email" placeholder="you@company.com"&gt;&lt;/fm-input&gt;
-&lt;fm-input type="password" placeholder="Enter password"&gt;&lt;/fm-input&gt;
-&lt;fm-input type="number" placeholder="Enter amount"&gt;&lt;/fm-input&gt;
-&lt;fm-input type="search" placeholder="Search..."&gt;&lt;/fm-input&gt;
-
-&lt;!-- Sizes --&gt;
-&lt;fm-input size="sm" placeholder="Small input"&gt;&lt;/fm-input&gt;
-&lt;fm-input size="md" placeholder="Medium input"&gt;&lt;/fm-input&gt;
-&lt;fm-input size="lg" placeholder="Large input"&gt;&lt;/fm-input&gt;
-
-&lt;!-- Variants --&gt;
-&lt;fm-input variant="default"&gt;&lt;/fm-input&gt;
-&lt;fm-input variant="filled"&gt;&lt;/fm-input&gt;
-&lt;fm-input variant="outlined"&gt;&lt;/fm-input&gt;
+          <pre><code class="language-html">&lt;!-- Basic inputs --&gt;
+&lt;fm-input placeholder="Enter campaign name" label="Campaign name"&gt;&lt;/fm-input&gt;
+&lt;fm-input type="email" placeholder="you@company.com" label="Email"&gt;&lt;/fm-input&gt;
+&lt;fm-input type="password" placeholder="Enter password" label="Password"&gt;&lt;/fm-input&gt;
 
 &lt;!-- States --&gt;
-&lt;fm-input value="Disabled" disabled&gt;&lt;/fm-input&gt;
-&lt;fm-input value="Read only" readonly&gt;&lt;/fm-input&gt;
-&lt;fm-input required&gt;&lt;/fm-input&gt;
+&lt;fm-input value="Disabled input" disabled&gt;&lt;/fm-input&gt;
+&lt;fm-input placeholder="Required input" required&gt;&lt;/fm-input&gt;
 
 &lt;!-- With error --&gt;
-&lt;fm-input error="Must be at least $1,000"&gt;&lt;/fm-input&gt;
+&lt;fm-input type="number" placeholder="Enter amount" error="Budget must be at least $1,000"&gt;&lt;/fm-input&gt;
 
 &lt;!-- Listen for events --&gt;
 &lt;script&gt;
@@ -2147,53 +2103,24 @@ npm install @fm-agency/design-system</code></pre>
       <span slot="header">Textarea</span>
       <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
-        <div class="preview-area preview-stack">
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Basic textarea</p>
+        <div class="preview-area preview-stack-sm">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">Basic textarea</p>
             <div style="max-width: 400px;">
-              <fm-textarea placeholder="Describe your campaign objectives, target audience, and key messaging..." rows="4"></fm-textarea>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Sizes</p>
-            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
-              <fm-textarea size="sm" placeholder="Small textarea" rows="2"></fm-textarea>
-              <fm-textarea size="md" placeholder="Medium textarea (default)" rows="2"></fm-textarea>
-              <fm-textarea size="lg" placeholder="Large textarea" rows="2"></fm-textarea>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Auto-resize (grows as you type)</p>
-            <div style="max-width: 400px;">
-              <fm-textarea placeholder="Type to see auto-resize in action..." rows="3" autoresize maxrows="8"></fm-textarea>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">With character count</p>
-            <div style="max-width: 400px;">
-              <fm-textarea placeholder="Tell us about yourself..." rows="3" maxlength="200" showcount value="Started in digital marketing back in 2015..."></fm-textarea>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Variants</p>
-            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
-              <fm-textarea variant="default" placeholder="Default variant" rows="2"></fm-textarea>
-              <fm-textarea variant="filled" placeholder="Filled variant" rows="2"></fm-textarea>
-              <fm-textarea variant="outlined" placeholder="Outlined variant" rows="2"></fm-textarea>
-            </div>
-          </div>
-          <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">States</p>
-            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
-              <fm-textarea rows="2" value="This textarea is disabled and cannot be edited." disabled></fm-textarea>
-              <fm-textarea rows="2" value="This content is read-only." readonly></fm-textarea>
-              <fm-textarea rows="2" placeholder="This field is required" required></fm-textarea>
+              <fm-textarea placeholder="Describe your campaign objectives, target audience, and key messaging..." rows="4" label="Campaign description"></fm-textarea>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">With Error</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">States</p>
+            <div style="max-width: 400px; display: flex; flex-direction: column; gap: 16px;">
+              <fm-textarea rows="2" value="This textarea is disabled and cannot be edited." disabled label="Disabled"></fm-textarea>
+              <fm-textarea rows="2" placeholder="This field is required" required label="Required"></fm-textarea>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">With Error</p>
             <div style="max-width: 400px;">
-              <fm-textarea rows="3" error="Brief must be at least 50 characters long"></fm-textarea>
+              <fm-textarea rows="3" error="Brief must be at least 50 characters long" label="Brief"></fm-textarea>
             </div>
           </div>
         </div>
@@ -2231,16 +2158,10 @@ npm install @fm-agency/design-system</code></pre>
                 <td>Disables the textarea</td>
               </tr>
               <tr>
-                <td><code>readonly</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Makes textarea read-only</td>
-              </tr>
-              <tr>
                 <td><code>required</code></td>
                 <td>boolean</td>
                 <td>false</td>
-                <td>HTML5 required attribute</td>
+                <td>HTML5 required attribute for form validation</td>
               </tr>
               <tr>
                 <td><code>error</code></td>
@@ -2249,40 +2170,10 @@ npm install @fm-agency/design-system</code></pre>
                 <td>Error message (shows error state when set)</td>
               </tr>
               <tr>
-                <td><code>size</code></td>
+                <td><code>label</code></td>
                 <td>string</td>
-                <td>"md"</td>
-                <td>Textarea size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
-              </tr>
-              <tr>
-                <td><code>variant</code></td>
-                <td>string</td>
-                <td>"default"</td>
-                <td>Visual style: <code>default</code>, <code>filled</code>, <code>outlined</code></td>
-              </tr>
-              <tr>
-                <td><code>autoresize</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Auto-expand height as user types</td>
-              </tr>
-              <tr>
-                <td><code>maxrows</code></td>
-                <td>number</td>
-                <td>10</td>
-                <td>Maximum rows for auto-resize</td>
-              </tr>
-              <tr>
-                <td><code>maxlength</code></td>
-                <td>number</td>
-                <td>—</td>
-                <td>Maximum character count</td>
-              </tr>
-              <tr>
-                <td><code>showcount</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Show character count (requires maxlength)</td>
+                <td>""</td>
+                <td>Accessible label (visually hidden, for screen readers)</td>
               </tr>
             </tbody>
           </table>
@@ -2335,11 +2226,6 @@ npm install @fm-agency/design-system</code></pre>
                 <td>void</td>
                 <td>Clear the textarea value</td>
               </tr>
-              <tr>
-                <td><code>insertText(text)</code></td>
-                <td>void</td>
-                <td>Insert text at cursor position</td>
-              </tr>
             </tbody>
           </table>
           <h4>Parts</h4>
@@ -2350,7 +2236,6 @@ npm install @fm-agency/design-system</code></pre>
             <tbody>
               <tr><td><code>textarea</code></td><td>The native textarea element</td></tr>
               <tr><td><code>error</code></td><td>The error message container</td></tr>
-              <tr><td><code>count</code></td><td>The character count element</td></tr>
               <tr><td><code>helper</code></td><td>The helper text container</td></tr>
             </tbody>
           </table>
@@ -2359,7 +2244,6 @@ npm install @fm-agency/design-system</code></pre>
             <li><strong>Entrance:</strong> Fade in with subtle slide up (spring physics)</li>
             <li><strong>Focus:</strong> Border color transition + focus ring</li>
             <li><strong>Error:</strong> Shake animation when error appears</li>
-            <li><strong>Auto-resize:</strong> Smooth height transition</li>
           </ul>
         </div>
       </fm-tab>
@@ -2369,37 +2253,11 @@ npm install @fm-agency/design-system</code></pre>
 &lt;fm-textarea 
   placeholder="Describe your campaign..." 
   rows="4"
+  label="Campaign description"
 &gt;&lt;/fm-textarea&gt;
-
-&lt;!-- Sizes --&gt;
-&lt;fm-textarea size="sm" rows="2"&gt;&lt;/fm-textarea&gt;
-&lt;fm-textarea size="md" rows="2"&gt;&lt;/fm-textarea&gt;
-&lt;fm-textarea size="lg" rows="2"&gt;&lt;/fm-textarea&gt;
-
-&lt;!-- Auto-resize (grows with content) --&gt;
-&lt;fm-textarea 
-  placeholder="Type to auto-expand..." 
-  rows="3" 
-  autoresize 
-  maxrows="8"
-&gt;&lt;/fm-textarea&gt;
-
-&lt;!-- Character count --&gt;
-&lt;fm-textarea 
-  placeholder="Tell us about yourself..." 
-  rows="3" 
-  maxlength="200" 
-  showcount
-&gt;&lt;/fm-textarea&gt;
-
-&lt;!-- Variants --&gt;
-&lt;fm-textarea variant="default" rows="2"&gt;&lt;/fm-textarea&gt;
-&lt;fm-textarea variant="filled" rows="2"&gt;&lt;/fm-textarea&gt;
-&lt;fm-textarea variant="outlined" rows="2"&gt;&lt;/fm-textarea&gt;
 
 &lt;!-- States --&gt;
 &lt;fm-textarea rows="2" disabled&gt;&lt;/fm-textarea&gt;
-&lt;fm-textarea rows="2" readonly&gt;&lt;/fm-textarea&gt;
 &lt;fm-textarea rows="2" required&gt;&lt;/fm-textarea&gt;
 
 &lt;!-- With error --&gt;

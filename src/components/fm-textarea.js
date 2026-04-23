@@ -2,22 +2,16 @@ import { FmElement } from "../core/fm-element.js";
 import { animate } from "motion";
 
 /**
- * <fm-textarea> — A polished multi-line text input with auto-resize.
+ * <fm-textarea> — A polished multi-line text input.
  *
  * Attributes:
  *   value       — string (controlled value)
  *   placeholder — string
  *   disabled    — boolean
- *   readonly    — boolean
  *   required    — boolean
  *   error       — string (error message)
- *   size        — "sm" | "md" (default) | "lg"
- *   variant     — "default" | "filled" | "outlined"
  *   rows        — number (default: 3)
- *   maxrows     — number (default: 10, for auto-resize limit)
- *   autoresize  — boolean (auto-expand height as user types)
- *   maxlength   — number (maximum character count)
- *   showcount   — boolean (show character count)
+ *   label       — string (accessible label, visually hidden)
  *
  * Events:
  *   input  — { value: string } — fired on every keystroke
@@ -27,53 +21,29 @@ import { animate } from "motion";
  */
 export class FmTextarea extends FmElement {
   static observedAttributes = [
-    "value", "placeholder", "disabled", "readonly", 
-    "required", "error", "size", "variant", "rows", "maxrows", 
-    "autoresize", "maxlength", "showcount"
+    "value", "placeholder", "disabled", 
+    "required", "error", "rows", "label"
   ];
 
   template() {
     const value = this.attr("value", "");
     const placeholder = this.attr("placeholder", "");
     const disabled = this.boolAttr("disabled");
-    const readonly = this.boolAttr("readonly");
     const required = this.boolAttr("required");
     const error = this.attr("error", "");
-    const size = this.attr("size", "md");
-    const variant = this.attr("variant", "default");
     const rows = parseInt(this.attr("rows", "3"), 10) || 3;
-    const maxrows = parseInt(this.attr("maxrows", "10"), 10) || 10;
-    const autoresize = this.boolAttr("autoresize");
-    const maxlength = this.attr("maxlength", "");
-    const showcount = this.boolAttr("showcount");
+    const label = this.attr("label", "");
 
     const hasValue = value.length > 0;
     const hasError = error.length > 0;
-    const hasMaxlength = maxlength && maxlength.length > 0;
-    const charCount = value.length;
-    const maxCount = hasMaxlength ? parseInt(maxlength, 10) : 0;
-
-    const sizeClasses = {
-      sm: "size-sm",
-      md: "size-md",
-      lg: "size-lg",
-    }[size] || "size-md";
-
-    const variantClasses = {
-      default: "variant-default",
-      filled: "variant-filled",
-      outlined: "variant-outlined",
-    }[variant] || "variant-default";
 
     const disabledClass = disabled ? "is-disabled" : "";
     const errorClass = hasError ? "has-error" : "";
     const focusedClass = this._focused ? "is-focused" : "";
     const filledClass = hasValue || this._focused ? "is-filled" : "";
 
-    // Calculate min-height based on rows
-    const lineHeight = size === "sm" ? 20 : size === "lg" ? 28 : 24;
-    const paddingY = size === "sm" ? 24 : size === "lg" ? 40 : 32;
-    const minHeight = rows * lineHeight + paddingY;
+    // Calculate min-height based on rows (line-height ~24px + padding)
+    const minHeight = rows * 24 + 32;
 
     return /* html */ `
       <style>
@@ -89,76 +59,38 @@ export class FmTextarea extends FmElement {
           width: 100%;
         }
 
-        /* ---- Variants ---- */
-        .variant-default .textarea-field {
-          background: var(--fm-color-surface);
-          border: 1.5px solid var(--fm-color-border-strong);
-          border-radius: var(--fm-radius-md);
-        }
-        .variant-default .textarea-field:hover:not(:disabled) {
-          border-color: var(--fm-color-border);
-        }
-        .variant-default.is-focused .textarea-field {
-          border-color: var(--fm-color-primary);
-          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
-        }
-        .variant-default.has-error .textarea-field {
-          border-color: var(--fm-color-error);
-        }
-        .variant-default.has-error.is-focused .textarea-field {
-          box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
-        }
-
-        .variant-filled .textarea-field {
-          background: var(--fm-color-surface-muted);
-          border: 1.5px solid transparent;
-          border-radius: var(--fm-radius-md);
-        }
-        .variant-filled .textarea-field:hover:not(:disabled) {
-          background: var(--fm-color-surface-alt);
-        }
-        .variant-filled.is-focused .textarea-field {
-          background: var(--fm-color-surface);
-          border-color: var(--fm-color-primary);
-          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
-        }
-        .variant-filled.has-error .textarea-field {
-          border-color: var(--fm-color-error);
-        }
-
-        .variant-outlined .textarea-field {
-          background: transparent;
-          border: 1.5px solid var(--fm-color-border-strong);
-          border-radius: var(--fm-radius-md);
-        }
-        .variant-outlined .textarea-field:hover:not(:disabled) {
-          border-color: var(--fm-color-primary-light);
-        }
-        .variant-outlined.is-focused .textarea-field {
-          border-color: var(--fm-color-primary);
-          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
-        }
-        .variant-outlined.has-error .textarea-field {
-          border-color: var(--fm-color-error);
-        }
-
-        /* ---- Sizes ---- */
+        /* ---- Textarea Field ---- */
         .textarea-field {
           width: 100%;
           min-height: ${minHeight}px;
-          max-height: ${autoresize ? maxrows * lineHeight + paddingY + 'px' : 'none'};
+          padding: var(--fm-space-md);
           font-family: var(--fm-font-family);
+          font-size: var(--fm-font-size-md);
           font-weight: var(--fm-font-weight-normal);
           color: var(--fm-color-text);
-          transition: all var(--fm-transition-fast);
+          background: var(--fm-color-surface);
+          border: 1.5px solid var(--fm-color-border-strong);
+          border-radius: var(--fm-radius-md);
+          transition: border-color var(--fm-transition-fast);
           outline: none;
           resize: vertical;
           line-height: 1.5;
         }
+
         .textarea-field::placeholder {
           color: var(--fm-color-text-secondary);
           opacity: 0.6;
         }
+
+        .textarea-field:hover:not(:disabled) {
+          border-color: var(--fm-color-border);
+        }
+
+        /* Focus state - uses wrapper class for consistent styling */
+        .textarea-wrapper.is-focused .textarea-field {
+          border-color: var(--fm-color-primary);
+        }
+
         .textarea-field:disabled {
           background: var(--fm-color-surface-muted);
           cursor: not-allowed;
@@ -166,22 +98,27 @@ export class FmTextarea extends FmElement {
           resize: none;
         }
 
-        .size-sm .textarea-field {
-          padding: var(--fm-space-sm) var(--fm-space-sm);
-          font-size: var(--fm-font-size-sm);
-          min-height: ${Math.max(minHeight, 60)}px;
+        /* Error state - default error border */
+        .textarea-wrapper.has-error .textarea-field {
+          border-color: var(--fm-color-error);
         }
 
-        .size-md .textarea-field {
-          padding: var(--fm-space-md);
-          font-size: var(--fm-font-size-md);
-          min-height: ${Math.max(minHeight, 76)}px;
+        /* Error + Focus - show primary border to indicate focus */
+        .textarea-wrapper.has-error.is-focused .textarea-field {
+          border-color: var(--fm-color-primary);
         }
 
-        .size-lg .textarea-field {
-          padding: var(--fm-space-lg);
-          font-size: var(--fm-font-size-lg);
-          min-height: ${Math.max(minHeight, 92)}px;
+        /* ---- Label ---- */
+        .visually-hidden {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
         }
 
         /* ---- Error Message ---- */
@@ -200,21 +137,6 @@ export class FmTextarea extends FmElement {
           flex-shrink: 0;
         }
 
-        /* ---- Character Count ---- */
-        .char-count {
-          display: flex;
-          justify-content: flex-end;
-          margin-top: var(--fm-space-xs);
-          font-size: var(--fm-font-size-xs);
-          color: var(--fm-color-text-secondary);
-        }
-        .char-count.has-error {
-          color: var(--fm-color-error);
-        }
-        .char-count.is-near-limit {
-          color: var(--fm-color-warning);
-        }
-
         /* ---- Helper Text ---- */
         .helper-text {
           margin-top: var(--fm-space-xs);
@@ -226,27 +148,22 @@ export class FmTextarea extends FmElement {
         }
       </style>
 
-      <div class="textarea-wrapper ${sizeClasses} ${variantClasses} ${disabledClass} ${errorClass} ${focusedClass} ${filledClass}">
+      <div class="textarea-wrapper ${disabledClass} ${errorClass} ${focusedClass} ${filledClass}">
+        ${label ? `<label class="visually-hidden" for="textarea-${this._id}">${label}</label>` : ''}
         <textarea
+          id="textarea-${this._id}"
           class="textarea-field"
           part="textarea"
           rows="${rows}"
           placeholder="${placeholder}"
           ${disabled ? 'disabled' : ''}
-          ${readonly ? 'readonly' : ''}
           ${required ? 'required' : ''}
-          ${hasMaxlength ? `maxlength="${maxlength}"` : ''}
           aria-invalid="${hasError ? 'true' : 'false'}"
-          aria-describedby="${hasError ? 'error-msg' : ''}"
+          aria-describedby="${hasError ? 'error-msg-' + this._id : ''}"
         >${value}</textarea>
-        ${showcount && hasMaxlength ? /* html */ `
-          <div class="char-count ${charCount > maxCount * 0.9 ? 'is-near-limit' : ''} ${hasError ? 'has-error' : ''}" part="count">
-            ${charCount}/${maxCount}
-          </div>
-        ` : ''}
         ${hasError ? /* html */ `
-          <div class="error-message" id="error-msg" part="error">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="error-message" id="error-msg-${this._id}" part="error" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
               <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/>
               <path d="M12 8v4"/>
@@ -254,13 +171,13 @@ export class FmTextarea extends FmElement {
             </svg>
             ${error}
           </div>
-        ` : (!showcount ? /* html */ `
+        ` : /* html */ `
           <slot name="helper">
             <div class="helper-text" part="helper">
               <slot name="helper-text"></slot>
             </div>
           </slot>
-        ` : '')}
+        `}
       </div>
     `;
   }
@@ -279,6 +196,7 @@ export class FmTextarea extends FmElement {
   connectedCallback() {
     super.connectedCallback();
     this._focused = false;
+    this._id = Math.random().toString(36).substr(2, 9);
     this._bindEvents();
   }
 
@@ -298,16 +216,6 @@ export class FmTextarea extends FmElement {
         } else {
           wrapper.classList.remove("is-filled");
         }
-      }
-
-      // Auto-resize if enabled
-      if (this.boolAttr("autoresize")) {
-        this._autoResize(textarea);
-      }
-
-      // Update character count if shown
-      if (this.boolAttr("showcount")) {
-        this._updateCharCount(value.length);
       }
 
       this.dispatchEvent(new CustomEvent("input", {
@@ -353,42 +261,6 @@ export class FmTextarea extends FmElement {
     });
   }
 
-  _autoResize(textarea) {
-    // Reset height to auto to get correct scrollHeight
-    textarea.style.height = "auto";
-    
-    const lineHeight = parseInt(getComputedStyle(textarea).lineHeight, 10) || 24;
-    const paddingY = parseInt(getComputedStyle(textarea).paddingTop, 10) + 
-                     parseInt(getComputedStyle(textarea).paddingBottom, 10);
-    const maxrows = parseInt(this.attr("maxrows", "10"), 10) || 10;
-    const maxHeight = maxrows * lineHeight + paddingY;
-    
-    // Set new height (capped at max)
-    const newHeight = Math.min(textarea.scrollHeight, maxHeight);
-    textarea.style.height = `${newHeight}px`;
-    
-    // Disable/enable resize based on whether we're at max
-    textarea.style.resize = textarea.scrollHeight > maxHeight ? "vertical" : "none";
-  }
-
-  _updateCharCount(count) {
-    const countEl = this.root.querySelector(".char-count");
-    if (!countEl) return;
-    
-    const maxlength = parseInt(this.attr("maxlength", "0"), 10) || 0;
-    const isNearLimit = maxlength > 0 && count > maxlength * 0.9;
-    
-    // Update text
-    countEl.textContent = `${count}/${maxlength}`;
-    
-    // Update classes
-    if (isNearLimit) {
-      countEl.classList.add("is-near-limit");
-    } else {
-      countEl.classList.remove("is-near-limit");
-    }
-  }
-
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return;
     
@@ -406,16 +278,6 @@ export class FmTextarea extends FmElement {
           } else {
             wrapper.classList.remove("is-filled");
           }
-        }
-        
-        // Auto-resize if needed
-        if (this.boolAttr("autoresize")) {
-          this._autoResize(textarea);
-        }
-        
-        // Update character count
-        if (this.boolAttr("showcount")) {
-          this._updateCharCount((newValue ?? "").length);
         }
       }
     } else if (name === "error") {
@@ -458,32 +320,10 @@ export class FmTextarea extends FmElement {
     const textarea = this.root.querySelector(".textarea-field");
     if (textarea) {
       textarea.value = "";
-      textarea.style.height = "auto";
     }
     
     const wrapper = this.root.querySelector(".textarea-wrapper");
     if (wrapper) wrapper.classList.remove("is-filled");
-    
-    if (this.boolAttr("showcount")) {
-      this._updateCharCount(0);
-    }
-  }
-
-  insertText(text) {
-    const textarea = this.root.querySelector(".textarea-field");
-    if (!textarea) return;
-    
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const currentValue = textarea.value;
-    const newValue = currentValue.substring(0, start) + text + currentValue.substring(end);
-    
-    this.value = newValue;
-    
-    // Set cursor position after inserted text
-    setTimeout(() => {
-      textarea.selectionStart = textarea.selectionEnd = start + text.length;
-    }, 0);
   }
 
   get value() {

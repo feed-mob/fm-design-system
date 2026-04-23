@@ -9,11 +9,9 @@ import { animate } from "motion";
  *   value       — string (controlled value)
  *   placeholder — string
  *   disabled    — boolean
- *   readonly    — boolean
  *   required    — boolean
  *   error       — string (error message)
- *   size        — "sm" | "md" (default) | "lg"
- *   variant     — "default" | "filled" | "outlined"
+ *   label       — string (accessible label, visually hidden)
  *
  * Events:
  *   input  — { value: string } — fired on every keystroke
@@ -22,33 +20,19 @@ import { animate } from "motion";
  *   blur   — fired when input loses focus
  */
 export class FmInput extends FmElement {
-  static observedAttributes = ["type", "value", "placeholder", "disabled", "readonly", "required", "error", "size", "variant"];
+  static observedAttributes = ["type", "value", "placeholder", "disabled", "required", "error", "label"];
 
   template() {
     const type = this.attr("type", "text");
     const value = this.attr("value", "");
     const placeholder = this.attr("placeholder", "");
     const disabled = this.boolAttr("disabled");
-    const readonly = this.boolAttr("readonly");
     const required = this.boolAttr("required");
     const error = this.attr("error", "");
-    const size = this.attr("size", "md");
-    const variant = this.attr("variant", "default");
+    const label = this.attr("label", "");
 
     const hasValue = value.length > 0;
     const hasError = error.length > 0;
-
-    const sizeClasses = {
-      sm: "size-sm",
-      md: "size-md",
-      lg: "size-lg",
-    }[size] || "size-md";
-
-    const variantClasses = {
-      default: "variant-default",
-      filled: "variant-filled",
-      outlined: "variant-outlined",
-    }[variant] || "variant-default";
 
     const disabledClass = disabled ? "is-disabled" : "";
     const errorClass = hasError ? "has-error" : "";
@@ -69,94 +53,63 @@ export class FmInput extends FmElement {
           width: 100%;
         }
 
-        /* ---- Variants ---- */
-        .variant-default .input-field {
-          background: var(--fm-color-surface);
-          border: 1.5px solid var(--fm-color-border-strong);
-          border-radius: var(--fm-radius-md);
-        }
-        .variant-default .input-field:hover:not(:disabled) {
-          border-color: var(--fm-color-border);
-        }
-        .variant-default.is-focused .input-field {
-          border-color: var(--fm-color-primary);
-          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
-        }
-        .variant-default.has-error .input-field {
-          border-color: var(--fm-color-error);
-        }
-        .variant-default.has-error.is-focused .input-field {
-          box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
-        }
-
-        .variant-filled .input-field {
-          background: var(--fm-color-surface-muted);
-          border: 1.5px solid transparent;
-          border-radius: var(--fm-radius-md);
-        }
-        .variant-filled .input-field:hover:not(:disabled) {
-          background: var(--fm-color-surface-alt);
-        }
-        .variant-filled.is-focused .input-field {
-          background: var(--fm-color-surface);
-          border-color: var(--fm-color-primary);
-          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
-        }
-        .variant-filled.has-error .input-field {
-          border-color: var(--fm-color-error);
-        }
-
-        .variant-outlined .input-field {
-          background: transparent;
-          border: 1.5px solid var(--fm-color-border-strong);
-          border-radius: var(--fm-radius-md);
-        }
-        .variant-outlined .input-field:hover:not(:disabled) {
-          border-color: var(--fm-color-primary-light);
-        }
-        .variant-outlined.is-focused .input-field {
-          border-color: var(--fm-color-primary);
-          box-shadow: 0 0 0 3px var(--fm-alpha-primary-15);
-        }
-        .variant-outlined.has-error .input-field {
-          border-color: var(--fm-color-error);
-        }
-
-        /* ---- Sizes ---- */
+        /* ---- Input Field ---- */
         .input-field {
           width: 100%;
+          height: 44px;
+          padding: 0 var(--fm-space-md);
           font-family: var(--fm-font-family);
+          font-size: var(--fm-font-size-md);
           font-weight: var(--fm-font-weight-normal);
           color: var(--fm-color-text);
-          transition: all var(--fm-transition-fast);
+          background: var(--fm-color-surface);
+          border: 1.5px solid var(--fm-color-border-strong);
+          border-radius: var(--fm-radius-md);
+          transition: border-color var(--fm-transition-fast);
           outline: none;
         }
+
         .input-field::placeholder {
           color: var(--fm-color-text-secondary);
           opacity: 0.6;
         }
+
+        .input-field:hover:not(:disabled) {
+          border-color: var(--fm-color-border);
+        }
+
+        /* Focus state - uses wrapper class for consistent styling */
+        .input-wrapper.is-focused .input-field {
+          border-color: var(--fm-color-primary);
+        }
+
         .input-field:disabled {
           background: var(--fm-color-surface-muted);
           cursor: not-allowed;
           opacity: 0.6;
         }
 
-        .size-sm .input-field {
-          height: 36px;
-          padding: 0 var(--fm-space-sm);
-          font-size: var(--fm-font-size-sm);
+        /* Error state - default error border */
+        .input-wrapper.has-error .input-field {
+          border-color: var(--fm-color-error);
         }
 
-        .size-md .input-field {
-          height: 44px;
-          padding: 0 var(--fm-space-md);
-          font-size: var(--fm-font-size-md);
+        /* Error + Focus - show primary border to indicate focus */
+        .input-wrapper.has-error.is-focused .input-field {
+          border-color: var(--fm-color-primary);
         }
 
-        .size-lg .input-field {
-          height: 52px;
-          padding: 0 var(--fm-space-lg);
-          font-size: var(--fm-font-size-lg);
+        /* ---- Label ---- */
+        .visually-hidden {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
         }
 
         /* ---- Error Message ---- */
@@ -186,22 +139,23 @@ export class FmInput extends FmElement {
         }
       </style>
 
-      <div class="input-wrapper ${sizeClasses} ${variantClasses} ${disabledClass} ${errorClass} ${focusedClass} ${filledClass}">
+      <div class="input-wrapper ${disabledClass} ${errorClass} ${focusedClass} ${filledClass}">
+        ${label ? `<label class="visually-hidden" for="input-${this._id}">${label}</label>` : ''}
         <input
+          id="input-${this._id}"
           class="input-field"
           part="input"
           type="${type}"
           value="${value}"
           placeholder="${placeholder}"
           ${disabled ? 'disabled' : ''}
-          ${readonly ? 'readonly' : ''}
           ${required ? 'required' : ''}
           aria-invalid="${hasError ? 'true' : 'false'}"
-          aria-describedby="${hasError ? 'error-msg' : ''}"
+          aria-describedby="${hasError ? 'error-msg-' + this._id : ''}"
         />
         ${hasError ? /* html */ `
-          <div class="error-message" id="error-msg" part="error">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="error-message" id="error-msg-${this._id}" part="error" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
               <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/>
               <path d="M12 8v4"/>
@@ -234,6 +188,7 @@ export class FmInput extends FmElement {
   connectedCallback() {
     super.connectedCallback();
     this._focused = false;
+    this._id = Math.random().toString(36).substr(2, 9);
     this._bindEvents();
   }
 
