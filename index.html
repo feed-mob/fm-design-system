@@ -452,22 +452,7 @@ npm install @fm-agency/design-system</code></pre>
               <fm-badge variant="tag" removable>Social</fm-badge>
             </div>
           </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Sizes</p>
-            <div class="row">
-              <fm-badge variant="primary" size="sm">Small</fm-badge>
-              <fm-badge variant="primary" size="md">Medium</fm-badge>
-              <fm-badge variant="tag" size="sm" removable>Tag small</fm-badge>
-              <fm-badge variant="tag" size="md" removable>Tag medium</fm-badge>
-            </div>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Animated</p>
-            <div class="row">
-              <fm-badge variant="success" dot animate="pulse">Live Campaign</fm-badge>
-              <fm-badge variant="error" animate="pulse">3 Alerts</fm-badge>
-            </div>
-          </div>
+
         </div>
       </fm-tab>
       <fm-tab label="Interface">
@@ -485,22 +470,10 @@ npm install @fm-agency/design-system</code></pre>
                 <td>Badge color: <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code>, <code>tag</code></td>
               </tr>
               <tr>
-                <td><code>size</code></td>
-                <td>string</td>
-                <td>"md"</td>
-                <td>Size: <code>sm</code>, <code>md</code></td>
-              </tr>
-              <tr>
                 <td><code>dot</code></td>
                 <td>boolean</td>
                 <td>false</td>
                 <td>Shows a leading status dot</td>
-              </tr>
-              <tr>
-                <td><code>animate</code></td>
-                <td>string</td>
-                <td>"none"</td>
-                <td>Animation: <code>none</code>, <code>pulse</code></td>
               </tr>
               <tr>
                 <td><code>removable</code></td>
@@ -523,11 +496,7 @@ npm install @fm-agency/design-system</code></pre>
               </tr>
             </tbody>
           </table>
-          <h4>Animations</h4>
-          <ul class="animation-list">
-            <li><strong>Entrance:</strong> Scales in from 0 with spring physics</li>
-            <li><strong>Pulse:</strong> Subtle recurring scale animation for attention</li>
-          </ul>
+
         </div>
       </fm-tab>
       <fm-tab label="Code">
@@ -558,15 +527,7 @@ npm install @fm-agency/design-system</code></pre>
 &lt;fm-badge variant="success" dot&gt;Live&lt;/fm-badge&gt;
 &lt;fm-badge variant="primary" dot&gt;Active&lt;/fm-badge&gt;
 &lt;fm-badge variant="warning" dot&gt;Pending&lt;/fm-badge&gt;
-&lt;fm-badge variant="error" dot&gt;Offline&lt;/fm-badge&gt;
-
-&lt;!-- Pulsing alert badge --&gt;
-&lt;fm-badge variant="success" dot animate="pulse"&gt;Live Campaign&lt;/fm-badge&gt;
-&lt;fm-badge variant="error" animate="pulse"&gt;3 Alerts&lt;/fm-badge&gt;
-
-&lt;!-- Different sizes --&gt;
-&lt;fm-badge variant="primary" size="sm"&gt;Small&lt;/fm-badge&gt;
-&lt;fm-badge variant="primary" size="md"&gt;Medium&lt;/fm-badge&gt;</code></pre>
+&lt;fm-badge variant="error" dot&gt;Offline&lt;/fm-badge&gt;</code></pre>
         </div>
       </fm-tab>
     </fm-tabs>
@@ -1221,8 +1182,8 @@ npm install @fm-agency/design-system</code></pre>
             <fm-collapsible header="Campaign Settings">
               <p style="margin: 0 0 12px 0;">Configure your campaign targeting, budget, and scheduling options. All changes are saved automatically.</p>
               <div class="row" style="gap: 8px;">
-                <fm-badge variant="primary" size="sm">Auto-save</fm-badge>
-                <fm-badge variant="neutral" size="sm">Draft</fm-badge>
+                <fm-badge variant="primary">Auto-save</fm-badge>
+                <fm-badge variant="neutral">Draft</fm-badge>
               </div>
             </fm-collapsible>
           </div>

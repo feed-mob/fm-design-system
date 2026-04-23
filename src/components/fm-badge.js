@@ -1,30 +1,21 @@
 import { FmElement } from "../core/fm-element.js";
-import { animate } from "motion";
 
 /**
  * <fm-badge> — A compact status indicator / label for FM Agency.
  *
  * Attributes:
  *   variant  — "primary" (default) | "secondary" | "success" | "warning" | "error" | "neutral" | "tag"
- *   size     — "sm" | "md" (default)
  *   dot      — boolean, shows a leading status dot
- *   animate  — "none" (default) | "pulse"
  *   removable — boolean, shows X button (for tag variant)
  *
- * Animations (Motion):
- *   - Entrance: scales in from 0 with spring physics
- *   - Pulse: subtle recurring scale animation for attention
- *   - Remove: fade out + scale down when tag is removed
- * 
  * Events:
  *   - fm-remove: fired when removable tag's X button is clicked
  */
 export class FmBadge extends FmElement {
-  static observedAttributes = ["variant", "size", "dot", "animate", "removable"];
+  static observedAttributes = ["variant", "dot", "removable"];
 
   template() {
     const variant = this.attr("variant", "primary");
-    const size = this.attr("size", "md");
     const dot = this.boolAttr("dot");
     const removable = this.boolAttr("removable");
 
@@ -52,43 +43,34 @@ export class FmBadge extends FmElement {
           border-radius: var(--fm-radius-full);
           line-height: 1;
           user-select: none;
-          will-change: transform;
-        }
-
-        /* ---- Sizes ---- */
-        .badge.sm {
-          padding: 2px 8px;
-          font-size: 11px;
-        }
-        .badge.md {
           padding: 4px 12px;
           font-size: var(--fm-font-size-xs);
         }
 
-        /* ---- Variants ---- */
+        /* ---- Variants with improved contrast ---- */
         .badge.primary {
           background: var(--fm-color-primary-100);
           color: var(--fm-color-primary-dark);
         }
         .badge.secondary {
-          background: var(--fm-alpha-secondary-10);
-          color: var(--fm-color-secondary);
+          background: var(--fm-color-primary-50);
+          color: var(--fm-color-primary-dark);
         }
         .badge.success {
-          background: rgba(5, 150, 105, 0.12);
-          color: #047857;
+          background: #D1FAE5;
+          color: #065F46;
         }
         .badge.warning {
-          background: rgba(217, 119, 6, 0.12);
+          background: #FEF3C7;
           color: #92400E;
         }
         .badge.error {
-          background: rgba(220, 38, 38, 0.10);
-          color: #B91C1C;
+          background: #FEE2E2;
+          color: #991B1B;
         }
         .badge.neutral {
-          background: var(--fm-color-surface-muted);
-          color: var(--fm-color-text-secondary);
+          background: #F3F4F6;
+          color: #374151;
         }
 
         /* Tag variant: outlined style with border, for removable chips */
@@ -97,9 +79,6 @@ export class FmBadge extends FmElement {
           color: var(--fm-color-text);
           border: 1px solid var(--fm-color-border);
           padding: 3px 10px;
-        }
-        .badge.tag.sm {
-          padding: 1px 6px;
         }
         .badge.tag:hover {
           border-color: var(--fm-color-text-secondary);
@@ -144,56 +123,23 @@ export class FmBadge extends FmElement {
           outline: 2px solid currentColor;
           outline-offset: 1px;
         }
-        .badge.sm .remove-btn {
+        .badge.tag .remove-btn {
+          width: 14px;
+          height: 14px;
+          margin: 0 -2px 0 2px;
+        }
+        .badge.tag .remove-btn svg {
           width: 12px;
           height: 12px;
-          margin: 0 -1px 0 1px;
-        }
-        .badge.sm .remove-btn svg {
-          width: 10px;
-          height: 10px;
         }
       </style>
 
-      <span class="badge ${variant} ${size}" part="badge">
+      <span class="badge ${variant}" part="badge">
         ${dot ? '<span class="dot"></span>' : ""}
         <slot></slot>
         ${removeButton}
       </span>
     `;
-  }
-
-  /* ---- Animations ---- */
-
-  onEnter() {
-    const badge = this.root.querySelector(".badge");
-    const animType = this.attr("animate", "none");
-
-    // Entrance: pop in
-    animate(badge, { scale: [0, 1], opacity: [0, 1] }, {
-      type: "spring",
-      stiffness: 400,
-      damping: 22,
-    });
-
-    // Optional continuous pulse
-    if (animType === "pulse") {
-      this._startPulse(badge);
-    }
-  }
-
-  _startPulse(el) {
-    const run = () => {
-      this._pulseAnim = animate(
-        el,
-        { scale: [1, 1.06, 1] },
-        { duration: 1.8, ease: "easeInOut" },
-      );
-      this._pulseAnim.finished.then(() => {
-        if (this.isConnected) run();
-      });
-    };
-    run();
   }
 
   connectedCallback() {
@@ -217,21 +163,9 @@ export class FmBadge extends FmElement {
         }
       }));
 
-      // Animate removal
-      const badge = this.root.querySelector(".badge");
-      animate(badge, { scale: [1, 0.8], opacity: [1, 0] }, {
-        duration: 0.15,
-        ease: "easeIn"
-      }).finished.then(() => {
-        this.style.display = "none";
-      });
+      // Hide the badge
+      this.style.display = "none";
     });
-  }
-
-  disconnectedCallback() {
-    if (this._pulseAnim) {
-      this._pulseAnim.cancel();
-    }
   }
 
   attributeChangedCallback() {
