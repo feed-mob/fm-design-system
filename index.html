@@ -221,8 +221,13 @@ npm install @fm-agency/design-system</code></pre>
           <div class="row" style="margin-bottom: 20px;">
             <fm-button variant="primary">Get Started</fm-button>
             <fm-button variant="secondary">Learn More</fm-button>
+            <fm-button variant="tertiary">Tertiary</fm-button>
             <fm-button variant="outline">View Case Study</fm-button>
             <fm-button variant="ghost">Read Docs</fm-button>
+          </div>
+          <div class="row" style="margin-bottom: 20px;">
+            <fm-button variant="text" arrow>View case study</fm-button>
+            <fm-button variant="text">Text link</fm-button>
           </div>
           <div class="row" style="margin-bottom: 20px;">
             <fm-button variant="primary" size="sm">Small</fm-button>
@@ -248,7 +253,7 @@ npm install @fm-agency/design-system</code></pre>
                 <td><code>variant</code></td>
                 <td>string</td>
                 <td>"primary"</td>
-                <td>Button style: <code>primary</code>, <code>secondary</code>, <code>outline</code>, <code>ghost</code></td>
+                <td>Button style: <code>primary</code>, <code>secondary</code>, <code>tertiary</code>, <code>outline</code>, <code>ghost</code>, <code>text</code></td>
               </tr>
               <tr>
                 <td><code>size</code></td>
@@ -261,6 +266,12 @@ npm install @fm-agency/design-system</code></pre>
                 <td>boolean</td>
                 <td>false</td>
                 <td>Disables the button interaction</td>
+              </tr>
+              <tr>
+                <td><code>arrow</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Adds arrow icon (useful for text variant)</td>
               </tr>
             </tbody>
           </table>
@@ -280,8 +291,12 @@ npm install @fm-agency/design-system</code></pre>
 
 &lt;!-- Different variants --&gt;
 &lt;fm-button variant="secondary"&gt;Learn More&lt;/fm-button&gt;
+&lt;fm-button variant="tertiary"&gt;Tertiary&lt;/fm-button&gt;
 &lt;fm-button variant="outline"&gt;View Case Study&lt;/fm-button&gt;
 &lt;fm-button variant="ghost"&gt;Read Docs&lt;/fm-button&gt;
+
+&lt;!-- Text variant with arrow --&gt;
+&lt;fm-button variant="text" arrow&gt;View case study&lt;/fm-button&gt;
 
 &lt;!-- Sizes --&gt;
 &lt;fm-button variant="primary" size="lg"&gt;Large Button&lt;/fm-button&gt;
@@ -412,28 +427,51 @@ npm install @fm-agency/design-system</code></pre>
     <h2>fm-badge</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
-        <div class="preview-area">
-          <div class="row" style="margin-bottom: 20px;">
-            <fm-badge variant="primary">Design</fm-badge>
-            <fm-badge variant="secondary">Strategy</fm-badge>
-            <fm-badge variant="success">Approved</fm-badge>
-            <fm-badge variant="warning">In Review</fm-badge>
-            <fm-badge variant="error">Overdue</fm-badge>
-            <fm-badge variant="neutral">Draft</fm-badge>
+        <div class="preview-area preview-stack-sm">
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Standard variants</p>
+            <div class="row">
+              <fm-badge variant="primary">Design</fm-badge>
+              <fm-badge variant="secondary">Strategy</fm-badge>
+              <fm-badge variant="success">Approved</fm-badge>
+              <fm-badge variant="warning">In Review</fm-badge>
+              <fm-badge variant="error">Overdue</fm-badge>
+              <fm-badge variant="neutral">Draft</fm-badge>
+            </div>
           </div>
-          <div class="row" style="margin-bottom: 20px;">
-            <fm-badge variant="success" dot>Live</fm-badge>
-            <fm-badge variant="primary" dot>Active</fm-badge>
-            <fm-badge variant="warning" dot>Pending</fm-badge>
-            <fm-badge variant="error" dot>Offline</fm-badge>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Status badges with dot</p>
+            <div class="row">
+              <fm-badge variant="success" dot>Live</fm-badge>
+              <fm-badge variant="primary" dot>Active</fm-badge>
+              <fm-badge variant="warning" dot>Pending</fm-badge>
+              <fm-badge variant="error" dot>Offline</fm-badge>
+            </div>
           </div>
-          <div class="row" style="margin-bottom: 20px;">
-            <fm-badge variant="primary" size="sm">Small</fm-badge>
-            <fm-badge variant="primary" size="md">Medium</fm-badge>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Removable tags (click X to remove)</p>
+            <div class="row" id="tag-container">
+              <fm-badge variant="tag" removable>Campaign</fm-badge>
+              <fm-badge variant="tag" removable>Design</fm-badge>
+              <fm-badge variant="tag" removable>Digital</fm-badge>
+              <fm-badge variant="tag" removable>Social</fm-badge>
+            </div>
           </div>
-          <div class="row">
-            <fm-badge variant="success" dot animate="pulse">Live Campaign</fm-badge>
-            <fm-badge variant="error" animate="pulse">3 Alerts</fm-badge>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Sizes</p>
+            <div class="row">
+              <fm-badge variant="primary" size="sm">Small</fm-badge>
+              <fm-badge variant="primary" size="md">Medium</fm-badge>
+              <fm-badge variant="tag" size="sm" removable>Tag small</fm-badge>
+              <fm-badge variant="tag" size="md" removable>Tag medium</fm-badge>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Animated</p>
+            <div class="row">
+              <fm-badge variant="success" dot animate="pulse">Live Campaign</fm-badge>
+              <fm-badge variant="error" animate="pulse">3 Alerts</fm-badge>
+            </div>
           </div>
         </div>
       </fm-tab>
@@ -449,7 +487,7 @@ npm install @fm-agency/design-system</code></pre>
                 <td><code>variant</code></td>
                 <td>string</td>
                 <td>"primary"</td>
-                <td>Badge color: <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code></td>
+                <td>Badge color: <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code>, <code>tag</code></td>
               </tr>
               <tr>
                 <td><code>size</code></td>
@@ -469,6 +507,25 @@ npm install @fm-agency/design-system</code></pre>
                 <td>"none"</td>
                 <td>Animation: <code>none</code>, <code>pulse</code></td>
               </tr>
+              <tr>
+                <td><code>removable</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Shows X button (ideal for tag variant)</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Events</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fm-remove</code></td>
+                <td><code>{ text: string }</code></td>
+                <td>Fired when removable tag's X button is clicked</td>
+              </tr>
             </tbody>
           </table>
           <h4>Animations</h4>
@@ -487,6 +544,20 @@ npm install @fm-agency/design-system</code></pre>
 &lt;fm-badge variant="warning"&gt;In Review&lt;/fm-badge&gt;
 &lt;fm-badge variant="error"&gt;Overdue&lt;/fm-badge&gt;
 &lt;fm-badge variant="neutral"&gt;Draft&lt;/fm-badge&gt;
+
+&lt;!-- Removable tags --&gt;
+&lt;fm-badge variant="tag" removable&gt;Campaign&lt;/fm-badge&gt;
+&lt;fm-badge variant="tag" removable&gt;Design&lt;/fm-badge&gt;
+&lt;fm-badge variant="tag" removable&gt;Digital&lt;/fm-badge&gt;
+
+&lt;!-- Listen for remove events --&gt;
+&lt;script&gt;
+  document.querySelectorAll('fm-badge[removable]').forEach(badge =&gt; {
+    badge.addEventListener('fm-remove', (e) =&gt; {
+      console.log('Removed:', e.detail.text);
+    });
+  });
+&lt;/script&gt;
 
 &lt;!-- Status badge with dot --&gt;
 &lt;fm-badge variant="success" dot&gt;Live&lt;/fm-badge&gt;
@@ -2821,6 +2892,15 @@ npm install @fm-agency/design-system</code></pre>
       window.addEventListener('scroll', updateActiveLink, { passive: true });
       updateActiveLink();
     })();
+
+    // Tag removal demo - listen for fm-remove events
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('fm-badge[removable]').forEach(badge => {
+        badge.addEventListener('fm-remove', (e) => {
+          console.log('Tag removed:', e.detail.text);
+        });
+      });
+    });
   </script>
 </body>
 </html>

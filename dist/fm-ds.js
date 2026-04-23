@@ -3019,6 +3019,7 @@ function Ba(e = {}) {
 }
 var $ = Ba(), Va = class extends a {
 	template() {
+		let e = this.attr("variant", "primary"), t = this.attr("size", "md"), n = this.boolAttr("disabled"), r = this.boolAttr("arrow") ? "<svg class=\"arrow-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 8h10M9 4l4 4-4 4\"/></svg>" : "";
 		return `
       <style>
         :host {
@@ -3040,7 +3041,8 @@ var $ = Ba(), Va = class extends a {
           -webkit-tap-highlight-color: transparent;
           white-space: nowrap;
           transition: box-shadow var(--fm-transition-fast),
-                      border-color var(--fm-transition-fast);
+                      border-color var(--fm-transition-fast),
+                      background var(--fm-transition-fast);
 
           /* Default (md) sizing */
           padding: 10px 20px;
@@ -3082,6 +3084,18 @@ var $ = Ba(), Va = class extends a {
           background: var(--fm-color-secondary-light);
         }
 
+        /* Tertiary: dark background with subtle border */
+        button.tertiary {
+          background: var(--fm-color-surface-alt);
+          color: var(--fm-color-text);
+          border: 1px solid var(--fm-color-border);
+          box-shadow: none;
+        }
+        button.tertiary:hover:not(:disabled) {
+          background: var(--fm-color-surface-muted);
+          border-color: var(--fm-color-text-secondary);
+        }
+
         button.outline {
           background: transparent;
           color: var(--fm-color-primary);
@@ -3103,6 +3117,25 @@ var $ = Ba(), Va = class extends a {
           background: var(--fm-alpha-primary-10);
         }
 
+        /* Text variant: text with optional arrow */
+        button.text {
+          background: transparent;
+          color: var(--fm-color-primary);
+          border: none;
+          box-shadow: none;
+          padding: 0;
+          font-weight: var(--fm-font-weight-medium);
+        }
+        button.text:hover:not(:disabled) {
+          color: var(--fm-color-primary-dark);
+        }
+        button.text .arrow-icon {
+          transition: transform 0.2s ease;
+        }
+        button.text:hover:not(:disabled) .arrow-icon {
+          transform: translateX(2px);
+        }
+
         /* ---- Disabled ---- */
         button:disabled {
           opacity: 0.45;
@@ -3114,14 +3147,18 @@ var $ = Ba(), Va = class extends a {
           outline: 2px solid var(--fm-color-primary-light);
           outline-offset: 2px;
         }
+        button.text:focus-visible {
+          outline-offset: 4px;
+        }
       </style>
 
       <button
-        class="${this.attr("variant", "primary")} ${this.attr("size", "md")}"
-        ${this.boolAttr("disabled") ? "disabled" : ""}
+        class="${e} ${t}"
+        ${n ? "disabled" : ""}
         part="button"
       >
         <slot></slot>
+        ${r}
       </button>
     `;
 	}
@@ -3175,7 +3212,8 @@ var $ = Ba(), Va = class extends a {
 i(Va, "observedAttributes", [
 	"variant",
 	"size",
-	"disabled"
+	"disabled",
+	"arrow"
 ]), customElements.define("fm-button", Va);
 //#endregion
 //#region src/components/fm-card.js
@@ -3314,6 +3352,7 @@ i(Ha, "observedAttributes", ["variant", "hoverable"]), customElements.define("fm
 //#region src/components/fm-badge.js
 var Ua = class extends a {
 	template() {
+		let e = this.attr("variant", "primary"), t = this.attr("size", "md"), n = this.boolAttr("dot"), r = this.boolAttr("removable") ? "\n      <button class=\"remove-btn\" part=\"remove\" aria-label=\"Remove\" tabindex=\"-1\">\n        <svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n          <path d=\"M8 4L4 8M4 4l4 4\"/>\n        </svg>\n      </button>\n    " : "";
 		return `
       <style>
         :host {
@@ -3369,6 +3408,20 @@ var Ua = class extends a {
           color: var(--fm-color-text-secondary);
         }
 
+        /* Tag variant: outlined style with border, for removable chips */
+        .badge.tag {
+          background: var(--fm-color-surface);
+          color: var(--fm-color-text);
+          border: 1px solid var(--fm-color-border);
+          padding: 3px 10px;
+        }
+        .badge.tag.sm {
+          padding: 1px 6px;
+        }
+        .badge.tag:hover {
+          border-color: var(--fm-color-text-secondary);
+        }
+
         /* ---- Dot indicator ---- */
         .dot {
           width: 6px;
@@ -3382,11 +3435,47 @@ var Ua = class extends a {
         .warning .dot { background: var(--fm-color-warning); }
         .error .dot { background: var(--fm-color-error); }
         .neutral .dot { background: var(--fm-color-text-secondary); }
+
+        /* ---- Remove button ---- */
+        .remove-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 14px;
+          height: 14px;
+          padding: 0;
+          margin: 0 -2px 0 2px;
+          border: none;
+          background: transparent;
+          color: currentColor;
+          cursor: pointer;
+          border-radius: 50%;
+          opacity: 0.6;
+          transition: opacity 0.15s ease, background 0.15s ease;
+        }
+        .remove-btn:hover {
+          opacity: 1;
+          background: rgba(0, 0, 0, 0.08);
+        }
+        .remove-btn:focus-visible {
+          outline: 2px solid currentColor;
+          outline-offset: 1px;
+        }
+        .badge.sm .remove-btn {
+          width: 12px;
+          height: 12px;
+          margin: 0 -1px 0 1px;
+        }
+        .badge.sm .remove-btn svg {
+          width: 10px;
+          height: 10px;
+        }
       </style>
 
-      <span class="badge ${this.attr("variant", "primary")} ${this.attr("size", "md")}" part="badge">
-        ${this.boolAttr("dot") ? "<span class=\"dot\"></span>" : ""}
+      <span class="badge ${e} ${t}" part="badge">
+        ${n ? "<span class=\"dot\"></span>" : ""}
         <slot></slot>
+        ${r}
       </span>
     `;
 	}
@@ -3416,18 +3505,40 @@ var Ua = class extends a {
 		};
 		t();
 	}
+	connectedCallback() {
+		super.connectedCallback(), this._bindRemoveEvent();
+	}
+	_bindRemoveEvent() {
+		let e = this.root.querySelector(".remove-btn");
+		e && e.addEventListener("click", (e) => {
+			e.stopPropagation(), this.dispatchEvent(new CustomEvent("fm-remove", {
+				bubbles: !0,
+				composed: !0,
+				detail: { text: this.textContent?.trim() }
+			})), $(this.root.querySelector(".badge"), {
+				scale: [1, .8],
+				opacity: [1, 0]
+			}, {
+				duration: .15,
+				ease: "easeIn"
+			}).finished.then(() => {
+				this.style.display = "none";
+			});
+		});
+	}
 	disconnectedCallback() {
 		this._pulseAnim && this._pulseAnim.cancel();
 	}
 	attributeChangedCallback() {
-		this.render();
+		this.render(), this._bindRemoveEvent();
 	}
 };
 i(Ua, "observedAttributes", [
 	"variant",
 	"size",
 	"dot",
-	"animate"
+	"animate",
+	"removable"
 ]), customElements.define("fm-badge", Ua);
 //#endregion
 //#region src/components/fm-tabs.js

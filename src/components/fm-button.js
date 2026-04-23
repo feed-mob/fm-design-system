@@ -5,9 +5,10 @@ import { animate, hover, press } from "motion";
  * <fm-button> — A polished, professional button for FM Agency.
  *
  * Attributes:
- *   variant  — "primary" (default) | "secondary" | "outline" | "ghost"
+ *   variant  — "primary" (default) | "secondary" | "tertiary" | "outline" | "ghost" | "text"
  *   size     — "sm" | "md" (default) | "lg"
  *   disabled — boolean
+ *   arrow    — boolean (adds arrow icon for text variant)
  *
  * Animations (Motion):
  *   - Entrance: subtle fade-in + upward slide
@@ -16,12 +17,15 @@ import { animate, hover, press } from "motion";
  *   - Focus: teal ring indicator
  */
 export class FmButton extends FmElement {
-  static observedAttributes = ["variant", "size", "disabled"];
+  static observedAttributes = ["variant", "size", "disabled", "arrow"];
 
   template() {
     const variant = this.attr("variant", "primary");
     const size = this.attr("size", "md");
     const disabled = this.boolAttr("disabled");
+    const arrow = this.boolAttr("arrow");
+
+    const arrowIcon = arrow ? `<svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>` : "";
 
     return /* html */ `
       <style>
@@ -44,7 +48,8 @@ export class FmButton extends FmElement {
           -webkit-tap-highlight-color: transparent;
           white-space: nowrap;
           transition: box-shadow var(--fm-transition-fast),
-                      border-color var(--fm-transition-fast);
+                      border-color var(--fm-transition-fast),
+                      background var(--fm-transition-fast);
 
           /* Default (md) sizing */
           padding: 10px 20px;
@@ -86,6 +91,18 @@ export class FmButton extends FmElement {
           background: var(--fm-color-secondary-light);
         }
 
+        /* Tertiary: dark background with subtle border */
+        button.tertiary {
+          background: var(--fm-color-surface-alt);
+          color: var(--fm-color-text);
+          border: 1px solid var(--fm-color-border);
+          box-shadow: none;
+        }
+        button.tertiary:hover:not(:disabled) {
+          background: var(--fm-color-surface-muted);
+          border-color: var(--fm-color-text-secondary);
+        }
+
         button.outline {
           background: transparent;
           color: var(--fm-color-primary);
@@ -107,6 +124,25 @@ export class FmButton extends FmElement {
           background: var(--fm-alpha-primary-10);
         }
 
+        /* Text variant: text with optional arrow */
+        button.text {
+          background: transparent;
+          color: var(--fm-color-primary);
+          border: none;
+          box-shadow: none;
+          padding: 0;
+          font-weight: var(--fm-font-weight-medium);
+        }
+        button.text:hover:not(:disabled) {
+          color: var(--fm-color-primary-dark);
+        }
+        button.text .arrow-icon {
+          transition: transform 0.2s ease;
+        }
+        button.text:hover:not(:disabled) .arrow-icon {
+          transform: translateX(2px);
+        }
+
         /* ---- Disabled ---- */
         button:disabled {
           opacity: 0.45;
@@ -118,6 +154,9 @@ export class FmButton extends FmElement {
           outline: 2px solid var(--fm-color-primary-light);
           outline-offset: 2px;
         }
+        button.text:focus-visible {
+          outline-offset: 4px;
+        }
       </style>
 
       <button
@@ -126,6 +165,7 @@ export class FmButton extends FmElement {
         part="button"
       >
         <slot></slot>
+        ${arrowIcon}
       </button>
     `;
   }
