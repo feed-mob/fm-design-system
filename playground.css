@@ -48,17 +48,31 @@ h1 {
 
 section {
   margin-bottom: 48px;
+  padding: 0 0 48px 0;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+section:last-of-type {
+  border-bottom: none;
 }
 
 section h2 {
-  font-size: 0.75rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #94A3B8;
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #E2E8F0;
+  color: #0F172A;
+  margin-bottom: 24px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+section h2 code {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85em;
+  background: var(--fm-color-surface-muted, #F1F5F9);
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: var(--fm-color-primary-dark, #0F766E);
+  font-weight: 500;
 }
 
 .row {
@@ -208,11 +222,9 @@ footer {
 
 .sidebar-label {
   padding: 10px 20px 4px;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #94A3B8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748B;
   user-select: none;
 }
 
@@ -279,11 +291,17 @@ footer {
 }
 
 /* ========== ADDITIONAL STYLES FOR TABBED INTERFACE ========== */
+.interface-panel {
+  padding: 8px 0;
+}
+
 .interface-panel h4 {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--fm-color-text);
-  margin: 20px 0 12px 0;
+  margin: 24px 0 12px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--fm-color-border, #E2E8F0);
 }
 
 .interface-panel h4:first-child {
@@ -338,11 +356,19 @@ footer {
   color: var(--fm-color-text);
 }
 
+.code-panel {
+  background: #1E293B;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
 .code-panel pre {
   margin: 0;
   border-radius: var(--fm-radius-md);
   font-size: 0.8rem;
   line-height: 1.5;
+  background: transparent;
 }
 
 .code-panel pre code {
@@ -494,19 +520,72 @@ footer a:hover {
   }
 }
 
+/* ========== SKIP LINK ========== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0D9488;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.2s ease;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #F59E0B;
+  outline-offset: 0;
+}
+
+/* ========== FOCUS INDICATORS ========== */
+:focus-visible {
+  outline: 3px solid #0D9488;
+  outline-offset: 2px;
+}
+
+.sidebar-link:focus-visible {
+  outline-offset: -3px;
+}
+
 /* ========== SMOOTH SCROLL ========== */
 /* Note: disabled for instant navigation */
 html {
   scroll-behavior: auto;
 }
 
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ========== SCROLL PADDING FOR FIXED HEADER ========== */
 section[id] {
-  scroll-margin-top: 24px;
+  scroll-margin-top: 32px;
 }
 
 @media (max-width: 768px) {
+  section {
+    margin-bottom: 32px;
+    padding: 0 0 32px 0;
+  }
+
   section[id] {
-    scroll-margin-top: 16px;
+    scroll-margin-top: 20px;
+  }
+
+  section h2 {
+    font-size: 1.1rem;
   }
 }

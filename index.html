@@ -17,8 +17,11 @@
   <link rel="stylesheet" href="./playground.css" />
 </head>
 <body>
+  <!-- Skip to main content link for keyboard navigation -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Mobile sidebar toggle -->
-  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation" aria-expanded="false">
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
       <line x1="3" y1="5" x2="17" y2="5"/>
       <line x1="3" y1="10" x2="17" y2="10"/>
@@ -30,9 +33,9 @@
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
   <!-- Fixed sidebar navigation -->
-  <nav class="sidebar" id="sidebar">
+  <nav class="sidebar" id="sidebar" role="navigation" aria-label="Component navigation">
     <div class="sidebar-header">
-      <img src="./assets/logo.png" alt="FM" class="sidebar-logo" />
+      <img src="./assets/logo.png" alt="FeedMob Logo" class="sidebar-logo" />
     </div>
     <ul class="sidebar-nav">
       <li><a href="#getting-started" class="sidebar-link" data-section="getting-started">Getting Started</a></li>
@@ -58,12 +61,12 @@
   </nav>
 
   <!-- Main content area -->
-  <main class="main-content">
+  <main id="main-content" class="main-content" role="main" aria-label="Component documentation">
   <!-- ============================================================ -->
   <!-- GETTING STARTED                                               -->
   <!-- ============================================================ -->
-  <section id="getting-started" class="manual-section">
-    <h2>Getting Started</h2>
+  <section id="getting-started" class="manual-section" aria-labelledby="getting-started-heading">
+    <h2 id="getting-started-heading">Getting Started</h2>
     <div style="background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
       <p style="margin: 0; color: #92400E; font-size: 0.9rem;">
         <strong>Work in Progress</strong> — This design system is currently under development and not ready for production use.
@@ -106,8 +109,8 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- THEMING                                                       -->
   <!-- ============================================================ -->
-  <section id="theming">
-    <h2>Theming</h2>
+  <section id="theming" aria-labelledby="theming-heading">
+    <h2 id="theming-heading">Theming</h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Overview">
         <div style="padding: 16px 0;">
@@ -213,8 +216,8 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- BUTTONS                                                       -->
   <!-- ============================================================ -->
-  <section id="fm-button">
-    <h2>fm-button</h2>
+  <section id="fm-button" aria-labelledby="button-heading" data-component-label="Component">
+    <h2 id="button-heading"><code>&lt;fm-button&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
@@ -293,8 +296,8 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- CARDS                                                         -->
   <!-- ============================================================ -->
-  <section id="fm-card">
-    <h2>fm-card</h2>
+  <section id="fm-card" aria-labelledby="card-heading" data-component-label="Component">
+    <h2 id="card-heading"><code>&lt;fm-card&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
@@ -415,13 +418,13 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- BADGES                                                        -->
   <!-- ============================================================ -->
-  <section id="fm-badge">
-    <h2>fm-badge</h2>
+  <section id="fm-badge" aria-labelledby="badge-heading" data-component-label="Component">
+    <h2 id="badge-heading"><code>&lt;fm-badge&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack-sm">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Standard variants</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Standard variants</p>
             <div class="row">
               <fm-badge variant="primary">Design</fm-badge>
               <fm-badge variant="secondary">Strategy</fm-badge>
@@ -432,7 +435,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Status badges with dot</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Status badges with dot</p>
             <div class="row">
               <fm-badge variant="success" dot>Live</fm-badge>
               <fm-badge variant="primary" dot>Active</fm-badge>
@@ -441,7 +444,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Removable tags (click X to remove)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Removable tags (click X to remove)</p>
             <div class="row" id="tag-container">
               <fm-badge variant="tag" removable>Campaign</fm-badge>
               <fm-badge variant="tag" removable>Design</fm-badge>
@@ -450,7 +453,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Sizes</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Sizes</p>
             <div class="row">
               <fm-badge variant="primary" size="sm">Small</fm-badge>
               <fm-badge variant="primary" size="md">Medium</fm-badge>
@@ -459,7 +462,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Animated</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Animated</p>
             <div class="row">
               <fm-badge variant="success" dot animate="pulse">Live Campaign</fm-badge>
               <fm-badge variant="error" animate="pulse">3 Alerts</fm-badge>
@@ -572,8 +575,8 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- TABS                                                          -->
   <!-- ============================================================ -->
-  <section id="fm-tabs">
-    <h2>fm-tabs</h2>
+  <section id="fm-tabs" aria-labelledby="tabs-heading" data-component-label="Component">
+    <h2 id="tabs-heading"><code>&lt;fm-tabs&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
@@ -693,8 +696,8 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- CHECKBOXES                                                    -->
   <!-- ============================================================ -->
-  <section id="fm-checkbox">
-    <h2>fm-checkbox</h2>
+  <section id="fm-checkbox" aria-labelledby="checkbox-heading" data-component-label="Component">
+    <h2 id="checkbox-heading"><code>&lt;fm-checkbox&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
@@ -803,13 +806,13 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- BREADCRUMBS                                                   -->
   <!-- ============================================================ -->
-  <section id="fm-breadcrumb">
-    <h2>fm-breadcrumb</h2>
+  <section id="fm-breadcrumb" aria-labelledby="breadcrumb-heading" data-component-label="Component">
+    <h2 id="breadcrumb-heading"><code>&lt;fm-breadcrumb&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Default (JSON items)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 8px;">Default (JSON items)</p>
             <fm-breadcrumb items='[
               {"label": "Home", "href": "/"},
               {"label": "Products", "href": "/products"},
@@ -818,7 +821,7 @@ npm install @fm-agency/design-system</code></pre>
             ]'></fm-breadcrumb>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Slash separator</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 8px;">Slash separator</p>
             <fm-breadcrumb separator="slash" items='[
               {"label": "Dashboard", "href": "/dashboard"},
               {"label": "Analytics", "href": "/analytics"},
@@ -826,7 +829,7 @@ npm install @fm-agency/design-system</code></pre>
             ]'></fm-breadcrumb>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Arrow separator (small size)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 8px;">Arrow separator (small size)</p>
             <fm-breadcrumb separator="arrow" size="sm" items='[
               {"label": "Settings", "href": "/settings"},
               {"label": "Account", "href": "/settings/account"},
@@ -834,7 +837,7 @@ npm install @fm-agency/design-system</code></pre>
             ]'></fm-breadcrumb>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Large size with slotted content</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 8px;">Large size with slotted content</p>
             <fm-breadcrumb size="lg">
               <a href="/">Home</a>
               <a href="/library">Library</a>
@@ -939,8 +942,8 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- ALERTS                                                        -->
   <!-- ============================================================ -->
-  <section id="fm-alert">
-    <h2>fm-alert</h2>
+  <section id="fm-alert" aria-labelledby="alert-heading" data-component-label="Component">
+    <h2 id="alert-heading"><code>&lt;fm-alert&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack-sm">
@@ -1057,34 +1060,34 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- CLIPBOARD                                                     -->
   <!-- ============================================================ -->
-  <section id="fm-clipboard">
-    <h2>fm-clipboard</h2>
+  <section id="fm-clipboard" aria-labelledby="clipboard-heading" data-component-label="Component">
+    <h2 id="clipboard-heading"><code>&lt;fm-clipboard&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Button variant with toast feedback</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Button variant with toast feedback</p>
             <div class="row" style="align-items: center; gap: 16px;">
               <fm-clipboard text="campaign-id-12345" label="Copy ID"></fm-clipboard>
               <fm-clipboard text="https://app.feedmob.com/campaigns/abc123" variant="button" label="Copy URL"></fm-clipboard>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Icon variant with tooltip feedback</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Icon variant with tooltip feedback</p>
             <div class="row" style="align-items: center; gap: 16px; padding: 12px; background: var(--fm-color-surface-alt); border-radius: var(--fm-radius-md);">
               <span style="font-family: var(--fm-font-family); font-size: var(--fm-font-size-sm); color: var(--fm-color-text-secondary);">API Key: sk_live_51H...</span>
               <fm-clipboard text="sk_live_51H8x2jK9mLpQ3vR" variant="icon" feedback="tooltip"></fm-clipboard>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Inline variant with slotted text</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Inline variant with slotted text</p>
             <div class="row" style="align-items: center; gap: 8px; font-family: var(--fm-font-family); font-size: var(--fm-font-size-sm);">
               <span style="color: var(--fm-color-text-secondary);">Share code:</span>
               <fm-clipboard variant="inline" position="right">SUMMER2026</fm-clipboard>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Custom feedback text</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Custom feedback text</p>
             <div class="row" style="align-items: center; gap: 16px;">
               <fm-clipboard text="copied-content" feedback-text="Link copied!" label="Copy Link"></fm-clipboard>
             </div>
@@ -1208,13 +1211,13 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- COLLAPSIBLE                                                   -->
   <!-- ============================================================ -->
-  <section id="fm-collapsible">
-    <h2>fm-collapsible</h2>
+  <section id="fm-collapsible" aria-labelledby="collapsible-heading" data-component-label="Component">
+    <h2 id="collapsible-heading"><code>&lt;fm-collapsible&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack-sm">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic collapsible (collapsed by default)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Basic collapsible (collapsed by default)</p>
             <fm-collapsible header="Campaign Settings">
               <p style="margin: 0 0 12px 0;">Configure your campaign targeting, budget, and scheduling options. All changes are saved automatically.</p>
               <div class="row" style="gap: 8px;">
@@ -1224,7 +1227,7 @@ npm install @fm-agency/design-system</code></pre>
             </fm-collapsible>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Expanded by default</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Expanded by default</p>
             <fm-collapsible header="Analytics Overview" expanded>
               <p style="margin: 0 0 12px 0;">Real-time campaign performance metrics showing impressions, clicks, and conversions across all channels.</p>
               <fm-card variant="outlined">
@@ -1247,13 +1250,13 @@ npm install @fm-agency/design-system</code></pre>
             </fm-collapsible>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Disabled state</p>
             <fm-collapsible header="Advanced Options" disabled>
               <p>This content is not accessible when the collapsible is disabled.</p>
             </fm-collapsible>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Custom header slot</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Custom header slot</p>
             <fm-collapsible>
               <div slot="header" style="display: flex; align-items: center; gap: 12px;">
                 <fm-badge variant="success" dot>Active</fm-badge>
@@ -1389,13 +1392,13 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- DROPDOWN                                                      -->
   <!-- ============================================================ -->
-  <section id="fm-dropdown">
-    <h2>fm-dropdown</h2>
+  <section id="fm-dropdown" aria-labelledby="dropdown-heading" data-component-label="Component">
+    <h2 id="dropdown-heading"><code>&lt;fm-dropdown&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic menu with buttons and links</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Basic menu with buttons and links</p>
             <fm-dropdown 
               items='[
                 {"value": "edit", "label": "Edit Campaign", "type": "button"},
@@ -1407,7 +1410,7 @@ npm install @fm-agency/design-system</code></pre>
             </fm-dropdown>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Different sizes</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Different sizes</p>
             <div class="row" style="align-items: center; gap: 16px;">
               <fm-dropdown 
                 size="sm"
@@ -1433,7 +1436,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Variants</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Variants</p>
             <div class="row" style="align-items: center; gap: 16px;">
               <fm-dropdown 
                 variant="default"
@@ -1459,7 +1462,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">With disabled items</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With disabled items</p>
             <fm-dropdown 
               items='[
                 {"value": "edit", "label": "Edit", "type": "button"},
@@ -1469,7 +1472,7 @@ npm install @fm-agency/design-system</code></pre>
             </fm-dropdown>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Disabled state</p>
             <fm-dropdown 
               disabled
               items='[
@@ -1645,37 +1648,37 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- PAGINATION                                                  -->
   <!-- ============================================================ -->
-  <section id="fm-pagination">
-    <h2>fm-pagination</h2>
+  <section id="fm-pagination" aria-labelledby="pagination-heading" data-component-label="Component">
+    <h2 id="pagination-heading"><code>&lt;fm-pagination&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Default (with many pages)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Default (with many pages)</p>
             <fm-pagination current="5" total="20"></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">With Pagy object (simplest Ruby integration)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With Pagy object (simplest Ruby integration)</p>
             <fm-pagination pagy='{"page":7,"pages":20,"series":[1,":gap",6,7,8,":gap",20]}' variant="outline" href-template="/items?page=:page"></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Small size with first/last buttons</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Small size with first/last buttons</p>
             <fm-pagination current="3" total="15" size="sm" show-first-last></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Large size with custom sibling count</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Large size with custom sibling count</p>
             <fm-pagination current="8" total="50" size="lg" sibling-count="2"></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Outline variant</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Outline variant</p>
             <fm-pagination current="7" total="12" variant="outline"></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Ghost variant with prev/next labels</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Ghost variant with prev/next labels</p>
             <fm-pagination current="4" total="8" variant="ghost" prev-label="Prev" next-label="Next"></fm-pagination>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Disabled state</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Disabled state</p>
             <fm-pagination current="3" total="10" disabled></fm-pagination>
           </div>
         </div>
@@ -1927,8 +1930,8 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- SPARKLINE                                                     -->
   <!-- ============================================================ -->
-  <section id="fm-sparkline">
-    <h2>fm-sparkline</h2>
+  <section id="fm-sparkline" aria-labelledby="sparkline-heading" data-component-label="Component">
+    <h2 id="sparkline-heading"><code>&lt;fm-sparkline&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
@@ -1971,11 +1974,11 @@ npm install @fm-agency/design-system</code></pre>
 
           <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
             <div>
-              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Compact default</p>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Compact default</p>
               <fm-sparkline data='[10, 14, 12, 16, 19, 18, 24]' width="160" height="52"></fm-sparkline>
             </div>
             <div>
-              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Negative trend</p>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Negative trend</p>
               <fm-sparkline
                 data='[34, 31, 29, 28, 24, 22, 18]'
                 width="160"
@@ -1986,7 +1989,7 @@ npm install @fm-agency/design-system</code></pre>
               ></fm-sparkline>
             </div>
             <div>
-              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">CSV input</p>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">CSV input</p>
               <fm-sparkline data="6, 9, 8, 13, 11, 17, 15" width="160" height="52"></fm-sparkline>
             </div>
           </div>
@@ -2092,13 +2095,13 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- TOOLTIP                                                       -->
   <!-- ============================================================ -->
-  <section id="fm-tooltip">
-    <h2>fm-tooltip</h2>
+  <section id="fm-tooltip" aria-labelledby="tooltip-heading" data-component-label="Component">
+    <h2 id="tooltip-heading"><code>&lt;fm-tooltip&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Basic tooltip (hover to show)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Basic tooltip (hover to show)</p>
             <div class="row" style="align-items: center; gap: 24px; padding: 40px;">
               <fm-tooltip text="This is a helpful tooltip">
                 <fm-button variant="outline">Hover me</fm-button>
@@ -2109,7 +2112,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Different positions</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Different positions</p>
             <div class="row" style="align-items: center; gap: 24px; padding: 40px;">
               <fm-tooltip text="Position: top" position="top">
                 <fm-button variant="outline">Top</fm-button>
@@ -2126,7 +2129,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Variants</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Variants</p>
             <div class="row" style="align-items: center; gap: 24px; padding: 40px; background: var(--fm-color-surface-alt); border-radius: var(--fm-radius-md);">
               <fm-tooltip text="Dark variant (default)" variant="dark">
                 <fm-button variant="primary">Dark</fm-button>
@@ -2143,7 +2146,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">With icon trigger</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With icon trigger</p>
             <div class="row" style="align-items: center; gap: 24px; padding: 40px;">
               <fm-tooltip text="Get more information">
                 <button style="background: none; border: none; cursor: pointer; padding: 8px; color: var(--fm-color-text-secondary); display: flex; align-items: center; justify-content: center;">
@@ -2160,7 +2163,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Long text content</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Long text content</p>
             <div style="padding: 40px; display: flex; justify-content: center;">
               <fm-tooltip text="This is a longer tooltip message that explains the feature in more detail">
                 <fm-badge variant="info">Hover for info</fm-badge>
@@ -2268,13 +2271,13 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- INPUT                                                         -->
   <!-- ============================================================ -->
-  <section id="fm-input">
-    <h2>fm-input</h2>
+  <section id="fm-input" aria-labelledby="input-heading" data-component-label="Component">
+    <h2 id="input-heading"><code>&lt;fm-input&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Basic inputs</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Basic inputs</p>
             <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
               <fm-input placeholder="Enter campaign name"></fm-input>
               <fm-input type="email" placeholder="you@company.com"></fm-input>
@@ -2282,7 +2285,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Sizes</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Sizes</p>
             <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
               <fm-input size="sm" placeholder="Small size"></fm-input>
               <fm-input size="md" placeholder="Medium size (default)"></fm-input>
@@ -2290,7 +2293,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Variants</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Variants</p>
             <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
               <fm-input variant="default" placeholder="Default variant"></fm-input>
               <fm-input variant="filled" placeholder="Filled variant"></fm-input>
@@ -2298,7 +2301,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">States</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">States</p>
             <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
               <fm-input value="Disabled input" disabled></fm-input>
               <fm-input value="Read only input" readonly></fm-input>
@@ -2306,7 +2309,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">With Error</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">With Error</p>
             <div style="max-width: 400px;">
               <fm-input type="number" placeholder="Enter amount" error="Budget must be at least $1,000"></fm-input>
             </div>
@@ -2496,19 +2499,19 @@ npm install @fm-agency/design-system</code></pre>
   <!-- ============================================================ -->
   <!-- TEXTAREA                                                      -->
   <!-- ============================================================ -->
-  <section id="fm-textarea">
-    <h2>fm-textarea</h2>
+  <section id="fm-textarea" aria-labelledby="textarea-heading" data-component-label="Component">
+    <h2 id="textarea-heading"><code>&lt;fm-textarea&gt;</code></h2>
     <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Basic textarea</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Basic textarea</p>
             <div style="max-width: 400px;">
               <fm-textarea placeholder="Describe your campaign objectives, target audience, and key messaging..." rows="4"></fm-textarea>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Sizes</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Sizes</p>
             <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
               <fm-textarea size="sm" placeholder="Small textarea" rows="2"></fm-textarea>
               <fm-textarea size="md" placeholder="Medium textarea (default)" rows="2"></fm-textarea>
@@ -2516,19 +2519,19 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Auto-resize (grows as you type)</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Auto-resize (grows as you type)</p>
             <div style="max-width: 400px;">
               <fm-textarea placeholder="Type to see auto-resize in action..." rows="3" autoresize maxrows="8"></fm-textarea>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">With character count</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">With character count</p>
             <div style="max-width: 400px;">
               <fm-textarea placeholder="Tell us about yourself..." rows="3" maxlength="200" showcount value="Started in digital marketing back in 2015..."></fm-textarea>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">Variants</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">Variants</p>
             <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
               <fm-textarea variant="default" placeholder="Default variant" rows="2"></fm-textarea>
               <fm-textarea variant="filled" placeholder="Filled variant" rows="2"></fm-textarea>
@@ -2536,7 +2539,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div style="margin-bottom: 32px;">
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">States</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">States</p>
             <div style="max-width: 400px; display: flex; flex-direction: column; gap: 24px;">
               <fm-textarea rows="2" value="This textarea is disabled and cannot be edited." disabled></fm-textarea>
               <fm-textarea rows="2" value="This content is read-only." readonly></fm-textarea>
@@ -2544,7 +2547,7 @@ npm install @fm-agency/design-system</code></pre>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">With Error</p>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 16px;">With Error</p>
             <div style="max-width: 400px;">
               <fm-textarea rows="3" error="Brief must be at least 50 characters long"></fm-textarea>
             </div>
@@ -2780,8 +2783,8 @@ npm install @fm-agency/design-system</code></pre>
 
   </main>
 
-  <footer>
-    <a href="https://feedmob.com/" target="_blank" rel="noopener">FeedMob</a> Design System v0.1.0 — Built with Web Components &amp; Motion
+  <footer role="contentinfo">
+    <a href="https://feedmob.com/" target="_blank" rel="noopener noreferrer">FeedMob</a> Design System v0.1.0 — Built with Web Components &amp; Motion
   </footer>
 
   <!-- Prism.js for syntax highlighting -->
