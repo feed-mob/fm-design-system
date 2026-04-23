@@ -1,27 +1,18 @@
 import { FmElement } from "../core/fm-element.js";
-import { animate, hover, press } from "motion";
 
 /**
  * <fm-button> — A polished, professional button for FM Agency.
  *
  * Attributes:
- *   variant  — "primary" (default) | "secondary" | "tertiary" | "outline" | "ghost" | "text"
- *   size     — "sm" | "md" (default) | "lg"
+ *   variant  — "primary" (default) | "secondary" | "outline" | "ghost" | "text"
  *   disabled — boolean
  *   arrow    — boolean (adds arrow icon for text variant)
- *
- * Animations (Motion):
- *   - Entrance: subtle fade-in + upward slide
- *   - Hover: refined lift with shadow enhancement
- *   - Press: tactile press-down with spring physics
- *   - Focus: teal ring indicator
  */
 export class FmButton extends FmElement {
-  static observedAttributes = ["variant", "size", "disabled", "arrow"];
+  static observedAttributes = ["variant", "disabled", "arrow"];
 
   template() {
     const variant = this.attr("variant", "primary");
-    const size = this.attr("size", "md");
     const disabled = this.boolAttr("disabled");
     const arrow = this.boolAttr("arrow");
 
@@ -47,29 +38,15 @@ export class FmButton extends FmElement {
           user-select: none;
           -webkit-tap-highlight-color: transparent;
           white-space: nowrap;
-          transition: box-shadow var(--fm-transition-fast),
-                      border-color var(--fm-transition-fast),
-                      background var(--fm-transition-fast);
+          transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-          /* Default (md) sizing */
+          /* Default sizing */
           padding: 10px 20px;
           font-size: var(--fm-font-size-sm);
           gap: var(--fm-space-sm);
           display: inline-flex;
           align-items: center;
           justify-content: center;
-        }
-
-        /* ---- Sizes ---- */
-        button.sm {
-          padding: 6px 14px;
-          font-size: var(--fm-font-size-xs);
-          border-radius: var(--fm-radius-sm);
-        }
-        button.lg {
-          padding: 14px 28px;
-          font-size: var(--fm-font-size-md);
-          border-radius: var(--fm-radius-lg);
         }
 
         /* ---- Variants ---- */
@@ -89,18 +66,6 @@ export class FmButton extends FmElement {
         }
         button.secondary:hover:not(:disabled) {
           background: var(--fm-color-secondary-light);
-        }
-
-        /* Tertiary: dark background with subtle border */
-        button.tertiary {
-          background: var(--fm-color-surface-alt);
-          color: var(--fm-color-text);
-          border: 1px solid var(--fm-color-border);
-          box-shadow: none;
-        }
-        button.tertiary:hover:not(:disabled) {
-          background: var(--fm-color-surface-muted);
-          border-color: var(--fm-color-text-secondary);
         }
 
         button.outline {
@@ -160,7 +125,7 @@ export class FmButton extends FmElement {
       </style>
 
       <button
-        class="${variant} ${size}"
+        class="${variant}"
         ${disabled ? "disabled" : ""}
         part="button"
       >
@@ -170,66 +135,8 @@ export class FmButton extends FmElement {
     `;
   }
 
-  /* ---- Animations ---- */
-
-  onEnter() {
-    const btn = this.root.querySelector("button");
-    animate(btn, { opacity: [0, 1], y: [6, 0] }, {
-      type: "spring",
-      stiffness: 350,
-      damping: 25,
-    });
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this._bindEvents();
-  }
-
-  _bindEvents() {
-    const btn = this.root.querySelector("button");
-    if (!btn) return;
-
-    hover(btn, (element) => {
-      if (this.boolAttr("disabled")) return () => {};
-
-      animate(element, { scale: 1.03, y: -1 }, {
-        type: "spring",
-        stiffness: 450,
-        damping: 20,
-      });
-
-      return () => {
-        animate(element, { scale: 1, y: 0 }, {
-          type: "spring",
-          stiffness: 450,
-          damping: 20,
-        });
-      };
-    });
-
-    press(btn, (element) => {
-      if (this.boolAttr("disabled")) return () => {};
-
-      animate(element, { scale: 0.96 }, {
-        type: "spring",
-        stiffness: 500,
-        damping: 22,
-      });
-
-      return () => {
-        animate(element, { scale: 1.03 }, {
-          type: "spring",
-          stiffness: 450,
-          damping: 18,
-        });
-      };
-    });
-  }
-
   attributeChangedCallback() {
     this.render();
-    this._bindEvents();
   }
 }
 
