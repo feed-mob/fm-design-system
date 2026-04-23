@@ -50,7 +50,6 @@
       <li><a href="#fm-breadcrumb" class="sidebar-link" data-section="fm-breadcrumb">Breadcrumb</a></li>
       <li><a href="#fm-alert" class="sidebar-link" data-section="fm-alert">Alert</a></li>
       <li><a href="#fm-clipboard" class="sidebar-link" data-section="fm-clipboard">Clipboard</a></li>
-      <li><a href="#fm-collapsible" class="sidebar-link" data-section="fm-collapsible">Collapsible</a></li>
       <li><a href="#fm-dropdown" class="sidebar-link" data-section="fm-dropdown">Dropdown</a></li>
       <li><a href="#fm-pagination" class="sidebar-link" data-section="fm-pagination">Pagination</a></li>
       <li><a href="#fm-sparkline" class="sidebar-link" data-section="fm-sparkline">Sparkline</a></li>
@@ -1138,189 +1137,6 @@ npm install @fm-agency/design-system</code></pre>
   </section>
 
   <!-- ============================================================ -->
-  <!-- COLLAPSIBLE                                                   -->
-  <!-- ============================================================ -->
-  <section id="fm-collapsible" aria-labelledby="collapsible-heading" data-component-label="Component">
-    <fm-card variant="elevated">
-      <span slot="header">Collapsible</span>
-      <fm-tabs active="0" variant="pills">
-      <fm-tab label="Preview">
-        <div class="preview-area preview-stack-sm">
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Basic collapsible (collapsed by default)</p>
-            <fm-collapsible header="Campaign Settings">
-              <p style="margin: 0 0 12px 0;">Configure your campaign targeting, budget, and scheduling options. All changes are saved automatically.</p>
-              <div class="row" style="gap: 8px;">
-                <fm-badge variant="primary">Auto-save</fm-badge>
-                <fm-badge variant="neutral">Draft</fm-badge>
-              </div>
-            </fm-collapsible>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Expanded by default</p>
-            <fm-collapsible header="Analytics Overview" expanded>
-              <p style="margin: 0 0 12px 0;">Real-time campaign performance metrics showing impressions, clicks, and conversions across all channels.</p>
-              <fm-card variant="outlined">
-                <span slot="header">Key Metrics</span>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
-                  <div>
-                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-primary);">24.5K</div>
-                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">Impressions</div>
-                  </div>
-                  <div>
-                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-success);">1.2K</div>
-                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">Clicks</div>
-                  </div>
-                  <div>
-                    <div style="font-size: var(--fm-font-size-lg); font-weight: var(--fm-font-weight-bold); color: var(--fm-color-accent);">4.9%</div>
-                    <div style="font-size: var(--fm-font-size-xs); color: var(--fm-color-text-secondary);">CTR</div>
-                  </div>
-                </div>
-              </fm-card>
-            </fm-collapsible>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Disabled state</p>
-            <fm-collapsible header="Advanced Options" disabled>
-              <p>This content is not accessible when the collapsible is disabled.</p>
-            </fm-collapsible>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Custom header slot</p>
-            <fm-collapsible>
-              <div slot="header" style="display: flex; align-items: center; gap: 12px;">
-                <fm-badge variant="success" dot>Active</fm-badge>
-                <span style="font-weight: var(--fm-font-weight-semibold);">Live Campaign: Summer Sale</span>
-              </div>
-              <p style="margin: 0 0 12px 0;">Campaign is currently running with full budget allocation. Performance is tracking 15% above target.</p>
-              <fm-button variant="primary">View Dashboard</fm-button>
-            </fm-collapsible>
-          </div>
-        </div>
-      </fm-tab>
-      <fm-tab label="Interface">
-        <div class="interface-panel">
-          <h4>Attributes</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>header</code></td>
-                <td>string</td>
-                <td>""</td>
-                <td>Header text (use slot for custom content)</td>
-              </tr>
-              <tr>
-                <td><code>expanded</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Initial expanded state</td>
-              </tr>
-              <tr>
-                <td><code>disabled</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Disables interaction</td>
-              </tr>
-            </tbody>
-          </table>
-          <h4>Slots</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Name</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>(default)</code></td><td>Collapsible content body</td></tr>
-              <tr><td><code>header</code></td><td>Custom header content (overrides header attribute)</td></tr>
-              <tr><td><code>icon</code></td><td>Custom toggle icon (overrides default chevron)</td></tr>
-            </tbody>
-          </table>
-          <h4>Events</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>fm-collapse-change</code></td>
-                <td><code>{ expanded: boolean }</code></td>
-                <td>Fired when expand/collapse state changes</td>
-              </tr>
-            </tbody>
-          </table>
-          <h4>Methods</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>expand()</code></td>
-                <td>void</td>
-                <td>Expand the panel programmatically</td>
-              </tr>
-              <tr>
-                <td><code>collapse()</code></td>
-                <td>void</td>
-                <td>Collapse the panel programmatically</td>
-              </tr>
-              <tr>
-                <td><code>toggle()</code></td>
-                <td>void</td>
-                <td>Toggle expand/collapse state</td>
-              </tr>
-              <tr>
-                <td><code>expanded</code></td>
-                <td>boolean</td>
-                <td>Get current expanded state</td>
-              </tr>
-            </tbody>
-          </table>
-          <h4>Animations</h4>
-          <ul class="animation-list">
-            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
-            <li><strong>Expand:</strong> Height and fade animation (250ms ease-out)</li>
-            <li><strong>Collapse:</strong> Height and fade animation (200ms ease-in)</li>
-            <li><strong>Icon:</strong> Rotation 0° → 180° synced with content</li>
-          </ul>
-        </div>
-      </fm-tab>
-      <fm-tab label="Code">
-        <div class="code-panel">
-          <pre><code class="language-html">&lt;!-- Basic collapsible --&gt;
-&lt;fm-collapsible header="Campaign Settings"&gt;
-  &lt;p&gt;Configure your campaign targeting and budget options.&lt;/p&gt;
-&lt;/fm-collapsible&gt;
-
-&lt;!-- Expanded by default --&gt;
-&lt;fm-collapsible header="Analytics" expanded&gt;
-  &lt;p&gt;View real-time performance metrics.&lt;/p&gt;
-&lt;/fm-collapsible&gt;
-
-&lt;!-- Disabled state --&gt;
-&lt;fm-collapsible header="Advanced" disabled&gt;
-  &lt;p&gt;This content is not accessible.&lt;/p&gt;
-&lt;/fm-collapsible&gt;
-
-&lt;!-- Custom header slot --&gt;
-&lt;fm-collapsible&gt;
-  &lt;div slot="header"&gt;
-    &lt;fm-badge variant="success" dot&gt;Active&lt;/fm-badge&gt;
-    &lt;span&gt;Live Campaign&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;p&gt;Campaign is currently running.&lt;/p&gt;
-&lt;/fm-collapsible&gt;
-
-</code></pre>
-        </div>
-      </fm-tab>
-      </fm-tabs>
-    </fm-card>
-  </section>
-
-  <!-- ============================================================ -->
   <!-- DROPDOWN                                                      -->
   <!-- ============================================================ -->
   <section id="fm-dropdown" aria-labelledby="dropdown-heading" data-component-label="Component">
@@ -1330,116 +1146,117 @@ npm install @fm-agency/design-system</code></pre>
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Basic menu with buttons and links</p>
-            <fm-dropdown 
-              items='[
-                {"value": "edit", "label": "Edit Campaign", "type": "button"},
-                {"value": "duplicate", "label": "Duplicate", "type": "button"},
-                {"value": "view", "label": "View Report", "type": "link", "href": "#reports"},
-                {"value": "export", "label": "Export Data", "type": "link", "href": "#export"}
-              ]'
-              placeholder="Actions">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Basic menu with items</p>
+            <fm-dropdown placeholder="Actions">
+              <fm-dropdown-item value="edit">Edit Campaign</fm-dropdown-item>
+              <fm-dropdown-item value="duplicate">Duplicate</fm-dropdown-item>
+              <fm-dropdown-item value="view" href="#reports">View Report</fm-dropdown-item>
+              <fm-dropdown-item value="export" href="#export">Export Data</fm-dropdown-item>
             </fm-dropdown>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Different sizes</p>
-            <div class="row" style="align-items: center; gap: 16px;">
-              <fm-dropdown 
-                size="sm"
-                items='[
-                  {"value": "1", "label": "Small Menu", "type": "button"}
-                ]'
-                placeholder="Small">
-              </fm-dropdown>
-              <fm-dropdown 
-                size="md"
-                items='[
-                  {"value": "1", "label": "Medium Menu", "type": "button"}
-                ]'
-                placeholder="Medium (default)">
-              </fm-dropdown>
-              <fm-dropdown 
-                size="lg"
-                items='[
-                  {"value": "1", "label": "Large Menu", "type": "button"}
-                ]'
-                placeholder="Large">
-              </fm-dropdown>
-            </div>
           </div>
           <div>
             <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Variants</p>
             <div class="row" style="align-items: center; gap: 16px;">
-              <fm-dropdown 
-                variant="default"
-                items='[
-                  {"value": "1", "label": "Default", "type": "button"}
-                ]'
-                placeholder="Default">
+              <fm-dropdown variant="default" placeholder="Default">
+                <fm-dropdown-item value="1">Default style</fm-dropdown-item>
               </fm-dropdown>
-              <fm-dropdown 
-                variant="outline"
-                items='[
-                  {"value": "1", "label": "Outline", "type": "button"}
-                ]'
-                placeholder="Outline">
+              <fm-dropdown variant="outline" placeholder="Outline">
+                <fm-dropdown-item value="1">Outline style</fm-dropdown-item>
               </fm-dropdown>
-              <fm-dropdown 
-                variant="ghost"
-                items='[
-                  {"value": "1", "label": "Ghost", "type": "button"}
-                ]'
-                placeholder="Ghost">
+              <fm-dropdown variant="ghost" placeholder="Ghost">
+                <fm-dropdown-item value="1">Ghost style</fm-dropdown-item>
               </fm-dropdown>
             </div>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With disabled items</p>
-            <fm-dropdown 
-              items='[
-                {"value": "edit", "label": "Edit", "type": "button"},
-                {"value": "delete", "label": "Delete", "type": "button", "disabled": true}
-              ]'
-              placeholder="Actions...">
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Icon-only trigger with custom icons</p>
+            <div class="row" style="align-items: center; gap: 16px;">
+              <fm-dropdown icon-only>
+                <svg slot="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+                </svg>
+                <fm-dropdown-item value="edit">Edit</fm-dropdown-item>
+                <fm-dropdown-item value="delete">Delete</fm-dropdown-item>
+              </fm-dropdown>
+              <fm-dropdown variant="outline" icon-only>
+                <svg slot="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+                <fm-dropdown-item value="create">Create New</fm-dropdown-item>
+                <fm-dropdown-item value="import">Import</fm-dropdown-item>
+              </fm-dropdown>
+              <fm-dropdown variant="ghost" icon-only>
+                <svg slot="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                <fm-dropdown-item value="clear">Clear All</fm-dropdown-item>
+              </fm-dropdown>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">With icons and disabled items</p>
+            <fm-dropdown placeholder="Settings">
+              <fm-dropdown-item value="profile">
+                <svg slot="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+                Profile
+              </fm-dropdown-item>
+              <fm-dropdown-item value="billing">
+                <svg slot="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                Billing
+              </fm-dropdown-item>
+              <fm-dropdown-item value="delete" disabled>
+                <svg slot="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Delete Account
+              </fm-dropdown-item>
+            </fm-dropdown>
+          </div>
+          <div>
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Mixed items with form (delete confirmation)</p>
+            <fm-dropdown placeholder="Manage" id="manage-dropdown">
+              <fm-dropdown-item value="edit">
+                <svg slot="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                Edit Campaign
+              </fm-dropdown-item>
+              <fm-dropdown-item value="duplicate">
+                <svg slot="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                Duplicate
+              </fm-dropdown-item>
+              <div slot="divider"></div>
+              <form style="padding: 4px 0;" onsubmit="event.preventDefault(); if(confirm('Are you sure you want to delete this campaign?')) { alert('Campaign deleted!'); document.getElementById('manage-dropdown').close(); }">
+                <button type="submit" style="display: flex; align-items: center; gap: 8px; width: calc(100% - 32px); margin: 0 16px; padding: 8px 0; font-family: var(--fm-font-family); font-size: var(--fm-font-size-sm); color: var(--fm-color-error); background: transparent; border: none; cursor: pointer; text-align: left; transition: color 0.15s ease;" onmouseover="this.style.color='#B91C1C'" onmouseout="this.style.color='var(--fm-color-error)'">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                  </svg>
+                  Delete Campaign
+                </button>
+              </form>
             </fm-dropdown>
           </div>
           <div>
             <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Disabled state</p>
-            <fm-dropdown 
-              disabled
-              items='[
-                {"value": "1", "label": "Option 1", "type": "button"}
-              ]'
-              placeholder="Disabled">
+            <fm-dropdown disabled placeholder="Disabled">
+              <fm-dropdown-item value="1">Option</fm-dropdown-item>
             </fm-dropdown>
           </div>
         </div>
       </fm-tab>
       <fm-tab label="Interface">
         <div class="interface-panel">
-          <h4>Attributes</h4>
+          <h4>fm-dropdown Attributes</h4>
           <table class="props-table">
             <thead>
               <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><code>items</code></td>
-                <td>string (JSON)</td>
-                <td>""</td>
-                <td>JSON array of { value, label, type, href?, disabled? } objects. Type can be "button" or "link"</td>
-              </tr>
-              <tr>
                 <td><code>placeholder</code></td>
                 <td>string</td>
                 <td>"Menu"</td>
                 <td>Text shown on trigger button</td>
-              </tr>
-              <tr>
-                <td><code>size</code></td>
-                <td>string</td>
-                <td>"md"</td>
-                <td>Size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
               </tr>
               <tr>
                 <td><code>variant</code></td>
@@ -1453,17 +1270,63 @@ npm install @fm-agency/design-system</code></pre>
                 <td>false</td>
                 <td>Disables interaction</td>
               </tr>
+              <tr>
+                <td><code>icon-only</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Shows only the chevron icon on trigger</td>
+              </tr>
             </tbody>
           </table>
+
+          <h4>fm-dropdown-item Attributes</h4>
+          <table class="props-table">
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>value</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Value emitted when item is selected</td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Disables the item</td>
+              </tr>
+              <tr>
+                <td><code>href</code></td>
+                <td>string</td>
+                <td>""</td>
+                <td>Makes item act as a link (optional)</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h4>Slots</h4>
           <table class="props-table">
             <thead>
               <tr><th>Name</th><th>Description</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>trigger</code></td><td>Custom trigger content (overrides default button)</td></tr>
+              <tr>
+                <td><code>icon</code> (fm-dropdown)</td>
+                <td>Custom icon for icon-only trigger (optional, defaults to chevron)</td>
+              </tr>
+              <tr>
+                <td><code>default</code> (fm-dropdown)</td>
+                <td>Dropdown content (fm-dropdown-item elements or any HTML)</td>
+              </tr>
+              <tr>
+                <td><code>icon</code> (fm-dropdown-item)</td>
+                <td>Icon displayed before item content</td>
+              </tr>
             </tbody>
           </table>
+
           <h4>Events</h4>
           <table class="props-table">
             <thead>
@@ -1471,9 +1334,9 @@ npm install @fm-agency/design-system</code></pre>
             </thead>
             <tbody>
               <tr>
-                <td><code>fm-dropdown-click</code></td>
-                <td><code>{ value, label, index, type }</code></td>
-                <td>Fired when an item is clicked. Type is "button" or "link"</td>
+                <td><code>fm-dropdown-select</code></td>
+                <td><code>{ value }</code></td>
+                <td>Fired when an item is selected</td>
               </tr>
               <tr>
                 <td><code>fm-dropdown-open</code></td>
@@ -1487,7 +1350,8 @@ npm install @fm-agency/design-system</code></pre>
               </tr>
             </tbody>
           </table>
-          <h4>Methods</h4>
+
+          <h4>Methods (fm-dropdown)</h4>
           <table class="props-table">
             <thead>
               <tr><th>Name</th><th>Returns</th><th>Description</th></tr>
@@ -1510,68 +1374,81 @@ npm install @fm-agency/design-system</code></pre>
               </tr>
             </tbody>
           </table>
+
           <h4>Animations</h4>
           <ul class="animation-list">
-            <li><strong>Entrance:</strong> Fade in with subtle slide up and spring physics</li>
-            <li><strong>Open:</strong> Scale + fade animation with spring physics</li>
-            <li><strong>Items:</strong> Staggered fade-in when dropdown opens</li>
-            <li><strong>Hover:</strong> Background color change on items</li>
-            <li><strong>Press:</strong> Tactile feedback on trigger</li>
-            <li><strong>Close:</strong> Fade out with scale down</li>
+            <li><strong>Open:</strong> Simple fade + scale transition (150ms)</li>
+            <li><strong>Close:</strong> Reverse open animation</li>
           </ul>
         </div>
       </fm-tab>
       <fm-tab label="Code">
         <div class="code-panel">
-          <pre><code class="language-html">&lt;!-- Basic menu with buttons and links --&gt;
-&lt;fm-dropdown 
-  items='[
-    {"value": "edit", "label": "Edit Campaign", "type": "button"},
-    {"value": "duplicate", "label": "Duplicate", "type": "button"},
-    {"value": "view", "label": "View Report", "type": "link", "href": "#reports"},
-    {"value": "export", "label": "Export Data", "type": "link", "href": "#export"}
-  ]'
-  placeholder="Actions"&gt;
+          <pre><code class="language-html">&lt;!-- Basic menu with items --&gt;
+&lt;fm-dropdown placeholder="Actions"&gt;
+  &lt;fm-dropdown-item value="edit"&gt;Edit Campaign&lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="duplicate"&gt;Duplicate&lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="view" href="#reports"&gt;View Report&lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="export" href="#export"&gt;Export Data&lt;/fm-dropdown-item&gt;
 &lt;/fm-dropdown&gt;
 
-&lt;!-- Button items (default) --&gt;
-&lt;fm-dropdown 
-  items='[
-    {"value": "save", "label": "Save Changes", "type": "button"},
-    {"value": "discard", "label": "Discard", "type": "button"}
-  ]'
-  placeholder="Options"&gt;
+&lt;!-- Icon-only trigger with custom icon (more icon) --&gt;
+&lt;fm-dropdown icon-only&gt;
+  &lt;svg slot="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;circle cx="12" cy="12" r="1"/&gt;&lt;circle cx="19" cy="12" r="1"/&gt;&lt;circle cx="5" cy="12" r="1"/&gt;
+  &lt;/svg&gt;
+  &lt;fm-dropdown-item value="edit"&gt;Edit&lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="delete"&gt;Delete&lt;/fm-dropdown-item&gt;
 &lt;/fm-dropdown&gt;
 
-&lt;!-- Link items --&gt;
-&lt;fm-dropdown 
-  items='[
-    {"value": "docs", "label": "Documentation", "type": "link", "href": "/docs"},
-    {"value": "api", "label": "API Reference", "type": "link", "href": "/api"}
-  ]'
-  placeholder="Resources"&gt;
+&lt;!-- Icon-only trigger with plus icon --&gt;
+&lt;fm-dropdown variant="outline" icon-only&gt;
+  &lt;svg slot="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14"/&gt;
+  &lt;/svg&gt;
+  &lt;fm-dropdown-item value="create"&gt;Create New&lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="import"&gt;Import&lt;/fm-dropdown-item&gt;
 &lt;/fm-dropdown&gt;
 
-&lt;!-- With disabled items --&gt;
-&lt;fm-dropdown 
-  items='[
-    {"value": "edit", "label": "Edit", "type": "button"},
-    {"value": "delete", "label": "Delete", "type": "button", "disabled": true}
-  ]'
-  placeholder="Actions..."&gt;
+&lt;!-- With icons and disabled items --&gt;
+&lt;fm-dropdown placeholder="Settings"&gt;
+  &lt;fm-dropdown-item value="profile"&gt;
+    &lt;svg slot="icon" width="16" height="16"&gt;...&lt;/svg&gt;
+    Profile
+  &lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="billing"&gt;
+    &lt;svg slot="icon" width="16" height="16"&gt;...&lt;/svg&gt;
+    Billing
+  &lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="delete" disabled&gt;
+    &lt;svg slot="icon" width="16" height="16"&gt;...&lt;/svg&gt;
+    Delete Account
+  &lt;/fm-dropdown-item&gt;
 &lt;/fm-dropdown&gt;
 
-&lt;!-- Different sizes --&gt;
-&lt;fm-dropdown size="sm" items='[...]'&gt;&lt;/fm-dropdown&gt;
-&lt;fm-dropdown size="md" items='[...]'&gt;&lt;/fm-dropdown&gt;
-&lt;fm-dropdown size="lg" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;!-- Mixed items with form (browser native confirmation) --&gt;
+&lt;fm-dropdown placeholder="Manage" id="manage-dropdown"&gt;
+  &lt;fm-dropdown-item value="edit"&gt;Edit Campaign&lt;/fm-dropdown-item&gt;
+  &lt;fm-dropdown-item value="duplicate"&gt;Duplicate&lt;/fm-dropdown-item&gt;
+  &lt;div slot="divider"&gt;&lt;/div&gt;
+  &lt;form onsubmit="event.preventDefault(); if (confirm('Are you sure?')) { handleDelete(); }"&gt;
+    &lt;button type="submit"&gt;Delete Campaign&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/fm-dropdown&gt;
 
-&lt;!-- Variants --&gt;
-&lt;fm-dropdown variant="default" items='[...]'&gt;&lt;/fm-dropdown&gt;
-&lt;fm-dropdown variant="outline" items='[...]'&gt;&lt;/fm-dropdown&gt;
-&lt;fm-dropdown variant="ghost" items='[...]'&gt;&lt;/fm-dropdown&gt;
+&lt;script&gt;
+  function handleDelete() {
+    console.log('Campaign deleted!');
+    document.getElementById('manage-dropdown').close();
+  }
+&lt;/script&gt;
 
-</code></pre>
+&lt;script&gt;
+  // Listen for selection events
+  document.querySelector('fm-dropdown').addEventListener('fm-dropdown-select', (e) =&gt; {
+    console.log('Selected:', e.detail.value);
+  });
+&lt;/script&gt;</code></pre>
         </div>
       </fm-tab>
       </fm-tabs>
