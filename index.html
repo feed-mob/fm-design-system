@@ -1603,50 +1603,24 @@ npm install @fm-agency/design-system</code></pre>
       <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
-          <div class="grid">
-            <fm-card variant="elevated">
-              <span slot="header">Campaign Lift</span>
-              <div style="display: flex; align-items: end; justify-content: space-between; gap: 16px;">
-                <div>
-                  <div style="font-size: 1.875rem; font-weight: 700; color: var(--fm-color-text); line-height: 1; margin-bottom: 6px;">+18.4%</div>
-                  <div style="font-size: 0.875rem; color: var(--fm-color-text-secondary);">Compared to the previous 30 days</div>
-                </div>
-                <fm-sparkline
-                  data='[18, 22, 19, 27, 24, 29, 35, 33, 41]'
-                  width="180"
-                  height="64"
-                  aria-label="Campaign lift trend"
-                ></fm-sparkline>
-              </div>
-            </fm-card>
-
-            <fm-card variant="elevated">
-              <span slot="header">Qualified Leads</span>
-              <div style="display: flex; align-items: end; justify-content: space-between; gap: 16px;">
-                <div>
-                  <div style="font-size: 1.875rem; font-weight: 700; color: var(--fm-color-text); line-height: 1; margin-bottom: 6px;">247</div>
-                  <div style="font-size: 0.875rem; color: var(--fm-color-text-secondary);">Weekly volume with a mid-cycle dip</div>
-                </div>
-                <fm-sparkline
-                  data='[42, 46, 51, 39, 44, 49, 55, 58, 61]'
-                  width="180"
-                  height="64"
-                  stroke-color="var(--fm-color-info)"
-                  gradient-from="rgba(2, 132, 199, 0.22)"
-                  gradient-to="rgba(2, 132, 199, 0)"
-                  aria-label="Qualified leads trend"
-                ></fm-sparkline>
-              </div>
-            </fm-card>
-          </div>
-
           <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
             <div>
-              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Compact default</p>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">Default</p>
               <fm-sparkline data='[10, 14, 12, 16, 19, 18, 24]' width="160" height="52"></fm-sparkline>
             </div>
             <div>
-              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Negative trend</p>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">Custom colors</p>
+              <fm-sparkline
+                data='[42, 46, 51, 39, 44, 49, 55]'
+                width="160"
+                height="52"
+                stroke-color="var(--fm-color-info)"
+                gradient-from="rgba(2, 132, 199, 0.22)"
+                gradient-to="rgba(2, 132, 199, 0)"
+              ></fm-sparkline>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">Negative trend</p>
               <fm-sparkline
                 data='[34, 31, 29, 28, 24, 22, 18]'
                 width="160"
@@ -1657,7 +1631,7 @@ npm install @fm-agency/design-system</code></pre>
               ></fm-sparkline>
             </div>
             <div>
-              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">CSV input</p>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary); margin-bottom: 12px;">CSV input</p>
               <fm-sparkline data="6, 9, 8, 13, 11, 17, 15" width="160" height="52"></fm-sparkline>
             </div>
           </div>
@@ -1730,14 +1704,18 @@ npm install @fm-agency/design-system</code></pre>
       </fm-tab>
       <fm-tab label="Code">
         <div class="code-panel">
-          <pre><code class="language-html">&lt;!-- Default sparkline --&gt;
+          <pre><code class="language-html">&lt;!-- Default --&gt;
+&lt;fm-sparkline data='[10, 14, 12, 16, 19, 18, 24]'&gt;&lt;/fm-sparkline&gt;
+
+&lt;!-- Custom colors --&gt;
 &lt;fm-sparkline
-  data='[18, 22, 19, 27, 24, 29, 35]'
-  width="200"
-  height="60"
+  data='[42, 46, 51, 39, 44, 49, 55]'
+  stroke-color="var(--fm-color-info)"
+  gradient-from="rgba(2, 132, 199, 0.22)"
+  gradient-to="rgba(2, 132, 199, 0)"
 &gt;&lt;/fm-sparkline&gt;
 
-&lt;!-- Custom colours --&gt;
+&lt;!-- Negative trend --&gt;
 &lt;fm-sparkline
   data='[34, 31, 29, 28, 24, 22, 18]'
   stroke-color="var(--fm-color-error)"
@@ -1745,16 +1723,8 @@ npm install @fm-agency/design-system</code></pre>
   gradient-to="rgba(220, 38, 38, 0)"
 &gt;&lt;/fm-sparkline&gt;
 
-&lt;!-- CSV input is supported too --&gt;
+&lt;!-- CSV input --&gt;
 &lt;fm-sparkline data="6, 9, 8, 13, 11, 17, 15"&gt;&lt;/fm-sparkline&gt;</code></pre>
-
-          <p class="manual-text">ERB / Rails usage with a server-side array:</p>
-          <pre><code class="language-erb">&lt;fm-sparkline
-  data='&lt;%= [18, 22, 19, 27, 24, 29, 35].to_json %&gt;'
-  width="200"
-  height="60"
-  stroke-color="var(--fm-color-primary)"
-&gt;&lt;/fm-sparkline&gt;</code></pre>
         </div>
       </fm-tab>
       </fm-tabs>
