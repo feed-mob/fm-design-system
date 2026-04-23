@@ -1,1 +1,3 @@
 - When a new component is created or updated, make sure we update the index.html as well
+- download icons from https://tabler.io/icons if needed
+- minimize component variants
