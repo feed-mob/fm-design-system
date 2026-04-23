@@ -674,11 +674,6 @@ npm install @fm-agency/design-system</code></pre>
             <fm-checkbox>Subscribe to newsletter</fm-checkbox>
           </div>
           <div class="row" style="margin-bottom: 20px; align-items: center;">
-            <fm-checkbox size="sm" checked>Small checkbox</fm-checkbox>
-            <fm-checkbox size="md" checked>Medium checkbox (default)</fm-checkbox>
-            <fm-checkbox size="lg" checked>Large checkbox</fm-checkbox>
-          </div>
-          <div class="row" style="margin-bottom: 20px; align-items: center;">
             <fm-checkbox disabled>Disabled unchecked</fm-checkbox>
             <fm-checkbox disabled checked>Disabled checked</fm-checkbox>
           </div>
@@ -706,12 +701,6 @@ npm install @fm-agency/design-system</code></pre>
                 <td>boolean</td>
                 <td>false</td>
                 <td>Disables interaction</td>
-              </tr>
-              <tr>
-                <td><code>size</code></td>
-                <td>string</td>
-                <td>"md"</td>
-                <td>Checkbox size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
               </tr>
               <tr>
                 <td><code>indeterminate</code></td>
@@ -752,11 +741,6 @@ npm install @fm-agency/design-system</code></pre>
 
 &lt;!-- Checked by default --&gt;
 &lt;fm-checkbox checked&gt;Subscribe to newsletter&lt;/fm-checkbox&gt;
-
-&lt;!-- Different sizes --&gt;
-&lt;fm-checkbox size="sm"&gt;Small&lt;/fm-checkbox&gt;
-&lt;fm-checkbox size="md"&gt;Medium (default)&lt;/fm-checkbox&gt;
-&lt;fm-checkbox size="lg"&gt;Large&lt;/fm-checkbox&gt;
 
 &lt;!-- Disabled states --&gt;
 &lt;fm-checkbox disabled&gt;Disabled unchecked&lt;/fm-checkbox&gt;
@@ -799,20 +783,12 @@ npm install @fm-agency/design-system</code></pre>
             ]'></fm-breadcrumb>
           </div>
           <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 8px;">Arrow separator (small size)</p>
-            <fm-breadcrumb separator="arrow" size="sm" items='[
+            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 8px;">Arrow separator</p>
+            <fm-breadcrumb separator="arrow" items='[
               {"label": "Settings", "href": "/settings"},
               {"label": "Account", "href": "/settings/account"},
               {"label": "Profile"}
             ]'></fm-breadcrumb>
-          </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 8px;">Large size with slotted content</p>
-            <fm-breadcrumb size="lg">
-              <a href="/">Home</a>
-              <a href="/library">Library</a>
-              <span>Data</span>
-            </fm-breadcrumb>
           </div>
         </div>
       </fm-tab>
@@ -836,23 +812,9 @@ npm install @fm-agency/design-system</code></pre>
                 <td>"chevron"</td>
                 <td>Separator style: <code>chevron</code>, <code>slash</code>, <code>arrow</code></td>
               </tr>
-              <tr>
-                <td><code>size</code></td>
-                <td>string</td>
-                <td>"md"</td>
-                <td>Size: <code>sm</code>, <code>md</code>, <code>lg</code></td>
-              </tr>
             </tbody>
           </table>
-          <h4>Slots</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Name</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>(default)</code></td><td>Slotted links/spans for custom breadcrumb items</td></tr>
-            </tbody>
-          </table>
+
           <h4>Events</h4>
           <table class="props-table">
             <thead>
@@ -889,19 +851,12 @@ npm install @fm-agency/design-system</code></pre>
   {"label": "Reports"}
 ]'&gt;&lt;/fm-breadcrumb&gt;
 
-&lt;!-- Different sizes --&gt;
-&lt;fm-breadcrumb separator="arrow" size="sm" items='[
+&lt;!-- Arrow separator --&gt;
+&lt;fm-breadcrumb separator="arrow" items='[
   {"label": "Settings", "href": "/settings"},
   {"label": "Account", "href": "/settings/account"},
   {"label": "Profile"}
 ]'&gt;&lt;/fm-breadcrumb&gt;
-
-&lt;!-- Slotted content (manual) --&gt;
-&lt;fm-breadcrumb size="lg"&gt;
-  &lt;a href="/"&gt;Home&lt;/a&gt;
-  &lt;a href="/library"&gt;Library&lt;/a&gt;
-  &lt;span&gt;Data&lt;/span&gt;
-&lt;/fm-breadcrumb&gt;
 
 </code></pre>
         </div>
