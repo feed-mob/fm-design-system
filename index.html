@@ -217,8 +217,9 @@ npm install @fm-agency/design-system</code></pre>
   <!-- BUTTONS                                                       -->
   <!-- ============================================================ -->
   <section id="fm-button" aria-labelledby="button-heading" data-component-label="Component">
-    <h2 id="button-heading"><code>&lt;fm-button&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Button</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
           <div class="row" style="margin-bottom: 20px;">
@@ -290,15 +291,17 @@ npm install @fm-agency/design-system</code></pre>
 &lt;fm-button variant="primary" disabled&gt;Disabled&lt;/fm-button&gt;</code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- CARDS                                                         -->
   <!-- ============================================================ -->
   <section id="fm-card" aria-labelledby="card-heading" data-component-label="Component">
-    <h2 id="card-heading"><code>&lt;fm-card&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Card</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
           <div class="grid" style="margin-bottom: 20px;">
@@ -412,96 +415,96 @@ npm install @fm-agency/design-system</code></pre>
 &lt;/fm-card&gt;</code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- BADGES                                                        -->
   <!-- ============================================================ -->
   <section id="fm-badge" aria-labelledby="badge-heading" data-component-label="Component">
-    <h2 id="badge-heading"><code>&lt;fm-badge&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
-      <fm-tab label="Preview">
-        <div class="preview-area preview-stack-sm">
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Standard variants</p>
-            <div class="row">
-              <fm-badge variant="primary">Design</fm-badge>
-              <fm-badge variant="secondary">Strategy</fm-badge>
-              <fm-badge variant="success">Approved</fm-badge>
-              <fm-badge variant="warning">In Review</fm-badge>
-              <fm-badge variant="error">Overdue</fm-badge>
-              <fm-badge variant="neutral">Draft</fm-badge>
+    <fm-card variant="elevated">
+      <span slot="header">Badge</span>
+      <fm-tabs active="0" variant="pills">
+        <fm-tab label="Preview">
+          <div class="preview-area preview-stack-sm">
+            <div>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Standard variants</p>
+              <div class="row">
+                <fm-badge variant="primary">Design</fm-badge>
+                <fm-badge variant="secondary">Strategy</fm-badge>
+                <fm-badge variant="success">Approved</fm-badge>
+                <fm-badge variant="warning">In Review</fm-badge>
+                <fm-badge variant="error">Overdue</fm-badge>
+                <fm-badge variant="neutral">Draft</fm-badge>
+              </div>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Status badges with dot</p>
+              <div class="row">
+                <fm-badge variant="success" dot>Live</fm-badge>
+                <fm-badge variant="primary" dot>Active</fm-badge>
+                <fm-badge variant="warning" dot>Pending</fm-badge>
+                <fm-badge variant="error" dot>Offline</fm-badge>
+              </div>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Removable tags (click X to remove)</p>
+              <div class="row" id="tag-container">
+                <fm-badge variant="tag" removable>Campaign</fm-badge>
+                <fm-badge variant="tag" removable>Design</fm-badge>
+                <fm-badge variant="tag" removable>Digital</fm-badge>
+                <fm-badge variant="tag" removable>Social</fm-badge>
+              </div>
             </div>
           </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Status badges with dot</p>
-            <div class="row">
-              <fm-badge variant="success" dot>Live</fm-badge>
-              <fm-badge variant="primary" dot>Active</fm-badge>
-              <fm-badge variant="warning" dot>Pending</fm-badge>
-              <fm-badge variant="error" dot>Offline</fm-badge>
-            </div>
+        </fm-tab>
+        <fm-tab label="Interface">
+          <div class="interface-panel">
+            <h4>Attributes</h4>
+            <table class="props-table">
+              <thead>
+                <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>variant</code></td>
+                  <td>string</td>
+                  <td>"primary"</td>
+                  <td>Badge color: <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code>, <code>tag</code></td>
+                </tr>
+                <tr>
+                  <td><code>dot</code></td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Shows a leading status dot</td>
+                </tr>
+                <tr>
+                  <td><code>removable</code></td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Shows X button (ideal for tag variant)</td>
+                </tr>
+              </tbody>
+            </table>
+            <h4>Events</h4>
+            <table class="props-table">
+              <thead>
+                <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>fm-remove</code></td>
+                  <td><code>{ text: string }</code></td>
+                  <td>Fired when removable tag's X button is clicked</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div>
-            <p style="font-size: 0.75rem; color: var(--fm-color-text-secondary);  margin-bottom: 12px;">Removable tags (click X to remove)</p>
-            <div class="row" id="tag-container">
-              <fm-badge variant="tag" removable>Campaign</fm-badge>
-              <fm-badge variant="tag" removable>Design</fm-badge>
-              <fm-badge variant="tag" removable>Digital</fm-badge>
-              <fm-badge variant="tag" removable>Social</fm-badge>
-            </div>
-          </div>
-
-        </div>
-      </fm-tab>
-      <fm-tab label="Interface">
-        <div class="interface-panel">
-          <h4>Attributes</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>variant</code></td>
-                <td>string</td>
-                <td>"primary"</td>
-                <td>Badge color: <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code>, <code>tag</code></td>
-              </tr>
-              <tr>
-                <td><code>dot</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Shows a leading status dot</td>
-              </tr>
-              <tr>
-                <td><code>removable</code></td>
-                <td>boolean</td>
-                <td>false</td>
-                <td>Shows X button (ideal for tag variant)</td>
-              </tr>
-            </tbody>
-          </table>
-          <h4>Events</h4>
-          <table class="props-table">
-            <thead>
-              <tr><th>Name</th><th>Detail</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>fm-remove</code></td>
-                <td><code>{ text: string }</code></td>
-                <td>Fired when removable tag's X button is clicked</td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-      </fm-tab>
-      <fm-tab label="Code">
-        <div class="code-panel">
-          <pre><code class="language-html">&lt;!-- Different variants --&gt;
+        </fm-tab>
+        <fm-tab label="Code">
+          <div class="code-panel">
+            <pre><code class="language-html">&lt;!-- Different variants --&gt;
 &lt;fm-badge variant="primary"&gt;Design&lt;/fm-badge&gt;
 &lt;fm-badge variant="secondary"&gt;Strategy&lt;/fm-badge&gt;
 &lt;fm-badge variant="success"&gt;Approved&lt;/fm-badge&gt;
@@ -528,17 +531,19 @@ npm install @fm-agency/design-system</code></pre>
 &lt;fm-badge variant="primary" dot&gt;Active&lt;/fm-badge&gt;
 &lt;fm-badge variant="warning" dot&gt;Pending&lt;/fm-badge&gt;
 &lt;fm-badge variant="error" dot&gt;Offline&lt;/fm-badge&gt;</code></pre>
-        </div>
-      </fm-tab>
-    </fm-tabs>
+          </div>
+        </fm-tab>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- TABS                                                          -->
   <!-- ============================================================ -->
   <section id="fm-tabs" aria-labelledby="tabs-heading" data-component-label="Component">
-    <h2 id="tabs-heading"><code>&lt;fm-tabs&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Tabs</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
           <div style="margin-bottom: 24px;">
@@ -651,15 +656,17 @@ npm install @fm-agency/design-system</code></pre>
 </code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- CHECKBOXES                                                    -->
   <!-- ============================================================ -->
   <section id="fm-checkbox" aria-labelledby="checkbox-heading" data-component-label="Component">
-    <h2 id="checkbox-heading"><code>&lt;fm-checkbox&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Checkbox</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area">
           <div class="row" style="margin-bottom: 20px; align-items: center;">
@@ -761,15 +768,17 @@ npm install @fm-agency/design-system</code></pre>
 </code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- BREADCRUMBS                                                   -->
   <!-- ============================================================ -->
   <section id="fm-breadcrumb" aria-labelledby="breadcrumb-heading" data-component-label="Component">
-    <h2 id="breadcrumb-heading"><code>&lt;fm-breadcrumb&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Breadcrumb</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
@@ -897,15 +906,17 @@ npm install @fm-agency/design-system</code></pre>
 </code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- ALERTS                                                        -->
   <!-- ============================================================ -->
   <section id="fm-alert" aria-labelledby="alert-heading" data-component-label="Component">
-    <h2 id="alert-heading"><code>&lt;fm-alert&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Alert</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack-sm">
           <fm-alert variant="info" title="New Campaign Available" dismissible>
@@ -1022,8 +1033,9 @@ npm install @fm-agency/design-system</code></pre>
   <!-- CLIPBOARD                                                     -->
   <!-- ============================================================ -->
   <section id="fm-clipboard" aria-labelledby="clipboard-heading" data-component-label="Component">
-    <h2 id="clipboard-heading"><code>&lt;fm-clipboard&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Clipboard</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
@@ -1166,15 +1178,17 @@ npm install @fm-agency/design-system</code></pre>
 </code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- COLLAPSIBLE                                                   -->
   <!-- ============================================================ -->
   <section id="fm-collapsible" aria-labelledby="collapsible-heading" data-component-label="Component">
-    <h2 id="collapsible-heading"><code>&lt;fm-collapsible&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Collapsible</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack-sm">
           <div>
@@ -1347,15 +1361,17 @@ npm install @fm-agency/design-system</code></pre>
 </code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- DROPDOWN                                                      -->
   <!-- ============================================================ -->
   <section id="fm-dropdown" aria-labelledby="dropdown-heading" data-component-label="Component">
-    <h2 id="dropdown-heading"><code>&lt;fm-dropdown&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Dropdown</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
@@ -1603,15 +1619,17 @@ npm install @fm-agency/design-system</code></pre>
 </code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- PAGINATION                                                  -->
   <!-- ============================================================ -->
   <section id="fm-pagination" aria-labelledby="pagination-heading" data-component-label="Component">
-    <h2 id="pagination-heading"><code>&lt;fm-pagination&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Pagination</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
@@ -1885,15 +1903,17 @@ npm install @fm-agency/design-system</code></pre>
           </ul>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- SPARKLINE                                                     -->
   <!-- ============================================================ -->
   <section id="fm-sparkline" aria-labelledby="sparkline-heading" data-component-label="Component">
-    <h2 id="sparkline-heading"><code>&lt;fm-sparkline&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Sparkline</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div class="grid">
@@ -2050,15 +2070,17 @@ npm install @fm-agency/design-system</code></pre>
 &gt;&lt;/fm-sparkline&gt;</code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- TOOLTIP                                                       -->
   <!-- ============================================================ -->
   <section id="fm-tooltip" aria-labelledby="tooltip-heading" data-component-label="Component">
-    <h2 id="tooltip-heading"><code>&lt;fm-tooltip&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Tooltip</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div>
@@ -2226,15 +2248,17 @@ npm install @fm-agency/design-system</code></pre>
 &lt;/fm-tooltip&gt;</code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- INPUT                                                         -->
   <!-- ============================================================ -->
   <section id="fm-input" aria-labelledby="input-heading" data-component-label="Component">
-    <h2 id="input-heading"><code>&lt;fm-input&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Input</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div style="margin-bottom: 32px;">
@@ -2454,15 +2478,17 @@ npm install @fm-agency/design-system</code></pre>
 &lt;/script&gt;</code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   <!-- ============================================================ -->
   <!-- TEXTAREA                                                      -->
   <!-- ============================================================ -->
   <section id="fm-textarea" aria-labelledby="textarea-heading" data-component-label="Component">
-    <h2 id="textarea-heading"><code>&lt;fm-textarea&gt;</code></h2>
-    <fm-tabs active="0" variant="pills">
+    <fm-card variant="elevated">
+      <span slot="header">Textarea</span>
+      <fm-tabs active="0" variant="pills">
       <fm-tab label="Preview">
         <div class="preview-area preview-stack">
           <div style="margin-bottom: 32px;">
@@ -2739,7 +2765,8 @@ npm install @fm-agency/design-system</code></pre>
 &lt;/script&gt;</code></pre>
         </div>
       </fm-tab>
-    </fm-tabs>
+      </fm-tabs>
+    </fm-card>
   </section>
 
   </main>
