@@ -107,7 +107,13 @@ export class FmAlert extends FmElement {
           flex-shrink: 0;
           width: 20px;
           height: 20px;
-          margin-top: 2px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 0;
+        }
+        .alert.has-title .icon-wrapper {
+          margin-top: 1px;
         }
         .icon-wrapper ::slotted(svg),
         .icon-wrapper ::slotted(img) {
@@ -153,7 +159,6 @@ export class FmAlert extends FmElement {
           color: currentColor;
           opacity: 0.6;
           transition: opacity var(--fm-transition-fast), background var(--fm-transition-fast);
-          margin-top: -2px;
           margin-right: -6px;
           padding: 0;
         }
@@ -172,7 +177,7 @@ export class FmAlert extends FmElement {
         }
       </style>
 
-      <div class="alert ${variant}" part="alert">
+      <div class="alert ${variant} ${title ? 'has-title' : ''}" part="alert">
         <div class="icon-wrapper">
           <slot name="icon">${defaultIcons[variant] || defaultIcons.info}</slot>
         </div>
